@@ -24,8 +24,7 @@ import * as SqlClient from "effect/sql/SqlClient";
 import * as Threads from "../orchestration-v2/ThreadManagementService.ts";
 import * as Providers from "../provider/ProviderRegistry.ts";
 import * as Settings from "../serverSettings.ts";
-import * as Analytics from "../telemetry/AnalyticsService.ts";
-import { type ProviderDimensions, providerDimensions } from "../telemetry/ProviderDimensions.ts";
+import { type ProviderDimensions, providerDimensions } from "./providerDimensions.ts";
 import {
   FeedbackLimitError,
   FeedbackNotRequestedError,
@@ -101,7 +100,6 @@ const make = Effect.gen(function* () {
   const sql = yield* SqlClient.SqlClient;
   const threads = yield* Threads.ThreadManagementService;
   const settings = yield* Settings.ServerSettingsService;
-  const analytics = yield* Analytics.AnalyticsService;
   const providers = yield* Providers.ProviderRegistry;
   // Serializes the limit checks with their writes. Held only after any settings wait, so an answer
   // stalled on the settings lock never holds up a card or an unprompted report.
@@ -197,30 +195,15 @@ const make = Effect.gen(function* () {
       );
   });
 
-  /** Sends a stored report as the `agent.feedback` event; false when telemetry refuses it. */
+  /** Product telemetry is disabled; keep reports stored locally without sending. */
   const deliver = Effect.fn("FeedbackStore.deliver")(function* (
     report: Omit<FeedbackReport, "sent">,
-    dimensions: Partial<ProviderDimensions>,
+    _dimensions: Partial<ProviderDimensions>,
   ) {
-    const { kind, subject, expected, actual, workaround, trace, userRequested, source } = report;
-    const sent = yield* analytics.record("agent.feedback", {
-      kind,
-      subject,
-      expected,
-      actual,
-      workaround,
-      trace,
-      userRequested,
-      source,
-      ...dimensions,
-    });
-    if (!sent) {
-      // A failed clear leaves the report reading as sent, on purpose: uncertain reads as sent.
-      yield* sql`UPDATE agent_feedback SET sent = 0 WHERE id = ${report.id}`.pipe(
-        Effect.mapError(storageError),
-      );
-    }
-    return sent;
+    yield* sql`UPDATE agent_feedback SET sent = 0 WHERE id = ${report.id}`.pipe(
+      Effect.mapError(storageError),
+    );
+    return false;
   });
 
   const store = Effect.fn("FeedbackStore.store")(function* ({

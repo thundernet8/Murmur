@@ -32,7 +32,6 @@ import * as SqlitePersistence from "../persistence/Sqlite.ts";
 import * as Projects from "../project/ProjectService.ts";
 import * as Providers from "../provider/ProviderRegistry.ts";
 import * as Settings from "../serverSettings.ts";
-import * as Analytics from "../telemetry/AnalyticsService.ts";
 import {
   FEEDBACK_AWAITING_APPROVAL_NOTE,
   FeedbackInput,
@@ -282,16 +281,6 @@ const harness = Effect.gen(function* () {
           withSettingsSnapshot: (use) =>
             snapshotBegins.pipe(
               Effect.andThen(settingsLock.withPermits(1)(readSettings.pipe(Effect.flatMap(use)))),
-            ),
-        }),
-        Layer.mock(Analytics.AnalyticsService)({
-          record: (event, properties) =>
-            Ref.get(telemetry).pipe(
-              Effect.tap((on) =>
-                on
-                  ? Ref.update(events, (rows) => [...rows, [event, properties] as const])
-                  : Effect.void,
-              ),
             ),
         }),
         Layer.mock(Projects.ProjectService)({

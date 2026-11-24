@@ -33,7 +33,6 @@ import {
 } from "@t3tools/contracts/relay";
 import { encodeOAuthScope, oauthScopeSetEquals } from "@t3tools/shared/oauthScope";
 import { decodeRelayJwt } from "@t3tools/shared/relayJwt";
-import { withRelayClientTracing } from "@t3tools/shared/relayTracing";
 import { normalizeSecureRelayUrl } from "@t3tools/shared/relayUrl";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
@@ -864,7 +863,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.listEnvironments"),
-      withRelayClientTracing,
     ),
     listDevices: Effect.fnUntraced(
       function* (input) {
@@ -879,7 +877,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.listDevices"),
-      withRelayClientTracing,
     ),
     createEnvironmentLinkChallenge: Effect.fnUntraced(
       function* (input) {
@@ -894,7 +891,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.createEnvironmentLinkChallenge"),
-      withRelayClientTracing,
     ),
     linkEnvironment: Effect.fnUntraced(
       function* (input) {
@@ -909,7 +905,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.linkEnvironment"),
-      withRelayClientTracing,
     ),
     unlinkEnvironment: Effect.fnUntraced(
       function* (input) {
@@ -924,7 +919,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.unlinkEnvironment"),
-      withRelayClientTracing,
     ),
     getT3ChatLink: Effect.fnUntraced(
       function* (input) {
@@ -936,7 +930,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.getT3ChatLink"),
-      withRelayClientTracing,
     ),
     createT3ChatLinkRequest: Effect.fnUntraced(
       function* (input) {
@@ -948,7 +941,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.createT3ChatLinkRequest"),
-      withRelayClientTracing,
     ),
     unlinkT3Chat: Effect.fnUntraced(
       function* (input) {
@@ -960,7 +952,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
           );
       },
       Effect.withSpan("clientRuntime.managedRelay.unlinkT3Chat"),
-      withRelayClientTracing,
     ),
     getEnvironmentStatus: Effect.fnUntraced(
       function* (input) {
@@ -986,7 +977,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.getEnvironmentStatus"),
-      withRelayClientTracing,
     ),
     connectEnvironment: Effect.fnUntraced(
       function* (input) {
@@ -1018,7 +1008,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.connectEnvironment"),
-      withRelayClientTracing,
     ),
     registerDevice: Effect.fnUntraced(
       function* (input) {
@@ -1040,7 +1029,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.registerDevice"),
-      withRelayClientTracing,
     ),
     unregisterDevice: Effect.fnUntraced(
       function* (input) {
@@ -1062,7 +1050,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.unregisterDevice"),
-      withRelayClientTracing,
     ),
     getAgentActivitySnapshot: Effect.fnUntraced(
       function* (input) {
@@ -1083,7 +1070,6 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.getAgentActivitySnapshot"),
-      withRelayClientTracing,
     ),
     registerLiveActivity: Effect.fnUntraced(
       function* (input) {
@@ -1105,12 +1091,10 @@ export const make = Effect.fn("ManagedRelayClient.make")(function* (
         );
       },
       Effect.withSpan("clientRuntime.managedRelay.registerLiveActivity"),
-      withRelayClientTracing,
     ),
     resetTokenCache: SynchronizedRef.set(cachedTokens, []).pipe(
       Effect.andThen(options.accessTokenStore ? options.accessTokenStore.clear : Effect.void),
       Effect.withSpan("clientRuntime.managedRelay.resetTokenCache"),
-      withRelayClientTracing,
     ),
   });
 });

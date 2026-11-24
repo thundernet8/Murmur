@@ -57,7 +57,6 @@ import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter"
 import * as ProjectionStore from "./ProjectionStore.ts";
 import * as ProviderCommitBatch from "./ProviderCommitBatch.ts";
 import * as ProviderEventIngestor from "./ProviderEventIngestor.ts";
-import * as ProviderUsageAnalytics from "../telemetry/ProviderUsageAnalytics.ts";
 import * as McpAppModelContext from "../mcpApps/McpAppModelContext.ts";
 import * as PreviewAgentActivity from "../preview/PreviewAgentActivity.ts";
 import * as RunExecutionService from "./RunExecutionService.ts";
@@ -1602,20 +1601,9 @@ it.effect("ingests new member threads of an owned child after the root turn term
     const childMessageIngested = yield* Deferred.make<void>();
     const order = yield* Ref.make<ReadonlyArray<string>>([]);
     const origins = yield* Ref.make<ReadonlyArray<readonly [string, unknown, unknown]>>([]);
-    const requests = yield* Ref.make<ReadonlyArray<string>>([]);
     const layerTest = RunExecutionService.layer.pipe(
       Layer.provide(
         Layer.mergeAll(
-          Layer.succeed(ProviderUsageAnalytics.ProviderTurnAnalytics, {
-            runStarted: (input) =>
-              Ref.update(requests, (current) => [...current, `started:${input.runId}`]),
-            turnCompleted: () => Effect.void,
-            runSettled: (input) =>
-              Ref.update(requests, (current) => [
-                ...current,
-                `settled:${input.runId}:${input.status}:children-running=${input.childrenRunning}`,
-              ]),
-          }),
           McpAppModelContext.layerEmpty,
           PreviewAgentActivity.layer,
           Layer.mock(CheckpointService.CheckpointServiceV2)({ captureBaseline: () => Effect.void }),
@@ -1852,11 +1840,6 @@ it.effect("ingests new member threads of an owned child after the root turn term
         "native_child",
       ],
     );
-    // The child outlives the root, so the request summary says its later turns are missing.
-    assert.deepEqual(yield* Ref.get(requests), [
-      `started:${runId}`,
-      `settled:${runId}:completed:children-running=true`,
-    ]);
   }),
 );
 
