@@ -892,16 +892,18 @@ const clickTarget = async (
   return point;
 };
 
-type FocusCandidate = {
+type LocatorElement = Parameters<Exclude<Parameters<Locator["evaluate"]>[0], string>>[0];
+type BrowserNode = Parameters<LocatorElement["contains"]>[0];
+
+type FocusCandidate = NonNullable<BrowserNode> & {
   readonly tagName: string;
   readonly type?: string;
   readonly disabled?: boolean;
   readonly readOnly?: boolean;
   readonly isContentEditable?: boolean;
+  readonly control?: FocusCandidate | null;
   readonly shadowRoot?: { readonly activeElement: FocusCandidate | null } | null;
   readonly focus?: () => void;
-  getRootNode(): { readonly activeElement?: FocusCandidate | null };
-  contains(other: FocusCandidate): boolean;
 };
 
 // Serialized into the page's main world, so it must not reference module scope.
@@ -937,7 +939,9 @@ const focusTextTarget = (target: FocusCandidate | null) => {
     return false;
   }
   element.focus?.();
-  const active = element.getRootNode().activeElement;
+  const root: NonNullable<BrowserNode> & { readonly activeElement?: BrowserNode } =
+    element.getRootNode();
+  const active = root.activeElement;
   return active != null && (active === element || element.contains(active));
 };
 
@@ -963,7 +967,7 @@ const pageAnswer = async <A>(answer: Promise<A>, timeout: number) => {
 // Serialized into the page's main world, so it must not reference module scope.
 const valueOnlyInput = (
   target: FocusCandidate & {
-    closest(selector: string): { readonly control: FocusCandidate | null } | null;
+    closest(selector: string): FocusCandidate | null;
   },
 ) => {
   // As fill does, a target that is not a control stands for its label's control.

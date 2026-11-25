@@ -304,13 +304,14 @@ describe("webhook route", () => {
           controller.close();
         },
       });
+      const streamedRequest: RequestInit & { duplex: "half" } = {
+        method: "POST",
+        body: chunked,
+        // Node 的 fetch 接收流式请求体时需要 duplex。
+        duplex: "half",
+      };
       const streamed = await handler(
-        new Request("http://env.local/api/hooks/id/tok", {
-          method: "POST",
-          body: chunked,
-          // Node's fetch needs duplex for streamed bodies.
-          duplex: "half",
-        }),
+        new Request("http://env.local/api/hooks/id/tok", streamedRequest),
       );
       expect(streamed.status).toBe(413);
       expect(calls).toBe(0);

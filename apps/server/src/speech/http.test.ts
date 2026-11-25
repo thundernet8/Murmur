@@ -118,23 +118,22 @@ effectIt.live("rejects oversized chunked audio without invoking transcription", 
         }),
       );
       expect(changeKey.status).toBe(403);
+      const streamedRequest: RequestInit & { duplex: "half" } = {
+        method: "POST",
+        headers: { "content-type": "application/octet-stream" },
+        body: new ReadableStream({
+          start(controller) {
+            controller.enqueue(
+              new Uint8Array(SpeechService.MAX_SPEECH_BYTES + SPEECH_MAX_OPTIONS_BYTES + 4),
+            );
+            controller.enqueue(new Uint8Array(4));
+            controller.close();
+          },
+        }),
+        duplex: "half",
+      };
       yield* Effect.promise(() =>
-        expect(
-          fetch(url, {
-            method: "POST",
-            headers: { "content-type": "application/octet-stream" },
-            body: new ReadableStream({
-              start(controller) {
-                controller.enqueue(
-                  new Uint8Array(SpeechService.MAX_SPEECH_BYTES + SPEECH_MAX_OPTIONS_BYTES + 4),
-                );
-                controller.enqueue(new Uint8Array(4));
-                controller.close();
-              },
-            }),
-            duplex: "half",
-          }),
-        ).resolves.toMatchObject({ status: 413 }),
+        expect(fetch(url, streamedRequest)).resolves.toMatchObject({ status: 413 }),
       );
       expect(transcribe).not.toHaveBeenCalled();
     }).pipe(Effect.scoped, Effect.provide(Layer.mergeAll(NodeHttpServer.layerTest, dependencies)));

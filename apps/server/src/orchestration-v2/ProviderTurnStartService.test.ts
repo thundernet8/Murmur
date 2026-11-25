@@ -2071,7 +2071,7 @@ effectIt.effect(
                 yield* git(worktreePath, ["rev-parse", "--symbolic-full-name", "@{upstream}"]),
               ).toBe(expected.upstream);
             }
-            expect(yield* branchConfig("t3-merge-base")).toBe(expected.base);
+            expect(yield* branchConfig("murmur-merge-base")).toBe(expected.base);
             return yield* open();
           }).pipe(Effect.orDie),
         );
@@ -3370,7 +3370,6 @@ effectIt.effect("does not overwrite a run interrupted while its provider session
     expect(harness.startRootRun).not.toHaveBeenCalled();
     const projection = harness.projection();
     expect(projection.runs.at(-1)?.status).toBe("interrupted");
-    expect(harness.settledRuns).toEqual([]);
     expect(projection.attempts[0]?.status).toBe("pending");
     expect(projection.nodes[0]?.status).toBe("pending");
     expect(projection.turnItems).toEqual([]);

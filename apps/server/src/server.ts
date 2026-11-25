@@ -960,7 +960,6 @@ const layerMakeRoutes = Layer.mergeAll(
   Layer.provide(layerCommandReadiness),
   Layer.provide(ServerHttp.layerBrowserApiCors),
   Layer.provide(ServerHttp.layerHttpCompression),
-  Layer.provide(RelayEncryption.layer),
 );
 
 const layerMakeServer = Layer.unwrap(
@@ -1402,6 +1401,7 @@ const layerMakeServer = Layer.unwrap(
     }).pipe(
       withUntracedRequests,
       withRootRequestSpans,
+      Layer.provide(RelayEncryption.layer),
       Layer.tap(() => Deferred.succeed(routesReady, undefined).pipe(Effect.orDie)),
     );
     const layerServerApplication = Layer.mergeAll(

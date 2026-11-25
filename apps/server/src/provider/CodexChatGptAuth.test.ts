@@ -1687,17 +1687,6 @@ it.effect(
     ),
 );
 
-it.effect("telemetry failures do not fail a verified ChatGPT sign-in", () =>
-  provision(
-    Effect.gen(function* () {
-      const h = yield* makeHarnessFor(instanceId, new Map(), true);
-      yield* h.signIn;
-      const state = yield* h.phase("succeeded");
-      assert.strictEqual(state.phase, "succeeded");
-      assert.isTrue(Option.isSome(yield* h.auth.read));
-    }),
-  ),
-);
 it.effect("a running session renews its bound profile but refuses a replacement sign-in", () =>
   provision(
     Effect.gen(function* () {

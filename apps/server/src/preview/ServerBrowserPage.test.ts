@@ -424,7 +424,7 @@ describe("server browser element refs", () => {
     expect(await keys("#b")).toBe(`girona42${"a".repeat(501)}`);
 
     await page.setContent(
-      `<form onsubmit="event.preventDefault();sent.value='sent'"><label for=e>Email</label><input id=e value=old><input id=d type=date value=2020-02-02><label>Tint <input id=c type=color></label><input id=r type=range><textarea id=t></textarea><input id=sent></form>`,
+      `<form onsubmit="event.preventDefault();sent.value='sent'"><label for=e>Email</label><input id=e value=old><input id=d type=date value=2020-02-02><label>Tint <svg id=tint-icon></svg><input id=c type=color></label><input id=r type=range><textarea id=t></textarea><input id=sent></form>`,
     );
     await ServerBrowserPage.type(page, { locator: "text=Email", text: "a@b.c", clear: true });
     expect(await page.locator("#e").inputValue()).toBe("a@b.c");
@@ -432,6 +432,13 @@ describe("server browser element refs", () => {
     expect(await page.locator("#d").inputValue()).toBe("2026-01-31");
     await ServerBrowserPage.type(page, { locator: "text=Tint", text: "#ff0000", clear: true });
     expect(await page.locator("#c").inputValue()).toBe("#ff0000");
+    await ServerBrowserPage.type(page, { locator: "#tint-icon", text: "#00ff00", clear: true });
+    expect(await page.locator("#c").inputValue()).toBe("#00ff00");
+    await expect(
+      ServerBrowserPage.type(page, { locator: "#tint-icon", text: "ignored" }),
+    ).rejects.toMatchObject({
+      tag: "PreviewAutomationTargetNotEditableError",
+    });
     await ServerBrowserPage.type(page, { locator: "#r", text: "70", clear: true });
     expect(await page.locator("#r").inputValue()).toBe("70");
     await ServerBrowserPage.type(page, { locator: "#e", text: "x\ny" });
