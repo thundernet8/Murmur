@@ -90,7 +90,7 @@ const readField = (stdout: string, field: string) => {
   return line.slice(field.length + 1).trim();
 };
 
-const SERVER_ENTRY_SOURCE = '#!/bin/sh\necho "t3code wsl runtime test server 0.0.0"\n';
+const SERVER_ENTRY_SOURCE = '#!/bin/sh\necho "murmur wsl runtime test server 0.0.0"\n';
 
 describe("WSL runtime cache", () => {
   it.each([
@@ -149,9 +149,9 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
       archivePath,
       archiveSha,
       runtimeId,
-      runtimeParent: `${work}/home/.t3/wsl-runtime`,
-      runtimeRoot: `${work}/home/.t3/wsl-runtime/${runtimeId}`,
-      serverEntry: `${work}/home/.t3/wsl-runtime/${runtimeId}/t3`,
+      runtimeParent: `${work}/home/.murmur/wsl-runtime`,
+      runtimeRoot: `${work}/home/.murmur/wsl-runtime/${runtimeId}`,
+      serverEntry: `${work}/home/.murmur/wsl-runtime/${runtimeId}/t3`,
       installScript,
       install: (archive?: string, sha?: string, t3Home?: string | null) =>
         runShell(installScript(archive, sha, t3Home)),
@@ -200,17 +200,17 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
     expect(provider.stdout).toBe("linux-node-provider\n");
   });
 
-  it("stages the runtime under the login shell's T3CODE_HOME and reports it to the launcher", () => {
+  it("stages the runtime under the login shell's MURMUR_HOME and reports it to the launcher", () => {
     const fixture = createFixture();
     const t3Home = `${fixture.work}/home/.config/t3 home`;
     const install = fixture.install(undefined, undefined, t3Home);
     expect(install.status, install.stderr).toBe(0);
     expect(parseWslRuntimeRoot(install.stdout)).toBe(`${t3Home}/wsl-runtime/${fixture.runtimeId}`);
-    expect(runShell(`test ! -e ${sh(`${fixture.work}/home/.t3`)}`).status).toBe(0);
+    expect(runShell(`test ! -e ${sh(`${fixture.work}/home/.murmur`)}`).status).toBe(0);
 
     const probe = runShell(
       [
-        `bash() { ( export T3CODE_HOME=${sh(t3Home)}; eval "$2" ); }`,
+        `bash() { ( export MURMUR_HOME=${sh(t3Home)}; eval "$2" ); }`,
         buildWslRuntimeProbeScript(),
       ].join("\n"),
     );
@@ -278,7 +278,7 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
         "set -eu",
         `printf '%s' ${sh(brokenEntry)} > ${sh(fixture.serverEntry)}`,
         `chmod +x ${sh(fixture.serverEntry)}`,
-        `sha256sum ${sh(fixture.serverEntry)} | cut -d ' ' -f 1 > ${sh(`${fixture.runtimeRoot}/.t3code-wsl-runtime-ready`)}`,
+        `sha256sum ${sh(fixture.serverEntry)} | cut -d ' ' -f 1 > ${sh(`${fixture.runtimeRoot}/.murmur-wsl-runtime-ready`)}`,
       ].join("\n"),
     );
     expect(corrupt.status, corrupt.stderr).toBe(0);
@@ -316,9 +316,9 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
         ': > "$work/tar-calls"',
         'PATH="$work/bin:$PATH"',
         "export PATH",
-        `cat > "$work/install.sh" <<'T3CODE_INSTALL_SCRIPT'`,
+        `cat > "$work/install.sh" <<'MURMUR_INSTALL_SCRIPT'`,
         fixture.installScript(),
-        "T3CODE_INSTALL_SCRIPT",
+        "MURMUR_INSTALL_SCRIPT",
         // Keep runtime roots out of both racers' argv so their /proc scans cannot match themselves.
         'sh "$work/install.sh" > "$work/first.out" 2>&1 &',
         "first=$!",
@@ -390,13 +390,13 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
         "set -eu",
         `runtime_parent=${sh(fixture.runtimeParent)}`,
         'mkdir -p "$runtime_parent/sha256-current" "$runtime_parent/sha256-previous"',
-        'printf ready > "$runtime_parent/sha256-current/.t3code-wsl-runtime-ready"',
-        'printf ready > "$runtime_parent/sha256-previous/.t3code-wsl-runtime-ready"',
+        'printf ready > "$runtime_parent/sha256-current/.murmur-wsl-runtime-ready"',
+        'printf ready > "$runtime_parent/sha256-previous/.murmur-wsl-runtime-ready"',
         `touch -d "10 minutes ago" ${sh(fixture.runtimeRoot)}`,
         'touch -d "1 minute ago" "$runtime_parent/sha256-previous"',
-        `cat > ${sh(`${fixture.work}/select.sh`)} <<'T3CODE_SELECT_SCRIPT'`,
+        `cat > ${sh(`${fixture.work}/select.sh`)} <<'MURMUR_SELECT_SCRIPT'`,
         fixture.installScript(),
-        "T3CODE_SELECT_SCRIPT",
+        "MURMUR_SELECT_SCRIPT",
         `sh ${sh(`${fixture.work}/select.sh`)}`,
         `HOME=${sh(`${fixture.work}/home`)}`,
         "export HOME",
@@ -494,7 +494,7 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
         expect(prepared).toEqual({ ok: true, linuxAppRoot: fixture.runtimeRoot });
         const version = runShell(`${sh(fixture.serverEntry)} --version`);
         expect(version.status, version.stderr).toBe(0);
-        expect(version.stdout).toBe("t3code wsl runtime test server 0.0.0\n");
+        expect(version.stdout).toBe("murmur wsl runtime test server 0.0.0\n");
       }).pipe(Effect.provide(layerWslEnvironment(`${fixture.work}/home`)));
     });
   });
@@ -505,9 +505,9 @@ describe.skipIf(posixShellRunner === null)("WSL runtime install script (executed
         "set -eu",
         "work=$(mktemp -d)",
         'home="$work/home"',
-        'runtime_parent="$home/.t3/wsl-runtime"',
+        'runtime_parent="$home/.murmur/wsl-runtime"',
         'mkdir -p "$runtime_parent"',
-        'make_ready() { mkdir -p "$runtime_parent/$1"; printf ready > "$runtime_parent/$1/.t3code-wsl-runtime-ready"; }',
+        'make_ready() { mkdir -p "$runtime_parent/$1"; printf ready > "$runtime_parent/$1/.murmur-wsl-runtime-ready"; }',
         "make_ready sha256-current",
         "make_ready sha256-previous",
         "make_ready sha256-active",

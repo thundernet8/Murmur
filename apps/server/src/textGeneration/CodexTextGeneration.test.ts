@@ -40,7 +40,7 @@ const DEFAULT_TEST_MODEL_SELECTION = createModelSelection(
 );
 
 const layerCodexTextGenerationTest = ServerConfig.ServerConfig.layerTest(process.cwd(), {
-  prefix: "t3code-codex-text-generation-test-",
+  prefix: "murmur-codex-text-generation-test-",
 }).pipe(Layer.provideMerge(NodeServices.layer));
 
 interface FakeCodexInput {
@@ -216,7 +216,7 @@ function withFakeCodexEnv<A, E, R>(
 ) {
   return Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem;
-    const tempDir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-codex-text-" });
+    const tempDir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-codex-text-" });
     const codexPath = yield* makeFakeCodexBinary(tempDir, input);
     const config = decodeCodexSettings({
       binaryPath: codexPath,
@@ -423,11 +423,11 @@ it.layer(layerCodexTextGenerationTest)("CodexTextGeneration", (it) => {
     withFakeCodexEnv(
       {
         output: JSON.stringify({ title: "Remove default shapes" }),
-        launchArgs: `-c 'mcp_servers.t3-code.url="http://127.0.0.1:1/mcp"' -c 'mcp_servers.t3-code.enabled=true'`,
+        launchArgs: `-c 'mcp_servers.murmur-code.url="http://127.0.0.1:1/mcp"' -c 'mcp_servers.murmur-code.enabled=true'`,
         mcpServers: [{ name: "t3-code", enabled: true }],
         requireMcpServersOff: ["t3-code"],
         requireArg:
-          "--config features.apps=false --config mcp_servers.t3-code.enabled=false --ephemeral",
+          "--config features.apps=false --config mcp_servers.murmur-code.enabled=false --ephemeral",
       },
       (textGeneration) =>
         Effect.gen(function* () {
@@ -526,9 +526,9 @@ it.layer(layerCodexTextGenerationTest)("CodexTextGeneration", (it) => {
     ),
   );
 
-  it.effect("identifies codex exec as T3 Code", () =>
+  it.effect("identifies codex exec as Murmur", () =>
     withFakeCodexEnv(
-      { output: JSON.stringify({ title: "Live title" }), requireOriginator: "T3 Code" },
+      { output: JSON.stringify({ title: "Live title" }), requireOriginator: "Murmur" },
       (textGeneration) =>
         Effect.gen(function* () {
           const result = yield* textGeneration.generateThreadTitle({

@@ -106,32 +106,32 @@ describe("AcpClientTerminals", () => {
           sessionId === "unknown"
             ? undefined
             : {
-                T3_ACP_MCP_AUTHORIZATION: sessionId === "session-a" ? "token-a" : "token-b",
-                T3CODE_THREAD_ID: sessionId,
+                MURMUR_ACP_MCP_AUTHORIZATION: sessionId === "session-a" ? "token-a" : "token-b",
+                MURMUR_THREAD_ID: sessionId,
               },
       });
       yield* Effect.addFinalizer(() => terminals.disposeAll);
-      inheritedEnvironment.T3_TEST_INHERITED = "refreshed";
+      inheritedEnvironment.MURMUR_TEST_INHERITED = "refreshed";
 
       for (const [sessionId, expected] of [
-        ["session-a", "token-a||session-a|refreshed|T3_TEST_OVERRIDE=request"],
-        ["session-b", "token-b||session-b|refreshed|T3_TEST_OVERRIDE=request"],
-        ["unknown", "|||refreshed|T3_TEST_OVERRIDE=inherited"],
+        ["session-a", "token-a||session-a|refreshed|MURMUR_TEST_OVERRIDE=request"],
+        ["session-b", "token-b||session-b|refreshed|MURMUR_TEST_OVERRIDE=request"],
+        ["unknown", "|||refreshed|MURMUR_TEST_OVERRIDE=inherited"],
       ] as const) {
         const created = yield* terminals.create({
           sessionId,
           command: process.execPath,
           args: [
             "-e",
-            "const env = process.env; process.stdout.write([env.T3_ACP_MCP_AUTHORIZATION ?? '', env.t3_Acp_Mcp_Endpoint ?? '', env.T3CODE_THREAD_ID ?? '', env.T3_TEST_INHERITED, ...Object.keys(env).filter((name) => name.toUpperCase() === 'T3_TEST_OVERRIDE').map((name) => name + '=' + env[name])].join('|'))",
+            "const env = process.env; process.stdout.write([env.MURMUR_ACP_MCP_AUTHORIZATION ?? '', env.t3_Acp_Mcp_Endpoint ?? '', env.MURMUR_THREAD_ID ?? '', env.MURMUR_TEST_INHERITED, ...Object.keys(env).filter((name) => name.toUpperCase() === 'MURMUR_TEST_OVERRIDE').map((name) => name + '=' + env[name])].join('|'))",
           ],
           ...(sessionId === "unknown"
             ? {}
             : {
                 env: [
-                  { name: "T3_TEST_OVERRIDE", value: "first" },
+                  { name: "MURMUR_TEST_OVERRIDE", value: "first" },
                   { name: "t3_Test_Override", value: "second" },
-                  { name: "T3_TEST_OVERRIDE", value: "request" },
+                  { name: "MURMUR_TEST_OVERRIDE", value: "request" },
                 ],
               }),
         });
@@ -142,11 +142,11 @@ describe("AcpClientTerminals", () => {
     }).pipe(
       Effect.provideService(HostProcess.Environment, {
         ...process.env,
-        T3_ACP_MCP_AUTHORIZATION: "launching-thread-token",
+        MURMUR_ACP_MCP_AUTHORIZATION: "launching-thread-token",
         t3_Acp_Mcp_Endpoint: "launching-thread-endpoint",
-        T3CODE_THREAD_ID: "launching-thread",
-        T3_TEST_INHERITED: "kept",
-        T3_TEST_OVERRIDE: "inherited",
+        MURMUR_THREAD_ID: "launching-thread",
+        MURMUR_TEST_INHERITED: "kept",
+        MURMUR_TEST_OVERRIDE: "inherited",
       }),
       // Exercise Windows' case-insensitive variable names on every OS.
       Effect.provideService(HostProcess.Platform, "win32"),
@@ -159,12 +159,12 @@ describe("AcpClientTerminals", () => {
       const terminals = yield* makeAcpClientTerminals({
         defaultCwd: process.cwd(),
         shellCommands: true,
-        environmentForSession: () => ({ T3_ACP_MCP_NODE: "mailbox-probe" }),
+        environmentForSession: () => ({ MURMUR_ACP_MCP_NODE: "mailbox-probe" }),
       });
       yield* Effect.addFinalizer(() => terminals.disposeAll);
       const terminal = yield* terminals.create({
         sessionId: "devin",
-        command: 'printf "%s\\n" "$T3_ACP_MCP_NODE" | tr a-z A-Z',
+        command: 'printf "%s\\n" "$MURMUR_ACP_MCP_NODE" | tr a-z A-Z',
       });
       const exit = yield* terminals.waitForExit({ sessionId: "devin", ...terminal });
       const output = yield* terminals.output({ sessionId: "devin", ...terminal });

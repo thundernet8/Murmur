@@ -275,7 +275,7 @@ describe("GitHubRest", () => {
             expect(request.headers).toMatchObject({
               host: apiHost,
               authorization: "Bearer placeholder",
-              "user-agent": "t3code",
+              "user-agent": "murmur",
               "x-github-api-version": "2022-11-28",
             });
           }

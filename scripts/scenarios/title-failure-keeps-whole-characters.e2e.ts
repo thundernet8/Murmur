@@ -3,7 +3,7 @@ import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 const PREFIX = "Codex CLI command failed: ";
@@ -23,9 +23,11 @@ test(
         const fs = yield* FileSystem.FileSystem;
         const path = yield* Path.Path;
         return {
-          fakeCodex: path.join(T3_HOME, "bin/fake-codex"),
-          settingsPath: path.join(T3_HOME, "userdata/settings.json"),
-          originalSettings: yield* fs.readFileString(path.join(T3_HOME, "userdata/settings.json")),
+          fakeCodex: path.join(MURMUR_HOME, "bin/fake-codex"),
+          settingsPath: path.join(MURMUR_HOME, "userdata/settings.json"),
+          originalSettings: yield* fs.readFileString(
+            path.join(MURMUR_HOME, "userdata/settings.json"),
+          ),
         };
       }),
     );

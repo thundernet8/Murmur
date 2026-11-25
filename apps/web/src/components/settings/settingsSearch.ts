@@ -892,7 +892,7 @@ export const SETTINGS_SEARCH_ITEMS = [
     title: msg("Submodules"),
     to: "/settings/worktrees",
     scope: "project-defaults",
-    searchTerms: [msg("git submodule init recursive top-level none worktree t3.json")],
+    searchTerms: [msg("git submodule init recursive top-level none worktree murmur.json")],
   },
   {
     id: "start-from-origin",
@@ -1220,7 +1220,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   },
   {
     id: "pull-request-links-open-in-app",
-    title: msg("Open pull requests in T3 Code"),
+    title: msg("Open pull requests in Murmur"),
     to: "/settings/diffs",
     searchTerms: [
       `pr commit links ${SOURCE_CONTROL_HOST_LABELS} browser external click default pull request view panel`,
@@ -1351,7 +1351,9 @@ export const SETTINGS_SEARCH_ITEMS = [
     id: "project-actions",
     title: msg("Actions"),
     to: "/settings/projects",
-    searchTerms: [msg("commands scripts setup run dev server checkout worktree t3.json import")],
+    searchTerms: [
+      msg("commands scripts setup run dev server checkout worktree murmur.json import"),
+    ],
   },
   {
     id: "project-repositories",
@@ -1407,7 +1409,7 @@ export const SETTINGS_SEARCH_ITEMS = [
   {
     id: "t3-connect",
     localEnvironmentOnly: true,
-    title: msg("T3 Connect"),
+    title: msg("Murmur Connect"),
     to: "/settings/access",
     targetId: "connections-environment",
     searchTerms: [msg("managed tunnel cloud other devices remote tunnels limit t3 chat")],

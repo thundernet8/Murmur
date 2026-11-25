@@ -316,7 +316,7 @@ export const makeWorktreeCheckoutCache = Effect.fn("WorktreeCheckoutCache.make")
     const stats = yield* statEntries(input.root, paths);
     const restated = restatIndex(parsed, stats, { verify: input.verify });
     if (restated === null) return null;
-    const temporary = `${input.target}.t3-${NodeCrypto.randomUUID()}`;
+    const temporary = `${input.target}.murmur-${NodeCrypto.randomUUID()}`;
     yield* Effect.uninterruptible(
       fileSystem
         .writeFile(temporary, restated)

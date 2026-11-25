@@ -33,7 +33,7 @@ import {
 import { RpcClient, RpcSerialization } from "effect/rpc";
 import { Socket } from "effect/socket";
 
-import { APP_DIR, T3_HOME } from "../e2e.config.ts";
+import { APP_DIR, MURMUR_HOME } from "../e2e.config.ts";
 import { run, ScenarioError } from "./shell.ts";
 
 export interface T3State {
@@ -244,7 +244,7 @@ const sameSite = { lax: "Lax", strict: "Strict", none: "None" } as const;
 const signIn = Effect.fn("scenario.signIn")(function* (baseUrl: string) {
   const fs = yield* FileSystem.FileSystem;
   const path = yield* Path.Path;
-  const credential = yield* fs.readFileString(path.join(T3_HOME, "browser-dev-token"));
+  const credential = yield* fs.readFileString(path.join(MURMUR_HOME, "browser-dev-token"));
   const client = yield* HttpApiClient.make(EnvironmentHttpApi, { baseUrl });
   // Only the cookies are read: a proof runs this against a base server whose body may differ.
   const response = yield* client.auth
@@ -325,7 +325,7 @@ export const rpcClient = Effect.fn("scenario.rpcClient")(function* (home: string
 
 export const test = base.extend<{ t3: T3 }>({
   t3: async ({ app, browser }, use) => {
-    const { state, cleanup } = makeState(T3_HOME);
+    const { state, cleanup } = makeState(MURMUR_HOME);
     await use({
       ...state,
       open: async (target = "/") => {

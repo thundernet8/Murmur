@@ -2,7 +2,7 @@
 import * as NodeFS from "node:fs";
 import * as NodeNet from "node:net";
 
-import { T3_CONNECT_TROUBLESHOOTING_SECTIONS } from "@t3tools/contracts";
+import { MURMUR_CONNECT_TROUBLESHOOTING_SECTIONS } from "@t3tools/contracts";
 import { describe, expect, it } from "@effect/vitest";
 import * as Clock from "effect/Clock";
 import * as Deferred from "effect/Deferred";
@@ -449,7 +449,7 @@ describe("ConnectReachability DNS failures", () => {
   );
 });
 
-describe("T3 Connect troubleshooting links", () => {
+describe("Murmur Connect troubleshooting links", () => {
   it("each section names a heading in the user guide", () => {
     const guide = NodeFS.readFileSync(
       new URL("../../../../docs/user/t3-connect-troubleshooting.md", import.meta.url),
@@ -464,7 +464,7 @@ describe("T3 Connect troubleshooting links", () => {
           .replace(/ /g, "-"),
       ),
     );
-    for (const section of T3_CONNECT_TROUBLESHOOTING_SECTIONS) {
+    for (const section of MURMUR_CONNECT_TROUBLESHOOTING_SECTIONS) {
       expect(anchors, section).toContain(section);
     }
   });

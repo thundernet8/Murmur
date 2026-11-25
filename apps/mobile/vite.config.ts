@@ -75,7 +75,7 @@ const babel: {
   ) => Promise<{ code?: string | null; map?: object | null } | null>;
 } = require("@babel/core");
 const babelConfig = require("./babel.config.js")({ cache: () => {} });
-const testPlatform = process.env.T3_MOBILE_TEST_PLATFORM === "android" ? "android" : "ios";
+const testPlatform = process.env.MURMUR_MOBILE_TEST_PLATFORM === "android" ? "android" : "ios";
 
 // gt-react-native loads react-native and its hooks need <GTProvider>; tests get GT's core set up the way gt-react's initializeGTSPA does, which renders English without a provider.
 const gtTestModule = "\0gt-react-native";

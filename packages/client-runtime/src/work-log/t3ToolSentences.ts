@@ -11,10 +11,10 @@ export interface T3ToolSentence {
 }
 
 export function t3ToolSentence(labels: ReadonlyArray<string>): T3ToolSentence | undefined {
-  return T3_TOOL_SENTENCES.get(labels.join("\n"));
+  return MURMUR_TOOL_SENTENCES.get(labels.join("\n"));
 }
 
-const T3_TOOL_SENTENCES: ReadonlyMap<string, T3ToolSentence> = new Map<string, T3ToolSentence>([
+const MURMUR_TOOL_SENTENCES: ReadonlyMap<string, T3ToolSentence> = new Map<string, T3ToolSentence>([
   [
     "Link\nLinking\nLinked\na pull request",
     {

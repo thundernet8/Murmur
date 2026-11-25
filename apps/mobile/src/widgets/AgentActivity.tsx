@@ -178,7 +178,7 @@ function AgentActivity(
   const deepLinkRow = attentionRow ?? row0;
   const deepLink =
     deepLinkRow && deepLinkRow.deepLink.startsWith("/") && !deepLinkRow.deepLink.startsWith("//")
-      ? `t3code://${deepLinkRow.deepLink.slice(1)}`
+      ? `murmur://${deepLinkRow.deepLink.slice(1)}`
       : null;
   const linkModifiers = deepLink ? [widgetURL(deepLink)] : [];
 
@@ -255,7 +255,7 @@ function AgentActivity(
     <HStack
       modifiers={[frame({ width: height * 1.5, height }), foregroundStyle(color), ...modifiers]}
     >
-      <Image assetName="T3Mark" modifiers={[resizable()]} />
+      <Image assetName="MurmurMark" modifiers={[resizable()]} />
     </HStack>
   );
 

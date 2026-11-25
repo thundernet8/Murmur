@@ -4,7 +4,7 @@ import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 import * as Schema from "effect/Schema";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 const SettingsJson = Schema.fromJsonString(Schema.Record(Schema.String, Schema.Unknown));
@@ -13,7 +13,7 @@ const encodeSettings = Schema.encodeEffect(SettingsJson);
 
 const threadRuntimeSettings = Effect.gen(function* () {
   const fs = yield* FileSystem.FileSystem;
-  const settingsPath = (yield* Path.Path).join(T3_HOME, "userdata/settings.json");
+  const settingsPath = (yield* Path.Path).join(MURMUR_HOME, "userdata/settings.json");
   const original = yield* fs.readFileString(settingsPath);
   const settings = yield* decodeSettings(original);
   return {
@@ -58,7 +58,7 @@ test("/compact sent while the agent works waits for the turn", WEB, async ({ t3,
       messages: ["Change the file"],
       model: "approval",
     });
-    await runPromise(makeState(T3_HOME).cli(["thread", "send", waiting.threadId, "/compact"]));
+    await runPromise(makeState(MURMUR_HOME).cli(["thread", "send", waiting.threadId, "/compact"]));
     await t3.open(waiting);
     await screen.getByRole("button", "Send now").hover();
     await expect(

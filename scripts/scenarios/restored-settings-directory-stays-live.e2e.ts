@@ -3,7 +3,7 @@ import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Schema from "effect/Schema";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 const decodeSettings = Schema.decodeSync(
@@ -15,10 +15,10 @@ test(
   WEB,
   async ({ t3, app, screen }) => {
     await t3.project("settings-restore");
-    const settingsPath = `${T3_HOME}/userdata/settings.json`;
-    const active = `${T3_HOME}/active-settings`;
-    const previous = `${T3_HOME}/old-settings`;
-    const restored = `${T3_HOME}/restored-settings`;
+    const settingsPath = `${MURMUR_HOME}/userdata/settings.json`;
+    const active = `${MURMUR_HOME}/active-settings`;
+    const previous = `${MURMUR_HOME}/old-settings`;
+    const restored = `${MURMUR_HOME}/restored-settings`;
     const original = await runPromise(
       Effect.gen(function* () {
         const fs = yield* FileSystem.FileSystem;

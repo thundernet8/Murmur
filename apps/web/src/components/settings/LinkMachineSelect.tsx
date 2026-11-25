@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge } from "../ui/badge";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "../ui/select";
 
-const T3_CONNECT_NAME = "T3 Connect";
+const MURMUR_CONNECT_NAME = "Murmur Connect";
 
 /**
  * Shown wherever a link goes to an address this app does not already have for a
@@ -47,7 +47,7 @@ export function LinkMachineBadge({ machine }: { readonly machine: LinkableMachin
   if (machine.connected) return null;
   return (
     <Badge variant="outline" size="sm">
-      {machine.connectOnly ? T3_CONNECT_NAME : gt("Not connected")}
+      {machine.connectOnly ? MURMUR_CONNECT_NAME : gt("Not connected")}
     </Badge>
   );
 }
@@ -61,7 +61,7 @@ function MachineName({ machine }: { readonly machine: LinkableMachine }) {
   );
 }
 
-/** The user's other machines, including those on their T3 Connect account, then an address. */
+/** The user's other machines, including those on their Murmur Connect account, then an address. */
 export function LinkMachineSelect({
   machines,
   value,

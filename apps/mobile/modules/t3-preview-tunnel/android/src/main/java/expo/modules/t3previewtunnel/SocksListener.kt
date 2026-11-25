@@ -218,9 +218,8 @@ internal class SocksListener(private val requestAccess: () -> String?) {
         output.write(bytes)
       }.onFailure { webSocket.cancel() }
     }
-    val webSocket = client.newWebSocket(
-      Request.Builder().url(url).build(),
-      object : WebSocketListener() {
+    val request = Request.Builder().url(url).build()
+    val callbacks = object : WebSocketListener() {
         override fun onOpen(webSocket: WebSocket, response: Response) {
           opened.complete(true)
         }
@@ -251,7 +250,9 @@ internal class SocksListener(private val requestAccess: () -> String?) {
           closed.complete(Unit)
         }
       }
-    )
+    val webSocket = if (url.fragment?.startsWith("relay-e2ee=") == true) {
+      RelaySocket(request, callbacks).start()
+    } else { client.newWebSocket(request, callbacks) }
     if (!runCatching { opened.get(15, TimeUnit.SECONDS) }.getOrDefault(false)) {
       lastFailure = failure
       replied.completeExceptionally(java.io.IOException("tunnel did not open"))

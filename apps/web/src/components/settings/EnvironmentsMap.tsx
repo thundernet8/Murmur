@@ -205,7 +205,7 @@ const ROUTE_STYLES: Record<
 function routeKindLabel(kind: ConnectionRouteKind, gt: GT): string {
   switch (kind) {
     case "relay":
-      return "T3 Connect";
+      return "Murmur Connect";
     case "loopback":
       return gt("This device");
     case "lan":
@@ -240,7 +240,7 @@ function routeStateLabel(state: FleetRouteState, gt: GT): string {
   }
 }
 
-/** Asks T3 Connect for the account's machines once, as the list's own rows do on mount. */
+/** Asks Murmur Connect for the account's machines once, as the list's own rows do on mount. */
 function useConnectMachines() {
   const gt = useGT();
   const m = useMessages();
@@ -249,7 +249,7 @@ function useConnectMachines() {
   const discoverIfUnasked = useEffectEvent(() => {
     if (hasCloudPublicConfig() && !discovery.listed && !discovery.refreshing) void refresh();
   });
-  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- one T3 Connect listing when the map mounts, the request the list makes on mount
+  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- one Murmur Connect listing when the map mounts, the request the list makes on mount
   useEffect(() => {
     discoverIfUnasked();
   }, []);
@@ -2115,7 +2115,7 @@ const FleetScene = memo(function FleetScene({
               {...focusProps(
                 target,
                 rect,
-                gt("{label}, on your T3 Connect account, not added to this app. {status}", {
+                gt("{label}, on your Murmur Connect account, not added to this app. {status}", {
                   label: node.label,
                   status: connectAvailabilityText(node.availability, gt),
                 }),

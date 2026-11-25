@@ -95,7 +95,7 @@ describe("remote environment authorization", () => {
         credential: "one-time-credential",
         dpopProof: "token-proof",
         clientMetadata: {
-          label: "T3 Code Mobile",
+          label: "Murmur Mobile",
           deviceType: "mobile",
           os: "iOS",
         },

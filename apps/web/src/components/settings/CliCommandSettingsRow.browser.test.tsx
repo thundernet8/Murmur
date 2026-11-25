@@ -12,7 +12,7 @@ it("blocks installation behind another t3 without blocking removal of our instal
     supported: true,
     installedPath: null,
     onPath: false,
-    launcherPath: "/home/test/.t3/bin/t3",
+    launcherPath: "/home/test/.murmur/bin/t3",
   };
   const getState = vi.fn(async (): Promise<DesktopCliCommandState> => ({
     ...state,

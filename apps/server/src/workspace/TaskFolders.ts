@@ -11,7 +11,7 @@ import {
   type ThreadId,
   type VcsCreateWorktreeInput,
   type VcsCreateWorktreeResult,
-  T3_PROJECT_FILE_NAME,
+  MURMUR_PROJECT_FILE_NAME,
 } from "@t3tools/contracts";
 import { resolveProjectSettings } from "@t3tools/shared/projectSettings";
 import { flattenTemporaryWorktreeBranchName, isTemporaryWorktreeBranch } from "@t3tools/shared/git";
@@ -311,9 +311,9 @@ const make = Effect.gen(function* () {
     (cause: unknown): TaskFolderError =>
       new TaskFolderError({ operation, detail: `${prefix}: ${failureDetail(cause)}`, cause });
 
-  // A project that lays its own thread folder out says so in its `t3.json`.
+  // A project that lays its own thread folder out says so in its `murmur.json`.
   const projectFile = (projectRoot: string) =>
-    fileSystem.readFileString(path.join(projectRoot, T3_PROJECT_FILE_NAME)).pipe(
+    fileSystem.readFileString(path.join(projectRoot, MURMUR_PROJECT_FILE_NAME)).pipe(
       Effect.map(parseT3ProjectFile),
       Effect.orElseSucceed(() => null),
     );
@@ -341,12 +341,12 @@ const make = Effect.gen(function* () {
             ...hostEnvironment,
             // A `GIT_DIR` the server inherited would point the command's Git at another repository.
             ...VcsProcess.unsetInheritedRepositoryEnv(hostEnvironment, hostPlatform),
-            T3_PROJECT_ROOT: taskFolder.projectRoot,
-            T3_WORKTREE_ROOT: taskFolder.root,
-            T3_WORKTREE_PROJECT_PATH: taskFolder.projectPath,
-            T3_WORKTREE_BRANCH: branch,
-            T3_WORKTREE_BASE: baseBranch ?? "",
-            T3_WORKTREE_REPOSITORIES: repositories.join("\n"),
+            MURMUR_PROJECT_ROOT: taskFolder.projectRoot,
+            MURMUR_WORKTREE_ROOT: taskFolder.root,
+            MURMUR_WORKTREE_PROJECT_PATH: taskFolder.projectPath,
+            MURMUR_WORKTREE_BRANCH: branch,
+            MURMUR_WORKTREE_BASE: baseBranch ?? "",
+            MURMUR_WORKTREE_REPOSITORIES: repositories.join("\n"),
           },
           timeoutMs: LAYOUT_COMMAND_TIMEOUT_MS,
         })
@@ -1001,7 +1001,7 @@ const make = Effect.gen(function* () {
         if (layout !== null && !input.projectCommands) {
           return yield* new TaskFolderError({
             operation: "create",
-            detail: `This project lays out its worktrees with its own command (worktreeLayout in ${T3_PROJECT_FILE_NAME}), which this request is not permitted to run.`,
+            detail: `This project lays out its worktrees with its own command (worktreeLayout in ${MURMUR_PROJECT_FILE_NAME}), which this request is not permitted to run.`,
           });
         }
         if (layout !== null) {

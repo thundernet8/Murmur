@@ -3,7 +3,7 @@ import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { SECOND_HOME, startSecondServer } from "./second-server.ts";
 import { environmentId, makeState, rpcClient, runPromise, test, WEB } from "./t3.ts";
 
@@ -16,7 +16,7 @@ const linkEnvironments = Effect.fn("scenario.linkEnvironments")(function* (
   secondOrigin: string,
   fallback: string,
 ) {
-  const primary = yield* rpcClient(T3_HOME, primaryOrigin);
+  const primary = yield* rpcClient(MURMUR_HOME, primaryOrigin);
   const second = yield* rpcClient(SECOND_HOME, secondOrigin);
   for (const client of [primary, second]) {
     yield* client["server.updateSettings"]({ patch: { linkedEnvironmentsEnabled: true } });

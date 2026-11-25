@@ -306,11 +306,11 @@ it.effect.each(["read", "decode"] as const)(
 );
 
 it.effect.each([
-  { headSelector: "octocat:feature/fix", source: undefined, sourceProject: "octocat/t3code" },
+  { headSelector: "octocat:feature/fix", source: undefined, sourceProject: "octocat/murmur" },
   {
     headSelector: "feature/fix",
     source: { owner: "team/subgroup", refName: "feature/fix" },
-    sourceProject: "team/subgroup/t3code",
+    sourceProject: "team/subgroup/murmur",
   },
   {
     headSelector: "feature/fix",
@@ -325,7 +325,7 @@ it.effect.each([
         run: (input) => {
           requests.push(input.args);
           if (input.args[1] === "projects/:fullpath") {
-            return Effect.succeed(processOutput(JSON.stringify({ id: 100, path: "t3code" })));
+            return Effect.succeed(processOutput(JSON.stringify({ id: 100, path: "murmur" })));
           }
           assert.deepStrictEqual(input.args, [
             "api",

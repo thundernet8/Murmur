@@ -12,7 +12,7 @@ import * as ManagedEndpointReaper from "./ManagedEndpointReaper.ts";
 
 const NOW = "2026-08-25T12:00:00.000Z";
 const NOW_MILLIS = DateTime.makeUnsafe(NOW).epochMilliseconds;
-const PREFIX = "t3coderelay-managedendpoint-prod-";
+const PREFIX = "murmurrelay-managedendpoint-prod-";
 
 function tunnel(input: {
   readonly id: string;
@@ -227,7 +227,7 @@ function harness(input?: {
       teamId: "team-id",
       keyId: "key-id",
       privateKey: Redacted.make("private-key"),
-      bundleId: "com.t3tools.t3code.dev",
+      bundleId: "app.murmur.dev",
     },
     apnsDeliveryJobSigningSecret: Redacted.make("job-secret"),
     clerkSecretKey: Redacted.make("clerk-secret"),
@@ -499,7 +499,7 @@ describe("ManagedEndpointReaper", () => {
       ({ stage, expected }) => {
         const stageLegacyTunnels = legacyTunnels.map((entry) => ({
           ...entry,
-          name: entry.name!.replace(PREFIX, `t3coderelay-managedendpoint-${stage}-`),
+          name: entry.name!.replace(PREFIX, `murmurrelay-managedendpoint-${stage}-`),
         }));
         const state = harness({
           namespace: stage,

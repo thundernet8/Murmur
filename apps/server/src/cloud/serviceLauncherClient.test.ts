@@ -65,7 +65,7 @@ it.effect.each([3, SERVICE_LAUNCHER_PROTOCOL])(
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
       const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-trial-" });
-      const baseDir = path.join(root, ".t3");
+      const baseDir = path.join(root, ".murmur");
       const exe = (version: string) => path.join(baseDir, "runtime/versions", version, "t3");
       const installed = path.join(root, ".local/bin/t3");
       for (const file of [exe("1.0.0"), exe("1.1.0")]) {
@@ -248,7 +248,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
         const fs = yield* FileSystem.FileSystem;
         const path = yield* Path.Path;
         const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-update-" });
-        const baseDir = path.join(root, ".t3");
+        const baseDir = path.join(root, ".murmur");
         const exe = (version: string) => path.join(baseDir, "runtime/versions", version, "t3");
         const installed = path.join(root, "custom/bin/t3");
         const onPath = path.join(root, "bin/t3");
@@ -264,7 +264,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
         yield* ServiceLauncherClient.repointLaunchers({ baseDir, targetVersion: "2.0.0" }).pipe(
           Effect.provideService(HostProcess.Environment, {
             HOME: root,
-            T3CODE_INSTALL_BIN_DIR: path.dirname(installed),
+            MURMUR_INSTALL_BIN_DIR: path.dirname(installed),
             PATH: path.dirname(onPath),
           }),
         );
@@ -280,7 +280,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
       const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-update-" });
-      const baseDir = path.join(root, ".t3");
+      const baseDir = path.join(root, ".murmur");
       const exe = (version: string) => path.join(baseDir, "runtime/versions", version, "t3");
       const installed = path.join(root, ".local/bin/t3");
       const onPath = path.join(root, "bin/t3");
@@ -334,7 +334,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
       const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-update-" });
-      const baseDir = path.join(root, ".t3");
+      const baseDir = path.join(root, ".murmur");
       const installed = path.join(root, ".local/bin/t3");
       const onPath = path.join(root, "bin/t3");
       const foreign = path.join(root, "other-home/runtime/versions/1.0.0/t3");
@@ -372,7 +372,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
       const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-update-" });
-      const baseDir = path.join(root, ".t3");
+      const baseDir = path.join(root, ".murmur");
       const exe = (version: string) => path.join(baseDir, "runtime/versions", version, "t3");
       const cwd = path.join(root, "work");
       const inCwd = path.join(cwd, "t3");
@@ -405,7 +405,7 @@ it.layer(NodeServices.layer)("self-update launchers", (it) => {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
       const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-update-" });
-      const baseDir = path.join(root, ".t3");
+      const baseDir = path.join(root, ".murmur");
       const exe = (version: string) => path.join(baseDir, "runtime/versions", version, "t3");
       const cwd = path.join(root, "work");
       const onPath = path.join(root, "bin/t3");

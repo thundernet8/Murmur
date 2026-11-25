@@ -80,7 +80,7 @@ describe("load balancing shared project machines", () => {
   });
 });
 const repositoryIdentity = {
-  canonicalKey: "github.com/t3tools/t3code",
+  canonicalKey: "github.com/t3tools/murmur",
   locator: {
     source: "git-remote" as const,
     remoteName: "upstream",
@@ -88,8 +88,8 @@ const repositoryIdentity = {
   },
   provider: SourceControlProviderKind.make("github"),
   owner: "t3tools",
-  name: "t3code",
-  displayName: "T3 Code",
+  name: "murmur",
+  displayName: "Murmur",
 };
 
 function makeProject(
@@ -249,18 +249,18 @@ describe("buildProjectGroups", () => {
 
   it("preserves every physical clone as a selectable member in repository modes", () => {
     const projects = [
-      makeProject("t3code", "/work/t3code"),
-      makeProject("t3code-2", "/work/t3code-2"),
-      makeProject("t3code-3", "/work/t3code-3"),
+      makeProject("murmur", "/work/murmur"),
+      makeProject("murmur-2", "/work/murmur-2"),
+      makeProject("murmur-3", "/work/murmur-3"),
     ];
 
     for (const mode of ["repository", "repository_path"] as const) {
       const groups = buildProjectGroups({ projects, settings: settings(mode) });
       expect(groups).toHaveLength(1);
       expect(groups[0]?.members.map((member) => member.project.id)).toEqual([
-        "t3code",
-        "t3code-2",
-        "t3code-3",
+        "murmur",
+        "murmur-2",
+        "murmur-3",
       ]);
       expect(groups[0]?.memberProjectRefs).toHaveLength(3);
     }
@@ -315,41 +315,41 @@ describe("buildProjectGroups", () => {
   });
 
   it("keeps a fork apart from its upstream checkout and labels it by its own remote", () => {
-    const fork = makeProject("fork", "/work/t3code-fork", {
+    const fork = makeProject("fork", "/work/murmur-fork", {
       repositoryIdentity: {
         ...repositoryIdentity,
         origin: {
-          canonicalKey: "github.com/julius/t3code-fork",
-          displayName: "julius/t3code-fork",
+          canonicalKey: "github.com/julius/murmur-fork",
+          displayName: "julius/murmur-fork",
         },
       },
     });
-    const forkWorktree = makeProject("fork-2", "/work/t3code-fork-2", {
+    const forkWorktree = makeProject("fork-2", "/work/murmur-fork-2", {
       repositoryIdentity: fork.repositoryIdentity,
     });
-    const projects = [makeProject("t3code", "/work/t3code"), fork, forkWorktree];
+    const projects = [makeProject("murmur", "/work/murmur"), fork, forkWorktree];
 
     const groups = buildProjectGroups({ projects, settings: settings("repository") });
     expect(groups.map((group) => group.key)).toEqual([
-      "github.com/t3tools/t3code",
-      "github.com/julius/t3code-fork",
+      "github.com/t3tools/murmur",
+      "github.com/julius/murmur-fork",
     ]);
     expect(groups[1]?.members.map((member) => member.project.id)).toEqual(["fork", "fork-2"]);
-    expect(groups[1]?.label).toBe("julius/t3code-fork");
+    expect(groups[1]?.label).toBe("julius/murmur-fork");
   });
 
   // regression: #15049 a rename to the repository name snapped back to the display path
   it("labels a renamed group by its title even when it matches the repository name", () => {
     const folderTitles = [
-      makeProject("t3code", "/work/t3code", { title: "t3code" }),
-      makeProject("t3code-2", "/work/t3code-2", { title: "t3code" }),
+      makeProject("murmur", "/work/murmur", { title: "murmur" }),
+      makeProject("murmur-2", "/work/murmur-2", { title: "murmur" }),
     ];
     const renamed = folderTitles.map((project) => ({ ...project, hasCustomTitle: true }));
 
     const label = (projects: ReadonlyArray<EnvironmentProject>) =>
       buildProjectGroups({ projects, settings: settings("repository") })[0]?.label;
-    expect(label(folderTitles)).toBe("T3 Code");
-    expect(label(renamed)).toBe("t3code");
+    expect(label(folderTitles)).toBe("Murmur");
+    expect(label(renamed)).toBe("murmur");
   });
 
   it("labels a group by its repository when clones disagree on its casing", () => {
@@ -359,7 +359,7 @@ describe("buildProjectGroups", () => {
     const root = makeProject("NewCo", "/work/NewCo");
     const lowercasedClone = makeProject("NewCo", "/remote/NewCo", {
       environmentId: EnvironmentId.make("remote"),
-      repositoryIdentity: { ...repositoryIdentity, name: "T3CODE", displayName: "t3 code" },
+      repositoryIdentity: { ...repositoryIdentity, name: "MURMUR", displayName: "t3 code" },
     });
 
     const groups = buildProjectGroups({
@@ -368,38 +368,38 @@ describe("buildProjectGroups", () => {
       preferredEnvironmentId: environmentId,
     });
     expect(groups).toHaveLength(1);
-    expect(groups[0]?.label).toBe("T3 Code");
+    expect(groups[0]?.label).toBe("Murmur");
 
     // A subfolder group in repository_path mode keeps its own title.
-    const localIdentity = { ...repositoryIdentity, rootPath: "/work/t3code" };
+    const localIdentity = { ...repositoryIdentity, rootPath: "/work/murmur" };
     const pathGroups = buildProjectGroups({
       projects: [
-        makeProject("design", "/work/t3code/design", {
+        makeProject("design", "/work/murmur/design", {
           title: "Design docs",
           hasCustomTitle: true,
           repositoryIdentity: localIdentity,
         }),
-        makeProject("design", "/remote/t3code/design", {
+        makeProject("design", "/remote/murmur/design", {
           environmentId: EnvironmentId.make("remote"),
           repositoryIdentity: {
             ...repositoryIdentity,
-            rootPath: "/remote/t3code",
-            name: "T3CODE",
+            rootPath: "/remote/murmur",
+            name: "MURMUR",
             displayName: "t3 code",
           },
         }),
-        makeProject("t3code", "/work/t3code", { repositoryIdentity: localIdentity }),
+        makeProject("murmur", "/work/murmur", { repositoryIdentity: localIdentity }),
       ],
       settings: settings("repository_path"),
       preferredEnvironmentId: environmentId,
     });
-    expect(pathGroups.map((group) => group.label)).toEqual(["Design docs", "t3code"]);
+    expect(pathGroups.map((group) => group.label)).toEqual(["Design docs", "murmur"]);
   });
 
   it("applies a physical-project override without dropping its siblings", () => {
-    const first = makeProject("t3code", "/work/t3code");
-    const second = makeProject("t3code-2", "/work/t3code-2");
-    const third = makeProject("t3code-3", "/work/t3code-3");
+    const first = makeProject("murmur", "/work/murmur");
+    const second = makeProject("murmur-2", "/work/murmur-2");
+    const third = makeProject("murmur-3", "/work/murmur-3");
     const groups = buildProjectGroups({
       projects: [first, second, third],
       settings: settings("repository", {
@@ -409,18 +409,18 @@ describe("buildProjectGroups", () => {
 
     expect(groups).toHaveLength(2);
     expect(groups.flatMap((group) => group.members.map((member) => member.project.id))).toEqual([
-      "t3code",
-      "t3code-3",
-      "t3code-2",
+      "murmur",
+      "murmur-3",
+      "murmur-2",
     ]);
   });
 
   it("dedupes stale registrations at one physical path using the freshest project", () => {
-    const stale = makeProject("stale", "/work/t3code", {
+    const stale = makeProject("stale", "/work/murmur", {
       repositoryIdentity: null,
       updatedAt: "2026-07-01T00:00:00.000Z",
     });
-    const fresh = makeProject("fresh", "/work/t3code/", {
+    const fresh = makeProject("fresh", "/work/murmur/", {
       updatedAt: "2026-07-02T00:00:00.000Z",
     });
 
@@ -441,14 +441,14 @@ describe("buildProjectGroups", () => {
       name: "old-repository",
       displayName: "Old Repository",
     };
-    const stale = makeProject("stale", "/work/t3code", {
+    const stale = makeProject("stale", "/work/murmur", {
       repositoryIdentity: staleIdentity,
       updatedAt: "2026-07-01T00:00:00.000Z",
     });
-    const fresh = makeProject("fresh", "/work/t3code/", {
+    const fresh = makeProject("fresh", "/work/murmur/", {
       updatedAt: "2026-07-02T00:00:00.000Z",
     });
-    const sibling = makeProject("sibling", "/work/t3code-2");
+    const sibling = makeProject("sibling", "/work/murmur-2");
 
     const groups = buildProjectGroups({
       projects: [stale, fresh, sibling],
@@ -465,18 +465,18 @@ describe("buildProjectGroups", () => {
       name: "old-repository",
       displayName: "Old Repository",
     };
-    const staleIdentified = makeProject("stale-identified", "/work/t3code", {
+    const staleIdentified = makeProject("stale-identified", "/work/murmur", {
       repositoryIdentity: staleIdentity,
       updatedAt: "2026-07-01T00:00:00.000Z",
     });
-    const freshIdentified = makeProject("fresh-identified", "/work/t3code/", {
+    const freshIdentified = makeProject("fresh-identified", "/work/murmur/", {
       updatedAt: "2026-07-02T00:00:00.000Z",
     });
-    const winner = makeProject("winner", "/work/t3code", {
+    const winner = makeProject("winner", "/work/murmur", {
       repositoryIdentity: null,
       updatedAt: "2026-07-03T00:00:00.000Z",
     });
-    const sibling = makeProject("sibling", "/work/t3code-2");
+    const sibling = makeProject("sibling", "/work/murmur-2");
 
     const groups = buildProjectGroups({
       projects: [staleIdentified, freshIdentified, winner, sibling],
@@ -494,8 +494,8 @@ describe("project pins and archives", () => {
     buildProjectGroups({ projects, settings: settings("repository") })[0]!;
 
   it("keeps a project visible while its machines disagree", () => {
-    const local = makeProject("local", "/work/t3code");
-    const other = makeProject("remote", "/work/t3code", { environmentId: remote });
+    const local = makeProject("local", "/work/murmur");
+    const other = makeProject("remote", "/work/murmur", { environmentId: remote });
     const partial = group({ ...local, pinnedAt: at, archivedAt: at }, other);
     expect(partial).toMatchObject({ pinned: true, archived: false });
     expect(group({ ...local, archivedAt: at }, { ...other, archivedAt: at }).archived).toBe(true);

@@ -1,0 +1,21 @@
+{
+  "fill": {
+    "solid": "display-p3:0.04706,0.12549,0.14118,1.00000"
+  },
+  "groups": [
+    {
+      "layers": [
+        {
+          "image-name": "mark.png",
+          "name": "Murmur"
+        }
+      ]
+    }
+  ],
+  "supported-platforms": {
+    "squares": "shared",
+    "circles": [
+      "watchOS"
+    ]
+  }
+}

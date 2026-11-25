@@ -1,5 +1,5 @@
 import {
-  T3_PROJECT_FILE_NAME,
+  MURMUR_PROJECT_FILE_NAME,
   type EnvironmentId,
   type ProjectReadFileResult,
   type T3ProjectFile,
@@ -22,7 +22,7 @@ function toT3ProjectFile(
   const data = resolveProjectFileQueryData(
     environmentId,
     workspaceRoot,
-    T3_PROJECT_FILE_NAME,
+    MURMUR_PROJECT_FILE_NAME,
     result,
   );
   if (data === null || data.exists === false || data.truncated) return null;
@@ -35,7 +35,7 @@ export async function readT3ProjectFile(
 ): Promise<T3ProjectFile | null> {
   const result = await executeAtomQuery(
     appAtomRegistry,
-    getProjectFileQueryAtom(environmentId, workspaceRoot, T3_PROJECT_FILE_NAME),
+    getProjectFileQueryAtom(environmentId, workspaceRoot, MURMUR_PROJECT_FILE_NAME),
     { reportDefect: false, reportFailure: false },
   );
   return toT3ProjectFile(
@@ -45,13 +45,13 @@ export async function readT3ProjectFile(
   );
 }
 
-/** The project's t3.json from an earlier read, or `undefined` when none has loaded yet. */
+/** The project's murmur.json from an earlier read, or `undefined` when none has loaded yet. */
 export function peekT3ProjectFile(
   environmentId: EnvironmentId,
   workspaceRoot: string,
 ): T3ProjectFile | null | undefined {
   const result = appAtomRegistry.get(
-    getProjectFileQueryAtom(environmentId, workspaceRoot, T3_PROJECT_FILE_NAME),
+    getProjectFileQueryAtom(environmentId, workspaceRoot, MURMUR_PROJECT_FILE_NAME),
   );
   return AsyncResult.isSuccess(result)
     ? toT3ProjectFile(environmentId, workspaceRoot, result.value)

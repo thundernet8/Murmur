@@ -2,7 +2,7 @@
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { environmentId, rpcClient, runPromise, test, WEB } from "./t3.ts";
 
 declare global {
@@ -20,7 +20,7 @@ test(
     await t3.project("demo");
     await runPromise(
       Effect.gen(function* () {
-        const client = yield* rpcClient(T3_HOME, origin);
+        const client = yield* rpcClient(MURMUR_HOME, origin);
         yield* client["server.updateSettings"]({
           patch: {
             enableDeviceSupport: true,

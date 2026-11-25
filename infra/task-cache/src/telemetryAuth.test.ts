@@ -9,7 +9,7 @@ it("accepts signed stacked PR telemetry without granting cache writes or trustin
   try {
     const { publicKey, privateKey } = await generateKeyPair("RS256");
     const scope = {
-      scope_id: "t3code",
+      scope_id: "murmur",
       endpoint: "https://cache.example/projects/t3code",
       repository_id: "123",
       repository_owner_id: "456",

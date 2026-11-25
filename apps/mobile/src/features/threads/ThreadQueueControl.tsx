@@ -103,8 +103,8 @@ function QueuedRunSender(props: {
             icon: "bubble.left.and.bubble.right" as const,
             label: senderShell?.title.trim() || linkedSender?.title.trim() || gt("Agent"),
           }
-        : attribution === "t3code"
-          ? { icon: null, label: gt("Sent by T3 Code") }
+        : attribution === "murmur"
+          ? { icon: null, label: gt("Sent by Murmur") }
           : null;
   if (sender === null) return null;
   return (

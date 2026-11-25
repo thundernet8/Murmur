@@ -10,6 +10,7 @@ import type {
   DesktopPreviewTunnelAccessRequest,
   EnvironmentId,
 } from "@t3tools/contracts";
+import { createRelayTransport } from "@t3tools/shared/relayTransport";
 import * as HostProcess from "@t3tools/shared/HostProcess";
 import * as NetService from "@t3tools/shared/Net";
 import type { NonEmptyReadonlyArray } from "effect/Array";
@@ -156,6 +157,19 @@ const dialDestination = Effect.fn("LoopbackTunnel.dialDestination")(function* (
   }
   const url = new URL(tunnelUrl);
   url.searchParams.set("port", String(port));
+  if (url.hash.startsWith("#relay-e2ee=")) {
+    const publicKey = url.hash.slice("#relay-e2ee=".length);
+    url.hash = "";
+    const transport = createRelayTransport({ fetch: globalThis.fetch, WebSocket: NodeWS.WebSocket as unknown as typeof WebSocket });
+    transport.pin(url.origin, publicKey);
+    const tunnel = yield* Effect.acquireRelease(
+      Effect.sync(() => new transport.WebSocket(url)),
+      (socket) => Effect.sync(() => socket.close()),
+    );
+    tunnel.binaryType = "arraybuffer";
+    const socket = yield* Socket.fromWebSocket(Effect.succeed(tunnel), { openTimeout: CONNECT_TIMEOUT });
+    return { pull: yield* Socket.readerBytes(socket), writer: yield* socket.writer };
+  }
   const tunnel = yield* Effect.acquireRelease(
     Effect.sync(() => {
       // Closing before the handshake finishes emits an error after Socket's listeners are gone.

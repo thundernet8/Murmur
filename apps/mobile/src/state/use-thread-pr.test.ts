@@ -19,7 +19,7 @@ function linkedPr(
 ): ThreadPullRequestLink {
   return {
     host: "github.com",
-    repository: "t3tools/t3code",
+    repository: "t3tools/murmur",
     number,
     url: `https://github.com/t3tools/t3code/pull/${number}`,
     source: "manual",
@@ -61,7 +61,7 @@ describe("presentThreadLinkedPullRequests", () => {
       presentThreadLinkedPullRequests([
         linkedPr(7, {
           host: "gitlab.com",
-          repository: "t3tools/t3code",
+          repository: "t3tools/murmur",
           url: "https://gitlab.com/t3tools/t3code/-/merge_requests/7",
         }),
       ])?.accessibilityLabel,
@@ -72,7 +72,7 @@ describe("presentThreadLinkedPullRequests", () => {
 describe("resolveThreadPrSource compatibility", () => {
   const legacyRef = {
     projectId: ProjectId.make("project"),
-    repository: "t3tools/t3code",
+    repository: "t3tools/murmur",
     number: 1,
     url: "https://github.com/t3tools/t3code/pull/1",
   };
@@ -134,7 +134,7 @@ describe("knownPullRequestSummary", () => {
     const listed: PullRequestSummary = {
       provider: SourceControlProviderKind.make("github"),
       projectId,
-      repository: "t3tools/t3code",
+      repository: "t3tools/murmur",
       number: 7,
       title: "Listed title",
       url: "https://github.com/t3tools/t3code/pull/7",
@@ -144,7 +144,7 @@ describe("knownPullRequestSummary", () => {
       updatedAt: "2026-09-09T00:00:00.000Z",
     };
     const lookup = (host: string, number: number, summaries = [listed]) =>
-      knownPullRequestSummary({ host, repository: "t3tools/t3code", number }, threads, summaries);
+      knownPullRequestSummary({ host, repository: "t3tools/murmur", number }, threads, summaries);
 
     expect(lookup("github.com", 7, [])?.title).toBe("Change 7");
     expect(lookup("github.com", 7)?.title).toBe("Listed title");

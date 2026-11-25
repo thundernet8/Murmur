@@ -2,7 +2,7 @@ import { ThreadId } from "@t3tools/contracts";
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { rpcClient, runPromise, test, WEB } from "./t3.ts";
 
 test("The drawer removes a terminal closed by another client", WEB, async ({ t3, app, screen }) => {
@@ -15,7 +15,7 @@ test("The drawer removes a terminal closed by another client", WEB, async ({ t3,
 
   await runPromise(
     Effect.gen(function* () {
-      const client = yield* rpcClient(T3_HOME, origin);
+      const client = yield* rpcClient(MURMUR_HOME, origin);
       for (const terminalId of [kept, closed]) {
         yield* client["terminal.open"]({ threadId, terminalId, cwd });
       }
@@ -29,7 +29,7 @@ test("The drawer removes a terminal closed by another client", WEB, async ({ t3,
 
   await runPromise(
     Effect.gen(function* () {
-      const client = yield* rpcClient(T3_HOME, origin);
+      const client = yield* rpcClient(MURMUR_HOME, origin);
       yield* client["terminal.close"]({ threadId, terminalId: closed, deleteHistory: true });
     }).pipe(Effect.scoped),
   );

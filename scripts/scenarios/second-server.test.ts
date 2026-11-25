@@ -12,7 +12,7 @@ const root = await vi.hoisted(async () => {
 
 vi.mock("../e2e.config.ts", () => ({
   APP_DIR: root,
-  T3_HOME: NodePath.join(root, "home"),
+  MURMUR_HOME: NodePath.join(root, "home"),
 }));
 
 import { startSecondServer } from "./second-server.ts";

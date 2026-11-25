@@ -4,7 +4,7 @@ import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { environmentId, rpcClient, runPromise, test, WEB } from "./t3.ts";
 
 const PROVIDER = SecretProviderId.make("scenario");
@@ -30,9 +30,9 @@ test(
     await runPromise(
       Effect.gen(function* () {
         const fs = yield* FileSystem.FileSystem;
-        yield* fs.writeFileString(`${T3_HOME}/bin/op`, "#!/bin/sh\nexit 1\n");
-        yield* fs.chmod(`${T3_HOME}/bin/op`, 0o755);
-        const client = yield* rpcClient(T3_HOME, origin);
+        yield* fs.writeFileString(`${MURMUR_HOME}/bin/op`, "#!/bin/sh\nexit 1\n");
+        yield* fs.chmod(`${MURMUR_HOME}/bin/op`, 0o755);
+        const client = yield* rpcClient(MURMUR_HOME, origin);
         yield* client["server.updateSettings"]({
           patch: {
             secretProviders: {

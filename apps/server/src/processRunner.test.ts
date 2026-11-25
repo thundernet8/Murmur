@@ -383,7 +383,7 @@ describe("ProcessRunner.layer", () => {
       Effect.gen(function* () {
         const runner = yield* ProcessRunner.ProcessRunner;
         const error = yield* runner
-          .run({ command: "t3code-missing-command", args: [] })
+          .run({ command: "murmur-missing-command", args: [] })
           .pipe(Effect.flip);
 
         expect(error._tag).toBe("ProcessSpawnError");
@@ -448,12 +448,12 @@ describe("ProcessRunner.layer", () => {
       Effect.gen(function* () {
         const runner = yield* ProcessRunner.ProcessRunner;
         const error = yield* runner
-          .run({ command: "true", args: [], env: { T3_TOKEN: "secret\0value" } })
+          .run({ command: "true", args: [], env: { MURMUR_TOKEN: "secret\0value" } })
           .pipe(Effect.flip);
 
         expect(error._tag).toBe("ProcessSpawnError");
         expect((error.cause as PlatformError.PlatformError).reason._tag).toBe("BadArgument");
-        expect(String(error.cause)).toContain("T3_TOKEN");
+        expect(String(error.cause)).toContain("MURMUR_TOKEN");
         expect(String(error.cause)).not.toContain("secret");
       }).pipe(Effect.provide(layerLaunched.pipe(Layer.provide(NodeServices.layer)))),
   );

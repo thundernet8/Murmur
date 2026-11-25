@@ -18,7 +18,7 @@ import { vi } from "vite-plus/test";
 
 import { makeCli } from "../binCli.ts";
 import * as SqlitePersistence from "../persistence/Sqlite.ts";
-import { FEEDBACK_OFF_MESSAGE, T3_CLI_COMMANDS } from "../feedback/FeedbackReport.ts";
+import { FEEDBACK_OFF_MESSAGE, MURMUR_CLI_COMMANDS } from "../feedback/FeedbackReport.ts";
 import * as McpBridge from "../mcp/AcpMcpStdioBridge.ts";
 import {
   makePersistedServerRuntimeState,
@@ -52,14 +52,14 @@ const listedPaths = (command: Command.Command.Any, path: string): ReadonlyArray<
 ];
 
 it("feedback subjects name every listed t3 command", () => {
-  expect([...T3_CLI_COMMANDS].sort()).toEqual(
+  expect([...MURMUR_CLI_COMMANDS].sort()).toEqual(
     [...listedPaths(makeCli({ cloudEnabled: true }), "t3")].sort(),
   );
 });
 
 const hidden = (tool: string) =>
   new McpBridge.AcpMcpBridgeError({
-    message: "T3 Code MCP tools/call failed.",
+    message: "Murmur MCP tools/call failed.",
     rpcError: { code: -32602, message: `Tool '${tool}' not found` },
   });
 
@@ -113,9 +113,9 @@ it.effect("points to Labs only when the server hides the feedback tool", () =>
           Effect.fail(
             new McpBridge.AcpMcpBridgeError({ message: "fetch failed: connection refused" }),
           ),
-        stderr: `Could not reach the T3 Code server at ${runtimeState.origin}.`,
+        stderr: `Could not reach the Murmur server at ${runtimeState.origin}.`,
       },
-      { args: submit, running: false, stderr: "No running T3 Code server uses" },
+      { args: submit, running: false, stderr: "No running Murmur server uses" },
     ];
     for (const { args, running, call, stderr } of cases) {
       yield* running === false
@@ -215,7 +215,7 @@ it.effect("points to Labs only when the server hides the feedback tool", () =>
         NodeServices.layer,
         NodeCrypto.layer,
         NetService.layer,
-        ConfigProvider.layer(ConfigProvider.fromEnv({ env: { T3CODE_PORT: "3773" } })),
+        ConfigProvider.layer(ConfigProvider.fromEnv({ env: { MURMUR_PORT: "3773" } })),
       ),
     ),
   ),

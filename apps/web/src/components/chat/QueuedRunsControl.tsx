@@ -516,9 +516,9 @@ function QueuedMessage(props: {
 
   return (
     <>
-      {attribution === "t3code" ? (
+      {attribution === "murmur" ? (
         <p className="me-1 text-2xs text-muted-foreground/70">
-          <T>Sent by T3 Code</T>
+          <T>Sent by Murmur</T>
         </p>
       ) : null}
       {presentation?.guestName === undefined ? null : (

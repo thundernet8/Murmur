@@ -19,7 +19,7 @@ const setup = Effect.gen(function* () {
   const fs = yield* FileSystem.FileSystem;
   const path = yield* Path.Path;
   const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3-install-" });
-  const runtimeDir = path.join(root, ".t3/runtime");
+  const runtimeDir = path.join(root, ".murmur/runtime");
   const executable = path.join(runtimeDir, "versions", VERSION, "t3");
   yield* fs.makeDirectory(path.dirname(executable), { recursive: true });
   yield* fs.writeFileString(executable, "");
@@ -39,8 +39,8 @@ const setup = Effect.gen(function* () {
       Effect.provideService(HostProcess.Environment, {
         PATH: "/usr/bin",
         SHELL: "/bin/zsh",
-        T3CODE_INSTALL_BIN_DIR: binDir,
-        T3CODE_NPM_LAUNCHER_PATH: path.join(npmPackage, "bin/t3.mjs"),
+        MURMUR_INSTALL_BIN_DIR: binDir,
+        MURMUR_NPM_LAUNCHER_PATH: path.join(npmPackage, "bin/t3.mjs"),
         ...env,
       }),
     );
@@ -64,7 +64,7 @@ it.layer(NodeServices.layer)("t3 install", (it) => {
 
       // A link written through a symlinked T3 home is still ours.
       const alias = path.join(root, "alias");
-      yield* fs.symlink(path.join(root, ".t3"), alias);
+      yield* fs.symlink(path.join(root, ".murmur"), alias);
       yield* fs.remove(link);
       yield* fs.symlink(path.join(alias, "runtime/versions", VERSION, "t3"), link);
       const onPath = yield* provide(installCli(), { PATH: `/usr/bin:${path.join(root, "bin")}/` });
@@ -102,7 +102,7 @@ it.layer(NodeServices.layer)("t3 install", (it) => {
       assert.include(sibling.message, "Another t3 is already at");
       // This home's desktop launcher is replaced, as install.sh does.
       yield* fs.remove(link);
-      yield* fs.symlink(path.join(root, ".t3/bin/t3"), link);
+      yield* fs.symlink(path.join(root, ".murmur/bin/t3"), link);
       yield* provide(installCli());
       assert.equal(yield* fs.readFileString(link), posixLauncherScript(executable));
 
@@ -131,7 +131,7 @@ it.layer(NodeServices.layer)("t3 install", (it) => {
       const windows = <A, E, R>(effect: Effect.Effect<A, E, R>) =>
         provide(effect.pipe(Effect.provideService(HostProcess.Platform, "win32")));
       const desktopShim =
-        '@echo off\r\nrem Written by T3 Code\r\n"C:\\T3 Code\\T3 Code.exe" "x" %*\r\n';
+        '@echo off\r\nrem Written by Murmur\r\n"C:\\Murmur\\Murmur.exe" "x" %*\r\n';
       yield* fs.writeFileString(shim, desktopShim);
       const foreignShim = yield* windows(installCli()).pipe(Effect.flip);
       assert.include(foreignShim.message, "Another t3 is already at");

@@ -3,13 +3,13 @@ import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 // A saved rule that binds Enter to the command palette only while the right panel is closed.
 const panelConditionedEnter = Effect.gen(function* () {
   const fs = yield* FileSystem.FileSystem;
-  const keybindingsPath = (yield* Path.Path).join(T3_HOME, "userdata/keybindings.json");
+  const keybindingsPath = (yield* Path.Path).join(MURMUR_HOME, "userdata/keybindings.json");
   const original = (yield* fs.exists(keybindingsPath))
     ? yield* fs.readFileString(keybindingsPath)
     : null;

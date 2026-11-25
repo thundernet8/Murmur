@@ -5,7 +5,7 @@ import { LogInIcon, RotateCwIcon } from "lucide-react";
 import { hasCloudPublicConfig } from "../../cloud/publicConfig";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
 import { retryClerkLoad, useClerkLoadFailed } from "./clerkLoadFailure";
-import { T3_CONNECT_ACCOUNT_PAGES } from "./T3ConnectAccountPages";
+import { MURMUR_CONNECT_ACCOUNT_PAGES } from "./T3ConnectAccountPages";
 import { useT3ConnectAuthPrompt } from "./useT3ConnectAuthPrompt";
 
 export function T3ConnectSidebarSignIn() {
@@ -36,7 +36,7 @@ function ConfiguredT3ConnectSidebarAvatar() {
         },
       }}
     >
-      {T3_CONNECT_ACCOUNT_PAGES.map((page) => (
+      {MURMUR_CONNECT_ACCOUNT_PAGES.map((page) => (
         <UserButton.UserProfilePage
           key={page.url}
           label={m(page.label)}
@@ -62,7 +62,7 @@ function ConfiguredT3ConnectSidebarSignIn() {
           <SidebarMenuButton onClick={retryClerkLoad}>
             <RotateCwIcon />
             <span>
-              <T>Retry T3 Connect</T>
+              <T>Retry Murmur Connect</T>
             </span>
           </SidebarMenuButton>
         </SidebarMenuItem>
@@ -77,7 +77,7 @@ function ConfiguredT3ConnectSidebarSignIn() {
         <SidebarMenuButton onClick={openAuthPrompt}>
           <LogInIcon />
           <span>
-            <T>Sign in to T3 Connect</T>
+            <T>Sign in to Murmur Connect</T>
           </span>
         </SidebarMenuButton>
       </SidebarMenuItem>

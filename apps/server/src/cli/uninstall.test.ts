@@ -91,13 +91,13 @@ it.live(
       expect(result._tag, "an unavailable cleanup shell must fail uninstall").toBe("Failure");
       const [, args, options] = spawned[0]!;
       expect(args.at(-1)).toBe(
-        '""%T3_UNINSTALL_PING%" -n 3 127.0.0.1 >nul & rmdir /s /q "%T3_UNINSTALL_RUNTIME%""',
+        '""%MURMUR_UNINSTALL_PING%" -n 3 127.0.0.1 >nul & rmdir /s /q "%MURMUR_UNINSTALL_RUNTIME%""',
       );
       expect(options).toMatchObject({
         cwd: String.raw`C:\Windows\System32`,
         env: {
-          T3_UNINSTALL_PING: String.raw`C:\Windows\System32\ping.exe`,
-          T3_UNINSTALL_RUNTIME: runtimeDir,
+          MURMUR_UNINSTALL_PING: String.raw`C:\Windows\System32\ping.exe`,
+          MURMUR_UNINSTALL_RUNTIME: runtimeDir,
         },
       });
     }).pipe(Effect.scoped, Effect.provide(Layer.mergeAll(NodeServices.layer, NetService.layer))),
@@ -109,7 +109,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NetService.layer))("t3 uninstall com
       label: "names another home's service it leaves installed",
       otherFromRead: 1,
       removed: [],
-      output: "--base-dir '/home/me/.t3'",
+      output: "--base-dir '/home/me/.murmur'",
     },
     {
       label: "leaves a service that serves another home by the time it is removed",
@@ -131,10 +131,10 @@ it.layer(Layer.mergeAll(NodeServices.layer, NetService.layer))("t3 uninstall com
               supported: true,
               installed: true,
               current: true,
-              installedBaseDir: "/home/me/.t3",
-              ...(++reads >= input.otherFromRead ? { otherBaseDir: "/home/me/.t3" } : {}),
-              unitPath: "/home/me/.config/systemd/user/t3code.service",
-              logPath: "/home/me/.t3/userdata/logs/boot-service.log",
+              installedBaseDir: "/home/me/.murmur",
+              ...(++reads >= input.otherFromRead ? { otherBaseDir: "/home/me/.murmur" } : {}),
+              unitPath: "/home/me/.config/systemd/user/murmur.service",
+              logPath: "/home/me/.murmur/userdata/logs/boot-service.log",
             })),
             withStopped: (operation) => operation,
             restart: Effect.die("unexpected restart"),
@@ -279,7 +279,7 @@ it.layer(NodeServices.layer)("t3 uninstall launcher", (it) => {
       const cmd = path.join(root, "bin/t3.cmd");
       const edited = path.join(root, "bin/edited.cmd");
       yield* fs.writeFileString(cmd, `@echo off\r\n"${exe}" %*`);
-      yield* fs.writeFileString(edited, `@echo off\r\nset "T3CODE_HOME=D:\\other"\r\n"${exe}" %*`);
+      yield* fs.writeFileString(edited, `@echo off\r\nset "MURMUR_HOME=D:\\other"\r\n"${exe}" %*`);
       yield* fs.writeFileString(path.join(root, "runtime/launchers"), `${cmd}\r\n${edited}\r\n`);
       assert.deepStrictEqual(
         yield* findRecordedLaunchers(versionsDir).pipe(

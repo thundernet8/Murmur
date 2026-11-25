@@ -1,3 +1,5 @@
+import { createRelaySocketBridge, type RelaySocketBridgeEvent } from "@t3tools/shared/relaySocketBridge";
+import type { createRelayTransport } from "@t3tools/shared/relayTransport";
 import type { EnvironmentId } from "@t3tools/contracts";
 import { requireNativeModule, requireNativeView } from "expo";
 import { useRef, type Ref } from "react";
@@ -33,7 +35,19 @@ export interface TunnelWebViewRef {
 
 const PreviewTunnel = requireNativeModule<{
   resolveAccess(requestId: string, url: string | null): void;
+  receiveRelaySocket(id: string, type: string, data: string): void;
+  addListener(name: "onRelaySocket", listener: (event: RelaySocketBridgeEvent) => void): { remove(): void };
 }>("T3PreviewTunnel");
+
+const relayBridgeSlot = globalThis as typeof globalThis & {
+  __murmurRelayTransport?: ReturnType<typeof createRelayTransport>;
+  __murmurPreviewBridge?: { remove(): void };
+};
+relayBridgeSlot.__murmurPreviewBridge?.remove();
+relayBridgeSlot.__murmurPreviewBridge = PreviewTunnel.addListener("onRelaySocket", createRelaySocketBridge({
+  transport: () => relayBridgeSlot.__murmurRelayTransport,
+  receive: (id, type, data) => PreviewTunnel.receiveRelaySocket(id, type, data),
+}));
 
 const NativeTunnelWebView = requireNativeView<
   ViewProps & {
@@ -84,7 +98,7 @@ export function TunnelWebView({
     readonly debug?: string;
     /**
      * Whether the environment itself was out of reach (`environment`), answered that nothing
-     * listens on the port (`port`), or runs a T3 Code server without the tunnel (`outdated`).
+     * listens on the port (`port`), or runs a Murmur server without the tunnel (`outdated`).
      */
     readonly cause?: TunnelFailureCause;
   }) => void;

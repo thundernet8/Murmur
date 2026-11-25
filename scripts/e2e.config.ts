@@ -18,7 +18,7 @@ const resolved = await Effect.gen(function* () {
   const path = yield* Path.Path;
   const env = yield* HostProcess.Environment;
   const scripts = yield* path.fromFileUrl(new URL(".", import.meta.url));
-  const home = path.resolve(scripts, "../.t3/scenarios");
+  const home = path.resolve(scripts, "../.murmur/scenarios");
   // A pooled device reaches this machine over the tailnet, not localhost.
   const host = yield* run("tailscale", ["ip", "-4"]).pipe(
     Effect.map((result) => result.stdout.trim().split("\n")[0] ?? ""),
@@ -28,28 +28,28 @@ const resolved = await Effect.gen(function* () {
     node: yield* HostProcess.ExecutablePath,
     scripts,
     /** The checkout whose app runs. `prove-scenario.ts` points it at a base or head worktree. */
-    appDir: path.resolve(scripts, env.T3_SCENARIO_APP_DIR ?? ".."),
+    appDir: path.resolve(scripts, env.MURMUR_SCENARIO_APP_DIR ?? ".."),
     home,
     startApp: path.join(scripts, "scenarios/start-app.ts"),
     // e2e gives the app only PATH, HOME and the temp directory. A scenario that needs more names
     // it here: exact names or prefixes ending in `*`, separated by commas.
-    inheritEnv: (env.T3_SCENARIO_INHERIT_ENV ?? "")
+    inheritEnv: (env.MURMUR_SCENARIO_INHERIT_ENV ?? "")
       .split(",")
       .map((name) => name.trim())
       .filter((name) => name !== ""),
     mobile: {
       host: host || "127.0.0.1",
       // A mobile target has no `app.url`, so e2e cannot pick these ports.
-      serverPort: Number(env.T3_SCENARIO_SERVER_PORT ?? 13_990),
-      metroPort: Number(env.T3_SCENARIO_METRO_PORT ?? 8_190),
+      serverPort: Number(env.MURMUR_SCENARIO_SERVER_PORT ?? 13_990),
+      metroPort: Number(env.MURMUR_SCENARIO_METRO_PORT ?? 8_190),
     },
   };
 }).pipe(Effect.provide(NodeServices.layer), Effect.runPromise);
 
 export const APP_DIR = resolved.appDir;
-/** T3 homes only scenarios use, recreated on every run. `.t3` is gitignored. */
-export const T3_HOME = resolved.home;
-export const MOBILE_T3_HOME = `${T3_HOME}-mobile`;
+/** T3 homes only scenarios use, recreated on every run. `.murmur` is gitignored. */
+export const MURMUR_HOME = resolved.home;
+export const MOBILE_MURMUR_HOME = `${MURMUR_HOME}-mobile`;
 export const MOBILE = resolved.mobile;
 const startApp = resolved.startApp;
 /**
@@ -161,7 +161,7 @@ export default {
         readyUrl: `http://${LOOPBACK}:{port}/.well-known/t3/environment`,
         command: {
           executable: resolved.node,
-          args: [startApp, "web", T3_HOME, LOOPBACK, "{port}"],
+          args: [startApp, "web", MURMUR_HOME, LOOPBACK, "{port}"],
           cwd: APP_DIR,
           inheritEnv: resolved.inheritEnv,
           startupTimeout: 300_000,
@@ -177,7 +177,7 @@ export default {
         session: "t3-scenarios",
       }),
       app: {
-        bundleId: "com.t3tools.t3code.dev",
+        bundleId: "app.murmur.dev",
         // Metro starts after the server listens, so it answering means both are up.
         readyUrl: `http://127.0.0.1:${MOBILE.metroPort}/status`,
         command: {
@@ -185,7 +185,7 @@ export default {
           args: [
             startApp,
             "mobile",
-            MOBILE_T3_HOME,
+            MOBILE_MURMUR_HOME,
             String(MOBILE.serverPort),
             String(MOBILE.metroPort),
             MOBILE.host,

@@ -301,7 +301,7 @@ export const layer: Layer.Layer<
                 Effect.gen(function* () {
                   const aside = yield* fileSystem.makeTempDirectory({
                     directory: path.dirname(worktreePath),
-                    prefix: ".t3-replaced-",
+                    prefix: ".murmur-replaced-",
                   });
                   yield* fileSystem.rename(worktreePath, path.join(aside, "folder"));
                   return aside;

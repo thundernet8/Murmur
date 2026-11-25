@@ -9,7 +9,7 @@ describe("GitLab change request URLs", () => {
   it("reads a merge request on any host, nested groups and all", () => {
     expect(parse("https://gitlab.com/t3tools/platform/t3code/-/merge_requests/42")).toEqual({
       host: "gitlab.com",
-      repository: "t3tools/platform/t3code",
+      repository: "t3tools/platform/murmur",
       number: 42,
       repositoryUrl: "https://gitlab.com/t3tools/platform/t3code",
     });

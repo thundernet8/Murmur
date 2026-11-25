@@ -1661,8 +1661,8 @@ describe("resolveSidebarRouteReveal", () => {
 describe("sidebarFolderExpansionKeys", () => {
   it("honors a collapse the legacy sidebar saved under a member's cwd", () => {
     const keys = sidebarFolderExpansionKeys({
-      projectKey: "github.com/pingdotgg/t3code",
-      memberProjects: [{ physicalProjectKey: "local:/code/t3code", workspaceRoot: "/code/t3code" }],
+      projectKey: "github.com/pingdotgg/murmur",
+      memberProjects: [{ physicalProjectKey: "local:/code/murmur", workspaceRoot: "/code/murmur" }],
     });
     const cwdKey = keys.at(-1)!;
 
@@ -1675,8 +1675,8 @@ describe("sidebarFolderExpansionKeys", () => {
 describe("groupSidebarThreadsByProject", () => {
   it("puts each thread in its project's folder and drops empty projects unless kept", () => {
     const remoteEnvironmentId = EnvironmentId.make("environment-remote");
-    const t3code = ProjectId.make("t3code");
-    const t3codeRemote = ProjectId.make("t3code-remote");
+    const murmur = ProjectId.make("murmur");
+    const murmurRemote = ProjectId.make("murmur-remote");
     const fleet = ProjectId.make("fleet");
     const thread = (id: string, environmentId: EnvironmentId, projectId: ProjectId) => ({
       id,
@@ -1685,10 +1685,10 @@ describe("groupSidebarThreadsByProject", () => {
     });
     const groups = [
       {
-        projectKey: "t3code",
+        projectKey: "murmur",
         memberProjectRefs: [
-          { environmentId: localEnvironmentId, projectId: t3code },
-          { environmentId: remoteEnvironmentId, projectId: t3codeRemote },
+          { environmentId: localEnvironmentId, projectId: murmur },
+          { environmentId: remoteEnvironmentId, projectId: murmurRemote },
         ],
       },
       {
@@ -1704,9 +1704,9 @@ describe("groupSidebarThreadsByProject", () => {
     ];
 
     const threads = [
-      thread("a", localEnvironmentId, t3code),
+      thread("a", localEnvironmentId, murmur),
       thread("orphan", localEnvironmentId, ProjectId.make("deleted")),
-      thread("b", remoteEnvironmentId, t3codeRemote),
+      thread("b", remoteEnvironmentId, murmurRemote),
     ];
     const summarize = (keepEmpty: (group: (typeof groups)[number]) => boolean) =>
       groupSidebarThreadsByProject(groups, threads, keepEmpty).map((folder) => ({
@@ -1715,14 +1715,14 @@ describe("groupSidebarThreadsByProject", () => {
       }));
 
     expect(summarize(() => true)).toEqual([
-      { projectKey: "t3code", threads: ["a", "b"] },
+      { projectKey: "murmur", threads: ["a", "b"] },
       { projectKey: "fleet", threads: [] },
       { projectKey: "notes", threads: [] },
     ]);
-    expect(summarize(() => false)).toEqual([{ projectKey: "t3code", threads: ["a", "b"] }]);
+    expect(summarize(() => false)).toEqual([{ projectKey: "murmur", threads: ["a", "b"] }]);
     // A pinned project keeps its empty folder while other empty projects drop out.
     expect(summarize((group) => group.projectKey === "fleet")).toEqual([
-      { projectKey: "t3code", threads: ["a", "b"] },
+      { projectKey: "murmur", threads: ["a", "b"] },
       { projectKey: "fleet", threads: [] },
     ]);
   });

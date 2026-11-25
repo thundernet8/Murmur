@@ -294,7 +294,7 @@ const layerTailscaleUp = Layer.succeed(
   ),
 );
 
-const T3_DESCRIPTOR_BODY = JSON.stringify({
+const MURMUR_DESCRIPTOR_BODY = JSON.stringify({
   environmentId: "serve-test",
   label: "Serve test",
   platform: { os: "darwin", arch: "arm64" },
@@ -305,7 +305,7 @@ const T3_DESCRIPTOR_BODY = JSON.stringify({
 const serveProbeResponse = (request: HttpClientRequest.HttpClientRequest, status: number) =>
   HttpClientResponse.fromWeb(
     request,
-    new Response(status === 200 ? T3_DESCRIPTOR_BODY : null, { status }),
+    new Response(status === 200 ? MURMUR_DESCRIPTOR_BODY : null, { status }),
   );
 
 const layerServeProbe = (status: number) =>

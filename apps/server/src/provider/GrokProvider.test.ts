@@ -205,7 +205,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer))("checkGrokProvide
       const snapshot = yield* Effect.scoped(
         Effect.gen(function* () {
           const fs = yield* FileSystem.FileSystem;
-          const dir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-grok-version-" });
+          const dir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-grok-version-" });
           const grokPath = writeFakeCli({
             directory: dir,
             name: "grok",
@@ -302,7 +302,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer))("checkGrokProvide
   }) =>
     Effect.gen(function* () {
       const fs = yield* FileSystem.FileSystem;
-      const dir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-grok-probe-" });
+      const dir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-grok-probe-" });
       const mockAgentPath = NodePath.resolve(__dirname, "../../scripts/acp-mock-agent.ts");
       return writeFakeCli({
         directory: dir,
@@ -342,7 +342,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer))("checkGrokProvide
       const { snapshot, updateRan } = yield* Effect.scoped(
         Effect.gen(function* () {
           const fs = yield* FileSystem.FileSystem;
-          const dir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-grok-updater-" });
+          const dir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-grok-updater-" });
           const updateLogPath = NodePath.join(dir, "updates.log");
           const grokPath = yield* writeFakeGrokCli({
             modelsOutput: LOGGED_IN_MODELS_OUTPUT,
@@ -433,7 +433,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer))("checkGrokProvide
           });
           return yield* checkGrokProviderStatus(
             decodeGrokSettings({ enabled: true, binaryPath: grokPath }),
-            { ...process.env, XAI_API_KEY: "", T3_ACP_OMIT_INITIALIZE_MODEL_STATE: "1" },
+            { ...process.env, XAI_API_KEY: "", MURMUR_ACP_OMIT_INITIALIZE_MODEL_STATE: "1" },
           );
         }),
       );

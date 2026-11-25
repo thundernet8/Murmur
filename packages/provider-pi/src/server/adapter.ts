@@ -79,7 +79,7 @@ import {
   materializePiT3McpExtension,
   resolvePiLaunchArgs,
 } from "./mcpInjection.ts";
-import { PI_FILE_CHANGE_TOOLS, PI_T3_SERVICE_TIER_COMMAND } from "./mcpExtensionSource.ts";
+import { PI_FILE_CHANGE_TOOLS, PI_MURMUR_SERVICE_TIER_COMMAND } from "./mcpExtensionSource.ts";
 import { PI_STANDARD_SERVICE_TIER } from "./modelCapabilities.ts";
 
 export const PI_PROVIDER = ProviderDriverKind.make("pi");
@@ -545,7 +545,7 @@ export const makePiAdapterV2 = Effect.fn("makePiAdapterV2")(function* (
           const launch = buildPiRpcLaunch({
             launchArgs: resolvedLaunchArgs.args,
             // PortScanner.AGENT_THREAD_ENV, as a literal because this package cannot reach apps/server.
-            environment: { ...options.environment, T3CODE_THREAD_ID: input.threadId },
+            environment: { ...options.environment, MURMUR_THREAD_ID: input.threadId },
             mcpSession,
             extensionPath,
             sessionPath,
@@ -571,7 +571,7 @@ export const makePiAdapterV2 = Effect.fn("makePiAdapterV2")(function* (
             cwd,
             env: launch.env,
           });
-          // Its tools carry T3CODE_THREAD_ID, so port discovery must scan while Pi runs.
+          // Its tools carry MURMUR_THREAD_ID, so port discovery must scan while Pi runs.
           const trackAgent = host.trackAgent;
           if (trackAgent !== undefined) {
             yield* Effect.acquireRelease(Effect.sync(trackAgent), (release) =>
@@ -3331,12 +3331,12 @@ export const makePiAdapterV2 = Effect.fn("makePiAdapterV2")(function* (
           serviceTierMayBeSet = true;
           const result = yield* request({
             type: "prompt",
-            message: `/${PI_T3_SERVICE_TIER_COMMAND} ${serviceTier ?? ""}`.trimEnd(),
+            message: `/${PI_MURMUR_SERVICE_TIER_COMMAND} ${serviceTier ?? ""}`.trimEnd(),
           });
           // Pi before 0.99 acknowledges a handled extension command without a disposition.
           const disposition = recordString(result, "disposition");
           if (disposition !== undefined && disposition !== "handled") {
-            return yield* protocolError("T3 Code's Pi extension did not apply the service tier");
+            return yield* protocolError("Murmur's Pi extension did not apply the service tier");
           }
           serviceTierMayBeSet = serviceTier !== null;
         }

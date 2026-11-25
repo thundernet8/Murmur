@@ -247,7 +247,7 @@ const runSide = Effect.fn("prove.runSide")(function* (
       ["run", scenarioPath, "--target", target, "--output", path.relative(scripts, outDir)],
       {
         cwd: scripts,
-        env: { ...environment, T3_SCENARIO_APP_DIR: appDir, E2E_TELEMETRY_DISABLED: "1" },
+        env: { ...environment, MURMUR_SCENARIO_APP_DIR: appDir, E2E_TELEMETRY_DISABLED: "1" },
         // The report says how the run went; e2e's exit code only repeats it.
         allowExit: [0, 1, 2, 3, 4],
         echo: true,

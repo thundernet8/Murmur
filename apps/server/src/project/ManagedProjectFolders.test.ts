@@ -129,7 +129,7 @@ it.effect("offers nothing, and says why once, when the data dir sits inside a Gi
     const path = yield* Path.Path;
     const checkout = yield* fileSystem.makeTempDirectoryScoped({ prefix: "t3-scratch-repo-" });
     yield* git(checkout, ["init", "--quiet"]);
-    const baseDir = path.join(checkout, ".t3");
+    const baseDir = path.join(checkout, ".murmur");
     yield* fileSystem.makeDirectory(baseDir);
     const repositoryRoot = (yield* git(baseDir, ["rev-parse", "--show-toplevel"])).stdout.trim();
     yield* Effect.gen(function* () {
@@ -535,7 +535,7 @@ it.effect("says Git is not installed when a named project cannot start Git", () 
       Effect.gen(function* () {
         const folders = yield* ManagedProjectFolders.ManagedProjectFolders;
 
-        const failure = yield* Effect.flip(folders.createNamedProject({ name: "T3Code Test" }));
+        const failure = yield* Effect.flip(folders.createNamedProject({ name: "Murmur Test" }));
 
         assert.strictEqual(
           failure.message,

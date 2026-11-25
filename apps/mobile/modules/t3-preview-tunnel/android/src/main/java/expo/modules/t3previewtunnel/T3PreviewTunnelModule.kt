@@ -10,6 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger
 class T3PreviewTunnelModule : Module() {
   override fun definition() = ModuleDefinition {
     Name("T3PreviewTunnel")
+    Events("onRelaySocket")
+    OnCreate {
+      RelaySocket.emit = { id, type, data -> sendEvent("onRelaySocket", mapOf("id" to id, "type" to type, "data" to data)) }
+    }
+    OnDestroy { RelaySocket.shutdown() }
+    Function("receiveRelaySocket") { id: String, type: String, data: String -> RelaySocket.receive(id, type, data) }
 
     Function("resolveAccess") { requestId: String, url: String? ->
       TunnelAccess.resolve(requestId, url)

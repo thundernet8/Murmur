@@ -1,4 +1,8 @@
-import { type EnvironmentId, T3_PROJECT_FILE_NAME, type T3ProjectFile } from "@t3tools/contracts";
+import {
+  type EnvironmentId,
+  MURMUR_PROJECT_FILE_NAME,
+  type T3ProjectFile,
+} from "@t3tools/contracts";
 import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
 import { useAtomValue } from "@effect/atom-react";
 import { AsyncResult, Atom } from "effect/reactivity";
@@ -29,11 +33,11 @@ const memberProjectFilesAtom = Atom.family((membersKey: string) => {
     const files = new Map<string, T3ProjectFile | null>();
     for (const [environmentId, workspaceRoot, physicalProjectKey] of members) {
       const result = get(
-        getProjectFileQueryAtom(environmentId, workspaceRoot, T3_PROJECT_FILE_NAME),
+        getProjectFileQueryAtom(environmentId, workspaceRoot, MURMUR_PROJECT_FILE_NAME),
       );
       if (result.waiting) continue;
       const data =
-        get(optimisticFileAtom(environmentId, workspaceRoot, T3_PROJECT_FILE_NAME))?.data ??
+        get(optimisticFileAtom(environmentId, workspaceRoot, MURMUR_PROJECT_FILE_NAME))?.data ??
         AsyncResult.getOrElse(result, () => null);
       files.set(
         physicalProjectKey,

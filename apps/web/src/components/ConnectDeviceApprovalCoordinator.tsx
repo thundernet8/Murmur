@@ -20,7 +20,7 @@ import { describeConnectDeviceClient } from "./settings/ConnectionsSettings.logi
 import { toastManager } from "./ui/toast";
 import { stackedThreadToast } from "./ui/toastHelpers";
 
-/** Asks whoever can approve to look at T3 Connect devices waiting on an environment. */
+/** Asks whoever can approve to look at Murmur Connect devices waiting on an environment. */
 export function ConnectDeviceApprovalCoordinator() {
   const { environments } = useEnvironments();
   return environments.map((environment) =>

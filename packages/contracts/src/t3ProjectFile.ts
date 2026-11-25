@@ -5,13 +5,14 @@ import { ThreadEnvMode, WorktreeSubmodules } from "./environment.ts";
 import { ProjectScriptIcon } from "./project.ts";
 import type { ProjectScopedServerSettingKey, ServerSettings } from "./settings.ts";
 
-export const T3_PROJECT_FILE_NAME = "t3.json";
+export const MURMUR_PROJECT_FILE_NAME = "murmur.json";
 
-export const T3_PROJECT_FILE_SCHEMA_URL = "https://t3.codes/schema/t3.json";
+export const MURMUR_PROJECT_FILE_SCHEMA_URL =
+  "https://raw.githubusercontent.com/thundernet8/Murmur/main/murmur.schema.json";
 
-const T3_PROJECT_FILE_PATH_MAX_LENGTH = 512;
-const T3_PROJECT_FILE_COMMAND_MAX_LENGTH = 4096;
-const T3_PROJECT_FILE_MAX_SCRIPTS = 50;
+const MURMUR_PROJECT_FILE_PATH_MAX_LENGTH = 512;
+const MURMUR_PROJECT_FILE_COMMAND_MAX_LENGTH = 4096;
+const MURMUR_PROJECT_FILE_MAX_SCRIPTS = 50;
 
 // Encoded-side annotations survive into JSON Schema; decoding still trims and rejects empty strings.
 const trimmedNonEmpty = (annotations: { readonly description: string }, maxLength?: number) => {
@@ -25,10 +26,10 @@ const trimmedNonEmpty = (annotations: { readonly description: string }, maxLengt
 
 export const T3ProjectFileScript = Schema.Struct({
   name: trimmedNonEmpty({
-    description: "Display name for the script, shown in the T3 Code scripts menu.",
+    description: "Display name for the script, shown in the Murmur scripts menu.",
   }),
   command: trimmedNonEmpty({
-    description: "Shell command executed in a T3 Code terminal at the project root.",
+    description: "Shell command executed in a Murmur terminal at the project root.",
   }),
   icon: Schema.optionalKey(
     ProjectScriptIcon.annotate({
@@ -72,41 +73,41 @@ export const T3ProjectFileScript = Schema.Struct({
     }),
   ),
 }).annotate({
-  description: "A project script that team members can import into T3 Code.",
+  description: "A project script that team members can import into Murmur.",
 });
 export type T3ProjectFileScript = typeof T3ProjectFileScript.Type;
 
 export const T3ProjectFile = Schema.Struct({
   $schema: Schema.optionalKey(
     Schema.String.annotate({
-      description: `URL of the JSON Schema for this file, typically "${T3_PROJECT_FILE_SCHEMA_URL}".`,
+      description: `URL of the JSON Schema for this file, typically "${MURMUR_PROJECT_FILE_SCHEMA_URL}".`,
     }),
   ),
   iconPath: Schema.optionalKey(
     trimmedNonEmpty(
       {
         description:
-          'Workspace-relative path to the project icon (e.g. "assets/logo.svg"). Checked before T3 Code\'s built-in icon locations.',
+          'Workspace-relative path to the project icon (e.g. "assets/logo.svg"). Checked before Murmur\'s built-in icon locations.',
       },
-      T3_PROJECT_FILE_PATH_MAX_LENGTH,
+      MURMUR_PROJECT_FILE_PATH_MAX_LENGTH,
     ),
   ),
   defaultThreadEnvMode: Schema.optionalKey(
     ThreadEnvMode.annotate({
       description:
-        'Where new threads start for this repository: "worktree" for a fresh git worktree, "local" for the current checkout. A per-project setting in T3 Code overrides this; when neither is set, the global default applies.',
+        'Where new threads start for this repository: "worktree" for a fresh git worktree, "local" for the current checkout. A per-project setting in Murmur overrides this; when neither is set, the global default applies.',
     }),
   ),
   worktreeSubmodules: Schema.optionalKey(
     WorktreeSubmodules.annotate({
       description:
-        'How new worktrees populate git submodules: "recursive" (the default) initializes nested submodules too, "top-level" initializes only those declared by this repository, and "none" leaves every submodule empty for a setup script to handle. A project or environment setting in T3 Code overrides this.',
+        'How new worktrees populate git submodules: "recursive" (the default) initializes nested submodules too, "top-level" initializes only those declared by this repository, and "none" leaves every submodule empty for a setup script to handle. A project or environment setting in Murmur overrides this.',
     }),
   ),
   ignoreRepositories: Schema.optionalKey(
     Schema.Array(Schema.String).annotate({
       description:
-        "Repositories inside the project folder that T3 Code should leave out of the project, as paths relative to it, such as vendor/big. They are then neither reviewed on their own nor given worktrees.",
+        "Repositories inside the project folder that Murmur should leave out of the project, as paths relative to it, such as vendor/big. They are then neither reviewed on their own nor given worktrees.",
     }),
   ),
   worktreeLayout: Schema.optionalKey(
@@ -114,17 +115,17 @@ export const T3ProjectFile = Schema.Struct({
       create: trimmedNonEmpty(
         {
           description:
-            "Shell command that lays out a thread's folder for a project tracking several repositories, in place of T3 Code's own worktrees and links. It runs in the project folder with T3_WORKTREE_ROOT (the folder to fill), T3_WORKTREE_PROJECT_PATH (where the project folder goes inside it), T3_WORKTREE_BRANCH, T3_WORKTREE_BASE, T3_WORKTREE_REPOSITORIES (the chosen repositories, one path per line) and T3_PROJECT_ROOT set. Each of the project's repositories it checks out at the same relative place is adopted as the thread's checkout of it, and must be a git worktree of that repository on T3_WORKTREE_BRANCH. It runs again when the folder goes missing, so it must cope with the branch already existing. It has ten minutes.",
+            "Shell command that lays out a thread's folder for a project tracking several repositories, in place of Murmur's own worktrees and links. It runs in the project folder with MURMUR_WORKTREE_ROOT (the folder to fill), MURMUR_WORKTREE_PROJECT_PATH (where the project folder goes inside it), MURMUR_WORKTREE_BRANCH, MURMUR_WORKTREE_BASE, MURMUR_WORKTREE_REPOSITORIES (the chosen repositories, one path per line) and MURMUR_PROJECT_ROOT set. Each of the project's repositories it checks out at the same relative place is adopted as the thread's checkout of it, and must be a git worktree of that repository on MURMUR_WORKTREE_BRANCH. It runs again when the folder goes missing, so it must cope with the branch already existing. It has ten minutes.",
         },
-        T3_PROJECT_FILE_COMMAND_MAX_LENGTH,
+        MURMUR_PROJECT_FILE_COMMAND_MAX_LENGTH,
       ),
       remove: Schema.optionalKey(
         trimmedNonEmpty(
           {
             description:
-              "Shell command that takes the thread's folder down again, with the same variables. It can run on a folder that is partly gone, and should delete what create generated. T3 Code removes the checkouts it leaves behind.",
+              "Shell command that takes the thread's folder down again, with the same variables. It can run on a folder that is partly gone, and should delete what create generated. Murmur removes the checkouts it leaves behind.",
           },
-          T3_PROJECT_FILE_COMMAND_MAX_LENGTH,
+          MURMUR_PROJECT_FILE_COMMAND_MAX_LENGTH,
         ),
       ),
     }).annotate({
@@ -136,26 +137,26 @@ export const T3ProjectFile = Schema.Struct({
     trimmedNonEmpty(
       {
         description:
-          'Repository-relative path to a git sparse-checkout pattern file in non-cone syntax (e.g. ".t3/sparse-checkout"). New worktrees check out only the files it matches. Both files are read from the branch being checked out; a missing pattern file fails the worktree instead of checking out everything.',
+          'Repository-relative path to a git sparse-checkout pattern file in non-cone syntax (e.g. ".murmur/sparse-checkout"). New worktrees check out only the files it matches. Both files are read from the branch being checked out; a missing pattern file fails the worktree instead of checking out everything.',
       },
-      T3_PROJECT_FILE_PATH_MAX_LENGTH,
+      MURMUR_PROJECT_FILE_PATH_MAX_LENGTH,
     ),
   ),
   scripts: Schema.optionalKey(
     Schema.Array(T3ProjectFileScript)
       .annotate({
-        description: "Project scripts shared with everyone who opens this repository in T3 Code.",
+        description: "Project scripts shared with everyone who opens this repository in Murmur.",
       })
-      .check(Schema.isMaxLength(T3_PROJECT_FILE_MAX_SCRIPTS)),
+      .check(Schema.isMaxLength(MURMUR_PROJECT_FILE_MAX_SCRIPTS)),
   ),
 }).annotate({
   title: "T3 project file",
   description:
-    "Checked-in project configuration for T3 Code (t3.json at the repository root). See https://t3.codes for documentation.",
+    "Checked-in project configuration for Murmur (murmur.json at the repository root). See https://github.com/thundernet8/Murmur for documentation.",
 });
 export type T3ProjectFile = typeof T3ProjectFile.Type;
 
-/** Keys must be nullable in ServerSettings so both environment and project overrides can inherit t3.json. */
+/** Keys must be nullable in ServerSettings so both environment and project overrides can inherit murmur.json. */
 export const PROJECT_FILE_BACKED_SETTINGS = {
   defaultThreadEnvMode: { field: "defaultThreadEnvMode", builtIn: "local" },
   worktreeSubmodules: { field: "worktreeSubmodules", builtIn: "recursive" },

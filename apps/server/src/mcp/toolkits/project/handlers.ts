@@ -9,7 +9,7 @@ import {
   type TaskFolderError,
   type Project as ProjectRecord,
   type ServerProvider,
-  T3_PROJECT_FILE_NAME,
+  MURMUR_PROJECT_FILE_NAME,
 } from "@t3tools/contracts";
 import * as Digest from "effect/crypto/Digest";
 import * as Effect from "effect/Effect";
@@ -113,13 +113,13 @@ const projectWorktreePath = Effect.fn("mcp.assertProjectWorktree")(function* (
   });
 });
 
-/** The composer falls back to the project's t3.json when no setting picks the mode. */
+/** The composer falls back to the project's murmur.json when no setting picks the mode. */
 const projectFileThreadEnvMode = Effect.fn("mcp.projectFileThreadEnvMode")(function* (
   workspaceRoot: string,
 ) {
   const fileSystem = yield* FileSystem.FileSystem;
   const contents = yield* fileSystem
-    .readFileString(`${workspaceRoot}/${T3_PROJECT_FILE_NAME}`)
+    .readFileString(`${workspaceRoot}/${MURMUR_PROJECT_FILE_NAME}`)
     .pipe(Effect.orElseSucceed(() => null));
   return resolveProjectFileBackedSetting(
     "defaultThreadEnvMode",

@@ -41,16 +41,14 @@ const { parseXml } = requireFromUpdater("builder-util-runtime") as {
 const semver = requireFromUpdater("semver") as { parse: (version: string) => RunningVersion };
 
 const releaseTitle = (version: string) =>
-  version.includes("-nightly.")
-    ? `T3 Code Nightly ${version} (0123456789ab)`
-    : `T3 Code v${version}`;
+  version.includes("-nightly.") ? `Murmur Nightly ${version} (0123456789ab)` : `Murmur v${version}`;
 
 const releaseFeed = (...versions: ReadonlyArray<string>) =>
   parseXml(
     `<feed xmlns="http://www.w3.org/2005/Atom">${versions
       .map(
         (version) =>
-          `<entry><link rel="alternate" type="text/html" href="https://github.com/pingdotgg/t3code/releases/tag/v${version}"/><title>${releaseTitle(version)}</title><content type="html">&lt;ul&gt;&lt;li&gt;${version} change&lt;/li&gt;&lt;/ul&gt;</content></entry>`,
+          `<entry><link rel="alternate" type="text/html" href="https://github.com/pingdotgg/murmur/releases/tag/v${version}"/><title>${releaseTitle(version)}</title><content type="html">&lt;ul&gt;&lt;li&gt;${version} change&lt;/li&gt;&lt;/ul&gt;</content></entry>`,
       )
       .join("")}</feed>`,
   );
@@ -117,8 +115,8 @@ describe("DesktopUpdates", () => {
   );
 
   it.effect("keeps the disabled reason available after configuration and channel changes", () => {
-    const harness = makeHarness({ env: { T3CODE_DISABLE_AUTO_UPDATE: "true" } });
-    const reason = "Automatic updates are disabled by the T3CODE_DISABLE_AUTO_UPDATE setting.";
+    const harness = makeHarness({ env: { MURMUR_DISABLE_AUTO_UPDATE: "true" } });
+    const reason = "Automatic updates are disabled by the MURMUR_DISABLE_AUTO_UPDATE setting.";
 
     return Effect.scoped(
       Effect.gen(function* () {
@@ -648,7 +646,7 @@ describe("DesktopUpdates", () => {
   });
 
   it.effect("downloads again when the downloaded update file was deleted before install", () => {
-    const downloadedFile = "/cache/pending/T3-Code-1.2.4-arm64.zip";
+    const downloadedFile = "/cache/pending/Murmur-1.2.4-arm64.zip";
     let installedFileExists: boolean | undefined;
     const harness = makeHarness({
       checkForUpdates: Effect.sync(() => harness.emit("update-available", { version: "1.2.4" })),
@@ -1404,7 +1402,7 @@ describe("describeUpdateErrorCause", () => {
 });
 
 describe("DesktopUpdates under a managed policy", () => {
-  const message = "Example Corp manages T3 Code updates.";
+  const message = "Example Corp manages Murmur updates.";
   const managed = (
     policy: Partial<DesktopUpdatePolicy.UpdatePolicy>,
   ): DesktopUpdatePolicy.UpdatePolicy => ({
@@ -1436,7 +1434,7 @@ describe("DesktopUpdates under a managed policy", () => {
   it.effect("updates from the administrator's feed", () => {
     const harness = makeHarness({
       // Any user can set the mock flag; it must not redirect a managed feed.
-      env: { T3CODE_DESKTOP_MOCK_UPDATES: "true" },
+      env: { MURMUR_DESKTOP_MOCK_UPDATES: "true" },
       policy: managed({ feedUrl: "https://updates.example.com/t3code" }),
     });
 
@@ -1491,7 +1489,7 @@ describe("DesktopUpdates under a managed policy", () => {
   it.effect("does not report the channel as the only block when updates are off anyway", () => {
     const harness = makeHarness({
       appVersion: "1.2.3-nightly.20261028.1",
-      env: { T3CODE_DISABLE_AUTO_UPDATE: "true" },
+      env: { MURMUR_DISABLE_AUTO_UPDATE: "true" },
       policy: managed({ allowNightly: false, feedUrl: "https://updates.example.com/t3code" }),
     });
 

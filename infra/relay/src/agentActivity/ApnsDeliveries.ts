@@ -503,7 +503,7 @@ export class ApnsDeliveries extends Context.Service<
       readonly notification: ApnsNotificationPayload;
     }) => Effect.Effect<RelayDeliveryResult, ApnsDeliveryError>;
   }
->()("t3code-relay/agentActivity/ApnsDeliveries") {}
+>()("murmur-relay/agentActivity/ApnsDeliveries") {}
 
 const make = Effect.gen(function* () {
   const attempts = yield* DeliveryAttempts.DeliveryAttempts;

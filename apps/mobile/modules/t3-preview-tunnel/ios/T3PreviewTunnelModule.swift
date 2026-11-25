@@ -4,6 +4,16 @@ import Foundation
 public final class T3PreviewTunnelModule: Module {
   public func definition() -> ModuleDefinition {
     Name("T3PreviewTunnel")
+    Events("onRelaySocket")
+    OnCreate { [weak self] in
+      T3RelaySocket.emit = { [weak self] id, type, data in
+        self?.sendEvent("onRelaySocket", ["id": id, "type": type, "data": data])
+      }
+    }
+    OnDestroy { T3RelaySocket.shutdown() }
+    Function("receiveRelaySocket") { (id: String, type: String, data: String) in
+      T3RelaySocket.receive(id: id, type: type, data: data)
+    }
 
     Function("resolveAccess") { (requestId: String, url: String?) in
       T3TunnelAccess.shared.resolve(requestId: requestId, url: url)

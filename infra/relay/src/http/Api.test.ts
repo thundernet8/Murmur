@@ -79,7 +79,7 @@ const relaySettings: RelayConfiguration.RelayConfiguration["Service"] = {
     teamId: "apns-team",
     keyId: "apns-key",
     privateKey: Redacted.make("apns-private-key"),
-    bundleId: "com.example.t3",
+    bundleId: "com.example.murmur",
     environment: "sandbox",
   },
   clerkSecretKey: Redacted.make("clerk-secret-key"),
@@ -1102,7 +1102,7 @@ describe("relay environment unlink", () => {
                   environmentId: "environment-1",
                   hostname: "dev-0123456789abcdef.example.test",
                   tunnelId: "tunnel-1",
-                  tunnelName: `t3coderelay-managedendpoint-dev-${endpointKey}`,
+                  tunnelName: `murmurrelay-managedendpoint-dev-${endpointKey}`,
                   dnsRecordId: "dns-1",
                   readyAt: "2026-07-28T00:00:00.000Z",
                   tunnelReleasedAt: null,
@@ -1489,7 +1489,7 @@ describe("relay routing fallback", () => {
 });
 
 describe("relay CORS", () => {
-  const origin = "https://app.t3.codes";
+  const origin = "https://murmur.invalid";
 
   class HandlerFailed extends Schema.TaggedError<HandlerFailed>()("HandlerFailed", {}) {}
 

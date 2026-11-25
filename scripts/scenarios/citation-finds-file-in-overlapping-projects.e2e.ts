@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 const FILE = "quarterly-handoff.txt";
@@ -19,7 +19,7 @@ test(
       title: "Find the report",
       messages: [`See :codex-file-citation{path="${FILE}" line_range_start="1"}`],
     });
-    const { cli } = makeState(T3_HOME);
+    const { cli } = makeState(MURMUR_HOME);
     await runPromise(cli(["project", "add", nested, "--title", "Report docs"]));
     try {
       await t3.open(thread);

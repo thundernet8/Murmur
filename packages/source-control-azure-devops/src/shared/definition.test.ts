@@ -14,7 +14,7 @@ describe("Azure DevOps change request URLs", () => {
   it("reads both hosted URL forms", () => {
     expect(parse("https://dev.azure.com/acme/platform/_git/t3code/pullrequest/17")).toEqual({
       host: "dev.azure.com",
-      repository: "acme/platform/_git/t3code",
+      repository: "acme/platform/_git/murmur",
       number: 17,
       repositoryUrl: "https://dev.azure.com/acme/platform/_git/t3code",
     });
@@ -22,7 +22,7 @@ describe("Azure DevOps change request URLs", () => {
       parse("https://acme.visualstudio.com/platform/_git/t3code/pullrequest/17"),
     ).toMatchObject({
       host: "acme.visualstudio.com",
-      repository: "platform/_git/t3code",
+      repository: "platform/_git/murmur",
       number: 17,
     });
   });
@@ -139,12 +139,12 @@ describe("Azure DevOps repository keys", () => {
 
   it("gives a repository the same key over SSH as over HTTPS", () => {
     for (const remote of [
-      "git@ssh.dev.azure.com:v3/T3Tools/Platform/T3Code",
-      "ssh://git@ssh.dev.azure.com:22/v3/T3Tools/Platform/T3Code",
-      "https://T3Tools@dev.azure.com/T3Tools/Platform/_git/T3Code",
+      "git@ssh.dev.azure.com:v3/T3Tools/Platform/Murmur",
+      "ssh://git@ssh.dev.azure.com:22/v3/T3Tools/Platform/Murmur",
+      "https://T3Tools@dev.azure.com/T3Tools/Platform/_git/Murmur",
     ]) {
       expect(registry.repositoryKeyFromRemote(remote), remote).toBe(
-        "dev.azure.com/t3tools/platform/_git/t3code",
+        "dev.azure.com/t3tools/platform/_git/murmur",
       );
     }
   });
@@ -210,11 +210,11 @@ describe("Azure DevOps repository keys", () => {
 
   it("keeps the organization in the host for the legacy visualstudio.com remotes", () => {
     for (const remote of [
-      "T3Tools@vs-ssh.visualstudio.com:v3/T3Tools/Platform/T3Code",
-      "https://T3Tools.visualstudio.com/Platform/_git/T3Code",
+      "T3Tools@vs-ssh.visualstudio.com:v3/T3Tools/Platform/Murmur",
+      "https://T3Tools.visualstudio.com/Platform/_git/Murmur",
     ]) {
       expect(registry.repositoryKeyFromRemote(remote), remote).toBe(
-        "t3tools.visualstudio.com/platform/_git/t3code",
+        "t3tools.visualstudio.com/platform/_git/murmur",
       );
     }
   });

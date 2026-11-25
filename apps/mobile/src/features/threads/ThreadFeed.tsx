@@ -1818,7 +1818,7 @@ function ThreadAutomationMessageRow(props: {
   );
 }
 
-/** Leads with why T3 Code compacted, when it did so without being asked. */
+/** Leads with why Murmur compacted, when it did so without being asked. */
 function compactionLabel(
   label: string,
   title: string | undefined,
@@ -2385,9 +2385,9 @@ function renderFeedEntry(
           className={cn("items-end", props.userMessageGrouping.groupedWithNext ? "mb-1" : "mb-2")}
           {...(enterAnimated ? { entering: FadeInDown.duration(220) } : {})}
         >
-          {presentation.attribution === "t3code" ? (
+          {presentation.attribution === "murmur" ? (
             <Text className="mb-1 pr-1 font-t3-medium text-2xs text-foreground-muted opacity-60">
-              {m(msg("Sent by T3 Code"))}
+              {m(msg("Sent by Murmur"))}
             </Text>
           ) : null}
           {presentation.guestName !== undefined ? (

@@ -188,13 +188,13 @@ function routeAddressKey(route: ConnectionRoute): string | null {
   }
 }
 
-const T3_CONNECT_NAME = "T3 Connect";
+const MURMUR_CONNECT_NAME = "Murmur Connect";
 
 /** The route's label in English. Display sites use `connectionRouteLabelText`. */
 export function connectionRouteLabel(route: ConnectionRoute): string {
   switch (connectionRouteKind(route)) {
     case "relay":
-      return T3_CONNECT_NAME;
+      return MURMUR_CONNECT_NAME;
     case "loopback":
       return msg("This device");
     case "lan":
@@ -456,7 +456,7 @@ export function isLearned(route: ConnectionRoute): boolean {
 
 /**
  * A learned route borrows the credential of the route it was learned over, so
- * it cannot outlive that route: removing T3 Connect also removes routes learned
+ * it cannot outlive that route: removing Murmur Connect also removes routes learned
  * through it, and removing a paired address removes routes that borrow its
  * token.
  */

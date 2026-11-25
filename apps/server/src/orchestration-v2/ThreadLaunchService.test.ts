@@ -3034,10 +3034,10 @@ it.live(
         yield* git.execute({ operation: "launch-test", cwd: shop, args });
       }
       yield* fileSystem.writeFileString(
-        path.join(shop, "t3.json"),
+        path.join(shop, "murmur.json"),
         JSON.stringify({
           worktreeLayout: {
-            create: `echo create >> "${ran}" && git worktree add -q -b "$T3_WORKTREE_BRANCH" "$T3_WORKTREE_PROJECT_PATH"`,
+            create: `echo create >> "${ran}" && git worktree add -q -b "$MURMUR_WORKTREE_BRANCH" "$MURMUR_WORKTREE_PROJECT_PATH"`,
           },
         }),
       );
@@ -3787,7 +3787,7 @@ it.effect("refuses a new worktree whose explicit branch already exists", () =>
     const git = yield* GitVcsDriver.GitVcsDriver;
     const directory = yield* fs.makeTempDirectoryScoped({ prefix: "launch-branch-exists-" });
     const cwd = `${directory}/repo`;
-    const temporaryBranch = "t3code/0b5e7a1c-3f2d-4e8a-9b6c-1d2e3f4a5b6c";
+    const temporaryBranch = "murmur/0b5e7a1c-3f2d-4e8a-9b6c-1d2e3f4a5b6c";
     yield* fs.makeDirectory(cwd);
     const command = (args: string[]) => git.execute({ operation: "launch-test", cwd, args });
     yield* command(["init", "-b", "main"]);

@@ -1,67 +1,31 @@
-# Brand icons
+# Murmur 品牌资源
 
-The three Icon Composer projects are the source of truth for full application icons:
+`murmur/mark.png` 是使用内置 imagegen 生成的新标记源文件。生成提示词：
 
-- `dev/app-icon.icon`
-- `nightly/app-icon.icon`
-- `prod/app-icon.icon`
+> 为 Murmur 创建一个独立的应用标记：以两道柔和交叠的对话声波构成小写 m，表达隐私、安全与开放包容。几何轮廓、圆润末端、青绿色、透明背景，无文字；前侧拱肩有一道收细的弧形高光，呈现柔和的实体感。在小尺寸下仍清晰可辨，不沿用 T3 品牌设计。
 
-Each project uses `text.svg` for the T3 mark and `background.svg` when the background is a vector layer. Additional layers use semantic names that describe their role and placement.
+运行 `vp run icons:export` 从源图重复生成 Web、桌面、iOS、Android、widget 和营销页面资源。运行 `vp run icons:check` 逐字节核验导出结果；无需 Icon Composer 或网络。
 
-Run `vp run icons:export` from the repository root to regenerate the tracked iOS, Linux, Windows, and web assets. The development web exports are also copied to `apps/web/public` for the browser favicon, web app manifest icons, and splash screen. Run `vp run icons:check` to verify that the generated assets and public copies match their sources without changing files.
+开发版、Nightly 和生产版使用不同底色，共享同一标记。通用与 Web 图标使用透明底的大圆角外框。macOS PNG 使用 1024×1024 画布，824×824 图标主体居中，四周各留 100px 安全区，外框同步加大圆角。iOS 保留完整底色画布，由系统裁切；Android adaptive 与 splash 图像为系统遮罩保留安全区。通知和 widget 使用从源图 alpha 提取的单色轮廓。
 
-Exporting requires Icon Composer 2 or newer on macOS. The script selects the newest compatible exporter from Xcode or a standalone Icon Composer installation and pins design generation 26. Set `ICON_COMPOSER_TOOL` to the full path of `Icon Composer.app/Contents/Executables/ictool` to override automatic discovery.
+`dev/`、`nightly/`、`prod/` 中的旧版素材仅保留为上游历史资源，应用构建不再引用它们；原 README 中的图标仍指向原始素材。上游商标说明见 [TRADEMARK.md](../TRADEMARK.md)。
 
-## macOS exports
+## 圆角与光泽调整
 
-Icon Composer's command-line exporter does not expose the `macOS pre-Tahoe` preset. A plain command-line `macOS` export is full bleed and is not suitable for the desktop app, so the export script intentionally leaves the tracked macOS PNGs unchanged and prints a reminder after every run.
-
-After changing an Icon Composer project, open it in Icon Composer and export the macOS PNG with exactly these settings:
-
-- Platform: `macOS pre-Tahoe`
-- Appearance: `Default`
-- Size: `1024pt`
-- Scale: `1×`
-
-Save the three exports to:
-
-- `dev/app-icon.icon` -> `dev/blueprint-macos-1024.png`
-- `nightly/app-icon.icon` -> `nightly/nightly-macos-1024.png`
-- `prod/app-icon.icon` -> `prod/black-macos-1024.png`
-
-The result must be a 1024×1024 PNG with the classic macOS safe area: the opaque icon body is 824×824, inset 100 pixels on every side, with only the native Icon Composer shadow extending into the surrounding transparent canvas.
-
-To have Codex perform the native exports, paste this prompt into a task opened at the repository root:
+使用内置 imagegen，以现有透明标记和图标截图为参考，圆润末端并添加弧形高光，再清理透明边缘。完整编辑提示词如下：
 
 ```text
-Use [@Computer](plugin://computer-use@openai-bundled) and the Icon Composer app to export the three macOS app icons in this repository.
-
-For each project below, use Platform: macOS pre-Tahoe, Appearance: Default, Size: 1024pt, and Scale: 1×, then save the PNG to the exact destination:
-
-- assets/dev/app-icon.icon -> assets/dev/blueprint-macos-1024.png
-- assets/nightly/app-icon.icon -> assets/nightly/nightly-macos-1024.png
-- assets/prod/app-icon.icon -> assets/prod/black-macos-1024.png
-
-Do not resize, composite, or otherwise post-process the exported PNGs.
-
-Verify every result is 1024×1024 and has the classic macOS safe area: an 824×824 opaque body inset 100px on every side, with only Icon Composer's native shadow extending beyond it.
+Use case: logo-brand / precise-object-edit. Image 1 is the editable Murmur mark; Image 2 is a screenshot showing its current app icon for context only. Refine the existing mark, keeping its identity, silhouette proportions, two overlapping speech-wave arches forming a lowercase m, overlap direction, and dark-teal to turquoise palette. Make the form softer and more rounded: smooth all joins and round off the two flared outside feet into gently pill-like rounded terminals, keeping the m recognizable. Add one elegant thin curved specular highlight following the upper shoulder of the front turquoise arch, tapering softly at both ends. This restrained mint-white sheen should make the mark feel like a subtly convex solid piece of satin-polished resin, with gentle tonal volume, not flat. Keep the highlight tasteful and readable at app-icon scale, with no separate decorative stroke outside the mark. No chrome, glitter, lens flare, heavy bevels, extra objects, text, or watermark. Output ONLY the revised single mark on an actual transparent background, centered on a square canvas with clean alpha. Do not include the screenshot's dark tile, border, white margin, or UI; the application will supply its rounded tile separately.
 ```
 
-Do not edit the generated PNG or ICO files directly.
+```text
+Use case: precise-object-edit / background-extraction. Clean up this exact Murmur mark without redesigning it. Preserve its rounded m shape, pill-like feet, dark teal and turquoise colors, overlap, convex satin-resin shading, and the single thin curved white-mint highlight on the upper front arch exactly as shown. Change ONLY the alpha cutout edges: completely remove the fuzzy floating cyan glow, smears, and pixel debris outside and above the upper-right arch, around the inside holes, and below the right foot. The mark must have a single crisp, smooth, antialiased silhouette, with absolutely zero color or alpha outside that silhouette and fully transparent interior holes. No halo, ambient glow, bloom, cast shadow, background, ground plane, added border, text, or objects. Keep the existing internal highlight and volume. Output only the cleaned mark on a genuinely transparent square canvas.
+```
 
-## Android launcher and splash artwork
+## 原始生成提示词
 
-Android masks the central 72dp of a 108dp adaptive canvas, and the Android 12+ splash screen masks
-the central two thirds of a 288dp canvas, so the Icon Composer exports cannot be used directly:
-their rounded-square silhouette gets framed again and the wordmark is cropped. The Android artwork
-is instead rendered from the same Icon Composer SVG sources by `vp run icons:export:android`:
+以下为内置 imagegen 的完整输入，源图保存在 `murmur/mark.png`：
 
-- `apps/mobile/assets/android-icon-foreground.png`: the shared transparent wordmark, sized to stay
-  inside the safe zone
-- `apps/mobile/assets/android-icon-background-dev.png` and `-nightly.png`: full-bleed variant
-  artwork (blueprint grid and annotations; night sky and clouds). Production uses a solid color.
-- `apps/mobile/assets/android-splash-icon-*.png`: the two layers composed into one 288dp image, so
-  the splash mask reproduces the launcher icon's framing.
-
-Rerun the export after changing a layer SVG. `android-icon-mark.png` remains a flat silhouette for
-Android's monochrome themed icon.
+```text
+Use case: logo-brand. Create the final application brand mark for Murmur, an open inclusive coding-agent app centered on privacy and security. One single isolated symbol, no words, no lettering, no mockups, no sheets. A compact memorable rounded lowercase m formed from two softly interlocking speech-wave arches; feels calm, welcoming, private and thoughtful. Clean geometric flat silhouette, strong legibility at 16 pixels, generous rounded edges, balanced negative space. Restrained teal/turquoise palette with subtle tonal distinction only, no shadows, no decorative background, no lock or shield clichés. Center the large mark with modest margins in a square transparent canvas. It must be an original brand mark unrelated to T3 branding. Transparent background is essential.
+```

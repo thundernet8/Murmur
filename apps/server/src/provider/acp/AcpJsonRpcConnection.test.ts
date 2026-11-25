@@ -108,8 +108,8 @@ const promptThenCancel = (input: {
       spawn: {
         ...mockRuntimeOptions.spawn,
         env: {
-          T3_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1",
-          T3_ACP_REQUEST_LOG_PATH: requestLogPath,
+          MURMUR_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1",
+          MURMUR_ACP_REQUEST_LOG_PATH: requestLogPath,
         },
       },
       cancelBehavior: input.cancelBehavior,
@@ -192,7 +192,7 @@ describe("AcpSessionRuntime", () => {
             ? {
                 spawn: {
                   ...mockRuntimeOptions.spawn,
-                  env: { T3_ACP_SESSION_LIFECYCLE: "1" },
+                  env: { MURMUR_ACP_SESSION_LIFECYCLE: "1" },
                 },
                 resumeSessionId: "mock-session-1",
                 resumeMethod: "resume" as const,
@@ -264,7 +264,7 @@ describe("AcpSessionRuntime", () => {
         ...mockRuntimeOptions,
         spawn: {
           ...mockRuntimeOptions.spawn,
-          env: { T3_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1" },
+          env: { MURMUR_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1" },
         },
         cancelBehavior: "wait-for-prompt",
         requestLogger: (event) =>
@@ -364,7 +364,7 @@ describe("AcpSessionRuntime", () => {
         Effect.provideService(AgentScope, {
           ...AgentScope.defaultValue(),
           wrap: ({ command, args }) =>
-            Effect.succeed({ command, args, unit: "t3code-acp-test.scope" }),
+            Effect.succeed({ command, args, unit: "murmur-acp-test.scope" }),
           stop: (unit) => Deferred.succeed(stopped, unit).pipe(Effect.asVoid),
         }),
       );
@@ -372,7 +372,7 @@ describe("AcpSessionRuntime", () => {
       expect(yield* Deferred.isDone(stopped)).toBe(false);
       yield* runtime.notify("_test/exit", {});
       const events = yield* runtime.getEvents().pipe(Stream.take(1), Stream.runCollect);
-      expect(yield* Deferred.await(stopped)).toBe("t3code-acp-test.scope");
+      expect(yield* Deferred.await(stopped)).toBe("murmur-acp-test.scope");
       const event = events[0];
       expect(event).toMatchObject({ _tag: "ConnectionTerminated", error: { code: 19 } });
       if (event?._tag !== "ConnectionTerminated") return;
@@ -404,7 +404,7 @@ describe("AcpSessionRuntime", () => {
         ...mockRuntimeOptions,
         spawn: {
           ...mockRuntimeOptions.spawn,
-          env: { T3_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1" },
+          env: { MURMUR_ACP_COMPLETE_FIRST_PROMPT_ON_CANCEL: "1" },
         },
         cancelBehavior: "wait-for-prompt",
       });
@@ -445,7 +445,7 @@ describe("AcpSessionRuntime", () => {
       });
       const runtime = yield* AcpSessionRuntime.make({
         ...mockRuntimeOptions,
-        spawn: { ...mockRuntimeOptions.spawn, env: { T3_ACP_FLOOD_STDERR: "1" } },
+        spawn: { ...mockRuntimeOptions.spawn, env: { MURMUR_ACP_FLOOD_STDERR: "1" } },
         onStderr: () => Effect.fail(failure),
       });
       expect(yield* runtime.start().pipe(Effect.flip)).toBe(failure);
@@ -514,7 +514,7 @@ describe("AcpSessionRuntime", () => {
         yield* Effect.gen(function* () {
           const runtime = yield* AcpSessionRuntime.make({
             ...mockRuntimeOptions,
-            spawn: { ...mockRuntimeOptions.spawn, env: { T3_ACP_FLOOD_STDERR: "1" } },
+            spawn: { ...mockRuntimeOptions.spawn, env: { MURMUR_ACP_FLOOD_STDERR: "1" } },
             ...(logStderr
               ? {
                   onStderr: (text: string) =>
@@ -573,7 +573,7 @@ describe("AcpSessionRuntime", () => {
     ({ extendEnv }) =>
       Effect.gen(function* () {
         yield* Effect.acquireRelease(
-          Effect.sync(() => setProcessEnv("T3_ACP_RUNTIME_AMBIENT", "sentinel")),
+          Effect.sync(() => setProcessEnv("MURMUR_ACP_RUNTIME_AMBIENT", "sentinel")),
           (restore) => Effect.sync(restore),
         );
         const runtime = yield* AcpSessionRuntime.make({
@@ -582,7 +582,7 @@ describe("AcpSessionRuntime", () => {
             command: process.execPath,
             args: mockAgentArgs,
             ...(extendEnv === undefined ? {} : { extendEnv }),
-            env: { T3_ACP_RUNTIME_EXPLICIT: "kept" },
+            env: { MURMUR_ACP_RUNTIME_EXPLICIT: "kept" },
           },
         });
         yield* runtime.initialize();
@@ -624,7 +624,7 @@ describe("AcpSessionRuntime", () => {
           spawn: {
             command: mockAgentCommand,
             args: mockAgentArgs,
-            env: { T3_ACP_MCP_ACP: "1" },
+            env: { MURMUR_ACP_MCP_ACP: "1" },
           },
           cwd: process.cwd(),
           clientInfo: { name: "t3-test", version: "0.0.0" },
@@ -679,7 +679,7 @@ describe("AcpSessionRuntime", () => {
           spawn: {
             command: mockAgentCommand,
             args: mockAgentArgs,
-            env: { T3_ACP_V2_MANAGEMENT: "1" },
+            env: { MURMUR_ACP_V2_MANAGEMENT: "1" },
           },
           cwd: process.cwd(),
           clientInfo: { name: "t3-test", version: "0.0.0" },
@@ -722,8 +722,8 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_AUTH_METHOD_ID: "test",
-              T3_ACP_REQUIRE_AUTH: "1",
+              MURMUR_ACP_AUTH_METHOD_ID: "test",
+              MURMUR_ACP_REQUIRE_AUTH: "1",
             },
           },
           cwd: process.cwd(),
@@ -760,8 +760,8 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_AUTH_METHOD_ID: "test",
-              T3_ACP_REQUIRE_AUTH: "1",
+              MURMUR_ACP_AUTH_METHOD_ID: "test",
+              MURMUR_ACP_REQUIRE_AUTH: "1",
             },
           },
           cwd: process.cwd(),
@@ -906,7 +906,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_FOREIGN_SESSION_UPDATES: "1",
+              MURMUR_ACP_EMIT_FOREIGN_SESSION_UPDATES: "1",
             },
           },
           cwd: process.cwd(),
@@ -967,7 +967,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_INTERLEAVED_ASSISTANT_TOOL_CALLS: "1",
+              MURMUR_ACP_EMIT_INTERLEAVED_ASSISTANT_TOOL_CALLS: "1",
             },
           },
           cwd: process.cwd(),
@@ -1014,7 +1014,7 @@ describe("AcpSessionRuntime", () => {
           spawn: {
             command: mockAgentCommand,
             args: mockAgentArgs,
-            env: { T3_ACP_EMIT_BACKGROUND_TOOL_DURING_ANSWER: "1" },
+            env: { MURMUR_ACP_EMIT_BACKGROUND_TOOL_DURING_ANSWER: "1" },
           },
           cwd: process.cwd(),
           clientInfo: { name: "t3-test", version: "0.0.0" },
@@ -1060,7 +1060,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_GENERIC_TOOL_PLACEHOLDERS: "1",
+              MURMUR_ACP_EMIT_GENERIC_TOOL_PLACEHOLDERS: "1",
             },
           },
           cwd: process.cwd(),
@@ -1132,7 +1132,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_SESSION_LIFECYCLE: "1",
+              MURMUR_ACP_SESSION_LIFECYCLE: "1",
             },
           },
           additionalDirectories: ["/tmp/t3-attachments"],
@@ -1188,8 +1188,8 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_REQUIRE_AUTH: "1",
-              T3_ACP_SESSION_LIFECYCLE: "1",
+              MURMUR_ACP_REQUIRE_AUTH: "1",
+              MURMUR_ACP_SESSION_LIFECYCLE: "1",
             },
           },
           cwd: process.cwd(),
@@ -1217,7 +1217,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_FAIL_LOAD_SESSION: "1",
+              MURMUR_ACP_FAIL_LOAD_SESSION: "1",
             },
           },
           cwd: process.cwd(),
@@ -1238,8 +1238,8 @@ describe("AcpSessionRuntime", () => {
         spawn: {
           ...mockRuntimeOptions.spawn,
           env: {
-            T3_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
-            T3_ACP_LOAD_SESSION_DELAY_MS: "500",
+            MURMUR_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
+            MURMUR_ACP_LOAD_SESSION_DELAY_MS: "500",
           },
         },
         resumeSessionId: "mock-session-1",
@@ -1271,9 +1271,9 @@ describe("AcpSessionRuntime", () => {
         spawn: {
           ...mockRuntimeOptions.spawn,
           env: {
-            T3_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
-            T3_ACP_LOAD_SESSION_DELAY_MS: "500",
-            T3_ACP_HOLD_SET_CONFIG_OPTION_UNTIL_LOAD_REPLY: "1",
+            MURMUR_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
+            MURMUR_ACP_LOAD_SESSION_DELAY_MS: "500",
+            MURMUR_ACP_HOLD_SET_CONFIG_OPTION_UNTIL_LOAD_REPLY: "1",
           },
         },
         resumeSessionId: "mock-session-1",
@@ -1307,9 +1307,9 @@ describe("AcpSessionRuntime", () => {
         spawn: {
           ...mockRuntimeOptions.spawn,
           env: {
-            T3_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
-            T3_ACP_LOAD_SESSION_DELAY_MS: "500",
-            T3_ACP_NOTIFY_MODE_BEFORE_LOAD_REPLY: "code",
+            MURMUR_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
+            MURMUR_ACP_LOAD_SESSION_DELAY_MS: "500",
+            MURMUR_ACP_NOTIFY_MODE_BEFORE_LOAD_REPLY: "code",
           },
         },
         resumeSessionId: "mock-session-1",
@@ -1352,8 +1352,8 @@ describe("AcpSessionRuntime", () => {
         spawn: {
           ...mockRuntimeOptions.spawn,
           env: {
-            T3_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
-            T3_ACP_LOAD_SESSION_DELAY_MS: "500",
+            MURMUR_ACP_DELAY_LOAD_SESSION_AFTER_REPLAY: "1",
+            MURMUR_ACP_LOAD_SESSION_DELAY_MS: "500",
           },
         },
         resumeSessionId: "mock-session-1",
@@ -1404,7 +1404,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_FAIL_LOAD_SESSION_AFTER_CONFIG_REPLAY: "1",
+              MURMUR_ACP_FAIL_LOAD_SESSION_AFTER_CONFIG_REPLAY: "1",
             },
           },
           cwd: process.cwd(),
@@ -1440,7 +1440,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_LOAD_REPLAY: "1",
+              MURMUR_ACP_EMIT_LOAD_REPLAY: "1",
             },
           },
           cwd: process.cwd(),
@@ -1471,9 +1471,9 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_LOAD_REPLAY: "1",
-              T3_ACP_LOAD_REPLY_DELAY_MS: "500",
-              T3_ACP_REJECT_PROMPT_UNTIL_LOADED: "1",
+              MURMUR_ACP_EMIT_LOAD_REPLAY: "1",
+              MURMUR_ACP_LOAD_REPLY_DELAY_MS: "500",
+              MURMUR_ACP_REJECT_PROMPT_UNTIL_LOADED: "1",
             },
           },
           cwd: process.cwd(),
@@ -1503,8 +1503,8 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_EMIT_LOAD_REPLAY: "1",
-              T3_ACP_LOAD_NEVER_REPLIES: "1",
+              MURMUR_ACP_EMIT_LOAD_REPLAY: "1",
+              MURMUR_ACP_LOAD_NEVER_REPLIES: "1",
             },
           },
           cwd: process.cwd(),
@@ -1556,7 +1556,7 @@ describe("AcpSessionRuntime", () => {
             command: mockAgentCommand,
             args: mockAgentArgs,
             env: {
-              T3_ACP_REQUEST_LOG_PATH: requestLogPath,
+              MURMUR_ACP_REQUEST_LOG_PATH: requestLogPath,
             },
           },
           cwd: process.cwd(),
@@ -1595,7 +1595,7 @@ describe("AcpSessionRuntime", () => {
           spawn: {
             command: mockAgentCommand,
             args: mockAgentArgs,
-            env: { T3_ACP_REQUEST_LOG_PATH: requestLogPath },
+            env: { MURMUR_ACP_REQUEST_LOG_PATH: requestLogPath },
           },
           customModels: ["cline-free/custom-model"],
         }),
@@ -1680,7 +1680,10 @@ describe("AcpSessionRuntime", () => {
         let promptsStarted = 0;
         const runtime = yield* AcpSessionRuntime.make({
           ...mockRuntimeOptions,
-          spawn: { ...mockRuntimeOptions.spawn, env: { T3_ACP_REQUEST_LOG_PATH: requestLogPath } },
+          spawn: {
+            ...mockRuntimeOptions.spawn,
+            env: { MURMUR_ACP_REQUEST_LOG_PATH: requestLogPath },
+          },
           interruptPromptOnCancel: false,
           // The cancel spends a test-clock second in its outgoing record, the window in which the
           // next prompt could overtake it.

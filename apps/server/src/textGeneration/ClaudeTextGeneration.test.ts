@@ -25,7 +25,7 @@ import { writeFakeCli } from "@t3tools/provider-testing/fakeCli";
 const decodeClaudeSettings = Schema.decodeSync(ClaudeSettings);
 
 const layerClaudeTextGenerationTest = ServerConfig.ServerConfig.layerTest(process.cwd(), {
-  prefix: "t3code-claude-text-generation-test-",
+  prefix: "murmur-claude-text-generation-test-",
 }).pipe(Layer.provideMerge(NodeServices.layer));
 
 // The stub behaviour lives in Node so the same implementation runs on Windows,
@@ -76,30 +76,31 @@ function withFakeClaudeEnv<A, E, R>(
 ) {
   return Effect.gen(function* () {
     const fs = yield* FileSystem.FileSystem;
-    const tempDir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-claude-text-" });
+    const tempDir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-claude-text-" });
     const binDir = yield* makeFakeClaudeBinary(tempDir, input.lifecyclePort);
     const pathDelimiter = (yield* HostProcess.isWindows) ? ";" : ":";
     const hostEnv = yield* HostProcess.Environment;
     const fakeClaudeEnv: Record<string, string | undefined> = {
-      T3_FAKE_CLAUDE_OUTPUT: input.output,
-      T3_FAKE_CLAUDE_REJECTS_NO_SESSION_PERSISTENCE: input.rejectsNoSessionPersistence
+      MURMUR_FAKE_CLAUDE_OUTPUT: input.output,
+      MURMUR_FAKE_CLAUDE_REJECTS_NO_SESSION_PERSISTENCE: input.rejectsNoSessionPersistence
         ? "1"
         : undefined,
-      T3_FAKE_CLAUDE_EXIT_CODE: input.exitCode === undefined ? undefined : String(input.exitCode),
-      T3_FAKE_CLAUDE_STDERR: input.stderr,
-      T3_FAKE_CLAUDE_EXPECTED_TOOLS: input.expectedTools,
-      T3_FAKE_CLAUDE_ARGS_MUST_CONTAIN: input.argsMustContain,
-      T3_FAKE_CLAUDE_ARGS_MUST_NOT_CONTAIN: input.argsMustNotContain,
-      T3_FAKE_CLAUDE_STDIN_MUST_CONTAIN: input.stdinMustContain,
-      T3_FAKE_CLAUDE_IMAGE_REJECTION: input.imageRejection,
-      T3_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG: input.imageAttemptLog,
-      T3_FAKE_CLAUDE_CWD_MUST_NOT_BE: input.cwdMustNotBe,
-      T3_FAKE_CLAUDE_SETTINGS_LOG: input.settingsLog,
-      T3_FAKE_CLAUDE_CONFIG_DIR_MUST_BE: input.configDirMustBe,
+      MURMUR_FAKE_CLAUDE_EXIT_CODE:
+        input.exitCode === undefined ? undefined : String(input.exitCode),
+      MURMUR_FAKE_CLAUDE_STDERR: input.stderr,
+      MURMUR_FAKE_CLAUDE_EXPECTED_TOOLS: input.expectedTools,
+      MURMUR_FAKE_CLAUDE_ARGS_MUST_CONTAIN: input.argsMustContain,
+      MURMUR_FAKE_CLAUDE_ARGS_MUST_NOT_CONTAIN: input.argsMustNotContain,
+      MURMUR_FAKE_CLAUDE_STDIN_MUST_CONTAIN: input.stdinMustContain,
+      MURMUR_FAKE_CLAUDE_IMAGE_REJECTION: input.imageRejection,
+      MURMUR_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG: input.imageAttemptLog,
+      MURMUR_FAKE_CLAUDE_CWD_MUST_NOT_BE: input.cwdMustNotBe,
+      MURMUR_FAKE_CLAUDE_SETTINGS_LOG: input.settingsLog,
+      MURMUR_FAKE_CLAUDE_CONFIG_DIR_MUST_BE: input.configDirMustBe,
     };
     const environment: NodeJS.ProcessEnv = {
       ...Object.fromEntries(
-        Object.entries(hostEnv).filter(([name]) => !name.startsWith("T3_FAKE_CLAUDE_")),
+        Object.entries(hostEnv).filter(([name]) => !name.startsWith("MURMUR_FAKE_CLAUDE_")),
       ),
       ...Object.fromEntries(
         Object.entries(fakeClaudeEnv).filter(([, value]) => value !== undefined),
@@ -135,7 +136,7 @@ it.layer(layerClaudeTextGenerationTest)("ClaudeTextGeneration", (it) => {
     Effect.gen(function* () {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
-      const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-claude-guide-" });
+      const root = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-claude-guide-" });
       const project = path.join(root, "project");
       const checkout = path.join(root, "checkout");
       for (const [directory, origin] of [
@@ -174,7 +175,7 @@ it.layer(layerClaudeTextGenerationTest)("ClaudeTextGeneration", (it) => {
     Effect.gen(function* () {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
-      const root = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-claude-guide-" });
+      const root = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-claude-guide-" });
       const home = path.join(root, "home");
       yield* fs.makeDirectory(home);
       yield* fs.writeFileString(
@@ -359,7 +360,7 @@ it.layer(layerClaudeTextGenerationTest)("ClaudeTextGeneration", (it) => {
     Effect.gen(function* () {
       const fs = yield* FileSystem.FileSystem;
       const path = yield* Path.Path;
-      const logDir = yield* fs.makeTempDirectoryScoped({ prefix: "t3code-claude-image-log-" });
+      const logDir = yield* fs.makeTempDirectoryScoped({ prefix: "murmur-claude-image-log-" });
       const imageAttemptLog = path.join(logDir, "image-attempts.log");
       return yield* withFakeClaudeEnv(
         {

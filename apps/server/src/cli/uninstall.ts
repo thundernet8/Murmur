@@ -138,11 +138,11 @@ export function spawnWindowsRemoval(environment: NodeJS.ProcessEnv, dir: string)
       "/v:off",
       "/s",
       "/c",
-      '""%T3_UNINSTALL_PING%" -n 3 127.0.0.1 >nul & rmdir /s /q "%T3_UNINSTALL_RUNTIME%""',
+      '""%MURMUR_UNINSTALL_PING%" -n 3 127.0.0.1 >nul & rmdir /s /q "%MURMUR_UNINSTALL_RUNTIME%""',
     ],
     {
       cwd: NodePath.win32.dirname(ping),
-      env: { ...process.env, T3_UNINSTALL_PING: ping, T3_UNINSTALL_RUNTIME: dir },
+      env: { ...process.env, MURMUR_UNINSTALL_PING: ping, MURMUR_UNINSTALL_RUNTIME: dir },
       windowsVerbatimArguments: true,
       detached: true,
       stdio: "ignore",
@@ -211,7 +211,7 @@ const logOtherHomeService = (plan: UninstallPlan) =>
   plan.otherHomeService === undefined
     ? Effect.void
     : Console.log(
-        `The T3 Code service serves ${plan.otherHomeService}, so it was not removed. Pass \`${BootService.formatBootServiceBaseDirOption(plan.otherHomeService)}\` to remove it.`,
+        `The Murmur service serves ${plan.otherHomeService}, so it was not removed. Pass \`${BootService.formatBootServiceBaseDirOption(plan.otherHomeService)}\` to remove it.`,
       );
 
 const runUninstall = Effect.fn("cli.uninstall.run")(function* (input: {
@@ -306,6 +306,6 @@ const runUninstall = Effect.fn("cli.uninstall.run")(function* (input: {
     }
   }
   yield* Console.log("");
-  yield* Console.log("t3 is uninstalled. Thanks for trying T3 Code.");
+  yield* Console.log("t3 is uninstalled. Thanks for trying Murmur.");
   yield* logOtherHomeService(plan);
 });

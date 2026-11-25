@@ -31,16 +31,16 @@ const testCrypto = SecureRandom.make((size) => new Uint8Array(size).fill(7));
 
 function makeProject(
   repositoryIdentity: OrchestrationProjectShell["repositoryIdentity"] = {
-    canonicalKey: "github.com/t3tools/t3code",
+    canonicalKey: "github.com/t3tools/murmur",
     locator: {
       source: "git-remote",
       remoteName: "origin",
-      remoteUrl: "git@github.com:T3Tools/T3Code.git",
+      remoteUrl: "git@github.com:T3Tools/Murmur.git",
     },
     provider: SourceControlProviderKind.make("github"),
-    displayName: "T3Tools/T3Code",
+    displayName: "T3Tools/Murmur",
     owner: "T3Tools",
-    name: "T3Code",
+    name: "Murmur",
   },
 ): OrchestrationProjectShell {
   return {
@@ -85,7 +85,7 @@ function makeLink(
   const { headBranch, baseBranch, ...rest } = overrides;
   return {
     host: "github.com",
-    repository: "t3tools/t3code",
+    repository: "t3tools/murmur",
     number,
     url: `https://github.com/t3tools/t3code/pull/${number}`,
     source: "manual",
@@ -235,7 +235,7 @@ describe("PullRequestWatchService", () => {
     Effect.gen(function* () {
       const freshMerged = yield* makeHarness({ readState: "merged" });
       expect(
-        yield* freshMerged.setWatching(true, { repository: "t3tools/t3code", number: 1 }),
+        yield* freshMerged.setWatching(true, { repository: "t3tools/murmur", number: 1 }),
       ).toMatchObject({ number: 1, watching: false, wasWatching: false, state: "merged" });
       expect(yield* Ref.get(freshMerged.commands)).toEqual([]);
 
@@ -260,13 +260,13 @@ describe("PullRequestWatchService", () => {
         ]),
       });
       expect(
-        yield* harness.setWatching(true, { repository: "t3tools/t3code", number: 1 }),
+        yield* harness.setWatching(true, { repository: "t3tools/murmur", number: 1 }),
       ).toMatchObject({ number: 1, watching: false, state: "merged" });
       expect(
-        yield* harness.setWatching(true, { repository: "t3tools/t3code", number: 3 }),
+        yield* harness.setWatching(true, { repository: "t3tools/murmur", number: 3 }),
       ).toMatchObject({ watching: true, wasWatching: true });
       expect(
-        yield* harness.setWatching(false, { repository: "t3tools/t3code", number: 3 }),
+        yield* harness.setWatching(false, { repository: "t3tools/murmur", number: 3 }),
       ).toMatchObject({ wasWatching: true });
       expect(yield* Ref.get(harness.commands)).toMatchObject([
         { type: "thread.pull-request.watch", number: 3, watching: true },
@@ -283,12 +283,12 @@ describe("PullRequestWatchService", () => {
       ]);
       const stillClosed = yield* makeHarness({ readState: "closed", thread: closedThread });
       expect(
-        yield* stillClosed.setWatching(true, { repository: "t3tools/t3code", number: 1 }),
+        yield* stillClosed.setWatching(true, { repository: "t3tools/murmur", number: 1 }),
       ).toMatchObject({ watching: false, state: "closed" });
       expect(yield* Ref.get(stillClosed.commands)).toEqual([]);
 
       const harness = yield* makeHarness({ readState: "open", thread: closedThread });
-      yield* harness.setWatching(true, { repository: "t3tools/t3code", number: 1 });
+      yield* harness.setWatching(true, { repository: "t3tools/murmur", number: 1 });
       expect(yield* Ref.get(harness.commands)).toMatchObject([
         { type: "thread.pull-request.watch", number: 1, watching: true },
       ]);
@@ -308,7 +308,7 @@ describe("PullRequestWatchService", () => {
         },
       });
       const error = yield* harness
-        .setWatching(true, { repository: "t3tools/t3code", number: 1 })
+        .setWatching(true, { repository: "t3tools/murmur", number: 1 })
         .pipe(Effect.flip);
       expect(error).toMatchObject({ _tag: "PullRequestWatchFromSubagentError" });
       expect(yield* Ref.get(harness.commands)).toEqual([]);

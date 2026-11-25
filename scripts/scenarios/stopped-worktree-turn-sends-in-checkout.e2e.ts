@@ -1,6 +1,6 @@
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 test(
@@ -10,7 +10,7 @@ test(
     const project = await t3.project("demo");
     // The question recording waits for an answer, so the turn is running in its new worktree.
     const started = await runPromise(
-      makeState(T3_HOME).cli(
+      makeState(MURMUR_HOME).cli(
         [
           "thread",
           "start",

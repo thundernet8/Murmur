@@ -263,7 +263,7 @@ describe("releaseManagedTunnelOnShutdown", () => {
             Layer.provideMerge(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer)),
           ),
           ConfigProvider.layer(
-            ConfigProvider.fromEnv({ env: { T3CODE_RELAY_URL: "https://relay.example.test" } }),
+            ConfigProvider.fromEnv({ env: { MURMUR_RELAY_URL: "https://relay.example.test" } }),
           ),
         ]),
         Effect.scoped,
@@ -770,7 +770,7 @@ describe("releaseManagedTunnelOnShutdown", () => {
       const result = yield* relink.pipe(
         Effect.provide(
           ConfigProvider.layer(
-            ConfigProvider.fromEnv({ env: { T3CODE_RELAY_URL: "https://relay.example.test" } }),
+            ConfigProvider.fromEnv({ env: { MURMUR_RELAY_URL: "https://relay.example.test" } }),
           ),
         ),
         Effect.flip,
@@ -1265,7 +1265,7 @@ describe("releaseManagedTunnelOnShutdown", () => {
         "not_linked",
       );
       // The address shows before any check passes.
-      expect(state.tunnelHostname).toBe("prod-abc.t3coderelay.com");
+      expect(state.tunnelHostname).toBe("prod-abc.murmurrelay.com");
     }).pipe(
       provideReleaseHarness({
         store,
@@ -1275,7 +1275,7 @@ describe("releaseManagedTunnelOnShutdown", () => {
         connector: {
           pid: 123,
           readyConnections: 0,
-          hostname: "prod-abc.t3coderelay.com",
+          hostname: "prod-abc.murmurrelay.com",
           origin: null,
           protocol: null,
         },

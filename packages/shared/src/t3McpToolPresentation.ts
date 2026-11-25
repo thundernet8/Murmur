@@ -107,15 +107,15 @@ function tool(
 }
 
 // Codex registers "t3-code-direct" for T3 tools kept out of Code Mode.
-const T3_MCP_SERVER_ALIASES = new Set([
+const MURMUR_MCP_SERVER_ALIASES = new Set([
   "t3-code",
   "t3_code",
-  "t3code",
+  "murmur",
   "t3-code-direct",
   "t3_code_direct",
 ]);
 
-const T3_MCP_TOOLS: Readonly<Record<string, T3McpToolDefinition>> = {
+const MURMUR_MCP_TOOLS: Readonly<Record<string, T3McpToolDefinition>> = {
   link_pull_request: tool(
     ["Link", "Linking", "Linked", "a pull request"],
     "link-pr",
@@ -443,7 +443,7 @@ const T3_MCP_TOOLS: Readonly<Record<string, T3McpToolDefinition>> = {
   send_to_user: tool(["Send", "Sending", "Sent", "a message"], "send-to-user"),
 };
 
-export const T3_MCP_TOOL_NAMES: ReadonlySet<string> = new Set(Object.keys(T3_MCP_TOOLS));
+export const MURMUR_MCP_TOOL_NAMES: ReadonlySet<string> = new Set(Object.keys(MURMUR_MCP_TOOLS));
 
 function normalizeT3McpToolLabel(value: string): string {
   return value.replace(/\s+(?:complete|completed)\s*$/i, "").trim();
@@ -473,13 +473,13 @@ function parseT3McpToolName(value: string): string | null {
     const { server, tool } = mcpMatch.groups;
     return server !== undefined &&
       tool !== undefined &&
-      T3_MCP_SERVER_ALIASES.has(server.toLowerCase())
+      MURMUR_MCP_SERVER_ALIASES.has(server.toLowerCase())
       ? tool
       : null;
   }
 
   const namespaceMatch =
-    /^(?<server>t3[-_]code[-_]direct|t3-code|t3_code|t3code)(?:[.:/]|\s*·\s*)(?<tool>.+)$/i.exec(
+    /^(?<server>t3[-_]code[-_]direct|t3-code|t3_code|murmur)(?:[.:/]|\s*·\s*)(?<tool>.+)$/i.exec(
       label,
     );
   if (namespaceMatch?.groups) {
@@ -488,11 +488,11 @@ function parseT3McpToolName(value: string): string | null {
 
   const prefixed = /^(?:mcp[-_]{1,2})?t3[-_ ]?code(?:__|[-_.:/ ])(?<tool>.+)$/i.exec(label);
   const candidate = prefixed?.groups?.tool ?? label;
-  if (Object.hasOwn(T3_MCP_TOOLS, candidate)) return candidate;
+  if (Object.hasOwn(MURMUR_MCP_TOOLS, candidate)) return candidate;
   // OpenCode 2 thread prefixes can contain underscores; choose the longest known tool-name suffix.
   if (!/^t3-code-/i.test(label)) return null;
   let longest: string | null = null;
-  for (const tool of Object.keys(T3_MCP_TOOLS)) {
+  for (const tool of Object.keys(MURMUR_MCP_TOOLS)) {
     if (label.endsWith(`_${tool}`) && tool.length > (longest?.length ?? 0)) longest = tool;
   }
   return longest;
@@ -500,7 +500,7 @@ function parseT3McpToolName(value: string): string | null {
 
 export function resolveT3McpToolId(toolName: string | null | undefined): string | null {
   const name = toolName == null ? null : resolveT3McpToolName(toolName);
-  return name !== null && Object.hasOwn(T3_MCP_TOOLS, name) ? name : null;
+  return name !== null && Object.hasOwn(MURMUR_MCP_TOOLS, name) ? name : null;
 }
 
 type SummaryInput = Readonly<Record<string, unknown>>;
@@ -525,12 +525,12 @@ export function resolveT3McpToolDefinition(
   input?: unknown,
 ): T3McpToolDefinition | null {
   const name = toolName == null ? null : resolveT3McpToolName(toolName);
-  if (name === null || !Object.hasOwn(T3_MCP_TOOLS, name)) return null;
+  if (name === null || !Object.hasOwn(MURMUR_MCP_TOOLS, name)) return null;
   const action = asSummaryInput(input)?.action;
   const actionTool = typeof action === "string" ? ACTION_TOOLS[name]?.(action) : undefined;
-  return actionTool !== undefined && Object.hasOwn(T3_MCP_TOOLS, actionTool)
-    ? T3_MCP_TOOLS[actionTool]!
-    : T3_MCP_TOOLS[name]!;
+  return actionTool !== undefined && Object.hasOwn(MURMUR_MCP_TOOLS, actionTool)
+    ? MURMUR_MCP_TOOLS[actionTool]!
+    : MURMUR_MCP_TOOLS[name]!;
 }
 
 /** Tools whose summary depends on which fields a call sets. */

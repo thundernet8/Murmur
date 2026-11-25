@@ -3,7 +3,7 @@ import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { run } from "./shell.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
@@ -83,12 +83,12 @@ test(
       Effect.gen(function* () {
         const path = yield* Path.Path;
         const fs = yield* FileSystem.FileSystem;
-        const shim = path.join(T3_HOME, "bin", "az");
+        const shim = path.join(MURMUR_HOME, "bin", "az");
         yield* fs.writeFileString(shim, azureCli);
         yield* fs.chmod(shim, 0o755);
         return {
-          repository: path.join(T3_HOME, "release"),
-          changed: path.join(T3_HOME, "bin", "workflow-changed"),
+          repository: path.join(MURMUR_HOME, "release"),
+          changed: path.join(MURMUR_HOME, "bin", "workflow-changed"),
         };
       }),
     );
@@ -102,7 +102,7 @@ test(
         },
       ),
     );
-    const primary = makeState(T3_HOME);
+    const primary = makeState(MURMUR_HOME);
     await runPromise(primary.cli(["project", "add", repository, "--title", "Release"]));
     try {
       await t3.open("/issues?status=closed");

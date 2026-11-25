@@ -2,7 +2,7 @@ import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 test(
@@ -10,8 +10,8 @@ test(
   WEB,
   async ({ t3, app, screen }) => {
     await t3.project("symlinked-theme-tree");
-    const fixture = `${T3_HOME}/symlinked-theme-tree`;
-    const themes = `${T3_HOME}/userdata/themes`;
+    const fixture = `${MURMUR_HOME}/symlinked-theme-tree`;
+    const themes = `${MURMUR_HOME}/userdata/themes`;
     const file = "restore-theme-tree.json";
     const active = `${fixture}/active`;
     const restored = `${fixture}/restored`;

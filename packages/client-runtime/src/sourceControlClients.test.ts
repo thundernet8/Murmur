@@ -14,19 +14,19 @@ const kindOf = (url: string) => sourceControlClients.parseChangeRequestUrl(url)?
 
 describe("sourceControlClients.parseChangeRequestUrl", () => {
   it("reads a GitHub pull request, lower-casing the repository", () => {
-    expect(parse("https://github.com/T3Tools/T3Code/pull/123")).toEqual({
+    expect(parse("https://github.com/T3Tools/Murmur/pull/123")).toEqual({
       host: "github.com",
-      repository: "t3tools/t3code",
+      repository: "t3tools/murmur",
       number: 123,
     });
   });
 
   it("reads a GitCafe pull request at its canonical /pull/ path and the older /pulls/ path", () => {
     for (const path of ["pull", "pulls"]) {
-      const url = `https://git.cafe/PingDotGG/T3Code/${path}/23897`;
+      const url = `https://git.cafe/PingDotGG/Murmur/${path}/23897`;
       expect(parse(url), path).toEqual({
         host: "git.cafe",
-        repository: "pingdotgg/t3code",
+        repository: "pingdotgg/murmur",
         number: 23897,
       });
       expect(kindOf(url), path).toBe("gitcafe");
@@ -98,7 +98,7 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
   it("reads a GitLab merge request on any host, nested groups and all", () => {
     expect(parse("https://gitlab.com/t3tools/platform/t3code/-/merge_requests/42")).toEqual({
       host: "gitlab.com",
-      repository: "t3tools/platform/t3code",
+      repository: "t3tools/platform/murmur",
       number: 42,
     });
     expect(parse("https://code.acme.test/team/project/-/merge_requests/9")).toEqual({
@@ -121,12 +121,12 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
     });
     expect(parse("https://dev.azure.com/acme/platform/_git/t3code/pullrequest/17")).toEqual({
       host: "dev.azure.com",
-      repository: "acme/platform/_git/t3code",
+      repository: "acme/platform/_git/murmur",
       number: 17,
     });
     expect(parse("https://acme.visualstudio.com/platform/_git/t3code/pullrequest/17")).toEqual({
       host: "acme.visualstudio.com",
-      repository: "platform/_git/t3code",
+      repository: "platform/_git/murmur",
       number: 17,
     });
   });
@@ -167,12 +167,12 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
   it("survives trailing segments, a trailing slash and a query string", () => {
     expect(parse("https://github.com/t3tools/t3code/pull/123/files?w=1")).toEqual({
       host: "github.com",
-      repository: "t3tools/t3code",
+      repository: "t3tools/murmur",
       number: 123,
     });
     expect(parse("https://github.com/t3tools/t3code/pull/123/")).toEqual({
       host: "github.com",
-      repository: "t3tools/t3code",
+      repository: "t3tools/murmur",
       number: 123,
     });
   });
@@ -194,7 +194,7 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
       "https://scm.example.test/tfs/Collection/Project/_git/Repo/pullrequest/0",
       "https://scm.example.test/tfs/Collection/Project/_git/Repo/pullrequest/9007199254740992",
       "ftp://scm.example.test/tfs/Collection/Project/_git/Repo/pullrequest/123",
-      "javascript:alert(1)//github.com/t3tools/t3code/pull/1",
+      "javascript:alert(1)//github.com/t3tools/murmur/pull/1",
       "not a url",
     ]) {
       expect(parse(link), link).toBeNull();
@@ -203,13 +203,13 @@ describe("sourceControlClients.parseChangeRequestUrl", () => {
 });
 
 describe("sourceControlClients.isSameChangeRequest", () => {
-  const linked = "https://github.com/pingdotgg/t3code/pull/42";
+  const linked = "https://github.com/pingdotgg/murmur/pull/42";
 
   it("matches the same pull request whatever its case or trailing path", () => {
     expect(
       sourceControlClients.isSameChangeRequest(
         linked,
-        "https://github.com/PingDotGG/T3Code/pull/42/files",
+        "https://github.com/PingDotGG/Murmur/pull/42/files",
       ),
     ).toBe(true);
   });
@@ -287,7 +287,7 @@ describe("sourceControlClients.recognizeRemote", () => {
     expect(kindOfRemote("https://gitlab.github.example/o/r")).toBe("github");
     expect(kindOfRemote("https://bitbucket.gitlab.example/o/r")).toBe("gitlab");
     expect(kindOfRemote("https://bitbucket.visualstudio.com/p/_git/r")).toBe("azure-devops");
-    expect(kindOfRemote("git@git.cafe:pingdotgg/t3code.git")).toBe("gitcafe");
+    expect(kindOfRemote("git@git.cafe:pingdotgg/murmur.git")).toBe("gitcafe");
     expect(kindOfRemote("https://origin.cursor.com/acme/web.git")).toBe("cursor-origin");
     expect(kindOfRemote("https://source.tanstack.com/@TanStack/router.git")).toBe(
       "tanstack-source",
@@ -316,19 +316,19 @@ describe("sourceControlClients.recognizeRemote", () => {
 describe("sourceControlClients repository keys", () => {
   // Persisted as `repositoryIdentity.canonicalKey` and in thread pull request keys.
   it.each([
-    ["git@github.com:T3Tools/T3Code.git", "github.com/t3tools/t3code"],
+    ["git@github.com:T3Tools/Murmur.git", "github.com/t3tools/murmur"],
     ["ssh://git@gitlab.company.com:2222/team/project.git", "gitlab.company.com/team/project"],
     [
-      "git@ssh.dev.azure.com:v3/T3Tools/Platform/T3Code",
-      "dev.azure.com/t3tools/platform/_git/t3code",
+      "git@ssh.dev.azure.com:v3/T3Tools/Platform/Murmur",
+      "dev.azure.com/t3tools/platform/_git/murmur",
     ],
     [
-      "T3Tools@vs-ssh.visualstudio.com:v3/T3Tools/Platform/T3Code",
-      "t3tools.visualstudio.com/platform/_git/t3code",
+      "T3Tools@vs-ssh.visualstudio.com:v3/T3Tools/Platform/Murmur",
+      "t3tools.visualstudio.com/platform/_git/murmur",
     ],
     [
-      "https://T3Tools.visualstudio.com/DefaultCollection/Platform/_git/T3Code",
-      "t3tools.visualstudio.com/defaultcollection/platform/_git/t3code",
+      "https://T3Tools.visualstudio.com/DefaultCollection/Platform/_git/Murmur",
+      "t3tools.visualstudio.com/defaultcollection/platform/_git/murmur",
     ],
     ["git@ssh.dev.azure.com:v3/o/p", "ssh.dev.azure.com/v3/o/p"],
     ["ssh.dev.azure.com/v3/o/p/r", "ssh.dev.azure.com/v3/o/p/r"],

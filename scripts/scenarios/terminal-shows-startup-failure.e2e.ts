@@ -6,7 +6,7 @@ import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 import * as Schema from "effect/Schema";
 
-import { APP_DIR, T3_HOME } from "../e2e.config.ts";
+import { APP_DIR, MURMUR_HOME } from "../e2e.config.ts";
 import { run } from "./shell.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
@@ -20,7 +20,7 @@ const scenarioServerPid = Effect.gen(function* () {
   const path = yield* Path.Path;
   const runtime = yield* Effect.firstSuccessOf(
     ["userdata", "dev"].map((dir) =>
-      fs.readFileString(path.join(T3_HOME, dir, "server-runtime.json")),
+      fs.readFileString(path.join(MURMUR_HOME, dir, "server-runtime.json")),
     ),
   );
   const { pid } = yield* decodeRuntime(runtime);

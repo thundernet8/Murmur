@@ -94,7 +94,7 @@ const serveTunnel = (
         Layer.provide(PreviewTunnel.layer.pipe(Layer.provide(settingsLayer))),
         Layer.provide(
           Layer.mock(SessionStore.SessionStore, {
-            cookieName: "t3_session",
+            cookieName: "murmur_session",
             legacyCookieName: undefined,
             awaitInvalidation: () => sessionInvalidated,
           }),

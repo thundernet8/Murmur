@@ -3,7 +3,7 @@ import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Schema from "effect/Schema";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 const decodeSettings = Schema.decodeSync(
@@ -15,8 +15,8 @@ test(
   WEB,
   async ({ t3, app, browser, screen }) => {
     await t3.project("rotated-log-cleanup");
-    const settingsPath = `${T3_HOME}/userdata/settings.json`;
-    const logFixture = `${T3_HOME}/userdata/logs/00-cleanup-fixture`;
+    const settingsPath = `${MURMUR_HOME}/userdata/settings.json`;
+    const logFixture = `${MURMUR_HOME}/userdata/logs/00-cleanup-fixture`;
     const expiredLog = `${logFixture}/server.log.1`;
     const original = await runPromise(
       Effect.flatMap(FileSystem.FileSystem, (fs) => fs.readFileString(settingsPath)),

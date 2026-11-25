@@ -1,6 +1,6 @@
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 test(
@@ -22,7 +22,9 @@ test(
     await expect(composer).toContainText("foo.ts");
 
     // The showcase recording streams for several seconds, long enough to queue behind its turn.
-    await runPromise(makeState(T3_HOME).cli(["thread", "send", thread.threadId, "Show me again"]));
+    await runPromise(
+      makeState(MURMUR_HOME).cli(["thread", "send", thread.threadId, "Show me again"]),
+    );
     await screen.getByText("Working for", { exact: false }).waitFor();
     // Enter steers by default; the alternate send queues.
     await browser.keyboard.press("ControlOrMeta+Enter");

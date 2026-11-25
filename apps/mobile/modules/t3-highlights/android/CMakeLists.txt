@@ -4,25 +4,25 @@ project(t3highlights LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(T3_HIGHLIGHTS_ROOT "${CMAKE_SOURCE_DIR}/..")
+set(MURMUR_HIGHLIGHTS_ROOT "${CMAKE_SOURCE_DIR}/..")
 
 add_library(
   t3highlights SHARED
   src/main/cpp/cpp-adapter.cpp
-  "${T3_HIGHLIGHTS_ROOT}/cpp/HybridT3Highlights.cpp"
-  "${T3_HIGHLIGHTS_ROOT}/cpp/Utf16ToUtf8.cpp"
-  "${T3_HIGHLIGHTS_ROOT}/cpp/t3_highlights.c"
-  "${T3_HIGHLIGHTS_ROOT}/Vendor/highlights/highlights.c"
-  "${T3_HIGHLIGHTS_ROOT}/Vendor/wasm2c/wasm-rt-impl.c"
-  "${T3_HIGHLIGHTS_ROOT}/Vendor/wasm2c/wasm-rt-mem-impl.c"
+  "${MURMUR_HIGHLIGHTS_ROOT}/cpp/HybridT3Highlights.cpp"
+  "${MURMUR_HIGHLIGHTS_ROOT}/cpp/Utf16ToUtf8.cpp"
+  "${MURMUR_HIGHLIGHTS_ROOT}/cpp/t3_highlights.c"
+  "${MURMUR_HIGHLIGHTS_ROOT}/Vendor/highlights/highlights.c"
+  "${MURMUR_HIGHLIGHTS_ROOT}/Vendor/wasm2c/wasm-rt-impl.c"
+  "${MURMUR_HIGHLIGHTS_ROOT}/Vendor/wasm2c/wasm-rt-mem-impl.c"
 )
 
 include(${CMAKE_SOURCE_DIR}/../nitrogen/generated/android/t3highlights+autolinking.cmake)
 
 target_include_directories(
   t3highlights
-  PRIVATE "${T3_HIGHLIGHTS_ROOT}/cpp" "${T3_HIGHLIGHTS_ROOT}/Vendor"
-          "${T3_HIGHLIGHTS_ROOT}/Vendor/highlights" "${T3_HIGHLIGHTS_ROOT}/Vendor/wasm2c"
+  PRIVATE "${MURMUR_HIGHLIGHTS_ROOT}/cpp" "${MURMUR_HIGHLIGHTS_ROOT}/Vendor"
+          "${MURMUR_HIGHLIGHTS_ROOT}/Vendor/highlights" "${MURMUR_HIGHLIGHTS_ROOT}/Vendor/wasm2c"
 )
 
 # Plain malloc memory with explicit bounds checks: no guard-page signal

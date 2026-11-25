@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
 
 import {
-  T3_MCP_TOOL_NAMES,
+  MURMUR_MCP_TOOL_NAMES,
   resolveT3McpSummaryAction,
   resolveT3McpToolDefinition,
   resolveT3McpToolPresentation,
@@ -9,20 +9,20 @@ import {
 
 describe("resolveT3McpToolPresentation", () => {
   it("recognizes every T3 tool across provider prefixes and completion suffixes", () => {
-    for (const tool of T3_MCP_TOOL_NAMES) {
+    for (const tool of MURMUR_MCP_TOOL_NAMES) {
       const presentation = resolveT3McpToolPresentation(tool);
       for (const prefix of [
         "mcp__t3-code__",
         "mcp__t3_code__",
-        "mcp__t3code__",
+        "mcp__murmur__",
         "T3-code.",
-        "t3code.",
+        "murmur.",
         "t3-code-direct.",
         "mcp__t3_code_direct__",
         "t3_code/",
-        "t3code:",
+        "murmur:",
         "mcp_t3-code_",
-        "T3 Code ",
+        "Murmur ",
         "t3-code · ",
       ]) {
         expect(resolveT3McpToolPresentation(`${prefix}${tool} completed`), tool).toEqual(

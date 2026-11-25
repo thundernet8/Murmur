@@ -1,8 +1,6 @@
 # AUR packaging
 
-This directory maintains the [`t3code-bin`](https://aur.archlinux.org/packages/t3code-bin) and
-[`t3code-nightly-bin`](https://aur.archlinux.org/packages/t3code-nightly-bin) packages. Both
-repackage the official x86_64 and ARM64 AppImages from GitHub Releases.
+本目录包含 `murmur-bin` 与 `murmur-nightly-bin` 的打包定义，使用 Murmur 仓库在 GitHub Releases 中提供的 x86_64 与 ARM64 AppImage。
 
 ## Publishing
 

@@ -66,7 +66,7 @@ export const FeedbackAwaitingApproval = Schema.Struct({
 export type FeedbackAwaitingApproval = typeof FeedbackAwaitingApproval.Type;
 
 export const FEEDBACK_OFF_MESSAGE =
-  "Agent feedback is off. Turn it on in T3 Code under Settings > Labs, then try again.";
+  "Agent feedback is off. Turn it on in Murmur under Settings > Labs, then try again.";
 
 export class FeedbackOffError extends Schema.TaggedError<FeedbackOffError>()(
   "FeedbackOffError",
@@ -124,7 +124,7 @@ export class FeedbackStorageError extends Schema.TaggedError<FeedbackStorageErro
 export const FEEDBACK_CLI_CLIENT_LABEL = "t3 feedback cli";
 
 /** Listed `t3` command paths a report may name. A CLI test keeps this in step with binCli. */
-export const T3_CLI_COMMANDS: ReadonlyArray<string> = [
+export const MURMUR_CLI_COMMANDS: ReadonlyArray<string> = [
   "t3",
   "t3 help",
   "t3 serve",
@@ -214,11 +214,11 @@ export const FEEDBACK_SUBJECT_MESSAGE =
 
 // The shared resolver knows the presented tools; the prefix covers the rest, such as these.
 // Codex also registers `t3-code-direct` for T3 tools it keeps out of Code Mode.
-const T3_PREFIX = /^(?:mcp__t3[-_]?code(?:[-_]direct)?__|t3[-_]?code(?:[-_]direct)?[.:/])/iu;
+const MURMUR_PREFIX = /^(?:mcp__t3[-_]?code(?:[-_]direct)?__|t3[-_]?code(?:[-_]direct)?[.:/])/iu;
 
 /** The bare name of a registered T3 tool however a provider prefixed it, else undefined. */
 export const resolveT3ToolName = (name: string, toolNames: ReadonlyArray<string>) => {
-  const tool = resolveT3McpToolId(name) ?? name.replace(T3_PREFIX, "");
+  const tool = resolveT3McpToolId(name) ?? name.replace(MURMUR_PREFIX, "");
   if (toolNames.includes(tool)) return tool;
   // OpenCode 2 prefixes tools with `t3-code-<thread>_`, underscores and all: the longest name wins.
   if (!/^t3-code-/iu.test(name)) return undefined;
@@ -230,6 +230,6 @@ export const resolveT3ToolName = (name: string, toolNames: ReadonlyArray<string>
 /** The stored subject, or undefined when the value names no T3 tool, `t3` command, or `general`. */
 export const resolveFeedbackSubject = (value: string, toolNames: ReadonlyArray<string>) => {
   const subject = value.trim();
-  if (subject === "general" || T3_CLI_COMMANDS.includes(subject)) return subject;
+  if (subject === "general" || MURMUR_CLI_COMMANDS.includes(subject)) return subject;
   return resolveT3ToolName(subject, toolNames);
 };

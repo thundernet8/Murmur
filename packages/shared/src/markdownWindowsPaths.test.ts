@@ -77,10 +77,10 @@ it.each(plugins)("%s finds each escape's word after earlier escapes in the text"
 });
 
 it.each([
-  [String.raw`C:\R&D folder\.t3\shot.png`, String.raw`C:\R&D folder\.t3\shot.png`],
-  [String.raw`C:\R&amp;D folder\.t3\shot.png`, String.raw`C:\R&D folder\.t3\shot.png`],
-  [String.raw`C:\work\&stuff\.t3\shot.png`, String.raw`C:\work\&stuff\.t3\shot.png`],
-  [String.raw`C:\work\&amp;lt;\.t3\shot.png`, String.raw`C:\work\&lt;\.t3\shot.png`],
+  [String.raw`C:\R&D folder\.murmur\shot.png`, String.raw`C:\R&D folder\.murmur\shot.png`],
+  [String.raw`C:\R&amp;D folder\.murmur\shot.png`, String.raw`C:\R&D folder\.murmur\shot.png`],
+  [String.raw`C:\work\&stuff\.murmur\shot.png`, String.raw`C:\work\&stuff\.murmur\shot.png`],
+  [String.raw`C:\work\&amp;lt;\.murmur\shot.png`, String.raw`C:\work\&lt;\.murmur\shot.png`],
 ])("preserves separators and decodes references once in %s", (authored, expected) => {
   const parser = unified().use(remarkParse).use(remarkKeepWindowsPaths);
   for (const prefix of ["", "!"]) {

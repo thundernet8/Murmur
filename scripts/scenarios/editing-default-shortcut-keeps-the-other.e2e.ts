@@ -2,7 +2,7 @@ import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 test(
@@ -10,7 +10,7 @@ test(
   WEB,
   async ({ t3, app, screen }) => {
     await t3.project("inherited-shortcuts");
-    const keybindingsPath = `${T3_HOME}/userdata/keybindings.json`;
+    const keybindingsPath = `${MURMUR_HOME}/userdata/keybindings.json`;
     const original = await runPromise(
       Effect.flatMap(FileSystem.FileSystem, (fs) => fs.readFileString(keybindingsPath)),
     );

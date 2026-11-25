@@ -15,7 +15,7 @@ if (permissionIndex === -1 || argv[permissionIndex + 1] !== "dontAsk") {
 const toolsIndex = argv.indexOf("--tools");
 if (
   toolsIndex === -1 ||
-  argv[toolsIndex + 1] !== (process.env.T3_FAKE_CLAUDE_EXPECTED_TOOLS ?? "")
+  argv[toolsIndex + 1] !== (process.env.MURMUR_FAKE_CLAUDE_EXPECTED_TOOLS ?? "")
 ) {
   fail("text generation did not receive the expected tool set", 6);
 }
@@ -28,7 +28,7 @@ if (!argv.includes("--disable-slash-commands")) {
 if (!argv.includes("--strict-mcp-config")) {
   fail("text generation must not load configured MCP servers", 9);
 }
-if (process.env.T3_FAKE_CLAUDE_REJECTS_NO_SESSION_PERSISTENCE === "1") {
+if (process.env.MURMUR_FAKE_CLAUDE_REJECTS_NO_SESSION_PERSISTENCE === "1") {
   if (argv.includes("--no-session-persistence")) {
     fail("error: unknown option '--no-session-persistence'", 1);
   }
@@ -44,10 +44,10 @@ const settingsText = settingsValue.startsWith("{")
 if (JSON.parse(settingsText).disableAllHooks !== true) {
   fail("text generation must disable hooks", 10);
 }
-if (process.env.T3_FAKE_CLAUDE_SETTINGS_LOG) {
-  NodeFS.writeFileSync(process.env.T3_FAKE_CLAUDE_SETTINGS_LOG, settingsText);
+if (process.env.MURMUR_FAKE_CLAUDE_SETTINGS_LOG) {
+  NodeFS.writeFileSync(process.env.MURMUR_FAKE_CLAUDE_SETTINGS_LOG, settingsText);
 }
-const cwdMustNotBe = process.env.T3_FAKE_CLAUDE_CWD_MUST_NOT_BE;
+const cwdMustNotBe = process.env.MURMUR_FAKE_CLAUDE_CWD_MUST_NOT_BE;
 if (cwdMustNotBe && NodeFS.realpathSync(process.cwd()) === NodeFS.realpathSync(cwdMustNotBe)) {
   fail("text generation ran in the project directory", 11);
 }
@@ -61,25 +61,25 @@ if (!process.stdin.isTTY) {
   stdinContent = Buffer.concat(chunks).toString("utf8");
 }
 
-const argsMustContain = process.env.T3_FAKE_CLAUDE_ARGS_MUST_CONTAIN;
+const argsMustContain = process.env.MURMUR_FAKE_CLAUDE_ARGS_MUST_CONTAIN;
 if (argsMustContain && !args.includes(argsMustContain)) {
   fail("args missing expected content", 2);
 }
 
-const argsMustNotContain = process.env.T3_FAKE_CLAUDE_ARGS_MUST_NOT_CONTAIN;
+const argsMustNotContain = process.env.MURMUR_FAKE_CLAUDE_ARGS_MUST_NOT_CONTAIN;
 if (argsMustNotContain && args.includes(argsMustNotContain)) {
   fail("args contained forbidden content", 3);
 }
 
-const stdinMustContain = process.env.T3_FAKE_CLAUDE_STDIN_MUST_CONTAIN;
+const stdinMustContain = process.env.MURMUR_FAKE_CLAUDE_STDIN_MUST_CONTAIN;
 if (stdinMustContain && !stdinContent.includes(stdinMustContain)) {
   fail("stdin missing expected content", 4);
 }
 
-const imageRejection = process.env.T3_FAKE_CLAUDE_IMAGE_REJECTION;
+const imageRejection = process.env.MURMUR_FAKE_CLAUDE_IMAGE_REJECTION;
 if (imageRejection && stdinContent.includes('"type":"image"')) {
-  if (process.env.T3_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG) {
-    NodeFS.appendFileSync(process.env.T3_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG, "image\n");
+  if (process.env.MURMUR_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG) {
+    NodeFS.appendFileSync(process.env.MURMUR_FAKE_CLAUDE_IMAGE_ATTEMPT_LOG, "image\n");
   }
   process.stdout.write(
     JSON.stringify({
@@ -93,15 +93,15 @@ if (imageRejection && stdinContent.includes('"type":"image"')) {
   process.exit(1);
 }
 
-const configDirMustBe = process.env.T3_FAKE_CLAUDE_CONFIG_DIR_MUST_BE;
+const configDirMustBe = process.env.MURMUR_FAKE_CLAUDE_CONFIG_DIR_MUST_BE;
 if (configDirMustBe && process.env.CLAUDE_CONFIG_DIR !== configDirMustBe) {
   fail("CLAUDE_CONFIG_DIR was " + (process.env.CLAUDE_CONFIG_DIR ?? ""), 5);
 }
 
-const stderrText = process.env.T3_FAKE_CLAUDE_STDERR;
+const stderrText = process.env.MURMUR_FAKE_CLAUDE_STDERR;
 if (stderrText) {
   process.stderr.write(stderrText + "\n");
 }
 
-process.stdout.write(process.env.T3_FAKE_CLAUDE_OUTPUT ?? "");
-process.exitCode = Number(process.env.T3_FAKE_CLAUDE_EXIT_CODE ?? 0);
+process.stdout.write(process.env.MURMUR_FAKE_CLAUDE_OUTPUT ?? "");
+process.exitCode = Number(process.env.MURMUR_FAKE_CLAUDE_EXIT_CODE ?? 0);

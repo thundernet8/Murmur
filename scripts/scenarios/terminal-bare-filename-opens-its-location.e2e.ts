@@ -4,12 +4,12 @@ import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { runPromise, test, WEB } from "./t3.ts";
 
 // gcc prints a file compiled from its own folder by bare name.
 const DIAGNOSTIC = "main.c:1:25: error: 'missing' undeclared";
-const EDITOR_ARGS = `${T3_HOME}/editor-args.txt`;
+const EDITOR_ARGS = `${MURMUR_HOME}/editor-args.txt`;
 
 /** The file's lines, or none while it does not exist. */
 const readLines = (file: string) =>

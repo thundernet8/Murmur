@@ -209,7 +209,7 @@ describe("webhook route", () => {
     }),
   );
 
-  it.live("trusts no relay headers on an environment not linked to T3 Connect", () =>
+  it.live("trusts no relay headers on an environment not linked to Murmur Connect", () =>
     Effect.gen(function* () {
       const received: Array<WebhookTriggerRequest> = [];
       const { handler, dispose } = handlerFor((request) => {
@@ -245,7 +245,7 @@ describe("webhook route", () => {
     try {
       const response = await handler(
         new Request("http://env.local/api/hooks/id/tok", {
-          headers: { Cookie: "t3_session=session-secret", "x-github-event": "push" },
+          headers: { Cookie: "murmur_session=session-secret", "x-github-event": "push" },
         }),
       );
       expect(response.status).toBe(202);

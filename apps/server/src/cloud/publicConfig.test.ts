@@ -3,18 +3,14 @@ import * as ConfigProvider from "effect/ConfigProvider";
 import * as Effect from "effect/Effect";
 import * as Result from "effect/Result";
 
-import {
-  hostedAppUrlConfig,
-  makeCloudCliOAuthConfig,
-  makeRelayUrlConfig,
-} from "./publicConfig.ts";
+import { hostedAppUrlConfig, makeCloudCliOAuthConfig, makeRelayUrlConfig } from "./publicConfig.ts";
 
 const provideEnv = (env: Readonly<Record<string, string>>) =>
   Effect.provide(ConfigProvider.layer(ConfigProvider.fromEnv({ env })));
 
 it.effect("rejects an insecure runtime relay URL override", () =>
   makeRelayUrlConfig("https://embedded.example.test").pipe(
-    provideEnv({ T3CODE_RELAY_URL: "http://runtime.example.test" }),
+    provideEnv({ MURMUR_RELAY_URL: "http://runtime.example.test" }),
     Effect.flip,
   ),
 );
@@ -24,11 +20,11 @@ it.effect("rejects malformed or insecure hosted app URLs", () =>
     for (const value of [
       "app.t3.codes",
       "http://app.t3.codes",
-      "https://app.t3.codes/nested",
-      "https://app.t3.codes?alias=true",
+      "https://murmur.invalid/nested",
+      "https://murmur.invalid?alias=true",
     ]) {
       const result = yield* hostedAppUrlConfig.pipe(
-        provideEnv({ T3CODE_HOSTED_APP_URL: value }),
+        provideEnv({ MURMUR_HOSTED_APP_URL: value }),
         Effect.result,
       );
       assert.isTrue(Result.isFailure(result), value);

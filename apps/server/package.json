@@ -4,10 +4,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pingdotgg/t3code",
+    "url": "https://github.com/thundernet8/Murmur",
     "directory": "apps/server"
   },
   "bin": {
+    "murmur": "./dist/bin.mjs",
     "t3": "./dist/bin.mjs"
   },
   "files": [

@@ -22,10 +22,10 @@ import { parseGitCloneProgressLine } from "./gitCloneProgress.ts";
 const projectId = ProjectId.make("project-1");
 const startInput = {
   projectId,
-  title: "t3code",
+  title: "murmur",
   createdAt: "2026-01-01T00:00:00.000Z",
-  remoteUrl: "git@github.com:octocat/t3code.git",
-  destinationPath: "/workspace/t3code",
+  remoteUrl: "git@github.com:octocat/murmur.git",
+  destinationPath: "/workspace/murmur",
 };
 
 function makeHarness(options?: {
@@ -90,8 +90,8 @@ describe("ProjectCloneTracker", () => {
       yield* Effect.yieldNow;
 
       const result = yield* tracker.start(startInput, harness.hooks);
-      expect(result.cwd).toBe("/workspace/t3code");
-      expect(harness.created).toEqual([{ projectId, workspaceRoot: "/workspace/t3code" }]);
+      expect(result.cwd).toBe("/workspace/murmur");
+      expect(harness.created).toEqual([{ projectId, workspaceRoot: "/workspace/murmur" }]);
 
       yield* Effect.yieldNow;
       const running = yield* tracker.get(projectId);
@@ -176,7 +176,7 @@ describe("ProjectCloneTracker", () => {
       expect(failed).toMatchObject({ phase: "failed", error: "fatal: repository not found" });
 
       expect(yield* tracker.retry(projectId)).toBe(true);
-      expect(harness.discarded).toEqual(["/workspace/t3code"]);
+      expect(harness.discarded).toEqual(["/workspace/murmur"]);
       yield* Effect.yieldNow;
       expect((yield* tracker.get(projectId))?.phase).toBe("done");
       expect(protocols).toEqual(["ssh", "ssh"]);
@@ -211,7 +211,7 @@ describe("ProjectCloneTracker", () => {
 
       expect(yield* tracker.cancel(projectId)).toBe(true);
       expect((yield* tracker.get(projectId))?.phase).toBe("cancelled");
-      expect(harness.discarded).toEqual(["/workspace/t3code"]);
+      expect(harness.discarded).toEqual(["/workspace/murmur"]);
       expect(yield* tracker.cancel(projectId)).toBe(false);
       expect(yield* tracker.retry(projectId)).toBe(true);
     }).pipe(Effect.provide(harness.layer));
@@ -280,7 +280,7 @@ describe("ProjectCloneTracker", () => {
       yield* Effect.yieldNow;
       yield* tracker.discard(projectId);
       expect(yield* tracker.get(projectId)).toBeNull();
-      expect(harness.discarded).toEqual(["/workspace/t3code"]);
+      expect(harness.discarded).toEqual(["/workspace/murmur"]);
     }).pipe(Effect.provide(harness.layer));
   });
 
@@ -323,7 +323,7 @@ describe("ProjectCloneTracker", () => {
       yield* Effect.yieldNow;
       expect(yield* tracker.get(owner)).toMatchObject({
         projectId: owner,
-        destinationPath: "/workspace/t3code",
+        destinationPath: "/workspace/murmur",
         phase: "done",
       });
       expect(harness.cloned).toEqual([owner]);
@@ -450,7 +450,7 @@ describe("parseGitCloneProgressLine", () => {
       percent: null,
       detail: null,
     });
-    expect(parseGitCloneProgressLine("Cloning into 't3code'...")).toBeNull();
+    expect(parseGitCloneProgressLine("Cloning into 'murmur'...")).toBeNull();
     expect(parseGitCloneProgressLine("fatal: repository not found")).toBeNull();
   });
 });

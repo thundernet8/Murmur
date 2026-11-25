@@ -36,13 +36,13 @@ export const config: VercelConfig = {
     {
       source: "/mobile",
       has: [{ type: "header", key: "user-agent", value: ".*(iPhone|iPad|iPod).*" }],
-      destination: "https://apps.apple.com/us/app/t3-code-remote-claude-more/id6787819824",
+      destination: "https://github.com/thundernet8/Murmur/releases",
       permanent: false,
     },
     {
       source: "/mobile",
       has: [{ type: "header", key: "user-agent", value: ".*Android.*" }],
-      destination: "https://play.google.com/store/apps/details?id=com.t3tools.t3code",
+      destination: "https://github.com/thundernet8/Murmur/releases",
       permanent: false,
     },
     {

@@ -4,7 +4,7 @@ import * as NodePath from "node:path";
 
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 const FILE = "location-proof.ts";
@@ -46,7 +46,7 @@ test(
     const project = await t3.project("demo", { [`src/${FILE}`]: "export {};\n" });
     const script = NodePath.join(project, "location-acp.mjs");
     const gate = NodePath.join(project, "release-edit");
-    const settingsPath = NodePath.join(T3_HOME, "userdata/settings.json");
+    const settingsPath = NodePath.join(MURMUR_HOME, "userdata/settings.json");
     const originalSettings = await NodeFSP.readFile(settingsPath, "utf8");
     const settings = JSON.parse(originalSettings);
     await NodeFSP.writeFile(script, ACP);
@@ -62,7 +62,7 @@ test(
     };
     try {
       await NodeFSP.writeFile(settingsPath, JSON.stringify(settings));
-      const { cli } = makeState(T3_HOME);
+      const { cli } = makeState(MURMUR_HOME);
       // The watcher reloads settings asynchronously. Retry only before a thread was created.
       let threadId: string | undefined;
       for (let attempt = 0; attempt < 8 && threadId === undefined; attempt++) {

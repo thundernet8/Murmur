@@ -142,7 +142,7 @@ private final class T3SocksConnection {
   private let onClose: (T3SocksConnection) -> Void
   private var received: [UInt8] = []
   private var greeted = false
-  private var tunnel: URLSessionWebSocketTask?
+  private var tunnel: T3RelaySocket?
   private var closed = false
   // Plain HTTP only: the page names the stand-in host, the environment's servers expect localhost.
   private var toServer = T3HostSwap(from: T3Loopback.standInHost, to: "localhost")
@@ -232,8 +232,7 @@ private final class T3SocksConnection {
     ]
     guard let url = components.url else { return finish(socksReply(replyFailure)) }
     // The same budget as the access request, so a stalled upgrade refuses the page promptly.
-    let tunnel = URLSession.shared.webSocketTask(with: URLRequest(url: url, timeoutInterval: 15))
-    tunnel.maximumMessageSize = 16 * 1024 * 1024
+    let tunnel = T3RelaySocket(url: url)
     self.tunnel = tunnel
     tunnel.resume()
     // A pong is the first sign the handshake succeeded; until then the page gets no reply.
@@ -275,7 +274,7 @@ private final class T3SocksConnection {
 
   // Each direction asks for the next chunk only after the previous one is written, so a slow
   // side slows the other instead of piling up in memory.
-  private func pumpToTunnel(_ tunnel: URLSessionWebSocketTask) {
+  private func pumpToTunnel(_ tunnel: T3RelaySocket) {
     connection.receive(minimumIncompleteLength: 1, maximumLength: 64 * 1024) {
       [weak self] data, _, isComplete, error in
       guard let self, !closed else { return }
@@ -297,7 +296,7 @@ private final class T3SocksConnection {
     }
   }
 
-  private func pumpFromTunnel(_ tunnel: URLSessionWebSocketTask) {
+  private func pumpFromTunnel(_ tunnel: T3RelaySocket) {
     tunnel.receive { [weak self] result in
       self?.queue.async {
         guard let self, !self.closed else { return }

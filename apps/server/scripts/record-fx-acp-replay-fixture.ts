@@ -1,6 +1,6 @@
 /**
  * Records an fx ACP replay transcript through the real orchestrator and FxAdapterV2.
- * Run from apps/server with fx on PATH (or T3_FX_BIN), signed in under HOME:
+ * Run from apps/server with fx on PATH (or MURMUR_FX_BIN), signed in under HOME:
  *   node scripts/record-fx-acp-replay-fixture.ts --scenario simple
  * fx 0.0.14+ saves each recorded mode as the default in ~/.fx/settings.json; restore it after.
  */
@@ -41,7 +41,7 @@ const encodeJson = Schema.encodeSync(Schema.fromJsonString(Schema.Unknown));
 const decodeJson = Schema.decodeUnknownSync(Schema.fromJsonString(Schema.Unknown));
 const HOME_PLACEHOLDER = "/home/fx-replay";
 const FX_INSTANCE_ID = ProviderInstanceId.make("fx");
-const T3_INSTRUCTIONS_BODY = /<t3_code_instructions>\n[\s\S]*?\n<\/t3_code_instructions>/u;
+const MURMUR_INSTRUCTIONS_BODY = /<t3_code_instructions>\n[\s\S]*?\n<\/t3_code_instructions>/u;
 const EMAIL = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/giu;
 const TOKEN = /\b(?:sk-|gho_|ghp_|xai-|vercel_)[A-Za-z0-9_-]{8,}\b/gu;
 
@@ -213,7 +213,7 @@ function normalizeOutboundFrame(frame: Record<string, unknown>, runtimeInstructi
               ? {
                   ...part,
                   text: part.text.replace(
-                    T3_INSTRUCTIONS_BODY,
+                    MURMUR_INSTRUCTIONS_BODY,
                     "<t3_code_instructions>\n<any>\n</t3_code_instructions>",
                   ),
                 }
@@ -326,7 +326,10 @@ function normalizeEntries(input: {
 const DEFAULT_FX_SETTINGS = Schema.decodeSync(FxSettings)({});
 
 const RecorderEnv = Config.all({
-  T3_FX_BIN: Config.String("T3_FX_BIN").pipe(Config.option, Config.map(Option.getOrUndefined)),
+  MURMUR_FX_BIN: Config.String("MURMUR_FX_BIN").pipe(
+    Config.option,
+    Config.map(Option.getOrUndefined),
+  ),
   HOME: Config.String("HOME").pipe(Config.option, Config.map(Option.getOrUndefined)),
   USER: Config.String("USER").pipe(Config.option, Config.map(Option.getOrUndefined)),
   AI_GATEWAY_API_KEY: Config.String("AI_GATEWAY_API_KEY").pipe(
@@ -374,7 +377,7 @@ const recordScenario = Effect.fn("recordFxScenario")(function* (fixtureName: str
   };
 
   const tee = makeWireTee();
-  const settings = { ...DEFAULT_FX_SETTINGS, binaryPath: recorderEnv.T3_FX_BIN ?? "fx" };
+  const settings = { ...DEFAULT_FX_SETTINGS, binaryPath: recorderEnv.MURMUR_FX_BIN ?? "fx" };
   const layerRegistry = ProviderAdapterRegistry.layerFromAdaptersEffect(
     Effect.gen(function* () {
       const environment = yield* HostProcess.Environment;

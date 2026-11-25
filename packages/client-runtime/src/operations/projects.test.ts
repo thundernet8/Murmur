@@ -49,11 +49,11 @@ describe("add project shared logic", () => {
     );
 
     for (const input of [
-      "pingdotgg/t3code",
+      "pingdotgg/murmur",
       "mona-cat_octo/repo",
       "pingdotgg",
-      "https://github.com/pingdotgg/t3code.git",
-      "git@github.com:pingdotgg/t3code.git",
+      "https://github.com/pingdotgg/murmur.git",
+      "git@github.com:pingdotgg/murmur.git",
     ]) {
       expect(githubIncompleteOwnerRepositoryMessage(github, input)).toBeNull();
     }
@@ -70,8 +70,8 @@ describe("add project shared logic", () => {
     expect(normalizePastedCloneUrl("imputnet/helium")).toBe(
       "https://github.com/imputnet/helium.git",
     );
-    expect(normalizePastedCloneUrl("  pingdotgg/t3code  ")).toBe(
-      "https://github.com/pingdotgg/t3code.git",
+    expect(normalizePastedCloneUrl("  pingdotgg/murmur  ")).toBe(
+      "https://github.com/pingdotgg/murmur.git",
     );
   });
 
@@ -97,12 +97,12 @@ describe("add project shared logic", () => {
 
   it("clones the repository when given a page URL copied from the browser", () => {
     for (const [pageUrl, pageRoute, repository] of [
-      ["https://github.com/pingdotgg/t3code/tree/main", "/tree/", "t3code"],
+      ["https://github.com/pingdotgg/murmur/tree/main", "/tree/", "murmur"],
       ["https://gitlab.com/gitlab-org/gitlab-runner/-/tree/main", "/-/", "gitlab-runner"],
-      ["https://git.cafe/pingdotgg/t3code/tree/main", "/tree/", "t3code"],
+      ["https://git.cafe/pingdotgg/t3code/tree/main", "/tree/", "murmur"],
       ["https://gitlab.example.test/g/p/-/blob/main/src/branch/x", "/-/", "p"],
       ["https://code.company.test/g/p/-/tree/main", "/-/", "p"],
-      ["https://github.com/pingdotgg/t3code/tree/release.git", "/tree/", "t3code"],
+      ["https://github.com/pingdotgg/murmur/tree/release.git", "/tree/", "murmur"],
     ] as const) {
       const cloneUrl = normalizePastedCloneUrl(pageUrl);
       expect(cloneUrl).not.toContain(pageRoute);

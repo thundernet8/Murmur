@@ -4,7 +4,7 @@ import * as NodePath from "node:path";
 
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
 const CHOSEN_MODEL = "anthropic/claude-sonnet-4";
@@ -20,8 +20,8 @@ test(
   WEB,
   async ({ t3, app, screen, browser }) => {
     const project = await t3.project("demo");
-    const fakePi = NodePath.join(T3_HOME, "bin/fake-pi");
-    const settingsPath = NodePath.join(T3_HOME, "userdata/settings.json");
+    const fakePi = NodePath.join(MURMUR_HOME, "bin/fake-pi");
+    const settingsPath = NodePath.join(MURMUR_HOME, "userdata/settings.json");
     const originalSettings = await NodeFSP.readFile(settingsPath, "utf8");
     const settings = JSON.parse(originalSettings);
     try {
@@ -44,7 +44,7 @@ test(
 
       await screen.getByRole("textbox").fill("Which model is this?");
       await screen.getByRole("textbox").press("Enter");
-      const { cli } = makeState(T3_HOME);
+      const { cli } = makeState(MURMUR_HOME);
       await expect
         .poll(
           async () => {

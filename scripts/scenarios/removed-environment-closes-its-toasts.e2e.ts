@@ -1,6 +1,6 @@
 import { expect } from "e2e";
 
-import { T3_HOME } from "../e2e.config.ts";
+import { MURMUR_HOME } from "../e2e.config.ts";
 import { SECOND_HOME, startSecondServer } from "./second-server.ts";
 import { makeState, runPromise, test, WEB } from "./t3.ts";
 
@@ -14,7 +14,7 @@ test(
       title: "Finished here",
       messages: ["first"],
     });
-    const primary = makeState(T3_HOME);
+    const primary = makeState(MURMUR_HOME);
     const second = makeState(SECOND_HOME);
     const server = startSecondServer(app.baseUrl ?? "");
     try {

@@ -290,7 +290,7 @@ describe("deriveMessagesTimelineRows", () => {
       toolSource: { key: "mcp:node_repl", name: "node repl", kind: "integration" as const },
       input: {
         title: "Restrict the breakpoint to Git actions",
-        code: "await sky.type_text({app:'T3 Code (Nightly)',text:'debug(ga.run)'});",
+        code: "await sky.type_text({app:'Murmur (Nightly)',text:'debug(ga.run)'});",
       },
     };
     const entries = deriveTimelineEntriesFromVisibleTurnItems({
@@ -5231,8 +5231,8 @@ describe("workEntryReadOutput", () => {
     expect(
       workEntryReadOutput(
         { changedFiles: ["src/app.ts", "~/.claude/CLAUDE.md", "~\\.gitconfig"] },
-        "/workspace/t3code",
+        "/workspace/murmur",
       ),
-    ).toBe("/workspace/t3code/src/app.ts\n~/.claude/CLAUDE.md\n~/.gitconfig");
+    ).toBe("/workspace/murmur/src/app.ts\n~/.claude/CLAUDE.md\n~/.gitconfig");
   });
 });
