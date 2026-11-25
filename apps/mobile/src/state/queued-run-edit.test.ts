@@ -3,7 +3,7 @@ import { Atom } from "effect/reactivity";
 import {
   ATTACHMENT_ONLY_BOOTSTRAP_PROMPT,
   restoreAttachmentOnlyBootstrapPrompt,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 import {
   ChatAttachmentId,
   ComposerContextId,
@@ -14,7 +14,7 @@ import {
   RunId,
   type ChatAttachment,
   type OrchestrationMessageContext,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import { selectThreadModel } from "./thread-model-selection";
 import { scopedThreadKey } from "../lib/scopedEntities";

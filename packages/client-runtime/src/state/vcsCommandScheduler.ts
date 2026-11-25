@@ -1,4 +1,4 @@
-import type { EnvironmentId } from "@t3tools/contracts";
+import type { EnvironmentId } from "@murmur/contracts";
 
 import { createAtomCommandScheduler, type AtomCommandConcurrency } from "./runtime.ts";
 

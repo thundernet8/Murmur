@@ -7,9 +7,9 @@ import {
   type ClientConnectionMethod,
   EnvironmentId,
   type ExecutionEnvironmentDescriptor,
-} from "@t3tools/contracts";
-import { RelayEnvironmentConnectScope } from "@t3tools/contracts/relay";
-import * as KeyedLock from "@t3tools/shared/KeyedLock";
+} from "@murmur/contracts";
+import { RelayEnvironmentConnectScope } from "@murmur/contracts/relay";
+import * as KeyedLock from "@murmur/shared/KeyedLock";
 import {
   exchangeRemoteDpopAccessToken,
   type RemoteEnvironmentAuthError,
@@ -125,7 +125,7 @@ export class RemoteEnvironmentAuthorization extends Context.Service<
       readonly directConnection?: DirectDpopConnection;
     }) => Effect.Effect<void, ConnectionAttemptError>;
   }
->()("@t3tools/client-runtime/authorization/service/RemoteEnvironmentAuthorization") {}
+>()("@murmur/client-runtime/authorization/service/RemoteEnvironmentAuthorization") {}
 
 const CACHED_ENDPOINT_SOCKET_TIMEOUT_MS = 3_000;
 const DPOP_AUTHORIZATION_TIMEOUT_MS = 30_000;

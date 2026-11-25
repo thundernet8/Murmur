@@ -1,5 +1,5 @@
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { writeFileStringAtomically } from "@t3tools/shared/atomicWrite";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { writeFileStringAtomically } from "@murmur/shared/atomicWrite";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

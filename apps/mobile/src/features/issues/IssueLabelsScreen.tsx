@@ -6,9 +6,9 @@ import {
   issuePicksFor,
   issueWriteAfterPicks,
   noIssuePicks,
-} from "@t3tools/client-runtime/issue-selection";
-import { isSelected, toggleSelection } from "@t3tools/client-runtime/pull-request-selection";
-import type { IssueLabelCandidate } from "@t3tools/contracts";
+} from "@murmur/client-runtime/issue-selection";
+import { isSelected, toggleSelection } from "@murmur/client-runtime/pull-request-selection";
+import type { IssueLabelCandidate } from "@murmur/contracts";
 import { msg, useGT } from "gt-react-native";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@t3tools/secret-provider-onepassword",
+  "name": "@murmur/secret-provider-onepassword",
   "private": true,
   "type": "module",
   "exports": {
@@ -17,10 +17,10 @@
     "test": "vp test run --config ../../vite.config.ts --dir ."
   },
   "dependencies": {
-    "@t3tools/contracts": "workspace:*",
-    "@t3tools/provider-core": "workspace:*",
-    "@t3tools/secret-provider-core": "workspace:*",
-    "@t3tools/shared": "workspace:*",
+    "@murmur/contracts": "workspace:*",
+    "@murmur/provider-core": "workspace:*",
+    "@murmur/secret-provider-core": "workspace:*",
+    "@murmur/shared": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

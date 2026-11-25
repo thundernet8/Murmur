@@ -8,10 +8,10 @@ import {
   isPrivateNetworkHost,
   isSharedAddressSpaceHost,
   isWildcardHost,
-} from "@t3tools/shared/hostClassification";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { QrCode } from "@t3tools/shared/qrCode";
-import { buildPairingAppLink } from "@t3tools/shared/remote";
+} from "@murmur/shared/hostClassification";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { QrCode } from "@murmur/shared/qrCode";
+import { buildPairingAppLink } from "@murmur/shared/remote";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";
 import { HttpServer } from "effect/http";

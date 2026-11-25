@@ -1,9 +1,9 @@
-import type { RepositoryIdentity, SourceControlProviderError } from "@t3tools/contracts";
-import { parseGitRemoteHost } from "@t3tools/source-control-core/shared/definition";
-import { repositoryPathFromRemoteUrl } from "@t3tools/source-control-core/server/SourceControlProvider";
-import { withoutRemoteUrlCredentials } from "@t3tools/shared/cloneUrl";
-import { canonicalRepositoryPath, normalizeGitRemoteUrl } from "@t3tools/shared/git";
-import { isSshRemoteUrl } from "@t3tools/shared/sourceControl";
+import type { RepositoryIdentity, SourceControlProviderError } from "@murmur/contracts";
+import { parseGitRemoteHost } from "@murmur/source-control-core/shared/definition";
+import { repositoryPathFromRemoteUrl } from "@murmur/source-control-core/server/SourceControlProvider";
+import { withoutRemoteUrlCredentials } from "@murmur/shared/cloneUrl";
+import { canonicalRepositoryPath, normalizeGitRemoteUrl } from "@murmur/shared/git";
+import { isSshRemoteUrl } from "@murmur/shared/sourceControl";
 import * as Cache from "effect/Cache";
 import * as Context from "effect/Context";
 import * as Data from "effect/Data";
@@ -17,7 +17,7 @@ import * as Path from "effect/Path";
 import * as ProcessRunner from "../processRunner.ts";
 import { sourceControlDefinitions } from "../sourceControl/sourceControlDefinitions.ts";
 import { explicitBareRepositoryEnv, unsetInheritedRepositoryEnv } from "../vcs/VcsProcess.ts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 
 const DEFAULT_REPOSITORY_IDENTITY_CACHE_CAPACITY = 512;
 // Minute-by-minute sweeps need cached hits; clone, publish and PR discovery force refresh.

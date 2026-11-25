@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vite-plus/test";
-import { ComposerContextId, EnvironmentId, ThreadId } from "@t3tools/contracts";
+import { ComposerContextId, EnvironmentId, ThreadId } from "@murmur/contracts";
 import type { FilePreviewItem } from "../components/ui/FilePreviewModal.types";
 import type { DraftComposerAttachment } from "./composerImages";
 import { composerImageGallery } from "./composerImageGallery";

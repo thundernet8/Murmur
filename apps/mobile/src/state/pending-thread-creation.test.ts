@@ -6,8 +6,8 @@ import {
   ProviderInstanceId,
   RunId,
   ThreadId,
-} from "@t3tools/contracts";
-import { isThreadWorking } from "@t3tools/client-runtime/state/thread-inbox";
+} from "@murmur/contracts";
+import { isThreadWorking } from "@murmur/client-runtime/state/thread-inbox";
 import { describe, expect, it } from "vite-plus/test";
 
 import {

@@ -4,12 +4,12 @@ import { AppText } from "./ui/AppText";
 import { Image } from "expo-image";
 import { memo, useLayoutEffect, useMemo, useState } from "react";
 import { View } from "react-native";
-import type { EnvironmentId, ProjectIconOverride } from "@t3tools/contracts";
+import type { EnvironmentId, ProjectIconOverride } from "@murmur/contracts";
 import {
   getProjectFaviconCacheKey,
   getProjectFaviconResourceKey,
   isProjectFaviconFallbackUrl,
-} from "@t3tools/shared/projectFavicon";
+} from "@murmur/shared/projectFavicon";
 import { useAtomValue } from "@effect/atom-react";
 import { Atom } from "effect/reactivity";
 import { useAppearancePreferences } from "../features/settings/appearance/AppearancePreferencesProvider";

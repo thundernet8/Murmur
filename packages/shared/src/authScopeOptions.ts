@@ -17,7 +17,7 @@ import {
   AuthSourceControlWriteScope,
   AuthTerminalOperateScope,
   AuthTerminalReadScope,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { mFallback, msg } from "gt-i18n";
 import type { MFunctionType } from "gt-i18n/types";
 

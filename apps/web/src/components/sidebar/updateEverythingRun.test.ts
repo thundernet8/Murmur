@@ -1,5 +1,5 @@
-import { AVAILABLE_CONNECTION_STATE } from "@t3tools/client-runtime/connection";
-import { EnvironmentId, type ServerConfig, type ServerSelfUpdateOutcome } from "@t3tools/contracts";
+import { AVAILABLE_CONNECTION_STATE } from "@murmur/client-runtime/connection";
+import { EnvironmentId, type ServerConfig, type ServerSelfUpdateOutcome } from "@murmur/contracts";
 import * as Effect from "effect/Effect";
 import { AsyncResult, Atom } from "effect/reactivity";
 import { afterEach, describe, expect, it, vi } from "vite-plus/test";

@@ -4,8 +4,8 @@ import {
   ProviderInstanceId,
   type OrchestrationV2ProviderCapabilities,
   type ProviderSetupError,
-} from "@t3tools/contracts";
-import type { SelfInvocation } from "@t3tools/shared/nodeRuntime";
+} from "@murmur/contracts";
+import type { SelfInvocation } from "@murmur/shared/nodeRuntime";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -15,10 +15,10 @@ import * as Semaphore from "effect/Semaphore";
 import * as Scope from "effect/Scope";
 import * as EffectAcpErrors from "effect-acp/errors";
 
-import * as ProviderHost from "@t3tools/provider-core/server/ProviderHost";
-import { PULL_REQUEST_LINKING_INSTRUCTIONS } from "@t3tools/provider-core/server/runtimeInstructions";
+import * as ProviderHost from "@murmur/provider-core/server/ProviderHost";
+import { PULL_REQUEST_LINKING_INSTRUCTIONS } from "@murmur/provider-core/server/runtimeInstructions";
 import type { AntigravityAuth } from "../../provider/AntigravityAuth.ts";
-import type * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
+import type * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
 import {
   antigravityAppendsSystemPrompt,
   antigravityPermissionDisposition,
@@ -56,7 +56,7 @@ import {
   makeAcpAdapterV2,
   type AcpAdapterV2Flavor,
   type AcpAdapterV2RuntimeInput,
-} from "@t3tools/provider-acp/server/adapter";
+} from "@murmur/provider-acp/server/adapter";
 
 const ANTIGRAVITY_PROVIDER = ProviderDriverKind.make("antigravity");
 

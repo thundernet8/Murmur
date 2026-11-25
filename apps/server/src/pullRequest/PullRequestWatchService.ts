@@ -5,7 +5,7 @@ import {
   type PullRequestChecksState,
   type PullRequestUnavailableError,
   type PullRequestWatchUntil,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";

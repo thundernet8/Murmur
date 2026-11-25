@@ -66,13 +66,13 @@ import {
   latestProviderTurnForAttempt,
   resolveProjectProviderInstanceEnabled,
   SECRET_REQUEST_UNSAVED_NOTE,
-} from "@t3tools/contracts";
-import { getProviderOptionCurrentValue, withLegacyUltracodeEffort } from "@t3tools/shared/model";
-import { backgroundWorkHoldsCompletion } from "@t3tools/shared/orchestrationV2PendingBackgroundWork";
-import { runRanAfter } from "@t3tools/shared/orchestrationV2ThreadError";
-import { resolveProjectSettings } from "@t3tools/shared/projectSettings";
-import { formatThreadLink } from "@t3tools/shared/threadLinks";
-import { threadPullRequestUpdatedAtMs } from "@t3tools/shared/threadPullRequests";
+} from "@murmur/contracts";
+import { getProviderOptionCurrentValue, withLegacyUltracodeEffort } from "@murmur/shared/model";
+import { backgroundWorkHoldsCompletion } from "@murmur/shared/orchestrationV2PendingBackgroundWork";
+import { runRanAfter } from "@murmur/shared/orchestrationV2ThreadError";
+import { resolveProjectSettings } from "@murmur/shared/projectSettings";
+import { formatThreadLink } from "@murmur/shared/threadLinks";
+import { threadPullRequestUpdatedAtMs } from "@murmur/shared/threadPullRequests";
 import {
   normalizeThreadPullRequestKey,
   visibleThreadPullRequests,
@@ -97,7 +97,7 @@ import {
   subagentStopNotice,
   delegatedTaskProgress,
   delegatedTaskReportRuns,
-} from "@t3tools/provider-core/server/subagentProjection";
+} from "@murmur/provider-core/server/subagentProjection";
 import {
   DispatchModeLimit,
   type DispatchModeRefusal,

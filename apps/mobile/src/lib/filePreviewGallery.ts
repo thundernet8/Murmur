@@ -1,4 +1,4 @@
-import type { EnvironmentId } from "@t3tools/contracts";
+import type { EnvironmentId } from "@murmur/contracts";
 import type { FilePreviewItem, FilePreviewSource } from "../components/ui/FilePreviewModal.types";
 
 export function remoteAttachmentImageSource(

@@ -1,19 +1,19 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import * as Dialog from "./ui/Dialog";
-import { ComposerContextId } from "@t3tools/contracts";
+import { ComposerContextId } from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { AsyncResult } from "effect/reactivity";
-import { settlePromise, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
+import { settlePromise, squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
 import { T, useGT } from "gt-react-native";
 import { useEffect, useState } from "react";
-import type { EnvironmentId } from "@t3tools/contracts";
-import { encodeComposerContextFragment } from "@t3tools/shared/composerContextClipboard";
-import { collectComposerContextReferences } from "@t3tools/shared/composerContextReferences";
+import type { EnvironmentId } from "@murmur/contracts";
+import { encodeComposerContextFragment } from "@murmur/shared/composerContextClipboard";
+import { collectComposerContextReferences } from "@murmur/shared/composerContextReferences";
 import {
   collectAssistantCitations,
   serializeAssistantCitation,
   withAssistantCitationComment,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 import { AssistantCitationSheet } from "./AssistantCitationSheet";
 import { ComposerEditor as NativeComposerEditor } from "../native/T3ComposerEditor";
 import type { ComposerEditorProps as NativeComposerEditorProps } from "../native/T3ComposerEditor";

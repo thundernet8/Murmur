@@ -1,6 +1,6 @@
-import { findThreadSearchOccurrences } from "@t3tools/shared/threadSearch";
+import { findThreadSearchOccurrences } from "@murmur/shared/threadSearch";
 import { useEffect, useEffectEvent, useRef } from "react";
-import { THREAD_FIND_BLOCK_TAGS } from "@t3tools/shared/threadFindBlockTags";
+import { THREAD_FIND_BLOCK_TAGS } from "@murmur/shared/threadFindBlockTags";
 
 import { observeResize } from "~/lib/observeResize";
 

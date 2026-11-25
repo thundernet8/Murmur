@@ -1,4 +1,4 @@
-import type { EnvironmentId, SecretProviderConfig, SecretProviderId } from "@t3tools/contracts";
+import type { EnvironmentId, SecretProviderConfig, SecretProviderId } from "@murmur/contracts";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { T, useGT, useMessages, Var } from "gt-react";

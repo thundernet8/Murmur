@@ -1,6 +1,6 @@
-import type { ProviderInstanceEnvironment } from "@t3tools/contracts";
-import { stripAppImageRuntimeEnv } from "@t3tools/shared/appImageRuntimeEnv";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import type { ProviderInstanceEnvironment } from "@murmur/contracts";
+import { stripAppImageRuntimeEnv } from "@murmur/shared/appImageRuntimeEnv";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Effect from "effect/Effect";
 
 import { expandHomeVariable } from "./pathExpansion.ts";

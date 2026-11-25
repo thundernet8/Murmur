@@ -5,8 +5,8 @@ import {
   RelayConnectionTarget,
   SshConnectionProfile,
   SshConnectionTarget,
-} from "@t3tools/client-runtime/connection";
-import { buildRemoteOpenUrl, EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/connection";
+import { buildRemoteOpenUrl, EnvironmentId } from "@murmur/contracts";
 import * as Option from "effect/Option";
 import { describe, expect, it } from "vite-plus/test";
 

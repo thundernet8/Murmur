@@ -1,10 +1,5 @@
-import type { IssueCandidatesTarget } from "@t3tools/client-runtime/state/issues";
-import type {
-  EnvironmentId,
-  IssueInvolvement,
-  IssueListState,
-  ProjectId,
-} from "@t3tools/contracts";
+import type { IssueCandidatesTarget } from "@murmur/client-runtime/state/issues";
+import type { EnvironmentId, IssueInvolvement, IssueListState, ProjectId } from "@murmur/contracts";
 import { FolderGit2Icon, LayersIcon, ListFilterIcon, TagIcon, UserIcon } from "lucide-react";
 import { T, useGT } from "gt-react";
 import { useState } from "react";

@@ -1,7 +1,7 @@
 // `test` for iOS scenarios: e2e's mobile test plus `t3`, which seeds state like the web one and
 // opens the dev client paired with the scenario's server.
 import { test as base } from "@e2e-dev/mobile";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as Path from "effect/Path";

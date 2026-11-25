@@ -5,9 +5,9 @@ import {
   ProviderDriverKind,
   type ProviderInstanceId,
   type ServerProviderModel,
-} from "@t3tools/contracts";
-import { isReasoningControl } from "@t3tools/client-runtime/model-traits";
-import { type CustomModelDefinition, normalizeCustomModelSlug } from "@t3tools/shared/model";
+} from "@murmur/contracts";
+import { isReasoningControl } from "@murmur/client-runtime/model-traits";
+import { type CustomModelDefinition, normalizeCustomModelSlug } from "@murmur/shared/model";
 
 import { useStableCallback } from "../../hooks/useStableCallback";
 import type { MessageResolver } from "../../i18n/messages";

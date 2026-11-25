@@ -1,4 +1,4 @@
-import { resolveProviderProbeTimeoutMs } from "@t3tools/provider-core/server/snapshotProbe";
+import { resolveProviderProbeTimeoutMs } from "@murmur/provider-core/server/snapshotProbe";
 import {
   ANTIGRAVITY_DEFAULT_MODEL,
   ProviderDriverKind,
@@ -9,8 +9,8 @@ import {
   type ServerProviderModel,
   type ServerProviderSlashCommand,
   type ServerProviderUsageLimits,
-} from "@t3tools/contracts";
-import { createModelCapabilities } from "@t3tools/shared/model";
+} from "@murmur/contracts";
+import { createModelCapabilities } from "@murmur/shared/model";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";
@@ -24,23 +24,23 @@ import * as SubscriptionRef from "effect/SubscriptionRef";
 import type * as EffectAcpErrors from "effect-acp/errors";
 import type * as EffectAcpSchema from "effect-acp/compat";
 
-import type * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
-import { parseSessionModeState } from "@t3tools/provider-acp/server/runtimeModel";
-import { acpProviderOptionDescriptors } from "@t3tools/provider-acp/server/sessionConfig";
+import type * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
+import { parseSessionModeState } from "@murmur/provider-acp/server/runtimeModel";
+import { acpProviderOptionDescriptors } from "@murmur/provider-acp/server/sessionConfig";
 import {
   DeferringFailedCheck,
   makeManagedServerProvider,
-} from "@t3tools/provider-core/server/managedProvider";
+} from "@murmur/provider-core/server/managedProvider";
 import {
   makeManualOnlyProviderMaintenanceCapabilities,
   type ProviderMaintenanceCapabilities,
-} from "@t3tools/provider-core/server/maintenanceResolver";
+} from "@murmur/provider-core/server/maintenanceResolver";
 import {
   buildServerProvider,
   isCommandMissingCause,
   type ServerProviderDraft,
-} from "@t3tools/provider-core/server/snapshotProbe";
-import { resolveUsageLimitsAfterProbe } from "@t3tools/provider-core/server/usageLimits";
+} from "@murmur/provider-core/server/snapshotProbe";
+import { resolveUsageLimitsAfterProbe } from "@murmur/provider-core/server/usageLimits";
 
 import { antigravityThinkingConfig } from "./acp/AntigravityAcpSupport.ts";
 

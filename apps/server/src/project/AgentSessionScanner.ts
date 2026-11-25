@@ -14,7 +14,7 @@ import {
   type AgentSessionProjectGit,
   type AgentSessionScanResult,
   type ProviderInstanceConfig,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";
@@ -29,20 +29,20 @@ import * as Schema from "effect/Schema";
 import * as Semaphore from "effect/Semaphore";
 import * as Stream from "effect/Stream";
 
-import { splitsSurrogatePair } from "@t3tools/shared/assistantCitations";
-import { isBareGitConfig, parseOriginUrlFromGitConfig } from "@t3tools/shared/git";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { normalizeProjectPathForComparison } from "@t3tools/shared/path";
-import { repositoryPathFromRemoteUrl } from "@t3tools/source-control-core/server/SourceControlProvider";
+import { splitsSurrogatePair } from "@murmur/shared/assistantCitations";
+import { isBareGitConfig, parseOriginUrlFromGitConfig } from "@murmur/shared/git";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { normalizeProjectPathForComparison } from "@murmur/shared/path";
+import { repositoryPathFromRemoteUrl } from "@murmur/source-control-core/server/SourceControlProvider";
 
 import * as ServerConfig from "../config.ts";
 import * as ProcessRunner from "../processRunner.ts";
 import * as ProjectStore from "../orchestration-v2/ProjectStore.ts";
 import * as ProviderSessionRuntime from "../persistence/ProviderSessionRuntime.ts";
 import { resolveCodexHomeLayout } from "../provider/Drivers/CodexHomeLayout.ts";
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
-import { piHome, resolvePiSessionsDir } from "@t3tools/provider-pi/server/usage";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
+import { piHome, resolvePiSessionsDir } from "@murmur/provider-pi/server/usage";
 import * as ServerSettings from "../serverSettings.ts";
 import { sourceControlDefinitions } from "../sourceControl/sourceControlDefinitions.ts";
 import {

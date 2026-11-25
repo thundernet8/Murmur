@@ -2,8 +2,8 @@ import {
   type EnvironmentId,
   MURMUR_PROJECT_FILE_NAME,
   type T3ProjectFile,
-} from "@t3tools/contracts";
-import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
+} from "@murmur/contracts";
+import { parseT3ProjectFile } from "@murmur/shared/t3ProjectFile";
 import { useAtomValue } from "@effect/atom-react";
 import { AsyncResult, Atom } from "effect/reactivity";
 import { useMessages } from "gt-react";

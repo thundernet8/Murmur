@@ -3,7 +3,7 @@ import {
   ServerPrepareTriageError,
   type ServerPrepareTriageInput,
   type ServerPrepareTriageResult,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -48,7 +48,7 @@ const describeClient = (client: AuthClientPresentationMetadata) =>
     .filter((part) => part !== undefined)
     .join(" ");
 
-/** Picks the release tag for `version`, or `main` when the build has no tag. */
+/** Picks the release tag for `version`, or `master` when the build has no tag. */
 export const pickSourceRef = (lsRemoteOutput: string, version: string) => {
   const commits = new Map(
     lsRemoteOutput
@@ -61,8 +61,8 @@ export const pickSourceRef = (lsRemoteOutput: string, version: string) => {
   // Annotated tags list the tag object first and the commit as `^{}`.
   const tagCommit = commits.get(`refs/tags/${tag}^{}`) ?? commits.get(`refs/tags/${tag}`);
   if (tagCommit !== undefined) return { ref: tag, commit: tagCommit };
-  const mainCommit = commits.get("refs/heads/main");
-  return mainCommit === undefined ? undefined : { ref: "main", commit: mainCommit };
+  const defaultCommit = commits.get("refs/heads/master");
+  return defaultCommit === undefined ? undefined : { ref: "master", commit: defaultCommit };
 };
 
 const make = Effect.gen(function* () {
@@ -87,7 +87,7 @@ const make = Effect.gen(function* () {
   yield* fs.remove(stagingDir, { recursive: true }).pipe(Effect.ignore);
 
   // Fetches the exact commit `ls-remote` resolved, so the folder the session
-  // names is the one that appears even when main moves meanwhile.
+  // names is the one that appears even when master moves meanwhile.
   const cloneSource = Effect.fn("TriageService.cloneSource")(function* (commit: string) {
     yield* fs.makeDirectory(stagingDir, { recursive: true });
     const staging = yield* fs.makeTempDirectory({ directory: stagingDir, prefix: "clone-" });
@@ -122,7 +122,7 @@ const make = Effect.gen(function* () {
   });
 
   // Release tags never move, so one lookup serves every later session. Builds
-  // with no tag track main, which does move, so they look it up each time.
+  // with no tag track master, which does move, so they look it up each time.
   let releaseSource: { readonly ref: string; readonly commit: string } | undefined;
   const resolveSource = Effect.fn("TriageService.resolveSource")(function* () {
     if (releaseSource !== undefined) return releaseSource;
@@ -130,12 +130,12 @@ const make = Effect.gen(function* () {
     const listed = yield* runGit(
       "resolveSourceRef",
       sourceDir,
-      ["ls-remote", MURMUR_REPOSITORY_URL, tag, `${tag}^{}`, "refs/heads/main"],
+      ["ls-remote", MURMUR_REPOSITORY_URL, tag, `${tag}^{}`, "refs/heads/master"],
       // Triage still starts without source; a dead network should not stall it.
       5_000,
     );
     const source = pickSourceRef(listed.stdout, serverVersion);
-    if (source?.ref !== "main") releaseSource = source;
+    if (source?.ref !== "master") releaseSource = source;
     return source;
   });
 
@@ -152,7 +152,7 @@ const make = Effect.gen(function* () {
       return {
         _tag: "failed",
         serverVersion,
-        reason: "the repository listed neither the release tag nor main.",
+        reason: "the repository listed neither the release tag nor master.",
       } satisfies TriageSourceClone;
     }
     const directory = path.join(sourceDir, source.commit);

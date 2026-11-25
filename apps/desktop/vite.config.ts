@@ -161,7 +161,7 @@ export default defineConfig({
       entry: ["src/preview-pick-preload.ts"],
       plugins: [pageWorldFunction()],
       deps: {
-        alwaysBundle: (id) => id === "@t3tools/shared/keybindingMatching",
+        alwaysBundle: (id) => id === "@murmur/shared/keybindingMatching",
       },
     },
     {

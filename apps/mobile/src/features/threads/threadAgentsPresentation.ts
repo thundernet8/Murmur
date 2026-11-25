@@ -1,24 +1,24 @@
-import { resolveLinkedThreadOpen } from "@t3tools/client-runtime/linked-thread";
+import { resolveLinkedThreadOpen } from "@murmur/client-runtime/linked-thread";
 import {
   formatSubagentDisplayTitle,
   resolveSubagentMetadata,
   subagentCardDetail,
   subagentDetailPreview,
-} from "@t3tools/client-runtime/state/subagent-display";
+} from "@murmur/client-runtime/state/subagent-display";
 import {
   isActiveSubagentStatus,
   promptTitle,
   type RuntimeSubagent,
   type SubagentWorkflowGroup,
-} from "@t3tools/client-runtime/state/subagentRuntime";
-import { REASONING_EFFORT_OPTION_IDS } from "@t3tools/client-runtime/state/thread-execution";
+} from "@murmur/client-runtime/state/subagentRuntime";
+import { REASONING_EFFORT_OPTION_IDS } from "@murmur/client-runtime/state/thread-execution";
 import type {
   EnvironmentId,
   OrchestrationV2Subagent,
   ServerProvider,
   ThreadId,
-} from "@t3tools/contracts";
-import { resolveSelectableModel } from "@t3tools/shared/model";
+} from "@murmur/contracts";
+import { resolveSelectableModel } from "@murmur/shared/model";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";

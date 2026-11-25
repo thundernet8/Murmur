@@ -1,16 +1,16 @@
 import { CollapsibleUserMessageBody } from "./CollapsibleUserMessageBody";
 import { msg, T, useGT, useLocale, useMessages } from "gt-react-native";
 import { m } from "../../i18n/messages";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
-import { toServerClock } from "@t3tools/client-runtime/clock";
-import { formatDuration } from "@t3tools/shared/orchestrationTimingCopy";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
+import { toServerClock } from "@murmur/client-runtime/clock";
+import { formatDuration } from "@murmur/shared/orchestrationTimingCopy";
 import { Sheet } from "../../components/ui/Sheet";
 import { ListActionRow } from "../../components/ui/ListActionRow";
 import { ListSection } from "../../components/ui/ListSection";
 import { collectMobileAssistantTextSelectors } from "../../lib/assistantCitationSelection";
 import { Button } from "../../components/ui/Button";
 import * as Dialog from "../../components/ui/Dialog";
-import { ASSISTANT_CITATION_MAX_TEXT_LENGTH, type AssistantCitation } from "@t3tools/contracts";
+import { ASSISTANT_CITATION_MAX_TEXT_LENGTH, type AssistantCitation } from "@murmur/contracts";
 import { useOpenPullRequest } from "../../native/useOpenPullRequest";
 import { useWorkspaceSettledContentWidth } from "../layout/workspace-content-width";
 import { useVisibleSecondClock } from "./use-visible-second-clock";
@@ -29,7 +29,7 @@ import {
   enrichedSkillInstructionsPath,
   enrichedSkillReference,
 } from "../../lib/enrichedLinkPresentation";
-import { formatProviderSkillDisplayName } from "@t3tools/shared/inlineSkills";
+import { formatProviderSkillDisplayName } from "@murmur/shared/inlineSkills";
 import {
   ThreadContextDivider,
   ThreadStatusLine,
@@ -57,15 +57,15 @@ import {
 import * as Haptics from "expo-haptics";
 import { KeyboardAwareLegendList } from "@legendapp/list/keyboard";
 import { useViewabilityAmount, type LegendListRef } from "@legendapp/list/react-native";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import type { HandoffEndpoints } from "@t3tools/client-runtime/handoff";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import type { HandoffEndpoints } from "@murmur/client-runtime/handoff";
 import {
   IDLE_COMPACTING_LABELS,
   resolveUserMessageFileCards,
   resolveUserMessagePresentation,
-} from "@t3tools/client-runtime/user-message";
-import { canForkProjectedAssistantItem } from "@t3tools/client-runtime/state/thread-workflows";
-import type { WorkflowOpening } from "@t3tools/client-runtime/state/subagentRuntime";
+} from "@murmur/client-runtime/user-message";
+import { canForkProjectedAssistantItem } from "@murmur/client-runtime/state/thread-workflows";
+import type { WorkflowOpening } from "@murmur/client-runtime/state/subagentRuntime";
 import {
   AuthFilesystemReadScope,
   idleCompactionOf,
@@ -81,48 +81,48 @@ import {
   type RunId,
   type ScheduledTaskId,
   type ScopedThreadRef,
-} from "@t3tools/contracts";
-import type { ToolCallVisibility } from "@t3tools/contracts/settings";
-import { encodeComposerContextFragment } from "@t3tools/shared/composerContextClipboard";
+} from "@murmur/contracts";
+import type { ToolCallVisibility } from "@murmur/contracts/settings";
+import { encodeComposerContextFragment } from "@murmur/shared/composerContextClipboard";
 import {
   hasThreadLinks,
   hostedThreadLink,
   parseThreadLinkHref,
   threadLinkRefs,
-} from "@t3tools/shared/threadLinks";
-import { PROMPT_LINK_MAX_PROMPT_LENGTH } from "@t3tools/shared/promptLinks";
+} from "@murmur/shared/threadLinks";
+import { PROMPT_LINK_MAX_PROMPT_LENGTH } from "@murmur/shared/promptLinks";
 import {
   parseComposerContextHref,
   collectComposerContextReferences,
   replaceComposerContextReferences,
   formatComposerContextReference,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 import { ComposerContextSheet } from "../../components/ComposerContextSheet";
 import { writeComposerContextClipboard } from "../../lib/composerContextClipboard";
-import type { CodexArtifactTemplate } from "@t3tools/shared/codexArtifactTemplates";
-import { codexArtifactTemplatePresentationLabel } from "@t3tools/shared/codexArtifactTemplatesCopy";
-import { resolveAssetUrl } from "@t3tools/client-runtime/state/assets";
-import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
+import type { CodexArtifactTemplate } from "@murmur/shared/codexArtifactTemplates";
+import { codexArtifactTemplatePresentationLabel } from "@murmur/shared/codexArtifactTemplatesCopy";
+import { resolveAssetUrl } from "@murmur/client-runtime/state/assets";
+import { formatAttachmentSize } from "@murmur/client-runtime/state/attachments";
 import {
   executeAtomQuery,
   isAtomCommandInterrupted,
   settlePromise,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import { classifyMarkdownImageSource } from "@t3tools/client-runtime/markdown-images";
+} from "@murmur/client-runtime/state/runtime";
+import { classifyMarkdownImageSource } from "@murmur/client-runtime/markdown-images";
 import {
   contextCompactionTokenCounts,
   resolveViewedImageAsset,
-} from "@t3tools/client-runtime/work-log/presentation";
+} from "@murmur/client-runtime/work-log/presentation";
 import {
   renderCodexInlineDirectivesAsMarkdown,
   splitCodexArtifactTemplateMarkdown,
-} from "@t3tools/shared/codexMarkdownDirectives";
-import { CHAT_LIST_ANCHOR_OFFSET, resolveChatListAnchoredEndSpace } from "@t3tools/shared/chatList";
-import { imageMimeType } from "@t3tools/shared/image";
-import { videoMimeType } from "@t3tools/shared/video";
+} from "@murmur/shared/codexMarkdownDirectives";
+import { CHAT_LIST_ANCHOR_OFFSET, resolveChatListAnchoredEndSpace } from "@murmur/shared/chatList";
+import { imageMimeType } from "@murmur/shared/image";
+import { videoMimeType } from "@murmur/shared/video";
 import { SymbolView, type AppSymbolName } from "../../components/ui/AppSymbol";
-import { textDirection } from "@t3tools/shared/textDirection";
+import { textDirection } from "@murmur/shared/textDirection";
 import { useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
 import { useNativeWorkspaceColumnsSupported } from "../../native/NativeWorkspaceColumns";
 import { useDeviceType } from "../../native/native-layout-metrics";
@@ -274,7 +274,7 @@ import {
 } from "./pending-thread-feed";
 import type { QueuedThreadMessage } from "../../state/thread-outbox-model";
 import { resolveThreadFeedFixedItemSize } from "./thread-feed-item-size";
-import { htmlRenderFrameHeight } from "@t3tools/shared/htmlRender";
+import { htmlRenderFrameHeight } from "@murmur/shared/htmlRender";
 import { htmlRenderRowHeight, ThreadHtmlRender } from "./HtmlRenderWebView";
 import { ThreadMcpApp } from "./McpAppWebView";
 import { assetEnvironment, useAssetUrl, useRefreshAssetUrl } from "../../state/assets";
@@ -289,7 +289,7 @@ import {
   pickWorkspaceLinkMatch,
   WORKSPACE_BASENAME_LOOKUP_LIMIT,
   workspaceLinkLookupQuery,
-} from "@t3tools/client-runtime/workspace-basename-lookup";
+} from "@murmur/client-runtime/workspace-basename-lookup";
 import {
   resolveThreadLink,
   useEnvironmentPreviewTunnelOff,

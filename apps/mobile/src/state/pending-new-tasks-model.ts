@@ -1,5 +1,5 @@
-import type { EnvironmentShellStatus } from "@t3tools/client-runtime/state/shell";
-import type { EnvironmentId, MessageId, ProjectId } from "@t3tools/contracts";
+import type { EnvironmentShellStatus } from "@murmur/client-runtime/state/shell";
+import type { EnvironmentId, MessageId, ProjectId } from "@murmur/contracts";
 
 import { msg } from "gt-react-native";
 import { m, type MessageResolver } from "../i18n/messages";

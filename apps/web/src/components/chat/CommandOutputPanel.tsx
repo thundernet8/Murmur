@@ -1,6 +1,6 @@
-import type { CommandOutputView } from "@t3tools/client-runtime/state/command-output";
-import type { EnvironmentId, ThreadId, TurnItemId } from "@t3tools/contracts";
-import { TERMINAL_PALETTES, terminalOutputSpans } from "@t3tools/shared/terminalOutput";
+import type { CommandOutputView } from "@murmur/client-runtime/state/command-output";
+import type { EnvironmentId, ThreadId, TurnItemId } from "@murmur/contracts";
+import { TERMINAL_PALETTES, terminalOutputSpans } from "@murmur/shared/terminalOutput";
 import { T, Var } from "gt-react";
 import { useLayoutEffect, useRef } from "react";
 

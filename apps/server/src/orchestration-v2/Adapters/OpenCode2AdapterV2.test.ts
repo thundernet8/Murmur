@@ -1,5 +1,5 @@
 import * as NodeURL from "node:url";
-import { toolOutputImages } from "@t3tools/shared/toolOutput";
+import { toolOutputImages } from "@murmur/shared/toolOutput";
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { assert, it } from "@effect/vitest";
@@ -25,7 +25,7 @@ import {
   type OrchestrationV2ProviderThread,
   type OrchestrationV2ProviderTurn,
   type ProviderReplayEntry,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";
@@ -40,23 +40,23 @@ import * as Stream from "effect/Stream";
 import * as Exit from "effect/Exit";
 import { TestClock } from "effect/testing";
 
-import type * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
-import { htmlRenderFromToolItem, sentMessageFromToolItem } from "@t3tools/shared/toolOutput";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
+import type * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import { buildRuntimeInstructions } from "@murmur/provider-core/server/runtimeInstructions";
+import { htmlRenderFromToolItem, sentMessageFromToolItem } from "@murmur/shared/toolOutput";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
 import {
   OPENCODE_2_STILL_STOPPING,
   OPENCODE_PROVIDER,
   t3McpServerName,
-} from "@t3tools/provider-opencode/testing";
+} from "@murmur/provider-opencode/testing";
 import { resolveAttachmentPath } from "../../attachmentStore.ts";
 import { openCode2ReplayRuntime } from "./OpenCode2AdapterV2.testkit.ts";
 import {
   makeProviderReplayGate,
   type ProviderReplayGate,
-} from "@t3tools/provider-testing/replayGate";
+} from "@murmur/provider-testing/replayGate";
 
 const SESSION = "ses_f148ca2deffeJcwCnRQtb0YFNX";
 const WORK = "/work/opencode2";
@@ -1095,7 +1095,7 @@ it.layer(McpProviderSessions.layer)("OpenCode2 adapter", (it) => {
           ],
           { replayGate: gate },
         );
-        const items: Array<import("@t3tools/contracts").OrchestrationV2TurnItem> = [];
+        const items: Array<import("@murmur/contracts").OrchestrationV2TurnItem> = [];
         const shellStarted = yield* Deferred.make<void>();
         const terminal = yield* runtime.events.pipe(
           Stream.tap((e) =>
@@ -2448,8 +2448,7 @@ it.layer(McpProviderSessions.layer)("OpenCode2 adapter", (it) => {
         // One reader: the runtime's event queue hands each event to only one taker.
         const launchSeen = yield* Deferred.make<void>();
         const marked = yield* Deferred.make<boolean | undefined>();
-        const settled =
-          yield* Deferred.make<import("@t3tools/contracts").OrchestrationV2TurnItem>();
+        const settled = yield* Deferred.make<import("@murmur/contracts").OrchestrationV2TurnItem>();
         yield* runtime.events.pipe(
           Stream.tap((e) =>
             e.type === "turn_item.updated" &&

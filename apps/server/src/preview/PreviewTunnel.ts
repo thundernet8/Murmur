@@ -2,7 +2,7 @@
 // connection per WebSocket. Raw bytes, so pages keep their own origin, HMR sockets and TLS.
 import * as NodeHttpServerRequest from "@effect/platform-node/NodeHttpServerRequest";
 import * as NodeSocket from "@effect/platform-node/NodeSocket";
-import { allowsPreviewTunnel, AuthTerminalOperateScope } from "@t3tools/contracts";
+import { allowsPreviewTunnel, AuthTerminalOperateScope } from "@murmur/contracts";
 import type * as NodeNet from "node:net";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";

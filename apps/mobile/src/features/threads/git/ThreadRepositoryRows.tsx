@@ -1,9 +1,9 @@
-import { formatDiffCount } from "@t3tools/client-runtime/diff-count";
+import { formatDiffCount } from "@murmur/client-runtime/diff-count";
 import { useAtomValue } from "@effect/atom-react";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   addableTaskFolderRepositories,
   pinnableThreadRepositories,
@@ -15,14 +15,14 @@ import {
   type RepositorySectionSummary,
   type ThreadRepositorySection,
   type ThreadRepositorySections,
-} from "@t3tools/client-runtime/state/thread-repositories";
+} from "@murmur/client-runtime/state/thread-repositories";
 import {
   AuthFilesystemReadScope,
   type EnvironmentId,
   type ProjectId,
   type ScopedThreadRef,
   type TaskFolder,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { msg, T, useGT, useMessages } from "gt-react-native";
 import { memo, useState } from "react";
 

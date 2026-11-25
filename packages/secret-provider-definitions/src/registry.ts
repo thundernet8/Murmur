@@ -1,5 +1,5 @@
-import { makeSecretProviderDefinitionRegistry } from "@t3tools/secret-provider-core/shared/definition";
-import * as OnePassword from "@t3tools/secret-provider-onepassword/shared/definition";
+import { makeSecretProviderDefinitionRegistry } from "@murmur/secret-provider-core/shared/definition";
+import * as OnePassword from "@murmur/secret-provider-onepassword/shared/definition";
 
 export const builtInSecretProviderDefinitions = makeSecretProviderDefinitionRegistry([
   OnePassword.definition,

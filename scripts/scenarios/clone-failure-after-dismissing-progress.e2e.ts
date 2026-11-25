@@ -1,7 +1,7 @@
 // @effect-diagnostics-next-line nodeBuiltinImport:off -- The fixture holds Git's HTTP request open.
 import * as NodeHttp from "node:http";
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
-import { ProjectId } from "@t3tools/contracts";
+import { ProjectId } from "@murmur/contracts";
 import { expect } from "e2e";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";

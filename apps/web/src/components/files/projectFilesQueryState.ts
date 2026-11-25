@@ -1,4 +1,4 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { useAtomRefresh, useAtomValue } from "@effect/atom-react";
 import { msg } from "gt-react";
 import {
@@ -7,7 +7,7 @@ import {
   ProjectReadFileError,
   type ProjectReadFileResult,
   MURMUR_PROJECT_FILE_NAME,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";

@@ -2,8 +2,8 @@ import * as Context from "effect/Context";
 import * as Duration from "effect/Duration";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import { DEFAULT_AUTOMATIC_GIT_FETCH_INTERVAL } from "@t3tools/contracts";
-import { resolveServerBackgroundActivitySettings } from "@t3tools/shared/backgroundActivitySettings";
+import { DEFAULT_AUTOMATIC_GIT_FETCH_INTERVAL } from "@murmur/contracts";
+import { resolveServerBackgroundActivitySettings } from "@murmur/shared/backgroundActivitySettings";
 
 import * as ServerSettings from "../serverSettings.ts";
 

@@ -1,18 +1,18 @@
 import { useComposerAttachmentActions } from "./use-composer-attachment-actions";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import * as Effect from "effect/Effect";
 import * as Dialog from "../components/ui/Dialog";
-import { AuthOrchestrationOperateScope } from "@t3tools/contracts";
+import { AuthOrchestrationOperateScope } from "@murmur/contracts";
 import { readEnvironmentScope } from "./session";
 import { useAtomValue } from "@effect/atom-react";
-import { compactBeforeSendTokens } from "@t3tools/client-runtime/state/context-window";
-import { threadRuntimeIsActive } from "@t3tools/client-runtime/state/shell";
-import { threadSteersDuringCompaction } from "@t3tools/client-runtime/state/thread-workflows";
-import { resolvePendingHandoff } from "@t3tools/client-runtime/handoff";
+import { compactBeforeSendTokens } from "@murmur/client-runtime/state/context-window";
+import { threadRuntimeIsActive } from "@murmur/client-runtime/state/shell";
+import { threadSteersDuringCompaction } from "@murmur/client-runtime/state/thread-workflows";
+import { resolvePendingHandoff } from "@murmur/client-runtime/handoff";
 import {
   announcedRun,
   isDetailBehindShell,
-} from "@t3tools/client-runtime/state/thread-activity-announcement";
+} from "@murmur/client-runtime/state/thread-activity-announcement";
 import {
   canResumeThread,
   deriveProviderSubagentStatus,
@@ -23,7 +23,7 @@ import {
   deriveThreadActivityRun,
   deriveThreadRuntime,
   threadRuntimeHasInterruptibleRun,
-} from "@t3tools/client-runtime/state/thread-execution";
+} from "@murmur/client-runtime/state/thread-execution";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -36,17 +36,17 @@ import {
   type RuntimeMode,
   type ScopedThreadRef,
   type ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import {
   parseCodexFeedbackCommand,
   submitCodexFeedback,
   type CodexFeedbackSubmission,
-} from "@t3tools/client-runtime/state/threads";
-import { resolveThreadWorkingStartedAt } from "@t3tools/client-runtime/state/models";
-import { deriveThreadTitleSeed } from "@t3tools/client-runtime/operations";
-import { upgradeLegacyContextMessage } from "@t3tools/shared/composerContextLegacy";
-import { restoreAttachmentOnlyBootstrapPrompt } from "@t3tools/shared/composerContextReferences";
+} from "@murmur/client-runtime/state/threads";
+import { resolveThreadWorkingStartedAt } from "@murmur/client-runtime/state/models";
+import { deriveThreadTitleSeed } from "@murmur/client-runtime/operations";
+import { upgradeLegacyContextMessage } from "@murmur/shared/composerContextLegacy";
+import { restoreAttachmentOnlyBootstrapPrompt } from "@murmur/shared/composerContextReferences";
 import {
   composerContextSendBlockReason,
   reidentifyComposerContext,
@@ -102,16 +102,16 @@ import {
   useComposerDraft,
   useComposerDraftSettings,
 } from "./use-composer-drafts";
-import { isClearComposerCommand, parseSideChatCommand } from "@t3tools/shared/composerTrigger";
-import { orchestrationV2WorktreePending } from "@t3tools/shared/orchestrationV2ThreadError";
+import { isClearComposerCommand, parseSideChatCommand } from "@murmur/shared/composerTrigger";
+import { orchestrationV2WorktreePending } from "@murmur/shared/orchestrationV2ThreadError";
 import {
   compactionBlocksSteering,
   resolveComposerDispatchMode,
   type ActiveTurnComposerAction,
-} from "@t3tools/client-runtime/state/composer-dispatch";
+} from "@murmur/client-runtime/state/composer-dispatch";
 import { Atom } from "effect/reactivity";
 import { AsyncResult } from "effect/reactivity";
-import { settlePromise, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
+import { settlePromise, squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
 import { prepareTurnAttachments } from "../lib/attachmentUpload";
 import { DEFAULT_FOLLOW_UP_BEHAVIOR } from "../lib/followUpBehavior";
 import { mobilePreferencesAtom } from "./preferences";

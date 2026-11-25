@@ -8,9 +8,9 @@ import {
   EnvironmentThemeFile,
   EnvironmentThemeId,
   environmentThemeFileHasColors,
-} from "@t3tools/contracts";
-import { fromJsonStringPretty, fromLenientJson } from "@t3tools/shared/schemaJson";
-import { BUILT_IN_THEME_IDS, UNPUBLISHABLE_THEME_IDS } from "@t3tools/shared/themePalettes";
+} from "@murmur/contracts";
+import { fromJsonStringPretty, fromLenientJson } from "@murmur/shared/schemaJson";
+import { BUILT_IN_THEME_IDS, UNPUBLISHABLE_THEME_IDS } from "@murmur/shared/themePalettes";
 import * as Config from "effect/Config";
 import * as Console from "effect/Console";
 import * as DateTime from "effect/DateTime";
@@ -21,8 +21,8 @@ import * as Path from "effect/Path";
 import * as Schema from "effect/Schema";
 import { Argument, Command, Flag } from "effect/cli";
 
-import { writeFileStringAtomically } from "@t3tools/shared/atomicWrite";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import { writeFileStringAtomically } from "@murmur/shared/atomicWrite";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as ServerConfig from "../config.ts";
 import {
   MAX_THEME_FILE_BYTES,

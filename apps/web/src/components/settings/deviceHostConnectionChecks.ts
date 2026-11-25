@@ -1,10 +1,10 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import {
   type DeviceHostSummary,
   type DevicePlatformAvailability,
   type EnvironmentId,
   SshDeviceHostConfig,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Schema from "effect/Schema";
 import { msg } from "gt-react";
 

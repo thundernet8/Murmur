@@ -9,13 +9,13 @@ import {
   type WorkspaceListFoldersResult,
   type WorkspaceScanFoldersInput,
   type WorkspaceScanFoldersResult,
-} from "@t3tools/contracts";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
-import { splitsSurrogatePair } from "@t3tools/shared/assistantCitations";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { fromLenientJson } from "@t3tools/shared/schemaJson";
-import { MURMUR_PROJECT_FILE_NAME } from "@t3tools/contracts";
-import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
+} from "@murmur/contracts";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
+import { splitsSurrogatePair } from "@murmur/shared/assistantCitations";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { fromLenientJson } from "@murmur/shared/schemaJson";
+import { MURMUR_PROJECT_FILE_NAME } from "@murmur/contracts";
+import { parseT3ProjectFile } from "@murmur/shared/t3ProjectFile";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

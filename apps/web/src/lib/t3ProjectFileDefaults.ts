@@ -3,9 +3,9 @@ import {
   type EnvironmentId,
   type ProjectReadFileResult,
   type T3ProjectFile,
-} from "@t3tools/contracts";
-import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
-import { executeAtomQuery } from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/contracts";
+import { parseT3ProjectFile } from "@murmur/shared/t3ProjectFile";
+import { executeAtomQuery } from "@murmur/client-runtime/state/runtime";
 import { AsyncResult } from "effect/reactivity";
 
 import {

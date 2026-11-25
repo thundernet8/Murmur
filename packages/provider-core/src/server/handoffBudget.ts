@@ -7,8 +7,8 @@ import type {
   OrchestrationV2HistoricalMessage,
   OrchestrationV2ProviderThread,
   OrchestrationV2TurnItem,
-} from "@t3tools/contracts";
-import { withMessageSenderNote } from "@t3tools/contracts";
+} from "@murmur/contracts";
+import { withMessageSenderNote } from "@murmur/contracts";
 
 import * as Config from "effect/Config";
 

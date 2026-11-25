@@ -7,14 +7,14 @@ import {
   type ProviderDriverKind,
   type ResolvedKeybindingsConfig,
   MODEL_PICKER_JUMP_KEYBINDING_COMMANDS,
-} from "@t3tools/contracts";
-import { resolveSelectableModel } from "@t3tools/shared/model";
+} from "@murmur/contracts";
+import { resolveSelectableModel } from "@murmur/shared/model";
 import { useAtomValue } from "@effect/atom-react";
 import {
   formatProviderUpdateRequiredNotice,
   providerUpdateChannelLags,
-} from "@t3tools/client-runtime/providerUpdateRequiredModels";
-import { groupModelsBySubProvider } from "@t3tools/client-runtime/providerSubProviders";
+} from "@murmur/client-runtime/providerUpdateRequiredModels";
+import { groupModelsBySubProvider } from "@murmur/client-runtime/providerSubProviders";
 import { useNavigate } from "@tanstack/react-router";
 import { LegendList, type LegendListRef } from "@legendapp/list/react";
 import {
@@ -39,7 +39,7 @@ import {
   parseModelPickerLegacySectionKey,
   parseModelPickerModelKey,
 } from "./modelPickerKeys";
-import { rankModelPickerSearch } from "@t3tools/client-runtime/model-search";
+import { rankModelPickerSearch } from "@murmur/client-runtime/model-search";
 import {
   Combobox,
   ComboboxEmpty,

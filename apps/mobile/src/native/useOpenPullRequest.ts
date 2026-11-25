@@ -1,11 +1,11 @@
 import { useNavigation, useRoute, StackActions } from "@react-navigation/native";
-import { isStandaloneIssueLink, resolveIssueLinkTarget } from "@t3tools/client-runtime/issue-links";
+import { isStandaloneIssueLink, resolveIssueLinkTarget } from "@murmur/client-runtime/issue-links";
 import {
   nativePullRequestDestination,
   pullRequestCandidateForIssueLink,
 } from "../lib/pullRequestNavigation";
-import { isAtomCommandInterrupted } from "@t3tools/client-runtime/state/runtime";
-import { EnvironmentId, ThreadId } from "@t3tools/contracts";
+import { isAtomCommandInterrupted } from "@murmur/client-runtime/state/runtime";
+import { EnvironmentId, ThreadId } from "@murmur/contracts";
 import { useProjects, useThreadShell } from "../state/entities";
 import { tryOpenWebLink } from "../lib/openExternalUrl";
 import { appAtomRegistry } from "../state/atom-registry";

@@ -1,4 +1,4 @@
-import { EnvironmentId, ThreadId } from "@t3tools/contracts";
+import { EnvironmentId, ThreadId } from "@murmur/contracts";
 import { expect, it, vi } from "vite-plus/test";
 
 const mocks = vi.hoisted(() => ({ readAccess: vi.fn() }));

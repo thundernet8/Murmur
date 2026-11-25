@@ -15,7 +15,7 @@ import { ThreadCommandOutput, useCommandOutputStreaming } from "./thread-command
 import {
   getQuestionAnswerPreview,
   hasQuestionAnswer,
-} from "@t3tools/client-runtime/work-log/user-input";
+} from "@murmur/client-runtime/work-log/user-input";
 import * as Haptics from "expo-haptics";
 import { T, useGT, useMessages } from "gt-react-native";
 import { Image } from "expo-image";
@@ -51,21 +51,21 @@ import {
   type RunId,
   type ThreadId,
   type ToolActivityIcon,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { Atom } from "effect/reactivity";
 import * as DateTime from "effect/DateTime";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
 import { environmentThreadDetails, threadEnvironment } from "../../state/threads";
 import { useAtomCommand } from "../../state/use-atom-command";
-import { toolActivityFaviconUrl } from "@t3tools/shared/favicon";
-import { isJavaScriptReplTool } from "@t3tools/shared/toolActivity";
+import { toolActivityFaviconUrl } from "@murmur/shared/favicon";
+import { isJavaScriptReplTool } from "@murmur/shared/toolActivity";
 import { useMarkdownCodeHighlight } from "./markdownCodeHighlightState";
 import { highlightCommand, type HighlightedLines } from "../../lib/highlights";
 import {
   commandHighlightLanguage,
   withVisibleControlCharacters,
-} from "@t3tools/client-runtime/work-log/command-label";
+} from "@murmur/client-runtime/work-log/command-label";
 
 import { AppText as Text } from "../../components/ui/AppText";
 import { T3Wordmark } from "../../components/T3Wordmark";
@@ -83,7 +83,7 @@ import {
   toolCallLines,
   turnItemOutputImages,
   turnItemOutputText,
-} from "@t3tools/client-runtime/work-log/item-detail";
+} from "@murmur/client-runtime/work-log/item-detail";
 import { useTurnItemDetail } from "../../state/queries";
 import {
   resolveThreadWorkGroupInitialScroll,
@@ -94,8 +94,8 @@ import {
   toolGroupAction,
   type ToolGroupSummaryKind,
   workEntryViewedImagePath,
-} from "@t3tools/client-runtime/work-log/presentation";
-import { notificationChildThreadId } from "@t3tools/client-runtime/state/thread-execution";
+} from "@murmur/client-runtime/work-log/presentation";
+import { notificationChildThreadId } from "@murmur/client-runtime/state/thread-execution";
 import type { MarkdownImageRenderer } from "../../native/SelectableMarkdownText";
 import type { FilePreviewSource } from "../../components/ui/FilePreviewModal";
 import { FilePreviewGallery } from "../../components/ui/FilePreviewGallery";
@@ -1415,7 +1415,7 @@ export function ThreadWorkGroupToggle(props: {
   readonly summaryKind: ToolGroupSummaryKind;
   readonly summaryToolIcon?: "browser" | "device" | "t3-code" | "pull-request" | "brain";
   readonly themeAppearance: "light" | "dark";
-  readonly toolSurface?: import("@t3tools/contracts").ToolActivitySurface;
+  readonly toolSurface?: import("@murmur/contracts").ToolActivitySurface;
   readonly toolIcon?: ToolActivityIcon;
   readonly hasFailure: boolean;
   readonly shimmer: boolean;

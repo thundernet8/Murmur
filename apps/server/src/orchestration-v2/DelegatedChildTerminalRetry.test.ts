@@ -9,10 +9,10 @@ import {
   ProviderTurnId,
   ThreadId,
   type OrchestrationV2DomainEvent,
-} from "@t3tools/contracts";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import { checkpointWorkspace } from "@t3tools/provider-testing/replayWorkspace";
+} from "@murmur/contracts";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import { checkpointWorkspace } from "@murmur/provider-testing/replayWorkspace";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
 import * as Fiber from "effect/Fiber";

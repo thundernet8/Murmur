@@ -4,7 +4,7 @@ import {
   IssueTrackerKind,
   ProjectId,
   SourceControlProviderKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { describe, expect, it } from "vite-plus/test";
 
 import { resolveIssueLinkTarget } from "./issueLinks.ts";

@@ -1,9 +1,9 @@
 import {
   type ConnectMcpApprovalCall,
   createConnectMcpApprovalCommand,
-} from "@t3tools/client-runtime/state/connectMcpApproval";
-import { runAtomCommand, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
-import type { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/connectMcpApproval";
+import { runAtomCommand, squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
+import type { EnvironmentId } from "@murmur/contracts";
 import * as Result from "effect/Result";
 
 import { connectionAtomRuntime } from "../connection/runtime";

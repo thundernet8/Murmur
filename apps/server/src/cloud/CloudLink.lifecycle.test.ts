@@ -14,10 +14,10 @@ import * as Schema from "effect/Schema";
 import * as Stream from "effect/Stream";
 import * as TestClock from "effect/testing/TestClock";
 import { HttpClient, HttpClientResponse, HttpServer, type HttpClientRequest } from "effect/http";
-import { RELAY_LINK_PROOF_TYP, signRelayJwt, verifyRelayJwt } from "@t3tools/shared/relayJwt";
+import { RELAY_LINK_PROOF_TYP, signRelayJwt, verifyRelayJwt } from "@murmur/shared/relayJwt";
 import * as NetAddress from "effect/net/NetAddress";
 
-import { EnvironmentId } from "@t3tools/contracts";
+import { EnvironmentId } from "@murmur/contracts";
 import * as EnvironmentKeys from "./environmentKeys.ts";
 import * as EnvironmentAuth from "../auth/EnvironmentAuth.ts";
 import * as ServerSecretStore from "../auth/ServerSecretStore.ts";
@@ -36,7 +36,7 @@ import * as CliTokenManager from "./CliTokenManager.ts";
 import {
   RelayEnvironmentLinkProofPayload,
   RelayManagedEndpointRecoveryRegistrationRequest,
-} from "@t3tools/contracts/relay";
+} from "@murmur/contracts/relay";
 import {
   CLOUD_ENDPOINT_CONFIRMED_ORIGIN,
   CLOUD_ENDPOINT_RUNTIME_CONFIG,

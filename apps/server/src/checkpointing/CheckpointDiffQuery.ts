@@ -8,7 +8,7 @@ import {
   type OrchestrationGetTurnDiffResult as OrchestrationGetTurnDiffResultType,
   type ThreadId,
   type ThreadTurnRepositoryDiff,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Digest from "effect/crypto/Digest";
 import * as Effect from "effect/Effect";

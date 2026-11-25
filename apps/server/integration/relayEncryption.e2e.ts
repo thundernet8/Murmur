@@ -4,9 +4,9 @@ import * as NodeHttp from "node:http";
 import * as NodeFSP from "node:fs/promises";
 import { WebSocket, WebSocketServer } from "ws";
 import { expect, it } from "vite-plus/test";
-import { generateNoiseKeyPair } from "@t3tools/shared/relayE2ee/noise";
-import { createRelaySocketBridge } from "@t3tools/shared/relaySocketBridge";
-import { createRelayTransport } from "@t3tools/shared/relayTransport";
+import { generateNoiseKeyPair } from "@murmur/shared/relayE2ee/noise";
+import { createRelaySocketBridge } from "@murmur/shared/relaySocketBridge";
+import { createRelayTransport } from "@murmur/shared/relayTransport";
 import { startEncryptedRelayGateway } from "../src/relay/EncryptedRelayGateway.ts";
 
 it("通过真实密文入口传输认证、流式 HTTP 和二进制 WebSocket，并拒绝明文与错误身份", async () => {

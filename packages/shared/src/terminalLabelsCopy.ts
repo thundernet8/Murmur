@@ -1,4 +1,4 @@
-import type { TerminalSummary } from "@t3tools/contracts";
+import type { TerminalSummary } from "@murmur/contracts";
 import { mFallback, msg } from "gt-i18n";
 import type { MFunctionType } from "gt-i18n/types";
 

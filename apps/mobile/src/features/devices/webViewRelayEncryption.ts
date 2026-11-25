@@ -1,5 +1,5 @@
-import type { DeviceHubAccess } from "@t3tools/client-runtime/device/hub-access";
-import { createRelayTransport } from "@t3tools/shared/relayTransport";
+import type { DeviceHubAccess } from "@murmur/client-runtime/device/hub-access";
+import { createRelayTransport } from "@murmur/shared/relayTransport";
 
 let transport: ReturnType<typeof createRelayTransport> | undefined;
 

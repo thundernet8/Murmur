@@ -1,5 +1,5 @@
 import { assert, describe, it } from "@effect/vitest";
-import { EnvironmentId, ProviderInstanceId, ThreadId } from "@t3tools/contracts";
+import { EnvironmentId, ProviderInstanceId, ThreadId } from "@murmur/contracts";
 import * as Effect from "effect/Effect";
 
 import * as McpProviderSessions from "./McpProviderSessions.ts";

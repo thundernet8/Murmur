@@ -1,6 +1,6 @@
 import { deriveProjectIdentity } from "../../projectIdentity";
 import { ProjectMonogram } from "../ProjectMonogram";
-import type { ProjectIconColor, ProjectIconOverride } from "@t3tools/contracts";
+import type { ProjectIconColor, ProjectIconOverride } from "@murmur/contracts";
 import { T, useGT, useMessages } from "gt-react";
 import { createElement, useState } from "react";
 import {

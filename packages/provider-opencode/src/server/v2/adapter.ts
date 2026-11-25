@@ -43,7 +43,7 @@ import {
   type ProviderInstanceId,
   type RunId,
   type RuntimeRequestId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import type * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";
@@ -61,47 +61,47 @@ import * as Schema from "effect/Schema";
 import * as Semaphore from "effect/Semaphore";
 import * as Stream from "effect/Stream";
 
-import * as ProviderHost from "@t3tools/provider-core/server/ProviderHost";
+import * as ProviderHost from "@murmur/provider-core/server/ProviderHost";
 import * as OpenCode2Client from "./OpenCode2Client.ts";
 import * as OpenCode2Server from "./OpenCode2Server.ts";
 import * as OpenCodeRuntime from "../OpenCodeRuntime.ts";
 import { readableProviderErrorMessage } from "../providerErrorMessage.ts";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
-import { t3OrchestrationSystemPrompt } from "@t3tools/provider-core/server/orchestrationInstructions";
-import { SKILL_MENTION_PATTERN } from "@t3tools/shared/composerInlineTokens";
-import { HTML_RENDER_TOOL_NAME } from "@t3tools/shared/htmlRender";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import { buildRuntimeInstructions } from "@murmur/provider-core/server/runtimeInstructions";
+import { t3OrchestrationSystemPrompt } from "@murmur/provider-core/server/orchestrationInstructions";
+import { SKILL_MENTION_PATTERN } from "@murmur/shared/composerInlineTokens";
+import { HTML_RENDER_TOOL_NAME } from "@murmur/shared/htmlRender";
 import {
   htmlRenderFromToolItem,
   SEND_TO_USER_TOOL_NAME,
   sentMessageFromToolItem,
-} from "@t3tools/shared/toolOutput";
-import { compareSemverVersions } from "@t3tools/shared/semver";
-import * as KeyedLock from "@t3tools/shared/KeyedLock";
-import { modelSelectionsEqual } from "@t3tools/shared/model";
-import { causeErrorTag } from "@t3tools/shared/observability";
+} from "@murmur/shared/toolOutput";
+import { compareSemverVersions } from "@murmur/shared/semver";
+import * as KeyedLock from "@murmur/shared/KeyedLock";
+import { modelSelectionsEqual } from "@murmur/shared/model";
+import { causeErrorTag } from "@murmur/shared/observability";
 
 import {
   isProviderNativeImageAttachment,
   providerMessageTextWithAttachmentPaths,
-} from "@t3tools/provider-core/server/attachmentPrompt";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+} from "@murmur/provider-core/server/attachmentPrompt";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
 import {
   backgroundWorkNotification,
   type BackgroundWorkReport,
-} from "@t3tools/provider-core/server/notification";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
+} from "@murmur/provider-core/server/notification";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
 import {
   makeProviderFailure,
   makeProviderRetryTurnItem,
-} from "@t3tools/provider-core/server/failure";
+} from "@murmur/provider-core/server/failure";
 import {
   makeSubagentChildThread,
   makeSubagentConversationArtifacts,
   subagentThreadTitle,
-} from "@t3tools/provider-core/server/subagentProjection";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import { turnScopedSelectionTransition } from "@t3tools/provider-core/server/selectionTransition";
+} from "@murmur/provider-core/server/subagentProjection";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import { turnScopedSelectionTransition } from "@murmur/provider-core/server/selectionTransition";
 import { OPENCODE_PROVIDER, openCodePermissionRequestKind } from "../adapter.ts";
 import {
   openCodeCodeModeHtmlRenders,
@@ -1843,7 +1843,7 @@ export const make = Effect.fn("OpenCode2Adapter.make")(function* (instanceId: Pr
     });
 
     const syncRoster = Effect.fnUntraced(function* (state: ThreadState) {
-      const roster: Array<import("@t3tools/contracts").OrchestrationV2PendingBackgroundTask> =
+      const roster: Array<import("@murmur/contracts").OrchestrationV2PendingBackgroundTask> =
         runningCalls(state)
           .filter((call) => call.background)
           .map((call) => ({

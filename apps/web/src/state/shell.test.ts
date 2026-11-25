@@ -2,10 +2,10 @@ import {
   AVAILABLE_CONNECTION_STATE,
   BearerConnectionTarget,
   PrimaryConnectionTarget,
-} from "@t3tools/client-runtime/connection";
-import type { EnvironmentCatalogState } from "@t3tools/client-runtime/state/connections";
-import { EMPTY_SHELL_STATE, type EnvironmentShellState } from "@t3tools/client-runtime/state/shell";
-import { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/connection";
+import type { EnvironmentCatalogState } from "@murmur/client-runtime/state/connections";
+import { EMPTY_SHELL_STATE, type EnvironmentShellState } from "@murmur/client-runtime/state/shell";
+import { EnvironmentId } from "@murmur/contracts";
 import * as Option from "effect/Option";
 import { AsyncResult, Atom, AtomRegistry } from "effect/reactivity";
 import { describe, expect, it, vi } from "vite-plus/test";

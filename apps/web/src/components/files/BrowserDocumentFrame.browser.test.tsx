@@ -2,9 +2,9 @@ import {
   FILE_PREVIEW_SCROLL_SCRIPT,
   injectHtmlRenderBootstrap,
   readFilePreviewScroll,
-} from "@t3tools/shared/htmlRender";
-import { EnvironmentId, ThreadId } from "@t3tools/contracts";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
+} from "@murmur/shared/htmlRender";
+import { EnvironmentId, ThreadId } from "@murmur/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
 import { describe, expect, it, vi } from "vite-plus/test";
 import { page } from "vite-plus/test/browser";
 

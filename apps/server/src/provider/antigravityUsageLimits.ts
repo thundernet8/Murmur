@@ -1,7 +1,7 @@
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
 
-import { makeUnavailableUsageLimits } from "@t3tools/provider-core/server/usageLimits";
+import { makeUnavailableUsageLimits } from "@murmur/provider-core/server/usageLimits";
 
 // 提取或复用 agy 的 OAuth 凭据访问 Google API 存在违反 ToS 的风险，禁止额度直连及反代。
 // https://antigravity.google/terms §6；额度信息只能通过官方 CLI/ACP 获取。

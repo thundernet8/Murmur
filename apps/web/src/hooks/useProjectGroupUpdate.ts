@@ -1,11 +1,11 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import { AuthOrchestrationOperateScope, type ProjectIconOverride } from "@t3tools/contracts";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import { AuthOrchestrationOperateScope, type ProjectIconOverride } from "@murmur/contracts";
 import {
   isAtomCommandInterrupted,
   mapAtomCommandResult,
   squashAtomCommandFailure,
   type AtomCommandResult,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { AsyncResult } from "effect/reactivity";
 import * as Cause from "effect/Cause";
 import { msg } from "gt-react";

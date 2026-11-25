@@ -1,8 +1,8 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import { splitFilePathPosition } from "@t3tools/shared/fileLinks";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import { splitFilePathPosition } from "@murmur/shared/fileLinks";
 import { isMacPlatform, isWindowsPlatform } from "./lib/utils";
 import { useAtomValue } from "@effect/atom-react";
-import { AuthOrchestrationOperateScope, type EnvironmentId } from "@t3tools/contracts";
+import { AuthOrchestrationOperateScope, type EnvironmentId } from "@murmur/contracts";
 import { msg } from "gt-react";
 import type { DragEvent } from "react";
 

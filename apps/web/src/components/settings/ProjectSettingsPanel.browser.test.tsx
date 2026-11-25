@@ -1,8 +1,5 @@
 import { RegistryContext } from "@effect/atom-react";
-import type {
-  DeleteProjectInput,
-  UpdateProjectInput,
-} from "@t3tools/client-runtime/state/projects";
+import type { DeleteProjectInput, UpdateProjectInput } from "@murmur/client-runtime/state/projects";
 import {
   AuthOrchestrationOperateScope,
   AuthSettingsWriteScope,
@@ -12,9 +9,9 @@ import {
   ProviderInstanceId,
   type AuthEnvironmentScope,
   type AuthSessionState,
-} from "@t3tools/contracts";
-import { DEFAULT_CLIENT_SETTINGS } from "@t3tools/contracts/settings";
-import { DEFAULT_RESOLVED_KEYBINDINGS } from "@t3tools/shared/keybindings";
+} from "@murmur/contracts";
+import { DEFAULT_CLIENT_SETTINGS } from "@murmur/contracts/settings";
+import { DEFAULT_RESOLVED_KEYBINDINGS } from "@murmur/shared/keybindings";
 import {
   createMemoryHistory,
   createRootRoute,
@@ -55,7 +52,7 @@ const state = vi.hoisted(() => ({
 }));
 
 // Session grants come from the server; each test drives them through these atoms.
-vi.mock(import("@t3tools/client-runtime/state/session"), async (original) => {
+vi.mock(import("@murmur/client-runtime/state/session"), async (original) => {
   const actual = await original();
   return {
     ...actual,
@@ -132,7 +129,7 @@ vi.mock(import("../files/projectFilesQueryState"), async (original) => ({
   getProjectFileQueryAtom: () => missingProjectFile,
 }));
 
-import { scopeProjectRef } from "@t3tools/client-runtime/environment";
+import { scopeProjectRef } from "@murmur/client-runtime/environment";
 import { DraftId, useComposerDraftStore } from "../../composerDraftStore";
 import { appAtomRegistry } from "../../rpc/atomRegistry";
 import { assetEnvironment } from "../../state/assets";

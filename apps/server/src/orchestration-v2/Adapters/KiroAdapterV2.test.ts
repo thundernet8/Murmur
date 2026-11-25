@@ -15,9 +15,9 @@ import {
   type RuntimeMode,
   type RuntimeRequestId,
   ThreadId,
-} from "@t3tools/contracts";
-import { resolveSelfInvocation } from "@t3tools/shared/nodeRuntime";
-import { htmlRenderFromToolItem } from "@t3tools/shared/toolOutput";
+} from "@murmur/contracts";
+import { resolveSelfInvocation } from "@murmur/shared/nodeRuntime";
+import { htmlRenderFromToolItem } from "@murmur/shared/toolOutput";
 import * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";
@@ -34,10 +34,10 @@ import * as TestClock from "effect/testing/TestClock";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
 import type * as EffectAcpSchema from "effect-acp/compat";
 
-import * as TestProviderHost from "@t3tools/provider-testing/TestProviderHost";
-import type * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
+import * as TestProviderHost from "@murmur/provider-testing/TestProviderHost";
+import type * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
 import {
   ProviderAdapterTurnStartError,
   type ProviderAdapterV2Error,
@@ -45,7 +45,7 @@ import {
   type ProviderAdapterV2TurnInput,
   ProviderCompactionUnsupportedError,
   ProviderAdapterV2RuntimePolicy,
-} from "@t3tools/provider-core/server/ProviderAdapter";
+} from "@murmur/provider-core/server/ProviderAdapter";
 import {
   decodeAcpReplayTranscript,
   makeAcpReplayCompletenessAssertion,
@@ -54,16 +54,16 @@ import {
 import {
   makeProviderReplayGate,
   type ProviderReplayGate,
-} from "@t3tools/provider-testing/replayGate";
-import { readProviderReplayTranscript } from "@t3tools/provider-testing/replayTranscript";
-import { KiroSettings } from "@t3tools/provider-kiro/settings";
+} from "@murmur/provider-testing/replayGate";
+import { readProviderReplayTranscript } from "@murmur/provider-testing/replayTranscript";
+import { KiroSettings } from "@murmur/provider-kiro/settings";
 import {
   KIRO_PROVIDER,
   kiroApprovalOptions,
   kiroAutopilotValue,
   kiroPermissionDisposition,
   makeKiroAdapterV2,
-} from "@t3tools/provider-kiro/testing";
+} from "@murmur/provider-kiro/testing";
 
 const testLayer = Layer.mergeAll(
   NodeServices.layer,

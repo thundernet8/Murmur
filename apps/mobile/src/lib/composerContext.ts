@@ -1,18 +1,18 @@
 import {
   collectComposerModelMentions,
   type ComposerModelMentionOccurrence,
-} from "@t3tools/client-runtime/composer-model-mentions";
-import { isProviderSkillUserInvocable } from "@t3tools/client-runtime/providerSkills";
-import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
-import { filePreviewKind } from "@t3tools/shared/filePreview";
-import { videoMimeType } from "@t3tools/shared/video";
+} from "@murmur/client-runtime/composer-model-mentions";
+import { isProviderSkillUserInvocable } from "@murmur/client-runtime/providerSkills";
+import { sourceControlClients } from "@murmur/client-runtime/source-control-clients";
+import { filePreviewKind } from "@murmur/shared/filePreview";
+import { videoMimeType } from "@murmur/shared/video";
 import { msg } from "gt-react-native";
 import { m } from "../i18n/messages";
 import {
   assistantCitationLabel,
   collectAssistantCitations,
   expandAssistantCitationsForProvider,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 import {
   PROVIDER_SEND_TURN_MAX_INPUT_CHARS,
   COMPOSER_CONTEXT_MAX_RECORDS,
@@ -25,7 +25,7 @@ import {
   type ServerProviderSkill,
   type EnvironmentContextRecord,
   type EnvironmentId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Schema from "effect/Schema";
 import {
   ATTACHMENT_ONLY_BOOTSTRAP_PROMPT,
@@ -34,13 +34,13 @@ import {
   isImageReferencesOnly,
   replaceComposerContextReferences,
   sanitizeComposerContextLabel,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 import {
   collectComposerInlineTokens,
   composerMathRanges,
   type ComposerInlineToken,
-} from "@t3tools/shared/composerInlineTokens";
-import { markdownMathRanges } from "@t3tools/shared/markdownMath";
+} from "@murmur/shared/composerInlineTokens";
+import { markdownMathRanges } from "@murmur/shared/markdownMath";
 
 const isMessageContext = Schema.is(OrchestrationMessageContext);
 const decodeMessageContext = Schema.decodeUnknownOption(OrchestrationMessageContext);

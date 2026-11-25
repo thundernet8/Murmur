@@ -1,4 +1,4 @@
-import { managedCapabilityDenial } from "@t3tools/client-runtime/contract-labels";
+import { managedCapabilityDenial } from "@murmur/client-runtime/contract-labels";
 import { SessionPermissions } from "./SessionPermissions";
 import {
   ChevronRightIcon,
@@ -14,14 +14,14 @@ import {
   connectReachabilityHelpUrl,
   formatConnectReachable,
   resolveEnvironmentMachineKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   connectionRoutes,
   hasSavedBearerRoute,
   connectionErrorText,
   connectionStatusText,
   environmentMcpUrl,
-} from "@t3tools/client-runtime/connection";
+} from "@murmur/client-runtime/connection";
 import * as Option from "effect/Option";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { m, type MessageResolver } from "../../i18n/messages";

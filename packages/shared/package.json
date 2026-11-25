@@ -1,5 +1,5 @@
 {
-  "name": "@t3tools/shared",
+  "name": "@murmur/shared",
   "private": true,
   "type": "module",
   "exports": {
@@ -697,10 +697,10 @@
     "test": "vp test run --config ../../vite.config.ts --dir ."
   },
   "dependencies": {
+    "@murmur/contracts": "workspace:*",
     "@noble/ciphers": "1.3.0",
     "@noble/curves": "catalog:",
     "@noble/hashes": "catalog:",
-    "@t3tools/contracts": "workspace:*",
     "effect": "catalog:",
     "ffi-rs": "1.3.2",
     "get-east-asian-width": "^1.6.0",

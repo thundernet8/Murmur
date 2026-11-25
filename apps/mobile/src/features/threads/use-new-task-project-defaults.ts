@@ -1,10 +1,10 @@
-import { resolveFilesystemReadAccess } from "@t3tools/client-runtime/state/filesystem";
-import { isScratchProject } from "@t3tools/client-runtime/state/projects";
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
-import type { ProjectReadFileResult } from "@t3tools/contracts";
-import { DEFAULT_SERVER_SETTINGS, MURMUR_PROJECT_FILE_NAME } from "@t3tools/contracts";
-import { resolveNewThreadEnvMode, resolveProjectSettings } from "@t3tools/shared/projectSettings";
-import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
+import { resolveFilesystemReadAccess } from "@murmur/client-runtime/state/filesystem";
+import { isScratchProject } from "@murmur/client-runtime/state/projects";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/shell";
+import type { ProjectReadFileResult } from "@murmur/contracts";
+import { DEFAULT_SERVER_SETTINGS, MURMUR_PROJECT_FILE_NAME } from "@murmur/contracts";
+import { resolveNewThreadEnvMode, resolveProjectSettings } from "@murmur/shared/projectSettings";
+import { parseT3ProjectFile } from "@murmur/shared/t3ProjectFile";
 
 import { m } from "../../i18n/messages";
 import { useEnvironmentServerConfig } from "../../state/entities";

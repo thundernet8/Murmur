@@ -1,4 +1,4 @@
-import { importRelayPrivateKey, RelayJwtError, signRelayJwt } from "@t3tools/shared/relayJwt";
+import { importRelayPrivateKey, RelayJwtError, signRelayJwt } from "@murmur/shared/relayJwt";
 import * as Context from "effect/Context";
 import * as Signature from "effect/crypto/Signature";
 import * as Effect from "effect/Effect";

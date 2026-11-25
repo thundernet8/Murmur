@@ -3,7 +3,7 @@ import {
   pullRequestAnchorMatchesUrl,
   pullRequestLinkCommit,
   resolvePullRequestReviewAnchor,
-} from "@t3tools/shared/pullRequestAnchor";
+} from "@murmur/shared/pullRequestAnchor";
 import { stripInlineContextReferences } from "~/lib/composerContextReferences";
 import type { Nodes } from "hast";
 
@@ -11,7 +11,7 @@ import { markdownHtmlComments, markdownTree } from "~/markdown/wordsHast";
 import {
   sourceControlClients,
   type ChangeRequestTerminology,
-} from "@t3tools/client-runtime/source-control-clients";
+} from "@murmur/client-runtime/source-control-clients";
 import * as Schema from "effect/Schema";
 import {
   COMPOSER_CONTEXT_REVIEW_TEXT_MAX_CHARS,
@@ -41,13 +41,13 @@ import {
   type ThreadLinkedPullRequest,
   type ThreadPullRequestLink,
   type VcsRef,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   legacyThreadPullRequestKey,
   resolveThreadCurrentPullRequestLink,
   threadPullRequestKeysEqual,
   visibleThreadPullRequests,
-} from "@t3tools/client-runtime/thread-pull-requests";
+} from "@murmur/client-runtime/thread-pull-requests";
 
 import { msg } from "gt-react";
 

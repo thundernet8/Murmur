@@ -6,7 +6,7 @@ import {
   AuthMcpRegistrationError,
   EnvironmentHttpApi,
   mcpClientScopes,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
 import * as Redacted from "effect/Redacted";
@@ -16,7 +16,7 @@ import { HttpServerRequest, HttpServerResponse } from "effect/http";
 import * as HttpEffect from "effect/http/HttpEffect";
 import * as HttpApiBuilder from "effect/http-api/HttpApiBuilder";
 
-import { DEFAULT_HOSTED_APP_URL } from "@t3tools/shared/connectAuth";
+import { DEFAULT_HOSTED_APP_URL } from "@murmur/shared/connectAuth";
 
 import * as CloudLink from "../cloud/CloudLink.ts";
 import { agentApprovalAppUrlConfig } from "../cloud/publicConfig.ts";

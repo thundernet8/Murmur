@@ -179,7 +179,7 @@ jobs:
       - name: Setup dependencies
         uses: ./.github/actions/setup-ci-deps
         with:
-          install-args: --filter=@t3tools/desktop... --filter=t3... --filter=@t3tools/scripts...
+          install-args: --filter=@murmur/desktop... --filter=t3... --filter=@murmur/scripts...
           save-pnpm-store: ${{ inputs.save_pnpm_store }}
         env:
           pnpm_config_cache_dir: ${{ runner.temp }}/pnpm-metadata
@@ -386,7 +386,7 @@ jobs:
         env:
           # The executable bundles the server again, so it needs the same stamp
           # as release.yml's JS bundle.
-          MURMUR_TELEMETRY_CHANNEL: ${{ github.repository == 'pingdotgg/t3code' && inputs.release_channel || 'dev' }}
+          MURMUR_TELEMETRY_CHANNEL: ${{ github.repository == 'thundernet8/Murmur' && inputs.release_channel || 'dev' }}
         run: node apps/server/scripts/cli.ts build-exe --verbose ${{ inputs.platform == 'win' && format('--target win-{0}', inputs.arch) || '' }}
 
       - name: Import macOS signing certificate for the CLI archive

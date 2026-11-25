@@ -1,18 +1,18 @@
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
-import type { StartThreadTurnInput } from "@t3tools/client-runtime/operations";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
+import type { StartThreadTurnInput } from "@murmur/client-runtime/operations";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
   type AtomCommandResult,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   MessageId,
   ThreadId,
   type ModelSelection,
   type RuntimeMode,
   type ScopedThreadRef,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { msg, useGT } from "gt-react-native";
 import { m } from "../../i18n/messages";
 

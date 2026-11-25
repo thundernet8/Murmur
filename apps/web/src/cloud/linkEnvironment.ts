@@ -16,15 +16,15 @@ import {
   EnvironmentHttpUnauthorizedError,
   EnvironmentId,
   WS_METHODS,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   type RelayEnvironmentLinkResponse,
   type RelayManagedEndpointProviderKind,
-} from "@t3tools/contracts/relay";
-import { EnvironmentRegistry, EnvironmentSupervisor } from "@t3tools/client-runtime/connection";
-import { request, runStream } from "@t3tools/client-runtime/rpc";
-import { ManagedRelay, relayRequestFailureDetail } from "@t3tools/client-runtime/relay";
-import { executeConnectedEnvironmentHttpRequest } from "@t3tools/client-runtime/state/environmentHttpAuth";
+} from "@murmur/contracts/relay";
+import { EnvironmentRegistry, EnvironmentSupervisor } from "@murmur/client-runtime/connection";
+import { request, runStream } from "@murmur/client-runtime/rpc";
+import { ManagedRelay, relayRequestFailureDetail } from "@murmur/client-runtime/relay";
+import { executeConnectedEnvironmentHttpRequest } from "@murmur/client-runtime/state/environmentHttpAuth";
 
 import { m } from "../i18n/messages";
 import { resolveCloudPublicConfig } from "./publicConfig";

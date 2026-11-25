@@ -1,11 +1,11 @@
 // Trust relay headers only with a mint-key-signed proof; otherwise handle the webhook as a direct request.
-import { RelayHookDeliveryProofPayload } from "@t3tools/contracts/relay";
+import { RelayHookDeliveryProofPayload } from "@murmur/contracts/relay";
 import {
   normalizeRelayIssuer,
   RELAY_HOOK_DELIVERY_HEADER,
   RELAY_HOOK_DELIVERY_TYP,
   verifyRelayJwt,
-} from "@t3tools/shared/relayJwt";
+} from "@murmur/shared/relayJwt";
 import * as Context from "effect/Context";
 import * as Signature from "effect/crypto/Signature";
 import * as Effect from "effect/Effect";

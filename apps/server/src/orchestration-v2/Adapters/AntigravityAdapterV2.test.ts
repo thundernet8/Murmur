@@ -11,14 +11,14 @@ import {
   RunAttemptId,
   RunId,
   ThreadId,
-} from "@t3tools/contracts";
-import { resolveSelfInvocation } from "@t3tools/shared/nodeRuntime";
+} from "@murmur/contracts";
+import { resolveSelfInvocation } from "@murmur/shared/nodeRuntime";
 import {
   compactDynamicToolOutput,
   htmlRenderFromToolItem,
   previewRecordingIdFromToolItem,
   sentMessageFromToolItem,
-} from "@t3tools/shared/toolOutput";
+} from "@murmur/shared/toolOutput";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";
@@ -37,18 +37,18 @@ import * as TestClock from "effect/testing/TestClock";
 import type * as EffectAcpSchema from "effect-acp/compat";
 import * as EffectAcpErrors from "effect-acp/errors";
 
-import * as ProviderHost from "@t3tools/provider-core/server/ProviderHost";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as TestProviderHost from "@t3tools/provider-testing/TestProviderHost";
-import type * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
-import { makeAcpAdapterV2 } from "@t3tools/provider-acp/server/adapter";
+import * as ProviderHost from "@murmur/provider-core/server/ProviderHost";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as TestProviderHost from "@murmur/provider-testing/TestProviderHost";
+import type * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
+import { makeAcpAdapterV2 } from "@murmur/provider-acp/server/adapter";
 import { makeAntigravityAcpRuntime } from "../../provider/acp/AntigravityAcpSupport.ts";
 import { normalizeAntigravitySessionUpdate } from "../../provider/acp/AntigravityProtocol.ts";
 import { ANTIGRAVITY_SIGN_IN_REQUIRED_MESSAGE } from "../../provider/antigravityAuthSupport.ts";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
 import { makeTurnInput } from "./AcpAdapterV2.testkit.ts";
-import type * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
+import type * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
 import {
   type AntigravityAdapterV2Options,
   type AntigravityAdapterV2RuntimeInput,

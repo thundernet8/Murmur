@@ -1,6 +1,6 @@
 import { assert, it } from "@effect/vitest";
-import { IssueTrackerKind, ProjectId } from "@t3tools/contracts";
-import * as NodeSqliteClient from "@t3tools/shared/nodeSqliteClient";
+import { IssueTrackerKind, ProjectId } from "@murmur/contracts";
+import * as NodeSqliteClient from "@murmur/shared/nodeSqliteClient";
 import * as Effect from "effect/Effect";
 import * as SqlClient from "effect/sql/SqlClient";
 

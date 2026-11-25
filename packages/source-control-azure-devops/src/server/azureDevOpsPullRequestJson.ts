@@ -1,7 +1,7 @@
 import {
   trimOptionalString as trimmed,
   normalizeRefName,
-} from "@t3tools/source-control-core/server/pullRequestUtils";
+} from "@murmur/source-control-core/server/pullRequestUtils";
 import * as Cause from "effect/Cause";
 import * as Exit from "effect/Exit";
 import * as Result from "effect/Result";
@@ -14,9 +14,9 @@ import type {
   PullRequestMergeMethod,
   PullRequestMergeability,
   PullRequestState,
-} from "@t3tools/contracts";
-import { TrimmedNonEmptyString } from "@t3tools/contracts";
-import { decodeJsonResult } from "@t3tools/shared/schemaJson";
+} from "@murmur/contracts";
+import { TrimmedNonEmptyString } from "@murmur/contracts";
+import { decodeJsonResult } from "@murmur/shared/schemaJson";
 
 import { azureDevOpsPullRequestWebUrl } from "./azureDevOpsPullRequests.ts";
 

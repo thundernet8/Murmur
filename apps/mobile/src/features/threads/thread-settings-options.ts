@@ -1,5 +1,5 @@
-import { managedRuntimeModeDenial } from "@t3tools/client-runtime/contract-labels";
-import type { ManagedPolicySummary, RuntimeMode } from "@t3tools/contracts";
+import { managedRuntimeModeDenial } from "@murmur/client-runtime/contract-labels";
+import type { ManagedPolicySummary, RuntimeMode } from "@murmur/contracts";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";
@@ -84,4 +84,4 @@ export function compatibleRuntimeModeForChoices(
     : (choices[0]?.mode ?? runtimeMode);
 }
 
-export { selectableProviderOptionChoices as selectableChoices } from "@t3tools/client-runtime/model-traits";
+export { selectableProviderOptionChoices as selectableChoices } from "@murmur/client-runtime/model-traits";

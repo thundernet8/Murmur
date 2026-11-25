@@ -24,10 +24,10 @@ export const absoluteUrl = (pathname: string): string => new URL(pathname, SITE_
 export const organizationJsonLd = (): JsonLd => ({
   "@type": "Organization",
   "@id": ORGANIZATION_ID,
-  name: "T3 Tools Inc",
+  name: SITE_NAME,
   url: SITE_ORIGIN,
   logo: absoluteUrl("/apple-touch-icon.png"),
-  sameAs: ["https://github.com/pingdotgg"],
+  sameAs: [GITHUB_REPOSITORY_URL],
 });
 
 export const websiteJsonLd = (): JsonLd => ({

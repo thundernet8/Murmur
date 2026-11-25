@@ -9,15 +9,15 @@ import type {
   ServerSettings,
   SourceControlDiscoveryResult,
   SourceControlRepositoryInfo,
-} from "@t3tools/contracts";
-import { SourceControlProviderKind } from "@t3tools/contracts";
-import { cloneUrlRepositoryPath } from "@t3tools/shared/cloneUrl";
+} from "@murmur/contracts";
+import { SourceControlProviderKind } from "@murmur/contracts";
+import { cloneUrlRepositoryPath } from "@murmur/shared/cloneUrl";
 import {
   isAbsolutePath,
   isExplicitRelativePath,
   isHostPath,
   newProjectFolderName,
-} from "@t3tools/shared/path";
+} from "@murmur/shared/path";
 import * as Arr from "effect/Array";
 import * as Option from "effect/Option";
 import * as Order from "effect/Order";

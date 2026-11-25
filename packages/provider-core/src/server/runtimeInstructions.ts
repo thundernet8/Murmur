@@ -1,4 +1,4 @@
-import type { AgentFeedbackMode } from "@t3tools/contracts";
+import type { AgentFeedbackMode } from "@murmur/contracts";
 
 import type { ProviderAdapterV2RuntimePolicy } from "./ProviderAdapter.ts";
 

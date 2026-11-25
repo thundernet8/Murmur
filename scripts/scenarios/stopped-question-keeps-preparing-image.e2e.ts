@@ -1,7 +1,7 @@
 // @effect-diagnostics nodeBuiltinImport:off -- The scenario starts a local ACP fixture.
 import * as NodePath from "node:path";
 
-import { ProviderDriverKind, ProviderInstanceId } from "@t3tools/contracts";
+import { ProviderDriverKind, ProviderInstanceId } from "@murmur/contracts";
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 

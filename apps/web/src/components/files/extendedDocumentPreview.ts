@@ -1,12 +1,9 @@
 import { pipe } from "effect/Function";
-import {
-  IMAGE_DIMENSIONS_HEADER_BYTES,
-  readImageDimensions,
-} from "@t3tools/shared/imageDimensions";
+import { IMAGE_DIMENSIONS_HEADER_BYTES, readImageDimensions } from "@murmur/shared/imageDimensions";
 import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { decodeHTMLAttribute, decodeHTMLStrict as decodeEntities } from "entities";
 import type JSZip from "jszip";
-import { terminalOutputPlainText } from "@t3tools/shared/terminalOutput";
+import { terminalOutputPlainText } from "@murmur/shared/terminalOutput";
 
 import { type OfficeWorkerResult, type NotebookCell } from "./officePreviewProtocol";
 import { PreviewError } from "./previewFailure";

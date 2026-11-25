@@ -14,7 +14,7 @@ import type { PlatformError } from "effect/PlatformError";
 import * as Schema from "effect/Schema";
 import * as Stream from "effect/Stream";
 
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 
 import * as ServerConfig from "../config.ts";
 import { expandHomePath } from "../os-jank.ts";

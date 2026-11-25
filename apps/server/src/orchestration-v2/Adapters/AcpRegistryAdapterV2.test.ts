@@ -12,9 +12,9 @@ import {
   ProviderInstanceId,
   ProviderSessionId,
   ThreadId,
-} from "@t3tools/contracts";
-import { pendingBackgroundTurnItems } from "@t3tools/shared/orchestrationV2PendingBackgroundWork";
-import { resolveSelfInvocation, selfInvocationArgs } from "@t3tools/shared/nodeRuntime";
+} from "@murmur/contracts";
+import { pendingBackgroundTurnItems } from "@murmur/shared/orchestrationV2PendingBackgroundWork";
+import { resolveSelfInvocation, selfInvocationArgs } from "@murmur/shared/nodeRuntime";
 import * as Exit from "effect/Exit";
 import * as Fiber from "effect/Fiber";
 import * as DateTime from "effect/DateTime";
@@ -32,37 +32,37 @@ import * as HttpClientResponse from "effect/http/HttpClientResponse";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
 import * as EffectAcpErrors from "effect-acp/errors";
 
-import { makeProviderFailure } from "@t3tools/provider-core/server/failure";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as TestProviderHost from "@t3tools/provider-testing/TestProviderHost";
+import { makeProviderFailure } from "@murmur/provider-core/server/failure";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as TestProviderHost from "@murmur/provider-testing/TestProviderHost";
 import {
   makeProviderReplayGate,
   type ProviderReplayGate,
-} from "@t3tools/provider-testing/replayGate";
-import type { ProviderContinuationRequest } from "@t3tools/provider-core/server/ProviderContinuationRequests";
+} from "@murmur/provider-testing/replayGate";
+import type { ProviderContinuationRequest } from "@murmur/provider-core/server/ProviderContinuationRequests";
 import * as ServerSettings from "../../serverSettings.ts";
-import type { AcpRegistryLiveConfiguration } from "@t3tools/provider-acp-registry/testing";
-import * as AcpRegistrySupport from "@t3tools/provider-acp-registry/server/AcpRegistrySupport";
-import * as AcpRegistryRuntimeCoordinator from "@t3tools/provider-acp-registry/server/AcpRegistryRuntimeCoordinator";
-import { ACP_SESSION_MODE_OPTION_ID } from "@t3tools/provider-acp/server/sessionConfig";
-import * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
-import { t3AcpPromptWithInstructions } from "@t3tools/provider-core/server/orchestrationInstructions";
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+import type { AcpRegistryLiveConfiguration } from "@murmur/provider-acp-registry/testing";
+import * as AcpRegistrySupport from "@murmur/provider-acp-registry/server/AcpRegistrySupport";
+import * as AcpRegistryRuntimeCoordinator from "@murmur/provider-acp-registry/server/AcpRegistryRuntimeCoordinator";
+import { ACP_SESSION_MODE_OPTION_ID } from "@murmur/provider-acp/server/sessionConfig";
+import * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
+import { t3AcpPromptWithInstructions } from "@murmur/provider-core/server/orchestrationInstructions";
+import { buildRuntimeInstructions } from "@murmur/provider-core/server/runtimeInstructions";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
 import {
   decodeAcpReplayTranscript,
   makeAcpReplayCompletenessAssertion,
   makeAcpReplayRuntime,
   makeTurnInput,
 } from "./AcpAdapterV2.testkit.ts";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import { AcpRegistryAdapterV2Driver } from "@t3tools/provider-acp-registry/server";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import { AcpRegistryAdapterV2Driver } from "@murmur/provider-acp-registry/server";
 import {
   ACP_REGISTRY_PROVIDER,
   makeAcpRegistryAdapterV2,
   acpRegistryPromptFailure,
   acpRegistryProbeResult,
-} from "@t3tools/provider-acp-registry/testing";
+} from "@murmur/provider-acp-registry/testing";
 
 const decodeAcpRegistryAdapterSettings = Schema.decodeUnknownEffect(
   AcpRegistryAdapterV2Driver.configSchema,

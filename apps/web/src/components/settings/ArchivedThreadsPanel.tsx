@@ -1,18 +1,18 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import type { ContextMenuSource } from "@t3tools/contracts";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import type { ContextMenuSource } from "@murmur/contracts";
 import { contextMenuSourceOf } from "../../contextMenuSource";
 import { m as resolveMessage } from "~/i18n/messages";
 import { settingsScopeEnvironmentLabels } from "./settingsScopeAxis";
 import { Spinner } from "~/components/ui/spinner";
 import { ArchiveIcon, ArchiveX, Trash2Icon } from "lucide-react";
-import { scopeThreadRef, scopedThreadKey } from "@t3tools/client-runtime/environment";
-import { presentThreadShell } from "@t3tools/client-runtime/state/shell";
+import { scopeThreadRef, scopedThreadKey } from "@murmur/client-runtime/environment";
+import { presentThreadShell } from "@murmur/client-runtime/state/shell";
 import {
   type AtomCommandResult,
   isAtomCommandInterrupted,
   settlePromise,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { useSettingsScope } from "./SettingsScopeContext";
 import { useThreadActions } from "../../hooks/useThreadActions";
 import { readLocalApi } from "../../localApi";

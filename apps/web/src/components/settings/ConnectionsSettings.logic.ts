@@ -1,9 +1,9 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import * as DateTime from "effect/DateTime";
 import { msg } from "gt-react";
 
 import { resolveDesktopPairingUrl, resolveHostedPairingUrl } from "./pairingUrls";
-import { getPairingTokenFromUrl, setPairingTokenOnUrl } from "@t3tools/shared/remote";
+import { getPairingTokenFromUrl, setPairingTokenOnUrl } from "@murmur/shared/remote";
 import { readHostedPairingRequest } from "../../hostedPairing";
 import { m, type MessageResolver } from "../../i18n/messages";
 import {
@@ -27,7 +27,7 @@ import {
   type EnvironmentId,
   type ServerAuthPolicy,
   type ServerDirectEndpoint,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   getDesktopUpdateDownloadedVersion,
   resolveDesktopUpdateButtonAction,

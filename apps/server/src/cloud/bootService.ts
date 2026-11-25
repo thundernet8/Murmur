@@ -1,5 +1,5 @@
-import { DESKTOP_UPDATE_RESTART_MARKER_FILE } from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import { DESKTOP_UPDATE_RESTART_MARKER_FILE } from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Config from "effect/Config";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";
@@ -15,7 +15,7 @@ import { CliError } from "effect/cli";
 import { HttpClient } from "effect/http";
 import * as Schema from "effect/Schema";
 
-import { CLI_RELEASE_BASE_URL_ENV } from "@t3tools/shared/cliRelease";
+import { CLI_RELEASE_BASE_URL_ENV } from "@murmur/shared/cliRelease";
 
 import * as ProcessRunner from "../processRunner.ts";
 import { acquireServiceSelectionLock } from "./serviceSelectionLock.ts";

@@ -12,7 +12,7 @@ import type {
   WorkflowDefinitionChangeResult,
   WorkflowDefinitionFiles,
   WorkflowDefinitionProblem,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Config from "effect/Config";
 import * as Context from "effect/Context";

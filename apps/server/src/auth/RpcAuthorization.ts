@@ -33,7 +33,7 @@ import {
   RpcScopeAuthorization,
   WS_METHODS,
   WsRpcGroup,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
 import * as Layer from "effect/Layer";

@@ -1,5 +1,5 @@
-import type { EnvironmentId } from "@t3tools/contracts";
-import { buildProjectGroups } from "@t3tools/client-runtime/state/project-grouping";
+import type { EnvironmentId } from "@murmur/contracts";
+import { buildProjectGroups } from "@murmur/client-runtime/state/project-grouping";
 import { useLocale, useMessages } from "gt-react-native";
 import {
   createContext,

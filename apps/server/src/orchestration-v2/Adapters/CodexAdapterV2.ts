@@ -2,7 +2,7 @@ import { pipe } from "effect/Function";
 import * as DocumentText from "../../provider/DocumentText.ts";
 import { brokenRuntimeError } from "../../provider/providerCompatibility.ts";
 import { revertCodexThread } from "../../provider/CodexThreadRevert.ts";
-import { historyResponseItems } from "@t3tools/provider-core/server/handoffBudget";
+import { historyResponseItems } from "@murmur/provider-core/server/handoffBudget";
 import { makeProviderTextDeltaCoalescer } from "./ProviderTextDeltaCoalescer.ts";
 import {
   mcpToolPresentation,
@@ -15,7 +15,7 @@ import {
   completeCodexTurnTokenUsage,
   type CodexTurnTokenUsageState,
 } from "../../provider/CodexTurnTokenUsage.ts";
-import type { ManagedServerProvider } from "@t3tools/provider-core/server/snapshot";
+import type { ManagedServerProvider } from "@murmur/provider-core/server/snapshot";
 import type { CodexEffectiveRuntime } from "../../provider/CodexManagedRuntime.ts";
 import { classifyCodexManagedError } from "../../provider/CodexManagedErrors.ts";
 import {
@@ -47,20 +47,20 @@ import {
   isDelegatedAppThread,
   ThreadId,
   type TurnItemId,
-} from "@t3tools/contracts";
-import { SKILL_MENTION_PATTERN } from "@t3tools/shared/composerInlineTokens";
-import { AgentScope } from "@t3tools/shared/AgentScope";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/contracts";
+import { SKILL_MENTION_PATTERN } from "@murmur/shared/composerInlineTokens";
+import { AgentScope } from "@murmur/shared/AgentScope";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import {
   COMPUTER_USE_TOOL_SOURCE,
   dynamicToolSurface,
   dynamicToolTitle,
-} from "@t3tools/shared/toolActivity";
-import { getModelSelectionStringOptionValue, modelSelectionsEqual } from "@t3tools/shared/model";
-import { appendGeneratedImageEmbeds } from "@t3tools/shared/generatedImageMarkdown";
-import { resolveSpawnCommand } from "@t3tools/shared/shell";
-import { mcpToolResultOutput } from "@t3tools/shared/toolOutput";
-import { oauthCallbackUrl } from "@t3tools/shared/oauthCallback";
+} from "@murmur/shared/toolActivity";
+import { getModelSelectionStringOptionValue, modelSelectionsEqual } from "@murmur/shared/model";
+import { appendGeneratedImageEmbeds } from "@murmur/shared/generatedImageMarkdown";
+import { resolveSpawnCommand } from "@murmur/shared/shell";
+import { mcpToolResultOutput } from "@murmur/shared/toolOutput";
+import { oauthCallbackUrl } from "@murmur/shared/oauthCallback";
 import type {
   ChatAttachment,
   OrchestrationV2AppThread,
@@ -86,7 +86,7 @@ import type {
   ProviderTurnId,
   ProviderInstanceId,
   RuntimeMode,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as CodexClient from "effect-codex-app-server/client";
 import * as CodexErrors from "effect-codex-app-server/errors";
 import * as CodexSchema from "effect-codex-app-server/schema";
@@ -116,7 +116,7 @@ import { resolveAttachmentPath, resolveAttachmentPathById } from "../../attachme
 import * as PortScanner from "../../preview/PortScanner.ts";
 import { getCodexServiceTierOptionValue } from "../../codexModelOptions.ts";
 import { ServerConfig } from "../../config.ts";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
 import { buildCodexAdditionalContext } from "../../provider/CodexDeveloperInstructions.ts";
 import {
   describeMcpElicitation,
@@ -131,43 +131,43 @@ import {
   boundProviderEventForLogging,
   shouldPersistProviderEvent,
 } from "../../provider/EventNdjsonLogger.ts";
-import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
+import * as ProviderEventLoggers from "@murmur/provider-core/server/ProviderEventLoggers";
 import { codexAppServerArgs, resolveCodexLaunchArgs } from "../../provider/codexLaunchArgs.ts";
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import * as McpProviderSession from "@t3tools/provider-core/server/mcpSession";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import * as McpProviderSession from "@murmur/provider-core/server/mcpSession";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
 import {
   MCP_APP_EXTENSION_ID,
   MCP_APP_MIME_TYPE,
   MCP_APP_OUTPUT_KEY,
   MCP_APP_RESOURCE_SCHEME,
-} from "@t3tools/shared/mcpApp";
+} from "@murmur/shared/mcpApp";
 import { snapshotMcpApp } from "../../mcpApps/McpAppSnapshot.ts";
 import {
   ProviderAdapterDriverCreateError,
   type ProviderAdapterDriverCreateInput,
-} from "@t3tools/provider-core/server/adapterDriver";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
-import { backgroundWorkNotification } from "@t3tools/provider-core/server/notification";
+} from "@murmur/provider-core/server/adapterDriver";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
+import { backgroundWorkNotification } from "@murmur/provider-core/server/notification";
 import {
   makeProviderFailure,
   makeProviderFailureTurnItem,
   makeProviderRetryTurnItem,
   PROVIDER_RETRY_BUDGET_MS,
-} from "@t3tools/provider-core/server/failure";
-import { turnScopedSelectionTransition } from "@t3tools/provider-core/server/selectionTransition";
+} from "@murmur/provider-core/server/failure";
+import { turnScopedSelectionTransition } from "@murmur/provider-core/server/selectionTransition";
 import {
   isProviderNativeImageAttachment,
   providerMessageTextWithAttachmentPaths,
-} from "@t3tools/provider-core/server/attachmentPrompt";
+} from "@murmur/provider-core/server/attachmentPrompt";
 import {
   makeSubagentChildThread,
   makeSubagentConversationArtifacts,
   subagentThreadTitle,
-} from "@t3tools/provider-core/server/subagentProjection";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import { buildWorkspaceInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
+} from "@murmur/provider-core/server/subagentProjection";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import { buildWorkspaceInstructions } from "@murmur/provider-core/server/runtimeInstructions";
 
 const CODEX_PROVIDER = ProviderDriverKind.make("codex");
 const CODEX_CAPACITY_MAX_RETRIES = 5;

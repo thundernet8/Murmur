@@ -6,13 +6,13 @@ import {
   RELAY_E2EE_PROLOGUE,
   decodeRelayTunnelControl,
   type RelayTunnelControl,
-} from "@t3tools/contracts/relayE2ee";
+} from "@murmur/contracts/relayE2ee";
 import {
   createNoiseResponder,
   type NoiseKeyPair,
   type TransportKeys,
-} from "@t3tools/shared/relayE2ee/noise";
-import { decodeRecord, encodeRecord } from "@t3tools/shared/relayE2ee/records";
+} from "@murmur/shared/relayE2ee/noise";
+import { decodeRecord, encodeRecord } from "@murmur/shared/relayE2ee/records";
 
 const PUBLIC_CONTROL_PATHS = new Set(["/api/t3-connect/health", "/api/t3-connect/mint-credential"]);
 const HOP_HEADERS = new Set([

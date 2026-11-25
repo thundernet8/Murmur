@@ -1,7 +1,7 @@
 import {
   codexFeedbackNotice,
   type CodexFeedbackSubmission,
-} from "@t3tools/client-runtime/state/threads";
+} from "@murmur/client-runtime/state/threads";
 import { msg } from "gt-react";
 import { MessageSquareIcon } from "lucide-react";
 

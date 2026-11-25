@@ -7,7 +7,7 @@ import {
   MURMUR_CODE_DARK_THEME_COLORS,
   MOBILE_THEME_IDS,
   getThemeColorsForAppearance,
-} from "@t3tools/shared/themePalettes";
+} from "@murmur/shared/themePalettes";
 import {
   readDefaultMobileThemeVariables,
   readGeneratedMobileThemeVariables,

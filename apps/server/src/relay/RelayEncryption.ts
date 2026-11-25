@@ -1,4 +1,4 @@
-import { relayKeyPairFromSecret } from "@t3tools/shared/relayE2ee/noise";
+import { relayKeyPairFromSecret } from "@murmur/shared/relayE2ee/noise";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
@@ -9,7 +9,7 @@ import * as HttpServer from "effect/http/HttpServer";
 import { HttpRouter, HttpServerRequest, HttpServerResponse } from "effect/http";
 import * as Socket from "effect/socket/Socket";
 import { WebSocket } from "ws";
-import { RELAY_E2EE_PATH } from "@t3tools/contracts/relayE2ee";
+import { RELAY_E2EE_PATH } from "@murmur/contracts/relayE2ee";
 import { loopbackUrlHostForAddress } from "../startupAccess.ts";
 import * as ServerSecretStore from "../auth/ServerSecretStore.ts";
 import { startEncryptedRelayGateway } from "./EncryptedRelayGateway.ts";

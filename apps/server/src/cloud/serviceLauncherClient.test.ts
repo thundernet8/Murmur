@@ -4,7 +4,7 @@ import * as Path from "effect/Path";
 import * as Logger from "effect/Logger";
 import * as PlatformError from "effect/PlatformError";
 import { assert, expect, it } from "@effect/vitest";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Effect from "effect/Effect";
 import * as Deferred from "effect/Deferred";
 import * as Fiber from "effect/Fiber";

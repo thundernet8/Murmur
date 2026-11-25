@@ -5,7 +5,7 @@ import type {
   PullRequestDetail,
   PullRequestListEntry,
   PullRequestMergeability,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { msg } from "gt-react-native";
 
 import type { AppSymbolName } from "../../components/ui/AppSymbol";

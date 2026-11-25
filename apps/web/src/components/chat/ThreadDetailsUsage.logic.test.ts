@@ -5,7 +5,7 @@ import {
   type ServerProviderUsageLimits,
   type UsageLimitSourceSnapshot,
   UsageLimitSourceId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { describe, expect, it } from "vite-plus/test";
 
 import { poolSources, resolveThreadDetailsLimits } from "./ThreadDetailsUsage.logic";

@@ -1,5 +1,5 @@
-import { listensOnLoopback } from "@t3tools/shared/hostClassification";
-import * as NetService from "@t3tools/shared/Net";
+import { listensOnLoopback } from "@murmur/shared/hostClassification";
+import * as NetService from "@murmur/shared/Net";
 import * as Duration from "effect/Duration";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

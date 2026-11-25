@@ -1,4 +1,4 @@
-import type { EnvironmentId, ThreadId, TurnItemId } from "@t3tools/contracts";
+import type { EnvironmentId, ThreadId, TurnItemId } from "@murmur/contracts";
 import {
   makeMcpAppHost,
   McpAppHostRefusal,
@@ -8,8 +8,8 @@ import {
   type McpAppDisplayMode,
   type McpAppHost,
   type McpAppHostContext,
-} from "@t3tools/client-runtime/mcp-apps";
-import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/mcp-apps";
+import { squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
 import {
   clampMcpAppHeight,
   MCP_APP_COLOR_SCHEME_PARAM,
@@ -18,7 +18,7 @@ import {
   mcpAppAllowAttribute,
   mcpAppFileName,
   type McpAppReference,
-} from "@t3tools/shared/mcpApp";
+} from "@murmur/shared/mcpApp";
 import { msg, T, useGT, Var } from "gt-react";
 import { Minimize2Icon } from "lucide-react";
 import { useEffect, useRef, useState, type FocusEvent, type ToggleEvent } from "react";

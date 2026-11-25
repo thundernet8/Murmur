@@ -1,16 +1,16 @@
 import {
   legacyThreadPullRequestKey,
   threadPullRequestKeyOf,
-} from "@t3tools/client-runtime/thread-pull-requests";
+} from "@murmur/client-runtime/thread-pull-requests";
 import {
   composerPullRequestsFromLinks,
   filterComposerPullRequestMatches,
   withLinkedComposerPullRequestsFirst,
-} from "@t3tools/shared/composerPullRequestMatches";
-import { resolveFilesystemReadAccess } from "@t3tools/client-runtime/state/filesystem";
+} from "@murmur/shared/composerPullRequestMatches";
+import { resolveFilesystemReadAccess } from "@murmur/client-runtime/state/filesystem";
 import { environmentSession } from "./session";
 import { useEnvironmentPresentation } from "./presentation";
-import type { VcsRefTarget } from "@t3tools/client-runtime/state/vcs";
+import type { VcsRefTarget } from "@murmur/client-runtime/state/vcs";
 import type {
   EnvironmentId,
   OrchestrationV2ProjectedTurnItem,
@@ -18,7 +18,7 @@ import type {
   ThreadPullRequestLink,
   VcsListRefsResult,
   VcsRef,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   createThreadSearchResultsAtomFamily,
   makeThreadSearchKey,
@@ -27,12 +27,12 @@ import {
   type SettledThreadSearch,
   type ThreadSearchResultsState,
   type ThreadSearchScope,
-} from "@t3tools/client-runtime/state/thread-search";
-import { THREAD_SEARCH_QUERY_MAX_LENGTH } from "@t3tools/contracts";
-import { messageSearchTokens } from "@t3tools/shared/paletteSearch";
+} from "@murmur/client-runtime/state/thread-search";
+import { THREAD_SEARCH_QUERY_MAX_LENGTH } from "@murmur/contracts";
+import { messageSearchTokens } from "@murmur/shared/paletteSearch";
 import { useAtomValue } from "@effect/atom-react";
 import * as Cause from "effect/Cause";
-import { turnItemDetailRevision } from "@t3tools/client-runtime/work-log/item-detail";
+import { turnItemDetailRevision } from "@murmur/client-runtime/work-log/item-detail";
 import * as Option from "effect/Option";
 import { AsyncResult, Atom } from "effect/reactivity";
 import { useEffect, useMemo, useState } from "react";

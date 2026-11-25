@@ -17,9 +17,9 @@ import {
   mcpClientScopes,
   parseMcpApprovalCode,
   type RuntimeMode,
-} from "@t3tools/contracts";
-import { DEFAULT_HOSTED_APP_URL } from "@t3tools/shared/connectAuth";
-import { encodeOAuthScope } from "@t3tools/shared/oauthScope";
+} from "@murmur/contracts";
+import { DEFAULT_HOSTED_APP_URL } from "@murmur/shared/connectAuth";
+import { encodeOAuthScope } from "@murmur/shared/oauthScope";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as Digest from "effect/crypto/Digest";

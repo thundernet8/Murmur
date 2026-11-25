@@ -1,7 +1,7 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 /* oxlint-disable react/no-array-index-key -- Spreadsheet rows and columns retain their source positions. */
-import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
-import type { OfficePreviewKind } from "@t3tools/shared/filePreview";
+import { formatAttachmentSize } from "@murmur/client-runtime/state/attachments";
+import type { OfficePreviewKind } from "@murmur/shared/filePreview";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";

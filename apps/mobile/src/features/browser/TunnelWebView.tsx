@@ -1,9 +1,9 @@
 import {
   createRelaySocketBridge,
   type RelaySocketBridgeEvent,
-} from "@t3tools/shared/relaySocketBridge";
-import type { createRelayTransport } from "@t3tools/shared/relayTransport";
-import type { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/shared/relaySocketBridge";
+import type { createRelayTransport } from "@murmur/shared/relayTransport";
+import type { EnvironmentId } from "@murmur/contracts";
 import { requireNativeModule, requireNativeView } from "expo";
 import { useRef, type Ref } from "react";
 import {

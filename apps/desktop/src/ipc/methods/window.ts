@@ -14,10 +14,10 @@ import {
   SystemSettingsPaneSchema,
   type DesktopEnvironmentBootstrap,
   type PickedThemeFile,
-} from "@t3tools/contracts";
-import { PROJECT_FAVICON_EXTENSIONS } from "@t3tools/shared/projectFavicon";
-import { resolveEditorCommand } from "@t3tools/shared/editor";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/contracts";
+import { PROJECT_FAVICON_EXTENSIONS } from "@murmur/shared/projectFavicon";
+import { resolveEditorCommand } from "@murmur/shared/editor";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";
 import * as Effect from "effect/Effect";

@@ -8,13 +8,13 @@ import type {
   ScopedProjectRef,
   ServerConfig,
   ServerProvider,
-} from "@t3tools/contracts";
-import { scopeProjectRef, scopeThreadRef } from "@t3tools/client-runtime/environment";
-import { resolveProviderInstanceDisplayName as agentName } from "@t3tools/client-runtime/state/provider-instance-display";
+} from "@murmur/contracts";
+import { scopeProjectRef, scopeThreadRef } from "@murmur/client-runtime/environment";
+import { resolveProviderInstanceDisplayName as agentName } from "@murmur/client-runtime/state/provider-instance-display";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   AgentSessionSource,
   AuthProvidersManageScope,
@@ -26,7 +26,7 @@ import {
   isManagedDriverAllowed,
   ProviderDriverKind,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { Link, useBlocker } from "@tanstack/react-router";
 import * as Schema from "effect/Schema";
 import {

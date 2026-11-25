@@ -1,16 +1,13 @@
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
-import type { VcsRef } from "@t3tools/client-runtime/state/vcs";
-import {
-  type AtomCommandResult,
-  mapAtomCommandResult,
-} from "@t3tools/client-runtime/state/runtime";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/shell";
+import type { VcsRef } from "@murmur/client-runtime/state/vcs";
+import { type AtomCommandResult, mapAtomCommandResult } from "@murmur/client-runtime/state/runtime";
 import type {
   VcsListRefsInput,
   VcsListRefsResult,
   VcsSwitchRefInput,
   VcsSwitchRefResult,
-} from "@t3tools/contracts";
-import { deriveLocalBranchNameFromRemoteRef } from "@t3tools/shared/git";
+} from "@murmur/contracts";
+import { deriveLocalBranchNameFromRemoteRef } from "@murmur/shared/git";
 import * as Cause from "effect/Cause";
 import { AsyncResult } from "effect/reactivity";
 import { msg } from "gt-react-native";

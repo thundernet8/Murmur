@@ -1,8 +1,8 @@
 import { msg } from "gt-react";
-import { managedCapabilityDenial } from "@t3tools/client-runtime/contract-labels";
+import { managedCapabilityDenial } from "@murmur/client-runtime/contract-labels";
 import { useAuth } from "@clerk/react";
 import { Link } from "@tanstack/react-router";
-import { AgentFeedbackMode } from "@t3tools/contracts";
+import { AgentFeedbackMode } from "@murmur/contracts";
 import { T, useGT, useMessages } from "gt-react";
 
 import { hasCloudPublicConfig } from "~/cloud/publicConfig";

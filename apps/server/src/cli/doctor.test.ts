@@ -1,6 +1,6 @@
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import { assert, it } from "@effect/vitest";
 import * as Console from "effect/Console";
 import * as Effect from "effect/Effect";

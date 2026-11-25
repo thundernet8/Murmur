@@ -1,9 +1,9 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import type { AuthConnectDevice, EnvironmentId } from "@t3tools/contracts";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import type { AuthConnectDevice, EnvironmentId } from "@murmur/contracts";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import * as DateTime from "effect/DateTime";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { useState } from "react";

@@ -1,7 +1,7 @@
 import {
   DESKTOP_UPDATE_IN_PROGRESS_MARKER_FILE,
   DESKTOP_UPDATE_IN_PROGRESS_TTL_MS,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Deferred from "effect/Deferred";
 import * as Duration from "effect/Duration";
@@ -107,7 +107,7 @@ export class DesktopBackendPool extends Context.Service<
       id: BackendInstanceId,
     ) => Effect.Effect<void, DesktopBackendPoolCannotUnregisterPrimaryError>;
   }
->()("@t3tools/desktop/backend/DesktopBackendPool") {}
+>()("@murmur/desktop/backend/DesktopBackendPool") {}
 
 export type BackendInstanceFactoryRequirements =
   | FileSystem.FileSystem

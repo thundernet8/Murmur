@@ -1,6 +1,6 @@
 import { msg, useLocale, useMessages } from "gt-react-native";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { formatDiffCount } from "@t3tools/client-runtime/diff-count";
+import { formatDiffCount } from "@murmur/client-runtime/diff-count";
 
 import { parseReviewInlineComments } from "./reviewCommentSelection";
 import { getCachedNativeReviewDiffData } from "./nativeReviewDiffAdapter";
@@ -19,7 +19,7 @@ import type {
   OrchestrationMessageContext,
   ReviewDiffFileStat,
   ReviewDiffPreviewSource,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { RegistryContext, useAtomValue } from "@effect/atom-react";
 import * as AsyncResult from "effect/reactivity/AsyncResult";
 import * as Atom from "effect/reactivity/Atom";

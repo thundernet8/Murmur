@@ -13,7 +13,7 @@ import {
   NodeId,
   type ProjectId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as ProviderCommitBatch from "./ProviderCommitBatch.ts";
 import * as ThreadViewers from "./ThreadViewers.ts";
 import * as Context from "effect/Context";

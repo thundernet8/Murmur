@@ -4,7 +4,7 @@ import {
   type OrchestrationV2CommandOutputFrame,
   type OrchestrationV2SubscribeCommandOutputInput,
   type OrchestrationV2TurnItem,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   appendTerminalOutput,
   EMPTY_TERMINAL_OUTPUT,
@@ -12,8 +12,8 @@ import {
   type TerminalOutputState,
   TERMINAL_OUTPUT_TAIL_CHARS,
   terminalOutputResumeText,
-} from "@t3tools/shared/terminalOutput";
-import { commandItemOutput } from "@t3tools/shared/commandOutput";
+} from "@murmur/shared/terminalOutput";
+import { commandItemOutput } from "@murmur/shared/commandOutput";
 import * as Cause from "effect/Cause";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";

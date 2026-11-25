@@ -1,7 +1,7 @@
-import { SourceControlProviderKind } from "@t3tools/contracts";
-import { normalizeGitRemoteUrl } from "@t3tools/shared/git";
-import { refineUnknownRemoteProvider } from "@t3tools/source-control-core/server/discovery";
-import { processOutput } from "@t3tools/source-control-testing/TestSourceControlHost";
+import { SourceControlProviderKind } from "@murmur/contracts";
+import { normalizeGitRemoteUrl } from "@murmur/shared/git";
+import { refineUnknownRemoteProvider } from "@murmur/source-control-core/server/discovery";
+import { processOutput } from "@murmur/source-control-testing/TestSourceControlHost";
 import { assert, it } from "@effect/vitest";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
@@ -9,7 +9,7 @@ import * as Layer from "effect/Layer";
 import * as Option from "effect/Option";
 import { ChildProcessSpawner } from "effect/process";
 
-import * as TestSourceControlHost from "@t3tools/source-control-testing/TestSourceControlHost";
+import * as TestSourceControlHost from "@murmur/source-control-testing/TestSourceControlHost";
 import * as GitLabCli from "./GitLabCli.ts";
 import { parseGitLabAuthStatusHosts } from "./gitLabAuthStatus.ts";
 import * as GitLabSourceControlProvider from "./GitLabSourceControlProvider.ts";

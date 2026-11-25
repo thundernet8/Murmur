@@ -1,4 +1,4 @@
-import type { createRelayTransport } from "@t3tools/shared/relayTransport";
+import type { createRelayTransport } from "@murmur/shared/relayTransport";
 import type { File } from "expo-file-system";
 
 export function encryptedRelayTransport(url: string) {

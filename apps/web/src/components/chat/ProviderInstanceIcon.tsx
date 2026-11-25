@@ -4,9 +4,9 @@ import {
   normalizeProviderAccentColor,
   providerAccentForegroundColor,
   providerInstanceInitials,
-} from "@t3tools/client-runtime/state/provider-instance-display";
+} from "@murmur/client-runtime/state/provider-instance-display";
 
-import { ProviderDriverKind } from "@t3tools/contracts";
+import { ProviderDriverKind } from "@murmur/contracts";
 import {
   AnthropicIcon,
   AntigravityIcon,

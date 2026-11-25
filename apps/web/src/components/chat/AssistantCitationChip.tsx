@@ -1,9 +1,9 @@
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import type { AssistantCitation, ResponseContextRecord } from "@t3tools/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import type { AssistantCitation, ResponseContextRecord } from "@murmur/contracts";
 import {
   assistantCitationLabel,
   serializeAssistantCitation,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useGT } from "gt-react";
 import { PencilIcon, QuoteIcon } from "lucide-react";

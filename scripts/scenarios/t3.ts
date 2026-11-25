@@ -11,8 +11,8 @@ import {
   type ProjectMutation,
   ProjectId,
   WsRpcGroup,
-} from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Clock from "effect/Clock";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as Effect from "effect/Effect";

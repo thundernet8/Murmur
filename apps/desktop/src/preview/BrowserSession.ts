@@ -1,4 +1,4 @@
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import type { Certificate, Session, WebContents } from "electron";
 import { BrowserWindow, session } from "electron";
 import { msg } from "gt-i18n";
@@ -228,7 +228,7 @@ export class BrowserSession extends Context.Service<
       partitions?: ReadonlyArray<string>,
     ) => Effect.Effect<void, BrowserSessionCacheClearError>;
   }
->()("@t3tools/desktop/preview/BrowserSession") {}
+>()("@murmur/desktop/preview/BrowserSession") {}
 
 const selectSessions = (
   sessions: ReadonlyMap<string, Session>,

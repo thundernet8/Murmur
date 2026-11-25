@@ -1,4 +1,4 @@
-import { managedCapabilityDenial, type ServerConfig } from "@t3tools/contracts";
+import { managedCapabilityDenial, type ServerConfig } from "@murmur/contracts";
 
 export function canShareWithGuest(
   permitted: boolean,

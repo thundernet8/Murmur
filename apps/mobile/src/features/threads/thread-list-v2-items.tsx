@@ -19,21 +19,21 @@ import type { ThreadMoveDestination } from "./threadOrder";
 import type {
   EnvironmentProject,
   EnvironmentThreadShell,
-} from "@t3tools/client-runtime/state/shell";
-import type { EnvironmentThreadSearchMatch } from "@t3tools/client-runtime/state/thread-search";
+} from "@murmur/client-runtime/state/shell";
+import type { EnvironmentThreadSearchMatch } from "@murmur/client-runtime/state/thread-search";
 import {
   formatWorkingDurationLabel,
   resolveThreadWorkingStartedAt,
-} from "@t3tools/client-runtime/state/models";
+} from "@murmur/client-runtime/state/models";
 import {
   AuthOrchestrationOperateScope,
   type EnvironmentId,
   type EnvironmentMachineKind,
-} from "@t3tools/contracts";
-import { toServerClock } from "@t3tools/client-runtime/clock";
-import type { SnoozePresetSetting } from "@t3tools/contracts/settings";
-import { canSnooze } from "@t3tools/client-runtime/state/thread-settled";
-import { threadChipCopyTarget } from "@t3tools/client-runtime/thread-reference";
+} from "@murmur/contracts";
+import { toServerClock } from "@murmur/client-runtime/clock";
+import type { SnoozePresetSetting } from "@murmur/contracts/settings";
+import { canSnooze } from "@murmur/client-runtime/state/thread-settled";
+import { threadChipCopyTarget } from "@murmur/client-runtime/thread-reference";
 import type { MenuAction } from "@react-native-menu/menu";
 import { useNavigation } from "@react-navigation/native";
 import { msg, T, useGT, useMessages } from "gt-react-native";

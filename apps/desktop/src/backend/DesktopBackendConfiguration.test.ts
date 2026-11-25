@@ -1,13 +1,13 @@
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { assert, describe, it } from "@effect/vitest";
-import { currentDesktopBootstrapToken } from "@t3tools/shared/desktopBootstrapToken";
+import { currentDesktopBootstrapToken } from "@murmur/shared/desktopBootstrapToken";
 import {
   DESKTOP_READINESS_CHALLENGE_PARAM,
   DESKTOP_READINESS_PROOF_PATH,
   desktopReadinessProof,
-} from "@t3tools/shared/desktopReadinessProof";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/shared/desktopReadinessProof";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

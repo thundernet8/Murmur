@@ -1,8 +1,8 @@
 import {
   formatProviderSubagentStatus,
   type ProviderSubagentStatus,
-} from "@t3tools/client-runtime/state/thread-execution";
-import { isOrchestrationV2WorkActive, type EnvironmentId, type ThreadId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/thread-execution";
+import { isOrchestrationV2WorkActive, type EnvironmentId, type ThreadId } from "@murmur/contracts";
 import { T, useGT, useMessages, Var } from "gt-react-native";
 import { useState } from "react";
 import { View } from "react-native";

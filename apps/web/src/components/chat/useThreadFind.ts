@@ -1,6 +1,6 @@
-import type { InlineSkill } from "@t3tools/shared/inlineSkills";
-import type { OrchestrationV2SearchThreadResult, ScopedThreadRef } from "@t3tools/contracts";
-import { scopedThreadKey } from "@t3tools/client-runtime/environment";
+import type { InlineSkill } from "@murmur/shared/inlineSkills";
+import type { OrchestrationV2SearchThreadResult, ScopedThreadRef } from "@murmur/contracts";
+import { scopedThreadKey } from "@murmur/client-runtime/environment";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { orchestrationEnvironment } from "~/state/orchestration";
 import { useRenderedAppearance } from "~/hooks/useTheme";

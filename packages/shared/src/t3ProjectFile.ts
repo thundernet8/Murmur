@@ -1,7 +1,7 @@
 import * as Exit from "effect/Exit";
 import * as Schema from "effect/Schema";
 
-import { T3ProjectFile, MURMUR_PROJECT_FILE_SCHEMA_URL } from "@t3tools/contracts";
+import { T3ProjectFile, MURMUR_PROJECT_FILE_SCHEMA_URL } from "@murmur/contracts";
 
 import { fromLenientJson } from "./schemaJson.ts";
 

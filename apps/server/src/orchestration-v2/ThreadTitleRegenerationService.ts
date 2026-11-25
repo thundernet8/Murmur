@@ -1,5 +1,5 @@
-import { resolveProjectSettings } from "@t3tools/shared/projectSettings";
-import { isAttachmentOnlyBootstrapPrompt } from "@t3tools/shared/composerContextReferences";
+import { resolveProjectSettings } from "@murmur/shared/projectSettings";
+import { isAttachmentOnlyBootstrapPrompt } from "@murmur/shared/composerContextReferences";
 import {
   CommandId,
   type ChatAttachment,
@@ -10,7 +10,7 @@ import {
   type ServerSettingsError,
   TextGenerationError,
   type ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
@@ -28,8 +28,8 @@ import * as ProjectStore from "./ProjectStore.ts";
 import { forkInheritedRunOrdinals, ProjectionStoreThreadNotFoundError } from "./ProjectionStore.ts";
 import * as ThreadManagementService from "./ThreadManagementService.ts";
 
-import { formatThreadTitleContext } from "@t3tools/provider-core/server/threadTitleContext";
-export { formatThreadTitleContext } from "@t3tools/provider-core/server/threadTitleContext";
+import { formatThreadTitleContext } from "@murmur/provider-core/server/threadTitleContext";
+export { formatThreadTitleContext } from "@murmur/provider-core/server/threadTitleContext";
 
 export class ThreadTitleRegenerationService extends Context.Service<
   ThreadTitleRegenerationService,

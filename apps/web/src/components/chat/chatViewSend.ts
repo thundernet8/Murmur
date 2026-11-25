@@ -5,17 +5,17 @@ import {
   type ScopedThreadRef,
   type ThreadId,
   PROVIDER_SEND_TURN_MAX_ATTACHMENTS,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   wasBootstrapThreadDeleted,
   wasBootstrapThreadNotCreated,
-} from "@t3tools/client-runtime/errors";
+} from "@murmur/client-runtime/errors";
 import { Atom } from "effect/reactivity";
 import { msg } from "gt-react";
 import {
   squashAtomCommandFailure,
   type AtomCommandResult,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { m } from "../../i18n/messages";
 import { readLocalApi } from "../../localApi";
 import {
@@ -34,8 +34,8 @@ import {
   useComposerDraftStore,
   DraftId,
 } from "../../composerDraftStore";
-import { ATTACHMENT_ONLY_BOOTSTRAP_PROMPT } from "@t3tools/shared/composerContextReferences";
-import { createModelSelection } from "@t3tools/shared/model";
+import { ATTACHMENT_ONLY_BOOTSTRAP_PROMPT } from "@murmur/shared/composerContextReferences";
+import { createModelSelection } from "@murmur/shared/model";
 import type { ProviderInstanceEntry } from "../../providerInstances";
 import { getComposerPromptInjectionState, getComposerProviderState } from "./composerProviderState";
 import {

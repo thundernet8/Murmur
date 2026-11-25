@@ -1,9 +1,9 @@
-import type { ProjectFaviconTarget } from "@t3tools/client-runtime/project-favicon-cache";
+import type { ProjectFaviconTarget } from "@murmur/client-runtime/project-favicon-cache";
 import {
   createAssetEnvironmentAtoms,
   createProjectFaviconUrlAtomFamily,
   projectFaviconResource,
-} from "@t3tools/client-runtime/state/assets";
+} from "@murmur/client-runtime/state/assets";
 import { Atom } from "effect/reactivity";
 
 import { connectionAtomRuntime } from "../connection/runtime";

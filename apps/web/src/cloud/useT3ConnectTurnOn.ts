@@ -3,7 +3,7 @@ import {
   AuthRelayWriteScope,
   type EnvironmentId,
   managedCapabilityDenial,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import { useManagedPolicy } from "../state/managedPolicy";
 import { useEnvironmentCanConfigureRelay, useEnvironmentScope } from "../state/session";

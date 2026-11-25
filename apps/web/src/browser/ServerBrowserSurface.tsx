@@ -13,12 +13,12 @@ import {
   type PreviewStreamPointer,
   type PreviewStreamViewport,
   previewStreamHostSetupMessage,
-} from "@t3tools/client-runtime/preview/server-browser-stream";
+} from "@murmur/client-runtime/preview/server-browser-stream";
 import type {
   EnvironmentId,
   PreviewStreamHostSetup,
   PreviewViewportSetting,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   type ClipboardEvent,
   type FormEvent,
@@ -39,7 +39,7 @@ import { CommandBlock } from "~/components/CommandBlock";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { toastManager } from "~/components/ui/toast";
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { m } from "~/i18n/messages";
 import { cn } from "~/lib/utils";
 import { refreshPreviewStreamAccess, usePreviewStreamAccess } from "~/state/previewStream";

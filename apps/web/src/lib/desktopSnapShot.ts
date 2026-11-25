@@ -1,4 +1,4 @@
-import type { DesktopBridge } from "@t3tools/contracts";
+import type { DesktopBridge } from "@murmur/contracts";
 
 const SNAP_SHOT_FOCUS_EVENT = "murmur:focus-composer";
 

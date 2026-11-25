@@ -1,7 +1,7 @@
 import {
   COMPOSER_CONTEXT_CLIPBOARD_MIME,
   encodeComposerContextClipboardHtml,
-} from "@t3tools/shared/composerContextClipboard";
+} from "@murmur/shared/composerContextClipboard";
 import { msg } from "gt-react";
 
 import { m } from "../../i18n/messages";

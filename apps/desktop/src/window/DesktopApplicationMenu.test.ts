@@ -1,12 +1,12 @@
 import * as NodeServices from "@effect/platform-node/NodeServices";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import { assert, describe, it } from "@effect/vitest";
 import * as Deferred from "effect/Deferred";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
 import * as Option from "effect/Option";
 
-import type { DesktopUpdateCheckResult, DesktopUpdateState } from "@t3tools/contracts";
+import type { DesktopUpdateCheckResult, DesktopUpdateState } from "@murmur/contracts";
 import * as Electron from "electron";
 import { vi } from "vite-plus/test";
 

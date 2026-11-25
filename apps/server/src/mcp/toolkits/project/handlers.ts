@@ -10,7 +10,7 @@ import {
   type Project as ProjectRecord,
   type ServerProvider,
   MURMUR_PROJECT_FILE_NAME,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Digest from "effect/crypto/Digest";
 import * as Effect from "effect/Effect";
 import * as Hex from "effect/encoding/Hex";
@@ -31,13 +31,13 @@ import * as GitVcsDriver from "../../../vcs/GitVcsDriver.ts";
 import * as ServerSettings from "../../../serverSettings.ts";
 import * as ProviderRegistry from "../../../provider/ProviderRegistry.ts";
 import * as DateTime from "effect/DateTime";
-import { resolveNewThreadModelSelection } from "@t3tools/shared/usageLimits";
+import { resolveNewThreadModelSelection } from "@murmur/shared/usageLimits";
 import {
   resolveProjectFileBackedSetting,
   resolveProjectSettings,
-} from "@t3tools/shared/projectSettings";
-import { resolveProjectScripts } from "@t3tools/shared/projectScripts";
-import { parseT3ProjectFile } from "@t3tools/shared/t3ProjectFile";
+} from "@murmur/shared/projectSettings";
+import { resolveProjectScripts } from "@murmur/shared/projectScripts";
+import { parseT3ProjectFile } from "@murmur/shared/t3ProjectFile";
 import { resolveRuntimeMode } from "../../delegatedTaskModes.ts";
 import * as McpInvocationContext from "../../McpInvocationContext.ts";
 import * as McpToolAccess from "../../McpToolAccess.ts";

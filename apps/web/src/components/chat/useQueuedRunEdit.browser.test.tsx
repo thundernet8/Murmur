@@ -1,4 +1,4 @@
-import type { ThreadStructure } from "@t3tools/client-runtime/state/shell";
+import type { ThreadStructure } from "@murmur/client-runtime/state/shell";
 import {
   EnvironmentId,
   ChatAttachmentId,
@@ -8,13 +8,13 @@ import {
   RunId,
   ThreadId,
   type ScopedThreadRef,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useImperativeHandle, type RefObject } from "react";
 import { describe, expect, it, vi } from "vite-plus/test";
 import {
   ATTACHMENT_ONLY_BOOTSTRAP_PROMPT,
   threadContextRecord,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 import { toastManager } from "../ui/toast";
 
 import { act, render } from "../../../test/render";

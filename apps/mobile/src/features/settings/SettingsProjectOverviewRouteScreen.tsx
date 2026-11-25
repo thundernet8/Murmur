@@ -1,21 +1,21 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import { T, useGT } from "gt-react-native";
 import { ScreenScrollView as ScrollView } from "../../components/ui/ScreenScrollView";
 import { AppText as Text, AppTextInput } from "../../components/ui/AppText";
 import { Button } from "../../components/ui/Button";
 import { ProjectFavicon } from "../../components/ProjectFavicon";
 import * as Dialog from "../../components/ui/Dialog";
-import { AuthOrchestrationOperateScope } from "@t3tools/contracts";
-import { planProjectRemoval } from "@t3tools/client-runtime/state/projects";
+import { AuthOrchestrationOperateScope } from "@murmur/contracts";
+import { planProjectRemoval } from "@murmur/client-runtime/state/projects";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   deriveProjectGroupLabel,
   type ProjectGroup,
-} from "@t3tools/client-runtime/state/project-grouping";
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
+} from "@murmur/client-runtime/state/project-grouping";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/shell";
 import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import { Platform, Pressable, View } from "react-native";

@@ -1,5 +1,5 @@
-import type { ClientConnectionMethod, EnvironmentId } from "@t3tools/contracts";
-import type { RelayProtectedError } from "@t3tools/contracts/relay";
+import type { ClientConnectionMethod, EnvironmentId } from "@murmur/contracts";
+import type { RelayProtectedError } from "@murmur/contracts/relay";
 import type { ManagedRelayClientError } from "../relay/managedRelay.ts";
 import { msg } from "gt-i18n";
 import { dpopFailureText, relayProtectedErrorText } from "../relay/errorPresentation.ts";

@@ -41,7 +41,7 @@ export interface NetServiceShape {
 }
 
 export class NetService extends Context.Service<NetService, NetServiceShape>()(
-  "@t3tools/shared/Net/NetService",
+  "@murmur/shared/Net/NetService",
 ) {}
 
 /** @public */

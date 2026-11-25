@@ -9,13 +9,13 @@ import {
   type SecretReference,
   SettingsSecretValue,
   type ServerProvider,
-} from "@t3tools/contracts";
-import type { AnyProviderDriver, ProviderInstance } from "@t3tools/provider-core/server/driver";
-import { makeManualOnlyProviderMaintenanceCapabilities } from "@t3tools/provider-core/server/maintenanceResolver";
-import * as ProviderLatestVersions from "@t3tools/provider-core/server/ProviderLatestVersions";
-import * as SecretResolver from "@t3tools/secret-provider-core/server/SecretResolver";
-import { defineSecretProviderDriver } from "@t3tools/secret-provider-core/server/driver";
-import { defineSecretProvider } from "@t3tools/secret-provider-core/shared/definition";
+} from "@murmur/contracts";
+import type { AnyProviderDriver, ProviderInstance } from "@murmur/provider-core/server/driver";
+import { makeManualOnlyProviderMaintenanceCapabilities } from "@murmur/provider-core/server/maintenanceResolver";
+import * as ProviderLatestVersions from "@murmur/provider-core/server/ProviderLatestVersions";
+import * as SecretResolver from "@murmur/secret-provider-core/server/SecretResolver";
+import { defineSecretProviderDriver } from "@murmur/secret-provider-core/server/driver";
+import { defineSecretProvider } from "@murmur/secret-provider-core/shared/definition";
 import * as Deferred from "effect/Deferred";
 import * as Effect from "effect/Effect";
 import * as Fiber from "effect/Fiber";

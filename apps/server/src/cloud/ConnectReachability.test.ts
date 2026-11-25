@@ -2,7 +2,7 @@
 import * as NodeFS from "node:fs";
 import * as NodeNet from "node:net";
 
-import { MURMUR_CONNECT_TROUBLESHOOTING_SECTIONS } from "@t3tools/contracts";
+import { MURMUR_CONNECT_TROUBLESHOOTING_SECTIONS } from "@murmur/contracts";
 import { describe, expect, it } from "@effect/vitest";
 import * as Clock from "effect/Clock";
 import * as Deferred from "effect/Deferred";

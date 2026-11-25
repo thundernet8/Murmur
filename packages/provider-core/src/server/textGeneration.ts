@@ -5,7 +5,7 @@ import type {
   ProjectId,
   PullRequestReviewGuide,
   TextGenerationError,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import type * as Effect from "effect/Effect";
 
 import type { TextGenerationPolicy } from "./textGenerationPolicy.ts";

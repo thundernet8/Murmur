@@ -1,9 +1,9 @@
-import type { ScopedThreadRef } from "@t3tools/contracts";
+import type { ScopedThreadRef } from "@murmur/contracts";
 import {
   HTML_RENDER_COLUMN_WIDTH,
   htmlRenderFrameHeight,
   type HtmlRenderReference,
-} from "@t3tools/shared/htmlRender";
+} from "@murmur/shared/htmlRender";
 import { useGT } from "gt-react";
 import { MinusIcon, PlusIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";

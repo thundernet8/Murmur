@@ -9,13 +9,13 @@ import {
   linkedThreadFailure,
   type LinkedThreadFailure,
   type LinkedThreadTarget,
-} from "@t3tools/client-runtime/linked-thread";
+} from "@murmur/client-runtime/linked-thread";
 import {
   toolCallLines,
   turnItemDetailRevision,
   turnItemOutputText,
-} from "@t3tools/client-runtime/work-log/item-detail";
-import { EnvironmentId, ThreadId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/work-log/item-detail";
+import { EnvironmentId, ThreadId } from "@murmur/contracts";
 import { T, useGT, useLocale, useMessages } from "gt-react-native";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type * as React from "react";

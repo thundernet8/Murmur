@@ -1,4 +1,4 @@
-import { RelayEncryptionTransport } from "@t3tools/client-runtime/relay/encryption";
+import { RelayEncryptionTransport } from "@murmur/client-runtime/relay/encryption";
 import * as Context from "effect/Context";
 import { msg } from "gt-react-native";
 
@@ -10,7 +10,7 @@ import {
   type EnvironmentId,
   DEFAULT_SPEECH_TRANSCRIPTION_OPTIONS,
   type VoiceTranscriptionDestination,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   getEnvironmentSpeechModels,
   getCloudSpeechKeys,
@@ -20,10 +20,10 @@ import {
   getEnvironmentSpeechStatus,
   transcribeEnvironmentPcm,
   VoiceTranscriptionError,
-} from "@t3tools/client-runtime/voice-input";
+} from "@murmur/client-runtime/voice-input";
 import { FetchHttpClient, type HttpClient } from "effect/http";
-import type { PreparedConnection } from "@t3tools/client-runtime/connection";
-import { effectiveSpeechLanguage } from "@t3tools/shared/speech";
+import type { PreparedConnection } from "@murmur/client-runtime/connection";
+import { effectiveSpeechLanguage } from "@murmur/shared/speech";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
 import { Atom, AsyncResult, AtomRegistry } from "effect/reactivity";

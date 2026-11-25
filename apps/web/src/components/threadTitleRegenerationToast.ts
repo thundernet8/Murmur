@@ -1,10 +1,10 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import type { ThreadTitleRegenerationOutcome } from "@t3tools/contracts";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import type { ThreadTitleRegenerationOutcome } from "@murmur/contracts";
 import {
   type AtomCommandResult,
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { msg } from "gt-react";
 
 import { m } from "../i18n/messages";

@@ -1,11 +1,11 @@
-import { threadContextRecord } from "@t3tools/shared/composerContextReferences";
+import { threadContextRecord } from "@murmur/shared/composerContextReferences";
 import { useEffect } from "react";
 import {
   type ComposerContextRecord,
   ComposerContextId,
   EnvironmentId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { expect, it, vi } from "vite-plus/test";
 
 import { act, render, stubGlobal } from "../../../test/render";

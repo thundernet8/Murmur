@@ -1,8 +1,8 @@
-import type { ContextMenuItem, ContextMenuSource } from "@t3tools/contracts";
+import type { ContextMenuItem, ContextMenuSource } from "@murmur/contracts";
 import {
   type SourceControlDefinition,
   UNKNOWN_SOURCE_CONTROL_CLIENT,
-} from "@t3tools/client-runtime/source-control-clients";
+} from "@murmur/client-runtime/source-control-clients";
 
 import { msg } from "gt-react";
 

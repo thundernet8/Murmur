@@ -1,4 +1,4 @@
-import type { ProviderDriverKind } from "@t3tools/contracts";
+import type { ProviderDriverKind } from "@murmur/contracts";
 
 import type { ModelEsque } from "./providerIconUtils";
 

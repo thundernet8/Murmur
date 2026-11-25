@@ -1,8 +1,8 @@
 import * as NodeServices from "@effect/platform-node/NodeServices";
-import { SourceControlProviderKind } from "@t3tools/contracts";
-import type * as SourceControlHost from "@t3tools/source-control-core/server/SourceControlHost";
-import * as TestSourceControlHost from "@t3tools/source-control-testing/TestSourceControlHost";
-import { processOutput } from "@t3tools/source-control-testing/TestSourceControlHost";
+import { SourceControlProviderKind } from "@murmur/contracts";
+import type * as SourceControlHost from "@murmur/source-control-core/server/SourceControlHost";
+import * as TestSourceControlHost from "@murmur/source-control-testing/TestSourceControlHost";
+import { processOutput } from "@murmur/source-control-testing/TestSourceControlHost";
 import { assert, it, vi } from "@effect/vitest";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";

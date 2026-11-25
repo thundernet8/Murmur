@@ -6,13 +6,13 @@ import * as Layer from "effect/Layer";
 import * as Path from "effect/Path";
 import { ChildProcessSpawner } from "effect/process";
 
-import { VcsProcessExitError } from "@t3tools/contracts";
+import { VcsProcessExitError } from "@murmur/contracts";
 
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import type * as SourceControlHost from "@t3tools/source-control-core/server/SourceControlHost";
-import * as TestSourceControlHost from "@t3tools/source-control-testing/TestSourceControlHost";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import type * as SourceControlHost from "@murmur/source-control-core/server/SourceControlHost";
+import * as TestSourceControlHost from "@murmur/source-control-testing/TestSourceControlHost";
 import * as GitLabCli from "./GitLabCli.ts";
-import { userFacingSourceControlDetail } from "@t3tools/source-control-core/server/SourceControlProvider";
+import { userFacingSourceControlDetail } from "@murmur/source-control-core/server/SourceControlProvider";
 
 const mockedRun = vi.fn<SourceControlHost.SourceControlHost["Service"]["process"]["run"]>();
 const layer = it.layer(

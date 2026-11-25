@@ -2,8 +2,8 @@ import {
   AuthOrchestrationOperateScope,
   EnvironmentAuthorizationError,
   EnvironmentId,
-} from "@t3tools/contracts";
-import { runAttachmentUploadCycle } from "@t3tools/client-runtime/state/attachments";
+} from "@murmur/contracts";
+import { runAttachmentUploadCycle } from "@murmur/client-runtime/state/attachments";
 import * as Cause from "effect/Cause";
 import { AtomRegistry } from "effect/reactivity";
 import { describe, expect, it } from "@effect/vitest";
@@ -21,8 +21,8 @@ vi.mock("./session", () => ({
   readEnvironmentScope: (environmentId: string, scope: string) =>
     scope === AuthOrchestrationOperateScope && state.grantedEnvironments.has(environmentId),
 }));
-vi.mock("@t3tools/client-runtime/state/attachments", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@t3tools/client-runtime/state/attachments")>()),
+vi.mock("@murmur/client-runtime/state/attachments", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@murmur/client-runtime/state/attachments")>()),
   createAttachmentEnvironmentAtoms: () => ({
     createUploadUrl: { label: "create", run: state.create },
     remove: { label: "remove", run: state.remove },

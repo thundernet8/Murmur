@@ -1,8 +1,8 @@
-import { tokenizeCliArgs } from "@t3tools/shared/cliArgs";
+import { tokenizeCliArgs } from "@murmur/shared/cliArgs";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 
-import type { McpProviderSessionConfig } from "@t3tools/provider-core/server/mcpSession";
+import type { McpProviderSessionConfig } from "@murmur/provider-core/server/mcpSession";
 import {
   PI_MURMUR_MCP_EXTENSION_FILENAME,
   PI_MURMUR_MCP_EXTENSION_SOURCE,

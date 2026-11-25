@@ -11,9 +11,9 @@ import {
   ProviderInstanceId,
   ProviderSessionId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import type { OpenCodeSettings } from "../settings.ts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Deferred from "effect/Deferred";
 import * as Effect from "effect/Effect";
 import * as Duration from "effect/Duration";
@@ -31,11 +31,11 @@ import * as FetchHttpClient from "effect/http/FetchHttpClient";
 import * as UrlParams from "effect/http/UrlParams";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
 
-import * as ProviderLatestVersions from "@t3tools/provider-core/server/ProviderLatestVersions";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
-import * as ProviderMaintenance from "@t3tools/provider-core/server/maintenanceResolver";
+import * as ProviderLatestVersions from "@murmur/provider-core/server/ProviderLatestVersions";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as ProviderEventLoggers from "@murmur/provider-core/server/ProviderEventLoggers";
+import * as ProviderMaintenance from "@murmur/provider-core/server/maintenanceResolver";
 import * as OpenCodeRuntime from "./OpenCodeRuntime.ts";
 import { OpenCodeDriver, isLocalOpenCodeServerUrl, openCodeUpdateFor } from "./driver.ts";
 import * as OpenCodeServerLedger from "./OpenCodeServerLedger.ts";
@@ -44,7 +44,7 @@ import {
   OPENCODE_2_WORKSPACE_RESPONSES,
   replayOpenCodeServer,
 } from "./probeResponses.fixture.ts";
-import * as TestProviderHost from "@t3tools/provider-testing/TestProviderHost";
+import * as TestProviderHost from "@murmur/provider-testing/TestProviderHost";
 
 it("only probes a locally configured OpenCode server's installed CLI", () => {
   assert.isTrue(isLocalOpenCodeServerUrl("http://127.0.0.1:35768"));

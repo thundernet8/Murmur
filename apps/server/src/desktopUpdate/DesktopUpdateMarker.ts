@@ -1,4 +1,4 @@
-import { DESKTOP_UPDATE_IN_PROGRESS_TTL_MS } from "@t3tools/contracts";
+import { DESKTOP_UPDATE_IN_PROGRESS_TTL_MS } from "@murmur/contracts";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";

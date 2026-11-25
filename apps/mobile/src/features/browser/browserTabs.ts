@@ -1,5 +1,5 @@
-import type { PreviewSessionSnapshot } from "@t3tools/contracts";
-import { isLoopbackHost } from "@t3tools/shared/preview";
+import type { PreviewSessionSnapshot } from "@murmur/contracts";
+import { isLoopbackHost } from "@murmur/shared/preview";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";

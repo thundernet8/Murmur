@@ -1,6 +1,6 @@
 import "~/index.css";
 
-import { EnvironmentId } from "@t3tools/contracts";
+import { EnvironmentId } from "@murmur/contracts";
 import { describe, expect, it, vi } from "vite-plus/test";
 import { userEvent } from "vite-plus/test/browser";
 

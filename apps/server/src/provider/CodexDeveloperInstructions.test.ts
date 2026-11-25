@@ -1,6 +1,6 @@
 import * as NodeAssert from "node:assert/strict";
 
-import { MURMUR_CODE_DEVICE_TOOL_INSTRUCTIONS } from "@t3tools/provider-core/server/orchestrationInstructions";
+import { MURMUR_CODE_DEVICE_TOOL_INSTRUCTIONS } from "@murmur/provider-core/server/orchestrationInstructions";
 import { describe, it } from "vite-plus/test";
 
 import {

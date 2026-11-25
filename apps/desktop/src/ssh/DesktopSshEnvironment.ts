@@ -2,12 +2,12 @@ import type {
   DesktopDiscoveredSshHost,
   DesktopSshEnvironmentBootstrap,
   DesktopSshEnvironmentTarget,
-} from "@t3tools/contracts";
-import { CLI_RELEASE_BASE_URL_ENV } from "@t3tools/shared/cliRelease";
-import * as NetService from "@t3tools/shared/Net";
-import * as SshAuth from "@t3tools/ssh/auth";
-import { resolveSshTarget } from "@t3tools/ssh/command";
-import { discoverSshHosts } from "@t3tools/ssh/config";
+} from "@murmur/contracts";
+import { CLI_RELEASE_BASE_URL_ENV } from "@murmur/shared/cliRelease";
+import * as NetService from "@murmur/shared/Net";
+import * as SshAuth from "@murmur/ssh/auth";
+import { resolveSshTarget } from "@murmur/ssh/command";
+import { discoverSshHosts } from "@murmur/ssh/config";
 import {
   SshCommandError,
   SshHostDiscoveryError,
@@ -16,8 +16,8 @@ import {
   SshPairingError,
   SshPasswordPromptError,
   SshReadinessError,
-} from "@t3tools/ssh/errors";
-import * as SshTunnel from "@t3tools/ssh/tunnel";
+} from "@murmur/ssh/errors";
+import * as SshTunnel from "@murmur/ssh/tunnel";
 import * as Context from "effect/Context";
 import type * as Digest from "effect/crypto/Digest";
 import * as SecureRandom from "effect/crypto/SecureRandom";
@@ -72,7 +72,7 @@ export class DesktopSshEnvironment extends Context.Service<
     ) => Effect.Effect<void, DesktopSshEnvironmentOperationError>;
     readonly closeAllTunnels: Effect.Effect<void>;
   }
->()("@t3tools/desktop/ssh/DesktopSshEnvironment") {}
+>()("@murmur/desktop/ssh/DesktopSshEnvironment") {}
 
 export interface DesktopSshEnvironmentLayerOptions {
   readonly resolveCliRunner?: Effect.Effect<SshTunnel.RemoteT3RunnerOptions>;

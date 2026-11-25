@@ -6,7 +6,7 @@ import {
   OrchestrationV2AppThreadJson,
   OrchestrationV2ProviderSessionJson,
   StorageCleanupReportEntry,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Base64Url from "effect/encoding/Base64Url";
 import * as Schema from "effect/Schema";
 import * as SqlClient from "effect/sql/SqlClient";
@@ -19,11 +19,11 @@ import type {
   WorktreeCleanupRules,
   StorageCleanupReport,
   ThreadId,
-} from "@t3tools/contracts";
-import { writeFileStringAtomically } from "@t3tools/shared/atomicWrite";
-import { resolveWorktreeCleanup } from "@t3tools/shared/projectSettings";
-import { resolveWorktreeT3Home } from "@t3tools/shared/devHome";
-import { makeDrainableWorker } from "@t3tools/shared/DrainableWorker";
+} from "@murmur/contracts";
+import { writeFileStringAtomically } from "@murmur/shared/atomicWrite";
+import { resolveWorktreeCleanup } from "@murmur/shared/projectSettings";
+import { resolveWorktreeT3Home } from "@murmur/shared/devHome";
+import { makeDrainableWorker } from "@murmur/shared/DrainableWorker";
 import * as Context from "effect/Context";
 import * as Deferred from "effect/Deferred";
 import * as Layer from "effect/Layer";
@@ -63,9 +63,9 @@ import { isNonRepositoryGitStderr } from "./vcs/GitVcsDriverCore.ts";
 import { isLinkedWorktree, removeLinkedWorktree } from "./vcs/worktreeRemoval.ts";
 import * as TaskFolders from "./workspace/TaskFolders.ts";
 import { withWorkspaceLease } from "./workspace/workspaceLease.ts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import * as NodeSqliteClient from "@t3tools/shared/nodeSqliteClient";
-import { isNetworkPath } from "@t3tools/shared/path";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import * as NodeSqliteClient from "@murmur/shared/nodeSqliteClient";
+import { isNetworkPath } from "@murmur/shared/path";
 
 const decodeCleanupThread = Schema.decodeUnknownEffect(
   Schema.fromJsonString(OrchestrationV2AppThreadJson),

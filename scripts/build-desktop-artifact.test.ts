@@ -19,7 +19,7 @@ import * as Sink from "effect/Sink";
 import * as Schema from "effect/Schema";
 import * as Stream from "effect/Stream";
 import { ChildProcess, ChildProcessSpawner } from "effect/process";
-import { fromYaml } from "@t3tools/shared/schemaYaml";
+import { fromYaml } from "@murmur/shared/schemaYaml";
 
 import {
   buildDesktopBundles,
@@ -72,8 +72,8 @@ import {
   ReleasePackageManifestError,
   releasePackageFiles,
 } from "./update-release-package-versions.ts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { symlinksSupported } from "@t3tools/shared/testing/symlinks";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { symlinksSupported } from "@murmur/shared/testing/symlinks";
 
 const encodeModuleUrl = Schema.encodeEffect(Schema.fromJsonString(Schema.String));
 const decodePackageVersion = Schema.decodeUnknownEffect(

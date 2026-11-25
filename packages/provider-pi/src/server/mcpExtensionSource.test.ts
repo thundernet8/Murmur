@@ -5,7 +5,7 @@ import * as NodeOS from "node:os";
 import * as NodeModule from "node:module";
 import * as NodeVM from "node:vm";
 import { assert, describe, it } from "@effect/vitest";
-import { PULL_REQUEST_LINKING_INSTRUCTIONS } from "@t3tools/provider-core/server/runtimeInstructions";
+import { PULL_REQUEST_LINKING_INSTRUCTIONS } from "@murmur/provider-core/server/runtimeInstructions";
 
 import {
   PI_MURMUR_MCP_EXTENSION_SOURCE,

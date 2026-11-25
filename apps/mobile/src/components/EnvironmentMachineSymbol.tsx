@@ -1,4 +1,4 @@
-import type { EnvironmentMachineKind } from "@t3tools/contracts";
+import type { EnvironmentMachineKind } from "@murmur/contracts";
 import { msg, useMessages } from "gt-react-native";
 
 import { SymbolView, type AppSymbolName } from "./ui/AppSymbol";

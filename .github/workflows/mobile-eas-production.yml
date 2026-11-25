@@ -76,7 +76,7 @@ permissions:
 jobs:
   production:
     name: EAS ${{ inputs.profile || 'production' }} ${{ github.event_name == 'push' && 'auto' || inputs.mode }}
-    if: github.repository == 'pingdotgg/t3code'
+    if: github.repository == 'thundernet8/Murmur'
     runs-on: blacksmith-8vcpu-ubuntu-2404
     # Serialize runs so OTAs publish in merge order. GitHub keeps at most one
     # queued job per group, so a burst of merges collapses into one run of the
@@ -142,7 +142,7 @@ jobs:
           cache: true
           run-install: |
             args:
-              - --filter=@t3tools/mobile...
+              - --filter=@murmur/mobile...
 
       - name: Expose pnpm
         if: steps.expo-token.outputs.present == 'true'

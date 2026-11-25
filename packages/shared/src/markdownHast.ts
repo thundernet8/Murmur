@@ -1,4 +1,4 @@
-import { isLocalEditorFileUrl, LOCAL_FILE_LINK_SCHEMES } from "@t3tools/contracts";
+import { isLocalEditorFileUrl, LOCAL_FILE_LINK_SCHEMES } from "@murmur/contracts";
 import type { Root } from "hast";
 import { defaultSchema, sanitize, type Schema } from "hast-util-sanitize";
 

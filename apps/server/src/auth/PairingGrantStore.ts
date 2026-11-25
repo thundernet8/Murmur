@@ -12,11 +12,11 @@ import {
   parseMcpApprovalCode,
   type ServerAuthBootstrapMethod,
   connectDeviceVerificationCode,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   DESKTOP_BOOTSTRAP_TOKEN_WINDOW_MS,
   isValidDesktopBootstrapToken,
-} from "@t3tools/shared/desktopBootstrapToken";
+} from "@murmur/shared/desktopBootstrapToken";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as DateTime from "effect/DateTime";

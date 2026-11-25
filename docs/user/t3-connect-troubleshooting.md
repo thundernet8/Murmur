@@ -161,7 +161,7 @@ If Murmur on the host disappears when SSH closes, see
 ## Report a problem
 
 If none of this helps, open an issue on
-[GitHub](https://github.com/pingdotgg/t3code/issues). Include:
+[GitHub](https://github.com/thundernet8/Murmur/issues). Include:
 
 - The text from **Copy diagnostics** in the environment's **Details**.
 - The output of `t3 connect status` on the host.

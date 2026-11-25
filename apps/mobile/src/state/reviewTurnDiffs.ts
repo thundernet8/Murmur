@@ -1,6 +1,6 @@
-import { turnDiffSections } from "@t3tools/client-runtime/state/thread-repositories";
-import type { EnvironmentId, OrchestrationGetTurnDiffResult, ThreadId } from "@t3tools/contracts";
-import { quoteGitPatchPath, unquoteGitPatchPath } from "@t3tools/shared/gitPatchPath";
+import { turnDiffSections } from "@murmur/client-runtime/state/thread-repositories";
+import type { EnvironmentId, OrchestrationGetTurnDiffResult, ThreadId } from "@murmur/contracts";
+import { quoteGitPatchPath, unquoteGitPatchPath } from "@murmur/shared/gitPatchPath";
 import * as Effect from "effect/Effect";
 import { Atom, type AtomRegistry } from "effect/reactivity";
 

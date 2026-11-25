@@ -1,10 +1,10 @@
-import { DESKTOP_UPDATE_RESTART_MARKER_FILE } from "@t3tools/contracts";
+import { DESKTOP_UPDATE_RESTART_MARKER_FILE } from "@murmur/contracts";
 // @effect-diagnostics-next-line nodeBuiltinImport:off -- Cross-process launcher contention uses real filesystem leases and IPC barriers.
 import * as NodeChildProcess from "node:child_process";
 import * as NodeSqlite from "node:sqlite";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { expect, it } from "@effect/vitest";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Clock from "effect/Clock";
 import * as ConfigProvider from "effect/ConfigProvider";
 import * as Duration from "effect/Duration";

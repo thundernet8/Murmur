@@ -4,16 +4,16 @@ import {
   type ChangeRequest,
   type SourceControlProviderAuth,
   type SourceControlProviderDiscoveryItem,
-} from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import {
   isMissingExecutable,
   providerAuth,
   type SourceControlManagedCliDiscoverySpec,
-} from "@t3tools/source-control-core/server/discovery";
-import * as SourceControlHost from "@t3tools/source-control-core/server/SourceControlHost";
-import * as SourceControlProvider from "@t3tools/source-control-core/server/SourceControlProvider";
-import { readSourceControlHostSettings } from "@t3tools/source-control-core/shared/definition";
+} from "@murmur/source-control-core/server/discovery";
+import * as SourceControlHost from "@murmur/source-control-core/server/SourceControlHost";
+import * as SourceControlProvider from "@murmur/source-control-core/server/SourceControlProvider";
+import { readSourceControlHostSettings } from "@murmur/source-control-core/shared/definition";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

@@ -47,7 +47,7 @@ A +1 on an existing PR is ALWAYS better than another PR. Search the open PRs bef
 covers your bug, react to it, test it, and comment with what you saw.
 
 Report bugs in issues. Put feature requests in
-[Ideas discussions](https://github.com/pingdotgg/t3code/discussions/categories/ideas).
+[Ideas discussions](https://github.com/thundernet8/Murmur/discussions/categories/ideas).
 
 ## Rules for a PR
 

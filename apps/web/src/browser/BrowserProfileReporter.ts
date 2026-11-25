@@ -1,7 +1,7 @@
-import type { EnvironmentServerConfig } from "@t3tools/client-runtime/connection";
-import { runAtomCommand } from "@t3tools/client-runtime/state/runtime";
-import { AuthPreviewOperateScope, type EnvironmentId } from "@t3tools/contracts";
-import type { ClientSettings } from "@t3tools/contracts/settings";
+import type { EnvironmentServerConfig } from "@murmur/client-runtime/connection";
+import { runAtomCommand } from "@murmur/client-runtime/state/runtime";
+import { AuthPreviewOperateScope, type EnvironmentId } from "@murmur/contracts";
+import type { ClientSettings } from "@murmur/contracts/settings";
 import { Atom } from "effect/reactivity";
 
 import {

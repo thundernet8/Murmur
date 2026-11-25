@@ -1,4 +1,4 @@
-import type { PullRequestReviewPosition, PullRequestReviewThread } from "@t3tools/contracts";
+import type { PullRequestReviewPosition, PullRequestReviewThread } from "@murmur/contracts";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";

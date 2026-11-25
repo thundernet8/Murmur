@@ -2,7 +2,7 @@ import type {
   EnvironmentId,
   ScopedProjectRef,
   SidebarProjectGroupingMode,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   buildProjectGroups,
   derivePhysicalProjectKey,
@@ -10,7 +10,7 @@ import {
   resolveScratchProjectScopeKey,
   selectGroupDefaultProject,
   type ProjectGroupingSettings,
-} from "@t3tools/client-runtime/state/project-grouping";
+} from "@murmur/client-runtime/state/project-grouping";
 import { msg } from "gt-react";
 
 import { m, type MessageResolver } from "./i18n/messages";

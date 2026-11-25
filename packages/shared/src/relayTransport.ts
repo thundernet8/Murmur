@@ -4,7 +4,7 @@ import {
   RELAY_E2EE_PROLOGUE,
   decodeRelayTunnelControl,
   type RelayTunnelControl,
-} from "@t3tools/contracts/relayE2ee";
+} from "@murmur/contracts/relayE2ee";
 import {
   createNoiseInitiator,
   relayKeyPairFromSecret,

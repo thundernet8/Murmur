@@ -7,18 +7,18 @@ import {
 import wordsWasm from "@pierre/words/wasm";
 import { decodeHTML, decodeHTMLAttribute } from "entities";
 import { find, html as htmlSchema, svg as svgSchema } from "property-information";
-import { resolveCodexArtifactTemplate } from "@t3tools/shared/codexArtifactTemplates";
-import { resolveCodexFileCitationLink } from "@t3tools/shared/codexFileCitations";
-import type { ReferenceAutolink } from "@t3tools/client-runtime/source-control-clients";
-import { expandGithubEmojiAliases } from "@t3tools/client-runtime/pull-request-markdown";
-import { resolveChangeRequestMediaUrl } from "@t3tools/client-runtime/pull-request-references";
-import { GITHUB_ALERT_MARKER } from "@t3tools/shared/markdownGithubAlerts";
-import { absoluteFilePathMatches } from "@t3tools/shared/markdownLinks";
+import { resolveCodexArtifactTemplate } from "@murmur/shared/codexArtifactTemplates";
+import { resolveCodexFileCitationLink } from "@murmur/shared/codexFileCitations";
+import type { ReferenceAutolink } from "@murmur/client-runtime/source-control-clients";
+import { expandGithubEmojiAliases } from "@murmur/client-runtime/pull-request-markdown";
+import { resolveChangeRequestMediaUrl } from "@murmur/client-runtime/pull-request-references";
+import { GITHUB_ALERT_MARKER } from "@murmur/shared/markdownGithubAlerts";
+import { absoluteFilePathMatches } from "@murmur/shared/markdownLinks";
 import {
   rehypeNormalizeLocalEditorLinks,
   rehypePreserveImageSourceMeta,
   sanitizeChatHast,
-} from "@t3tools/shared/markdownHast";
+} from "@murmur/shared/markdownHast";
 
 import { rehypeChipPunctuation } from "../components/chat/markdownChipPunctuation";
 import { rehypeHeadingIds } from "../components/chat/markdownFragments";

@@ -1,8 +1,8 @@
-import { EnvironmentAuthInvalidError } from "@t3tools/contracts";
+import { EnvironmentAuthInvalidError } from "@murmur/contracts";
 import {
   RelayEnvironmentEndpointUnavailableError,
   type RelayProtectedError,
-} from "@t3tools/contracts/relay";
+} from "@murmur/contracts/relay";
 import { describe, expect, it } from "@effect/vitest";
 
 import { presentConnectionDiagnosis } from "./diagnosis.ts";

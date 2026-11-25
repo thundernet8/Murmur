@@ -1,11 +1,11 @@
-import { BearerConnectionTarget } from "@t3tools/client-runtime/connection";
-import { VoiceInputController } from "@t3tools/client-runtime/voice-input";
+import { BearerConnectionTarget } from "@murmur/client-runtime/connection";
+import { VoiceInputController } from "@murmur/client-runtime/voice-input";
 import {
   DEFAULT_SPEECH_TRANSCRIPTION_OPTIONS,
   EnvironmentId,
   type EnvironmentSpeechStatus,
-} from "@t3tools/contracts";
-import { decodeSpeechPcmRequest } from "@t3tools/shared/speech";
+} from "@murmur/contracts";
+import { decodeSpeechPcmRequest } from "@murmur/shared/speech";
 import { expect, it, vi } from "vite-plus/test";
 
 import { stubGlobal } from "../../test/render";
@@ -19,7 +19,7 @@ import {
 vi.mock("../connection/runtime", async () => {
   const [{ Atom }, { layerRemoteHttpClient }] = await Promise.all([
     import("effect/reactivity"),
-    import("@t3tools/client-runtime/rpc"),
+    import("@murmur/client-runtime/rpc"),
   ]);
   return {
     connectionAtomRuntime: Atom.runtime(

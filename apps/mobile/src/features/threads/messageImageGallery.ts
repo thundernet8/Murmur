@@ -1,5 +1,5 @@
-import type { ChatAttachment, EnvironmentId, ThreadId } from "@t3tools/contracts";
-import { imageMimeType } from "@t3tools/shared/image";
+import type { ChatAttachment, EnvironmentId, ThreadId } from "@murmur/contracts";
+import { imageMimeType } from "@murmur/shared/image";
 import type { FilePreviewItem } from "../../components/ui/FilePreviewModal.types";
 import { remoteAttachmentImageSource } from "../../lib/filePreviewGallery";
 import { markdownImageSources } from "../../lib/markdownImageSources";

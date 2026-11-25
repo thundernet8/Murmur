@@ -7,7 +7,7 @@ import type {
   PullRequestListFilters,
   PullRequestListState,
   SourceControlProviderKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   CircleCheckIcon,
   CircleDashedIcon,

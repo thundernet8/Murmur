@@ -27,7 +27,7 @@ import { Tooltip, TooltipPopup, TooltipTrigger } from "../ui/tooltip";
 import {
   alternateComposerDispatchAction,
   resolveComposerDispatchMode,
-} from "@t3tools/client-runtime/state/composer-dispatch";
+} from "@murmur/client-runtime/state/composer-dispatch";
 
 interface PendingActionState {
   questionIndex: number;

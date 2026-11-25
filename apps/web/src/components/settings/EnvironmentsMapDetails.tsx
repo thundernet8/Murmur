@@ -1,11 +1,11 @@
 import { useAtomValue } from "@effect/atom-react";
-import { connectionStatusTitle } from "@t3tools/client-runtime/connection";
-import type { PeerLinkHealth } from "@t3tools/client-runtime/state/peerLinks";
+import { connectionStatusTitle } from "@murmur/client-runtime/connection";
+import type { PeerLinkHealth } from "@murmur/client-runtime/state/peerLinks";
 import {
   AuthMcpClientAccess,
   type EnvironmentId,
   resolveEnvironmentMachineKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as DateTime from "effect/DateTime";
 import { T, useGT, useMessages } from "gt-react";
 import { ArrowRightIcon, ClockAlertIcon, PlusIcon, TriangleAlertIcon, XIcon } from "lucide-react";

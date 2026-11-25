@@ -1,5 +1,5 @@
 {
-  "name": "@t3tools/source-control-core",
+  "name": "@murmur/source-control-core",
   "private": true,
   "type": "module",
   "exports": {
@@ -65,8 +65,8 @@
     "test": "vp test run --config ../../vite.config.ts --dir ."
   },
   "dependencies": {
-    "@t3tools/contracts": "workspace:*",
-    "@t3tools/shared": "workspace:*",
+    "@murmur/contracts": "workspace:*",
+    "@murmur/shared": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

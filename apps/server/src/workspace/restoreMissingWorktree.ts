@@ -4,7 +4,7 @@ import {
   type Project,
   type ProjectId,
   type TerminalCwdNotFoundError,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

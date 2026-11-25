@@ -9,9 +9,9 @@ import * as NodeHttpServer from "@effect/platform-node/NodeHttpServer";
 import * as NodeRuntime from "@effect/platform-node/NodeRuntime";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import * as NodeSocket from "@effect/platform-node/NodeSocket";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import * as NodeSqliteClient from "@t3tools/shared/nodeSqliteClient";
-import { fromJsonStringPretty } from "@t3tools/shared/schemaJson";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import * as NodeSqliteClient from "@murmur/shared/nodeSqliteClient";
+import { fromJsonStringPretty } from "@murmur/shared/schemaJson";
 import * as Clock from "effect/Clock";
 import * as Cause from "effect/Cause";
 import * as Console from "effect/Console";
@@ -43,7 +43,7 @@ import {
   ORCHESTRATION_PROTOCOL_VERSION_TEXT,
   ThreadId,
   WsRpcGroup,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   HttpClient,
   HttpClientRequest,

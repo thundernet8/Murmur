@@ -5,7 +5,7 @@ import type {
   SelectedLineRange,
 } from "@pierre/diffs";
 import { FileDiff } from "@pierre/diffs/react";
-import type { PullRequestReviewGuideExcerpt, PullRequestReviewPosition } from "@t3tools/contracts";
+import type { PullRequestReviewGuideExcerpt, PullRequestReviewPosition } from "@murmur/contracts";
 import { ArrowUpRightIcon } from "lucide-react";
 import { T, useGT, Var } from "gt-react";
 import { useState } from "react";
@@ -33,7 +33,7 @@ import {
   toViewerSide,
 } from "../PullRequestReviewAnnotation";
 import type { PendingReviewComment } from "../pullRequestReviewStore";
-import { excerptRows, fileDiffRows, rowsToPatch } from "@t3tools/client-runtime/review-guide-tour";
+import { excerptRows, fileDiffRows, rowsToPatch } from "@murmur/client-runtime/review-guide-tour";
 import type { PullRequestCompletionScope } from "../PullRequestMarkdownTextarea";
 import { excerptLoader } from "./GuideExcerpt.logic";
 import { GuideNoteMarker } from "./GuideNotes";

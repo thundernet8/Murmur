@@ -4,8 +4,8 @@ import {
   COMPOSER_CONTEXT_TERMINAL_TEXT_MAX_CHARS,
   type EnvironmentId,
   type ThreadId,
-} from "@t3tools/contracts";
-import { formatComposerContextReference } from "@t3tools/shared/composerContextReferences";
+} from "@murmur/contracts";
+import { formatComposerContextReference } from "@murmur/shared/composerContextReferences";
 import { msg, T, useGT } from "gt-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";

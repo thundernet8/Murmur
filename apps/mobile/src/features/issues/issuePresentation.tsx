@@ -1,10 +1,10 @@
 import { useAtomValue } from "@effect/atom-react";
-import { issueWriteAccess } from "@t3tools/client-runtime/issue-presentation";
+import { issueWriteAccess } from "@murmur/client-runtime/issue-presentation";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import type { IssueDetail, IssueLabel, IssueState } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/runtime";
+import type { IssueDetail, IssueLabel, IssueState } from "@murmur/contracts";
 import { AsyncResult } from "effect/reactivity";
 import { msg, useMessages } from "gt-react-native";
 import { View } from "react-native";

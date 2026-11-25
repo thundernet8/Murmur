@@ -1,4 +1,4 @@
-import type { VoiceInputState } from "@t3tools/client-runtime/voice-input";
+import type { VoiceInputState } from "@murmur/client-runtime/voice-input";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";

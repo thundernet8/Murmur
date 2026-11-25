@@ -1,5 +1,5 @@
-import type { SecretReference, SecretSourceCheckResult } from "@t3tools/contracts";
-import * as SecretResolver from "@t3tools/secret-provider-core/server/SecretResolver";
+import type { SecretReference, SecretSourceCheckResult } from "@murmur/contracts";
+import * as SecretResolver from "@murmur/secret-provider-core/server/SecretResolver";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";

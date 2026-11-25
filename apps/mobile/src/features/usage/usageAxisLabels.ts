@@ -1,4 +1,4 @@
-import { formatDayShort, formatHourShort } from "@t3tools/shared/usageFormat";
+import { formatDayShort, formatHourShort } from "@murmur/shared/usageFormat";
 
 import { DEFAULT_LOCALE } from "../../i18n/locales";
 

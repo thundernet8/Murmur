@@ -1,4 +1,4 @@
-import type { ManagedPolicySummary } from "@t3tools/contracts";
+import type { ManagedPolicySummary } from "@murmur/contracts";
 import { T, Var } from "gt-react";
 import { BuildingIcon } from "lucide-react";
 import type { ReactNode } from "react";

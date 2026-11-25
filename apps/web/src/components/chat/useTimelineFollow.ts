@@ -1,6 +1,6 @@
 import { useStableCallback } from "../../hooks/useStableCallback";
-import { type MessageId, type RunId } from "@t3tools/contracts";
-import { CHAT_LIST_ANCHOR_OFFSET } from "@t3tools/shared/chatList";
+import { type MessageId, type RunId } from "@murmur/contracts";
+import { CHAT_LIST_ANCHOR_OFFSET } from "@murmur/shared/chatList";
 import { Debouncer } from "@tanstack/react-pacer";
 import {
   type SetStateAction,
@@ -35,9 +35,9 @@ import {
   shouldReleaseTimelineAnchorForToolActivity,
 } from "../ChatView.logic";
 import type { Dispatch, RefObject } from "react";
-import type { ThreadStructure } from "@t3tools/client-runtime/state/shell";
-import type { deriveThreadActivityRun } from "@t3tools/client-runtime/state/thread-execution";
-import type { EnvironmentThreadStatus } from "@t3tools/client-runtime/state/threads";
+import type { ThreadStructure } from "@murmur/client-runtime/state/shell";
+import type { deriveThreadActivityRun } from "@murmur/client-runtime/state/thread-execution";
+import type { EnvironmentThreadStatus } from "@murmur/client-runtime/state/threads";
 import type { TimelineEntry } from "../../session-logic";
 
 interface TimelineAnchor {

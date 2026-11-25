@@ -1,14 +1,14 @@
 import { useGT } from "gt-react";
 import { useEffect, useRef } from "react";
-import type { DuoViewer } from "@t3tools/client-runtime/device/duo-viewer";
-import type { DeviceModelSource } from "@t3tools/client-runtime/device/model";
-import type { createPhoneInteraction } from "@t3tools/client-runtime/device/phone-interaction";
-import { createCanvasFrameSink } from "@t3tools/client-runtime/device/frame";
-import type { DeviceScreenSize, DeviceStreamClient } from "@t3tools/client-runtime/device/stream";
-import { createDuoPinch } from "@t3tools/client-runtime/device/duo-control";
+import type { DuoViewer } from "@murmur/client-runtime/device/duo-viewer";
+import type { DeviceModelSource } from "@murmur/client-runtime/device/model";
+import type { createPhoneInteraction } from "@murmur/client-runtime/device/phone-interaction";
+import { createCanvasFrameSink } from "@murmur/client-runtime/device/frame";
+import type { DeviceScreenSize, DeviceStreamClient } from "@murmur/client-runtime/device/stream";
+import { createDuoPinch } from "@murmur/client-runtime/device/duo-control";
 import { mountDeviceViewer } from "./mountDeviceViewer";
 
-const loadDuoViewer = () => import("@t3tools/client-runtime/device/duo-viewer");
+const loadDuoViewer = () => import("@murmur/client-runtime/device/duo-viewer");
 
 export function DeviceDuoViewport(props: {
   readonly model: DeviceModelSource;

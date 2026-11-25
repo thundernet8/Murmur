@@ -5,7 +5,7 @@ import {
   ProjectId,
   SourceControlProviderKind,
   type PullRequestDetailView,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { expect, it, vi } from "vite-plus/test";
 import { page, userEvent } from "vite-plus/test/browser";
 import appCss from "~/index.css?inline";

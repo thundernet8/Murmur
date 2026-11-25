@@ -1,4 +1,4 @@
-import { type AuthEnvironmentScope, EnvironmentHttpApi } from "@t3tools/contracts";
+import { type AuthEnvironmentScope, EnvironmentHttpApi } from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Duration from "effect/Duration";
 import * as Effect from "effect/Effect";

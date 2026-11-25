@@ -8,7 +8,7 @@ import type { ProjectScopedServerSettingKey, ServerSettings } from "./settings.t
 export const MURMUR_PROJECT_FILE_NAME = "murmur.json";
 
 export const MURMUR_PROJECT_FILE_SCHEMA_URL =
-  "https://raw.githubusercontent.com/thundernet8/Murmur/main/murmur.schema.json";
+  "https://raw.githubusercontent.com/thundernet8/Murmur/master/murmur.schema.json";
 
 const MURMUR_PROJECT_FILE_PATH_MAX_LENGTH = 512;
 const MURMUR_PROJECT_FILE_COMMAND_MAX_LENGTH = 4096;

@@ -1,9 +1,9 @@
-import type { ModelSelection, ProviderDriverKind } from "@t3tools/contracts";
+import type { ModelSelection, ProviderDriverKind } from "@murmur/contracts";
 import { useGT, useMessages } from "gt-react-native";
 import {
   buildTraitsTriggerDisplay,
   getPromptControlledTraits,
-} from "@t3tools/client-runtime/model-traits";
+} from "@murmur/client-runtime/model-traits";
 import type { ModelOption } from "../lib/modelOptions";
 import { resolveProviderOptionDescriptors } from "../lib/providerOptions";
 import { AppText as Text } from "./ui/AppText";

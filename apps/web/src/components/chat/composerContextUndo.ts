@@ -4,7 +4,7 @@ import type {
   EnvironmentContextRecord,
   PreviewAnnotationPayload,
   ThreadContextRecord,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useEffect, useState } from "react";
 
 import type { ComposerFileAttachment, ComposerImageAttachment } from "../../composerDraftStore";

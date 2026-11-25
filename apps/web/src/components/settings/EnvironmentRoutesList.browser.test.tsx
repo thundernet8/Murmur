@@ -4,8 +4,8 @@ import {
   type ConnectionCatalogEntry,
   type ConnectionRoute,
   mergeLearnedRoutes,
-} from "@t3tools/client-runtime/connection";
-import { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/connection";
+import { EnvironmentId } from "@murmur/contracts";
 import * as Option from "effect/Option";
 import { expect, it, vi } from "vite-plus/test";
 import { userEvent } from "vite-plus/test/browser";

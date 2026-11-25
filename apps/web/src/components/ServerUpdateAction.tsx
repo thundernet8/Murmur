@@ -1,11 +1,11 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { useAtomValue } from "@effect/atom-react";
 import {
   AuthEnvironmentMaintainScope,
   type AuthSessionState,
   sessionGrantsScope,
-} from "@t3tools/contracts";
-import { managedUpdatesDenial } from "@t3tools/client-runtime/contract-labels";
+} from "@murmur/contracts";
+import { managedUpdatesDenial } from "@murmur/client-runtime/contract-labels";
 import type { AsyncResult } from "effect/reactivity";
 import { environmentSession } from "~/state/session";
 import type {
@@ -13,17 +13,17 @@ import type {
   EnvironmentId,
   ServerInstallation,
   ServerSelfUpdateCapability,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   serverUpdateFailureText,
   type ServerUpdateStage,
   type ServerUpdateState,
-} from "@t3tools/client-runtime/state/server";
+} from "@murmur/client-runtime/state/server";
 import {
   isAtomCommandInterrupted,
   settlePromise,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { CircleArrowUpIcon } from "lucide-react";
 import { type ComponentProps, useRef, useState } from "react";
 import { msg, T, useGT, useMessages } from "gt-react";
@@ -39,7 +39,7 @@ import { useManagedPolicy } from "~/state/managedPolicy";
 import { environmentPresentations } from "~/state/presentation";
 import { ManagedControl } from "./ManagedPolicy";
 import { manualServerUpdateCommand } from "~/versionSkew";
-import { crossesReleaseTrack } from "@t3tools/shared/cliRelease";
+import { crossesReleaseTrack } from "@murmur/shared/cliRelease";
 import { Button } from "./ui/button";
 import { toastManager } from "./ui/toast";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "./ui/tooltip";

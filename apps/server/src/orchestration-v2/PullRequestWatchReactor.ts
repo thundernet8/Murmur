@@ -11,8 +11,8 @@ import {
   type ThreadPullRequestLink,
   type ThreadId,
   type ThreadPullRequestWatch,
-} from "@t3tools/contracts";
-import { commandIndicatesFailure } from "@t3tools/shared/toolOutput";
+} from "@murmur/contracts";
+import { commandIndicatesFailure } from "@murmur/shared/toolOutput";
 import {
   changeRequestsClosedBy,
   isChangeRequestCloseCommand,
@@ -40,7 +40,7 @@ import * as Stream from "effect/Stream";
 import {
   type ProviderChangeRequestWatchFingerprint,
   PullRequestProviderError,
-} from "@t3tools/source-control-core/server/PullRequestProvider";
+} from "@murmur/source-control-core/server/PullRequestProvider";
 import * as PullRequestService from "../pullRequest/PullRequestService.ts";
 import { forkParked } from "../serverActivation.ts";
 import * as Orchestrator from "./Orchestrator.ts";

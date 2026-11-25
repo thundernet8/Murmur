@@ -1,9 +1,9 @@
 import { m } from "../i18n/messages";
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { msg, T, useGT, useMessages } from "gt-react";
-import { resolvePathLinkTarget } from "@t3tools/shared/fileLinks";
+import { resolvePathLinkTarget } from "@murmur/shared/fileLinks";
 import { clientHostEnvironmentAtom } from "../state/clientHostEnvironment";
-import { buildFileLinkParentSuffixByPath, fileLinkLabel } from "@t3tools/shared/fileLinks";
+import { buildFileLinkParentSuffixByPath, fileLinkLabel } from "@murmur/shared/fileLinks";
 import {
   isMarkdownFileLinkLabel,
   isWindowsDrivePathHref,
@@ -12,21 +12,21 @@ import {
   extractInlineCodeSpans,
   extractMarkdownLinkHrefs,
   inlineCodeFilePathCandidate,
-} from "@t3tools/shared/markdownLinks";
-import { taskListMarkerOffset } from "@t3tools/shared/markdownTaskEdits";
-import { isHostPath, resolveWorkspaceFilePath } from "@t3tools/shared/path";
+} from "@murmur/shared/markdownLinks";
+import { taskListMarkerOffset } from "@murmur/shared/markdownTaskEdits";
+import { isHostPath, resolveWorkspaceFilePath } from "@murmur/shared/path";
 import { usePullRequestLinking } from "~/hooks/usePullRequestLinking";
 import {
   AuthFilesystemReadScope,
   AuthOrchestrationOperateScope,
   SOURCE_CONTROL_MEDIA_ASSET,
-} from "@t3tools/contracts";
-import { chatMarkdownImageSource } from "@t3tools/shared/markdownHast";
+} from "@murmur/contracts";
+import { chatMarkdownImageSource } from "@murmur/shared/markdownHast";
 import { useAtomValue } from "@effect/atom-react";
 import {
   COMPOSER_CONTEXT_CLIPBOARD_MIME,
   encodeComposerContextClipboardHtml,
-} from "@t3tools/shared/composerContextClipboard";
+} from "@murmur/shared/composerContextClipboard";
 import {
   FileSpreadsheetIcon,
   FileTextIcon,
@@ -52,23 +52,23 @@ import {
   type ScopedThreadRef,
   type ServerProviderSkill,
   type ThreadPullRequestKey,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import { scopedThreadKey } from "@t3tools/client-runtime/environment";
+} from "@murmur/client-runtime/state/runtime";
+import { scopedThreadKey } from "@murmur/client-runtime/environment";
 import type {
   CodexArtifactTemplate,
   CodexArtifactTemplateKind,
-} from "@t3tools/shared/codexArtifactTemplates";
-import { codexArtifactTemplatePresentationLabel } from "@t3tools/shared/codexArtifactTemplatesCopy";
+} from "@murmur/shared/codexArtifactTemplates";
+import { codexArtifactTemplatePresentationLabel } from "@murmur/shared/codexArtifactTemplatesCopy";
 import {
   classifyMarkdownImageSource,
   markdownImageSourceFragment,
-} from "@t3tools/client-runtime/markdown-images";
-import { mediaUrlReference } from "@t3tools/client-runtime/media-reference";
-import { mediaKindFromPath, mediaMimeTypeFromExtension } from "@t3tools/shared/mediaPreview";
+} from "@murmur/client-runtime/markdown-images";
+import { mediaUrlReference } from "@murmur/client-runtime/media-reference";
+import { mediaKindFromPath, mediaMimeTypeFromExtension } from "@murmur/shared/mediaPreview";
 import { InlineAudioPreview } from "./files/InlineAudioPreview";
 import { HostImageUrlContext } from "./chat/hostImageUrl";
 import * as Cause from "effect/Cause";
@@ -87,12 +87,12 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
-import { parseAssistantCitationHref } from "@t3tools/shared/assistantCitations";
-import { parseComposerContextHref } from "@t3tools/shared/composerContextReferences";
-import { parseThreadLinkHref } from "@t3tools/shared/threadLinks";
+import { parseAssistantCitationHref } from "@murmur/shared/assistantCitations";
+import { parseComposerContextHref } from "@murmur/shared/composerContextReferences";
+import { parseThreadLinkHref } from "@murmur/shared/threadLinks";
 import { AssistantCitationEmbed } from "./chat/AssistantCitationChip";
 import { MarkdownThreadLink } from "./chat/MarkdownThreadLink";
-import { artifactTemplateFromHastProperties } from "@t3tools/shared/codexArtifactTemplates";
+import { artifactTemplateFromHastProperties } from "@murmur/shared/codexArtifactTemplates";
 import {
   decodeMarkdownLinkEscapes,
   renderCodexInlineDirectivesAsMarkdown,
@@ -173,13 +173,13 @@ import {
   pickWorkspaceLinkMatch,
   WORKSPACE_BASENAME_LOOKUP_LIMIT,
   workspaceLinkLookupQuery,
-} from "@t3tools/client-runtime/workspace-basename-lookup";
-import { resolvePullRequestPreviewTarget } from "@t3tools/client-runtime/change-request-links";
+} from "@murmur/client-runtime/workspace-basename-lookup";
+import { resolvePullRequestPreviewTarget } from "@murmur/client-runtime/change-request-links";
 import {
   mayContainStandaloneIssueLink,
   resolveIssueLinkTarget,
-} from "@t3tools/client-runtime/issue-links";
-import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
+} from "@murmur/client-runtime/issue-links";
+import { sourceControlClients } from "@murmur/client-runtime/source-control-clients";
 import { useOpenChangeRequestLink } from "~/lib/openPullRequestLink";
 import { textDirection } from "~/textDirection";
 import { useOpenLink } from "../browser/useOpenLink";
@@ -204,8 +204,8 @@ import {
   withProperties,
 } from "./chat/markdownIslands";
 import type { Element as HastElement } from "hast";
-import { matchInlineSkills } from "@t3tools/shared/inlineSkills";
-import { collectComposerModelMentions } from "@t3tools/client-runtime/composer-model-mentions";
+import { matchInlineSkills } from "@murmur/shared/inlineSkills";
+import { collectComposerModelMentions } from "@murmur/client-runtime/composer-model-mentions";
 import { splitMarkdownBlocks } from "./chat/markdownStreamBlocks";
 import { MarkdownMermaidCodeBlock } from "./chat/MarkdownMermaidCodeBlock";
 import { MarkdownTable } from "./chat/MarkdownTable";

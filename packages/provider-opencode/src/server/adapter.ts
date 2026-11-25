@@ -9,9 +9,9 @@ import type {
   Todo as OpenCodeTodo,
   ToolPart,
 } from "@opencode-ai/sdk/v2";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { getModelSelectionStringOptionValue } from "@t3tools/shared/model";
-import { causeErrorTag } from "@t3tools/shared/observability";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { getModelSelectionStringOptionValue } from "@murmur/shared/model";
+import { causeErrorTag } from "@murmur/shared/observability";
 import {
   type AgentFeedbackMode,
   defaultInstanceIdForDriver,
@@ -38,7 +38,7 @@ import {
   type RuntimeRequestId,
   type ThreadId,
   settingsSecretLiteral,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { OpenCodeSettings } from "../settings.ts";
 import * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
@@ -56,35 +56,35 @@ import * as Semaphore from "effect/Semaphore";
 import * as Scope from "effect/Scope";
 import * as Stream from "effect/Stream";
 
-import { brokenVersionDetail } from "@t3tools/provider-core/server/compatibility";
-import * as ProviderHost from "@t3tools/provider-core/server/ProviderHost";
-import { mcpToolPresentation } from "@t3tools/provider-core/server/mcpToolPresentation";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
+import { brokenVersionDetail } from "@murmur/provider-core/server/compatibility";
+import * as ProviderHost from "@murmur/provider-core/server/ProviderHost";
+import { mcpToolPresentation } from "@murmur/provider-core/server/mcpToolPresentation";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as ProviderEventLoggers from "@murmur/provider-core/server/ProviderEventLoggers";
 import {
   structuralProtocolMethod,
   summarizeNativeProtocolPayload,
-} from "@t3tools/provider-core/server/nativeProtocolLogging";
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import { t3OrchestrationSystemPrompt } from "@t3tools/provider-core/server/orchestrationInstructions";
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
+} from "@murmur/provider-core/server/nativeProtocolLogging";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import { t3OrchestrationSystemPrompt } from "@murmur/provider-core/server/orchestrationInstructions";
+import { buildRuntimeInstructions } from "@murmur/provider-core/server/runtimeInstructions";
 import * as OpenCodeRuntime from "./OpenCodeRuntime.ts";
 import { readableProviderErrorMessage } from "./providerErrorMessage.ts";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
-import { makeProviderFailure } from "@t3tools/provider-core/server/failure";
-import { turnScopedSelectionTransition } from "@t3tools/provider-core/server/selectionTransition";
-import { providerMessageTextWithAttachmentPaths } from "@t3tools/provider-core/server/attachmentPrompt";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
+import { makeProviderFailure } from "@murmur/provider-core/server/failure";
+import { turnScopedSelectionTransition } from "@murmur/provider-core/server/selectionTransition";
+import { providerMessageTextWithAttachmentPaths } from "@murmur/provider-core/server/attachmentPrompt";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
 import {
   ProviderAdapterDriverCreateError,
   type ProviderAdapterDriver,
   type ProviderAdapterDriverCreateInput,
-} from "@t3tools/provider-core/server/adapterDriver";
+} from "@murmur/provider-core/server/adapterDriver";
 import {
   makeSubagentChildThread,
   subagentThreadTitle,
-} from "@t3tools/provider-core/server/subagentProjection";
+} from "@murmur/provider-core/server/subagentProjection";
 import { openCodeCommandFailed, openCodeToolOutput, openCodeToolTurnItem } from "./toolItems.ts";
 
 export const OPENCODE_PROVIDER = ProviderDriverKind.make("opencode");

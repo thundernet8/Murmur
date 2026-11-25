@@ -13,7 +13,7 @@ import * as Layer from "effect/Layer";
 import * as Option from "effect/Option";
 import * as Path from "effect/Path";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 
 import * as NonBlockingSpawner from "./NonBlockingSpawner.ts";
 import type { LauncherEvent, LauncherSpawnRequest } from "./processLauncherWorker.ts";

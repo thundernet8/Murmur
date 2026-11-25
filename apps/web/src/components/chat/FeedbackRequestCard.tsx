@@ -9,16 +9,16 @@ import {
   type FeedbackRequestItem,
   feedbackTraceLines,
   feedbackTraceSummary,
-} from "@t3tools/client-runtime/feedback-request";
+} from "@murmur/client-runtime/feedback-request";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import type {
   AgentFeedbackPreview,
   EnvironmentId,
   OrchestrationV2ProjectedTurnItem,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { CheckIcon, ChevronDownIcon, LockIcon, MessageSquareIcon, MinusIcon } from "lucide-react";
 import { useAtomValue } from "@effect/atom-react";
 import { useRef, useState } from "react";

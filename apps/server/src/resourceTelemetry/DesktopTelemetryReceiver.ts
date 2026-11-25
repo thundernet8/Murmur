@@ -13,10 +13,10 @@ import {
   type DesktopUpdateChannel,
   type DesktopUpdateStatusReport,
   type ResourceTelemetrySourceStatus,
-} from "@t3tools/contracts";
-import { resolveServerBackgroundActivitySettings } from "@t3tools/shared/backgroundActivitySettings";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { applyShellEnvironment } from "@t3tools/shared/shell";
+} from "@murmur/contracts";
+import { resolveServerBackgroundActivitySettings } from "@murmur/shared/backgroundActivitySettings";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { applyShellEnvironment } from "@murmur/shared/shell";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";

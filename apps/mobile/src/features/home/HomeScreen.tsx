@@ -13,10 +13,10 @@ import { THREAD_LIST_ROW_LAYOUT } from "../threads/threadListAnimations";
 import {
   type EnvironmentProject,
   type EnvironmentThreadShell,
-} from "@t3tools/client-runtime/state/shell";
-import { pickableProjectGroups } from "@t3tools/client-runtime/state/project-grouping";
-import { threadSearchMatchKey } from "@t3tools/client-runtime/state/thread-search";
-import { type EnvironmentId, type SidebarProjectGroupingMode } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/shell";
+import { pickableProjectGroups } from "@murmur/client-runtime/state/project-grouping";
+import { threadSearchMatchKey } from "@murmur/client-runtime/state/thread-search";
+import { type EnvironmentId, type SidebarProjectGroupingMode } from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import {
   use,

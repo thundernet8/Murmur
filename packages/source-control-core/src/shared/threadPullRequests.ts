@@ -3,9 +3,9 @@ import type {
   ThreadLinkedPullRequest,
   ThreadPullRequestKey,
   ThreadPullRequestLink,
-} from "@t3tools/contracts";
-import { canonicalRepositoryPath } from "@t3tools/shared/git";
-import { visibleThreadPullRequests } from "@t3tools/shared/threadPullRequests";
+} from "@murmur/contracts";
+import { canonicalRepositoryPath } from "@murmur/shared/git";
+import { visibleThreadPullRequests } from "@murmur/shared/threadPullRequests";
 
 import type { SourceControlDefinitionRegistry } from "./definition.ts";
 

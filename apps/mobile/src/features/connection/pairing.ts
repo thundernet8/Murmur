@@ -1,4 +1,4 @@
-import { readHostedPairingRequest } from "@t3tools/shared/remote";
+import { readHostedPairingRequest } from "@murmur/shared/remote";
 import * as Schema from "effect/Schema";
 import { msg } from "gt-react-native";
 

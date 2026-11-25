@@ -6,8 +6,8 @@ import * as PlatformError from "effect/PlatformError";
 import * as Schema from "effect/Schema";
 import * as ChildProcess from "effect/process/ChildProcess";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { unsetInheritedGitRepositoryEnv } from "@t3tools/shared/testing/gitRepositoryEnv";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { unsetInheritedGitRepositoryEnv } from "@murmur/shared/testing/gitRepositoryEnv";
 
 class ReplayFixtureGitCommandError extends Schema.TaggedError<ReplayFixtureGitCommandError>()(
   "ReplayFixtureGitCommandError",

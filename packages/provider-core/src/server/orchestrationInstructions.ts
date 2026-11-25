@@ -1,4 +1,4 @@
-import type { ProviderInteractionMode } from "@t3tools/contracts";
+import type { ProviderInteractionMode } from "@murmur/contracts";
 
 // Codex truncates entries over 4,000 bytes; keep each section self-contained and below that limit.
 export const MURMUR_CODE_ORCHESTRATION_SECTIONS: ReadonlyArray<string> = [

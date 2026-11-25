@@ -22,7 +22,7 @@ import {
   shouldRecommendDatabaseCompaction,
   type UsageSummary,
   WS_METHODS,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Duration from "effect/Duration";
 import * as Equal from "effect/Equal";

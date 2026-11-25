@@ -1,4 +1,4 @@
-import type { ModelSelection, ServerProvider } from "@t3tools/contracts";
+import type { ModelSelection, ServerProvider } from "@murmur/contracts";
 
 import { BUNDLED_MODEL_MANIFEST } from "../provider/ModelManifest.ts";
 

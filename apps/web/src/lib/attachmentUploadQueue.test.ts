@@ -1,4 +1,4 @@
-import { EnvironmentId, ProjectId } from "@t3tools/contracts";
+import { EnvironmentId, ProjectId } from "@murmur/contracts";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { Atom, AsyncResult } from "effect/reactivity";
 import { appAtomRegistry } from "../rpc/atomRegistry";
@@ -36,7 +36,7 @@ const mocks = vi.hoisted(() => ({
     ),
 }));
 
-vi.mock("@t3tools/client-runtime/state/runtime", async () => {
+vi.mock("@murmur/client-runtime/state/runtime", async () => {
   const Effect = await import("effect/Effect");
   return {
     awaitAtomResult: (...args: ReadonlyArray<unknown>) =>

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
 
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/models";
-import { EnvironmentId, ProjectId } from "@t3tools/contracts";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/models";
+import { EnvironmentId, ProjectId } from "@murmur/contracts";
 
 import { issueFilterProjects, issueListTargets, issuesSearchFromUrl } from "./issuesSearch.logic";
 

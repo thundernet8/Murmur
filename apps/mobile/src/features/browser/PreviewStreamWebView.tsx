@@ -1,8 +1,8 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import { Button } from "../../components/ui/Button";
 import { AppActivityIndicator } from "../../components/ui/AppActivityIndicator";
 import * as Dialog from "../../components/ui/Dialog";
-import previewStreamScript from "@t3tools/mobile-preview-stream";
+import previewStreamScript from "@murmur/mobile-preview-stream";
 import {
   previewStreamControlLabel,
   previewStreamHostSetupMessage,
@@ -10,8 +10,8 @@ import {
   type PreviewStreamDownload,
   type PreviewStreamFileChooser,
   type PreviewStreamInput,
-} from "@t3tools/client-runtime/preview/server-browser-stream";
-import type { EnvironmentId, PreviewStreamHostSetup } from "@t3tools/contracts";
+} from "@murmur/client-runtime/preview/server-browser-stream";
+import type { EnvironmentId, PreviewStreamHostSetup } from "@murmur/contracts";
 import {
   useEffectEvent,
   useImperativeHandle,

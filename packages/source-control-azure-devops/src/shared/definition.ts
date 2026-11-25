@@ -1,5 +1,5 @@
-import { SourceControlProviderKind } from "@t3tools/contracts";
-import { canonicalRepositoryPath } from "@t3tools/shared/git";
+import { SourceControlProviderKind } from "@murmur/contracts";
+import { canonicalRepositoryPath } from "@murmur/shared/git";
 import {
   buildCommitUrl,
   changeRequestUrlBelow,
@@ -9,7 +9,7 @@ import {
   parseIssuePath,
   parseCommitPath,
   remoteWebOrigin,
-} from "@t3tools/source-control-core/shared/definition";
+} from "@murmur/source-control-core/shared/definition";
 import { icon } from "./icon.ts";
 
 // Azure DevOps Server runs on any hostname; its `_git` route identifies it.

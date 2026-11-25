@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vite-plus/test";
-import { EnvironmentId, MessageId, ThreadId } from "@t3tools/contracts";
-import { serializeAssistantCitation } from "@t3tools/shared/assistantCitations";
+import { EnvironmentId, MessageId, ThreadId } from "@murmur/contracts";
+import { serializeAssistantCitation } from "@murmur/shared/assistantCitations";
 import {
   ATTACHMENT_ONLY_BOOTSTRAP_PROMPT,
   formatComposerContextReference,
   toComposerContextId,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 
 import { deriveTimelineMinimapItems, resolveTimelineMinimapPreview } from "./timelineMinimapItems";
 

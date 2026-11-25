@@ -1,4 +1,4 @@
-import { type EnvironmentContextRecord, resolveEnvironmentMachineKind } from "@t3tools/contracts";
+import { type EnvironmentContextRecord, resolveEnvironmentMachineKind } from "@murmur/contracts";
 
 import { useGT } from "gt-react";
 

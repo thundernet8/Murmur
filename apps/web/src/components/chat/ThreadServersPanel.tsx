@@ -1,18 +1,18 @@
 import { useAtomValue } from "@effect/atom-react";
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
 import {
   AuthPreviewOperateScope,
   AuthTerminalOperateScope,
   type DiscoveredLocalServer,
   type EnvironmentId,
   type ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import { isLoopbackHost } from "@t3tools/shared/preview";
+} from "@murmur/client-runtime/state/runtime";
+import { isLoopbackHost } from "@murmur/shared/preview";
 import { T, useGT, Var } from "gt-react";
 import { m } from "~/i18n/messages";
 import { CableIcon, GlobeIcon, SquareIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";

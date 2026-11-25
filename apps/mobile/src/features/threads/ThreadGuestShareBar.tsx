@@ -1,17 +1,17 @@
 import { useAtomValue } from "@effect/atom-react";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import {
   type AtomCommandResult,
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   AuthOrchestrationOperateScope,
   type ChatAttachment,
   type ScopedThreadRef,
   type ThreadGuestMessage,
   type ThreadGuestShare,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { Atom } from "effect/reactivity";
 import { msg, useGT } from "gt-react-native";
 import { type ReactNode, useEffect, useMemo, useState } from "react";

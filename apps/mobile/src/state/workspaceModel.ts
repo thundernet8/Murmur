@@ -2,18 +2,18 @@ import {
   EMPTY_SHELL_STATE,
   type EnvironmentShellState,
   type EnvironmentShellSummary,
-} from "@t3tools/client-runtime/state/shell";
-import type { MarkedText } from "@t3tools/client-runtime/errors";
-import type { EnvironmentId, ServerConfig } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/shell";
+import type { MarkedText } from "@murmur/client-runtime/errors";
+import type { EnvironmentId, ServerConfig } from "@murmur/contracts";
 
 import {
   type EnvironmentConnectionPhase,
   type NetworkStatus,
-} from "@t3tools/client-runtime/connection";
+} from "@murmur/client-runtime/connection";
 
-import type { EnvironmentConnectionSummary as WorkspaceEnvironment } from "@t3tools/client-runtime/state/presentation";
+import type { EnvironmentConnectionSummary as WorkspaceEnvironment } from "@murmur/client-runtime/state/presentation";
 
-export type { EnvironmentConnectionSummary as WorkspaceEnvironment } from "@t3tools/client-runtime/state/presentation";
+export type { EnvironmentConnectionSummary as WorkspaceEnvironment } from "@murmur/client-runtime/state/presentation";
 
 export interface WorkspaceConnectionState {
   readonly isLoadingConnections: boolean;

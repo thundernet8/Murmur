@@ -1,11 +1,11 @@
-import { changeRequestReferenceAutolinker } from "@t3tools/client-runtime/pull-request-references";
-import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
+import { changeRequestReferenceAutolinker } from "@murmur/client-runtime/pull-request-references";
+import { sourceControlClients } from "@murmur/client-runtime/source-control-clients";
 import type { Nodes } from "hast";
 
 import {
   splitPullRequestBody as splitBody,
   type PullRequestBodySegment,
-} from "@t3tools/client-runtime/pull-request-markdown";
+} from "@murmur/client-runtime/pull-request-markdown";
 import {
   markdownReferenceDefinitions,
   wordsHast,

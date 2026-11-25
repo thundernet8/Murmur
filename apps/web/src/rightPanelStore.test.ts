@@ -1,5 +1,5 @@
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import { EnvironmentId, RunId, ThreadId } from "@t3tools/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import { EnvironmentId, RunId, ThreadId } from "@murmur/contracts";
 import { beforeEach, describe, expect, it } from "vite-plus/test";
 
 import { useClosedViewStore } from "./closedViewStore";

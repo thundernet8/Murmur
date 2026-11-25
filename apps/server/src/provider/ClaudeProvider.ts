@@ -1,7 +1,7 @@
 // @effect-diagnostics-next-line nodeBuiltinImport:off -- the SDK's spawn hook returns a Node child process.
 import * as NodeChildProcess from "node:child_process";
 
-import { resolveProviderProbeTimeoutMs } from "@t3tools/provider-core/server/snapshotProbe";
+import { resolveProviderProbeTimeoutMs } from "@murmur/provider-core/server/snapshotProbe";
 import {
   type ClaudeSettings,
   type ModelCapabilities,
@@ -9,7 +9,7 @@ import {
   type ServerProviderModel,
   type ServerProviderSlashCommand,
   type ServerProviderResetCredits,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
@@ -20,11 +20,11 @@ import * as Ref from "effect/Ref";
 import * as Result from "effect/Result";
 import * as Schema from "effect/Schema";
 import { ChildProcess, ChildProcessSpawner } from "effect/process";
-import { createModelCapabilities } from "@t3tools/shared/model";
-import { envTrampoline, supportsEnvChdir } from "@t3tools/shared/envTrampoline";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import { createModelCapabilities } from "@murmur/shared/model";
+import { envTrampoline, supportsEnvChdir } from "@murmur/shared/envTrampoline";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as SpawnWorker from "../process/SpawnWorker.ts";
-import { resolveSpawnCommand } from "@t3tools/shared/shell";
+import { resolveSpawnCommand } from "@murmur/shared/shell";
 import {
   query as claudeQuery,
   type ModelInfo as ClaudeModelInfo,
@@ -46,7 +46,7 @@ import {
   providerProbeEnvironment,
   spawnAndCollect,
   type ServerProviderDraft,
-} from "@t3tools/provider-core/server/snapshotProbe";
+} from "@murmur/provider-core/server/snapshotProbe";
 import { resolveClaudeSdkExecutablePath } from "./Drivers/ClaudeExecutable.ts";
 import {
   claudeSignedOutMessage,
@@ -58,8 +58,8 @@ import {
   discoverClaudeSkills,
   readClaudeSettingsEnv,
 } from "./Drivers/ClaudeSkills.ts";
-import type { ProviderWorkspaceSnapshot } from "@t3tools/provider-core/server/driver";
-import { makeUnavailableUsageLimits } from "@t3tools/provider-core/server/usageLimits";
+import type { ProviderWorkspaceSnapshot } from "@murmur/provider-core/server/driver";
+import { makeUnavailableUsageLimits } from "@murmur/provider-core/server/usageLimits";
 import {
   type ClaudeScopedLimitNames,
   claudeUsageResponseToLimits,

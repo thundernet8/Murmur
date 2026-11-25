@@ -6,8 +6,8 @@ import {
   type VoiceInputControllerDependencies,
   type VoiceInputErrorCode,
   type VoiceInputState,
-} from "@t3tools/client-runtime/voice-input";
-import type { PreparedConnection } from "@t3tools/client-runtime/connection";
+} from "@murmur/client-runtime/voice-input";
+import type { PreparedConnection } from "@murmur/client-runtime/connection";
 import type {
   CloudSpeechModelId,
   CloudSpeechProvider,
@@ -18,9 +18,9 @@ import type {
   SpeechPostProcessingOptions,
   SpeechStreamText,
   SpeechTranscriptionOptions,
-} from "@t3tools/contracts";
-import { DEFAULT_CLIENT_SETTINGS, EnvironmentInternalError } from "@t3tools/contracts";
-import { resolveSpeechVocabulary } from "@t3tools/shared/speech";
+} from "@murmur/contracts";
+import { DEFAULT_CLIENT_SETTINGS, EnvironmentInternalError } from "@murmur/contracts";
+import { resolveSpeechVocabulary } from "@murmur/shared/speech";
 import * as Schema from "effect/Schema";
 import { useEffect, useSyncExternalStore } from "react";
 

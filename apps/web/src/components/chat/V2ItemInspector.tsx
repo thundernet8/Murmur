@@ -1,6 +1,6 @@
 import { T, Var, useGT } from "gt-react";
 import type { ToolCallDiffTarget } from "../../diffPanelStore";
-import type { EnvironmentId, OrchestrationV2ProjectedTurnItem } from "@t3tools/contracts";
+import type { EnvironmentId, OrchestrationV2ProjectedTurnItem } from "@murmur/contracts";
 import {
   isJsonToolText,
   toolCallLines,
@@ -8,9 +8,9 @@ import {
   turnItemNeedsDetailFetch,
   turnItemOutputImages,
   turnItemOutputText,
-} from "@t3tools/client-runtime/work-log/item-detail";
-import { formatDiffCount } from "@t3tools/client-runtime/diff-count";
-import { isJavaScriptReplTool } from "@t3tools/shared/toolActivity";
+} from "@murmur/client-runtime/work-log/item-detail";
+import { formatDiffCount } from "@murmur/client-runtime/diff-count";
+import { isJavaScriptReplTool } from "@murmur/shared/toolActivity";
 import { ExternalLinkIcon } from "lucide-react";
 import { memo, type ReactNode, Suspense, use } from "react";
 

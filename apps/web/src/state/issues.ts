@@ -5,10 +5,10 @@ import {
   type IssueCandidatesTarget,
   type IssueListTarget,
   type MergedIssueList,
-} from "@t3tools/client-runtime/state/issues";
+} from "@murmur/client-runtime/state/issues";
 import { useAtomValue } from "@effect/atom-react";
-import { selectEnvironmentQueryData } from "@t3tools/client-runtime/state/runtime";
-import type { EnvironmentId, IssueState, ThreadIssueLink } from "@t3tools/contracts";
+import { selectEnvironmentQueryData } from "@murmur/client-runtime/state/runtime";
+import type { EnvironmentId, IssueState, ThreadIssueLink } from "@murmur/contracts";
 import { Atom } from "effect/reactivity";
 
 import { connectionAtomRuntime } from "../connection/runtime";

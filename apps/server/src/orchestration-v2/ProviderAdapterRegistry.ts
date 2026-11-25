@@ -3,7 +3,7 @@ import {
   ProviderSetupError,
   type OrchestrationV2ProviderCapabilities,
   type ServerProvider,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
@@ -13,8 +13,8 @@ import * as Scope from "effect/Scope";
 import * as ModelManifest from "../provider/ModelManifest.ts";
 import { brokenRuntimeError } from "../provider/providerCompatibility.ts";
 import * as ProviderInstanceRegistry from "../provider/ProviderInstanceRegistry.ts";
-import { ProviderAdapterDriverCreateError } from "@t3tools/provider-core/server/adapterDriver";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
+import { ProviderAdapterDriverCreateError } from "@murmur/provider-core/server/adapterDriver";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
 
 const isProviderSetupError = Schema.is(ProviderSetupError);
 

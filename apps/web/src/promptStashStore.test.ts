@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test";
-import { EnvironmentId, MessageId, ThreadId } from "@t3tools/contracts";
+import { EnvironmentId, MessageId, ThreadId } from "@murmur/contracts";
 import {
   collectAssistantCitations,
   serializeAssistantCitation,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 
 import { removeLocalStorageItem } from "./hooks/useLocalStorage";
 import { createMemoryStorage } from "./lib/storage";

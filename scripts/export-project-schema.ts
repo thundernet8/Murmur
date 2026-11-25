@@ -2,7 +2,7 @@
 
 import * as NodeRuntime from "@effect/platform-node/NodeRuntime";
 import * as NodeServices from "@effect/platform-node/NodeServices";
-import { buildT3ProjectFileJsonSchema } from "@t3tools/shared/t3ProjectFile";
+import { buildT3ProjectFileJsonSchema } from "@murmur/shared/t3ProjectFile";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";
 import * as Path from "effect/Path";

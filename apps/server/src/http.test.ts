@@ -24,13 +24,13 @@ import {
   injectMcpAppDocumentBootstrap,
   injectMcpAppThemeBootstrap,
   MCP_APP_MAX_HTML_BYTES,
-} from "@t3tools/shared/mcpApp";
-import { ORCHESTRATION_PROTOCOL_HEADER } from "@t3tools/contracts";
+} from "@murmur/shared/mcpApp";
+import { ORCHESTRATION_PROTOCOL_HEADER } from "@murmur/contracts";
 import {
   DESKTOP_READINESS_PROOF_PATH,
   isValidDesktopReadinessProof,
-} from "@t3tools/shared/desktopReadinessProof";
-import { FILE_PREVIEW_SCROLL_SCRIPT } from "@t3tools/shared/htmlRender";
+} from "@murmur/shared/desktopReadinessProof";
+import { FILE_PREVIEW_SCROLL_SCRIPT } from "@murmur/shared/htmlRender";
 
 import * as ServerConfig from "./config.ts";
 

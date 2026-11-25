@@ -3,8 +3,8 @@ import type { MarkdownExtensions } from "~/markdown/wordsHast";
 import {
   resolveWorkEntryToolPresentation,
   toolGroupAction,
-} from "@t3tools/client-runtime/work-log/presentation";
-import { isJavaScriptReplTool } from "@t3tools/shared/toolActivity";
+} from "@murmur/client-runtime/work-log/presentation";
+import { isJavaScriptReplTool } from "@murmur/shared/toolActivity";
 import { formatWorkspaceRelativePath } from "../../filePathDisplay";
 import { m, type MessageResolver } from "../../i18n/messages";
 import { type TimelineWorkEntry, type TimelineRow } from "./timelineRowContext";

@@ -3,8 +3,8 @@
 // base and passes on head. See docs/internals/15_testing.md#scenarios.
 import * as NodeRuntime from "@effect/platform-node/NodeRuntime";
 import * as NodeServices from "@effect/platform-node/NodeServices";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { fromJsonStringPretty } from "@t3tools/shared/schemaJson";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { fromJsonStringPretty } from "@murmur/shared/schemaJson";
 import * as Console from "effect/Console";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

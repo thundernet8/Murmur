@@ -38,7 +38,7 @@ This skill does not authorize merging, changing service settings, or creating sc
 
 ## Load trusted policy and submission evidence
 
-For every live run, freshly resolve `refs/heads/main` in the trusted upstream `pingdotgg/t3code`
+For every live run, freshly resolve `refs/heads/master` in the trusted `thundernet8/Murmur`
 repository to a commit SHA. Use read-only GitHub tools or `gh` to load this skill, `CONTRIBUTING.md`,
 the documentation rules in `AGENTS.md`, [.github/TRIAGE_EXEMPTIONS.td](../../../.github/TRIAGE_EXEMPTIONS.td),
 [.github/VOUCHED.td](../../../.github/VOUCHED.td), and any other policy dependencies from that same SHA;
@@ -55,7 +55,7 @@ author login returned by GitHub against complete entries, case-insensitively. Do
 from organization membership, `VOUCHED.td`, vouch labels, collaborator or bot status, repository write
 access, or previous PR success. No organization-membership lookup is required.
 
-If the trusted main SHA or any required file cannot be retrieved completely or validated, report
+If the trusted master SHA or any required file cannot be retrieved completely or validated, report
 incomplete routing. Fail closed: do not grant an exemption, automatically close a PR, or hand it off for
 review. Missing or malformed files are not an empty exemption list. Read-only investigation can continue
 while routing remains unresolved, but automatic closure and review handoff must wait.
@@ -125,7 +125,7 @@ comment text but do not write to GitHub. Keep the eligibility finding separate f
 - **Closure warranted.** The assessment is complete and establishes a specific policy violation.
   Prepare a clear explanation under [closure and reconsideration](../../../CONTRIBUTING.md#closure-and-reconsideration),
   post it, then read the repository variable `PR_LIMITS_ENFORCE`
-  (`gh variable get PR_LIMITS_ENFORCE -R pingdotgg/t3code`). When it prints `true`, apply
+  (`gh variable get PR_LIMITS_ENFORCE -R thundernet8/Murmur`). When it prints `true`, apply
   `triage:closing` as the last thing you do to the PR, verify that the explanation and the label
   are present, and do not close the PR yourself:
   [pr-limits.yml](../../../.github/workflows/pr-limits.yml) closes it 72 hours after the label. Any

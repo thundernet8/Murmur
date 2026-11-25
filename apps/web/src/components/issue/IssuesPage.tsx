@@ -7,9 +7,9 @@ import {
   issueFilterScopes,
   issueTrackerKey,
   type HeldIssuePage,
-} from "@t3tools/client-runtime/issue-list";
-import { issueTrackerDetailText } from "@t3tools/client-runtime/state/issue-trackers";
-import { issueEntryKey } from "@t3tools/client-runtime/state/issues";
+} from "@murmur/client-runtime/issue-list";
+import { issueTrackerDetailText } from "@murmur/client-runtime/state/issue-trackers";
+import { issueEntryKey } from "@murmur/client-runtime/state/issues";
 import type {
   EnvironmentId,
   IssueInvolvement,
@@ -19,7 +19,7 @@ import type {
   IssueTrackerKind,
   IssueTrackerSummary,
   ProjectId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import {
   ArrowDownUpIcon,
@@ -94,7 +94,7 @@ import {
   type RightPanelSurface,
 } from "~/rightPanelStore";
 import { useAtomCommand } from "~/state/use-atom-command";
-import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
+import { squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
 import { useProjects } from "~/state/entities";
 import { useEnvironments, useIssuesSupported } from "~/state/environments";
 import { issueEnvironment, useIssueList } from "~/state/issues";

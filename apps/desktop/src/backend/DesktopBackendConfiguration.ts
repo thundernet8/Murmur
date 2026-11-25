@@ -1,13 +1,13 @@
 import * as NodeOS from "node:os";
 
-import { parsePersistedServerObservabilitySettings } from "@t3tools/shared/serverSettings";
-import { currentDesktopBootstrapToken } from "@t3tools/shared/desktopBootstrapToken";
+import { parsePersistedServerObservabilitySettings } from "@murmur/shared/serverSettings";
+import { currentDesktopBootstrapToken } from "@murmur/shared/desktopBootstrapToken";
 import {
   DESKTOP_READINESS_CHALLENGE_PARAM,
   DESKTOP_READINESS_PROOF_PATH,
   isValidDesktopReadinessProof,
-} from "@t3tools/shared/desktopReadinessProof";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/shared/desktopReadinessProof";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";
@@ -63,7 +63,7 @@ export class DesktopBackendConfiguration extends Context.Service<
     readonly resolvePrimaryLabel: Effect.Effect<string>;
     readonly currentBootstrapToken: Effect.Effect<string, PlatformError.PlatformError>;
   }
->()("@t3tools/desktop/backend/DesktopBackendConfiguration") {}
+>()("@murmur/desktop/backend/DesktopBackendConfiguration") {}
 
 interface BackendObservabilitySettings {
   readonly otlpTracesUrl: Option.Option<string>;

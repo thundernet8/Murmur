@@ -1,4 +1,4 @@
-import type { EnvironmentId, EnvironmentMachineKind } from "@t3tools/contracts";
+import type { EnvironmentId, EnvironmentMachineKind } from "@murmur/contracts";
 import { useGT } from "gt-react";
 
 import type { SidebarProjectSnapshot } from "~/sidebarProjectGrouping";

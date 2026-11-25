@@ -1,12 +1,12 @@
-import { collectComposerModelMentions } from "@t3tools/client-runtime/composer-model-mentions";
-import type { AssistantCitation } from "@t3tools/contracts";
-import { collectAssistantCitations } from "@t3tools/shared/assistantCitations";
-import { collectComposerContextReferences } from "@t3tools/shared/composerContextReferences";
+import { collectComposerModelMentions } from "@murmur/client-runtime/composer-model-mentions";
+import type { AssistantCitation } from "@murmur/contracts";
+import { collectAssistantCitations } from "@murmur/shared/assistantCitations";
+import { collectComposerContextReferences } from "@murmur/shared/composerContextReferences";
 import {
   collectComposerInlineTokens,
   composerMathRanges,
   type ComposerInlineToken,
-} from "@t3tools/shared/composerInlineTokens";
+} from "@murmur/shared/composerInlineTokens";
 import { markdownMathRanges } from "~/markdown/wordsHast";
 
 export type ComposerPromptSegment =

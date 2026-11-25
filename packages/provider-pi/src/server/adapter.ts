@@ -1,9 +1,9 @@
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as NodeUtil from "node:util";
-import { AgentScope } from "@t3tools/shared/AgentScope";
-import { getModelSelectionStringOptionValue } from "@t3tools/shared/model";
-import { readToolOutputImage } from "@t3tools/shared/toolOutput";
-import { isWorkspaceImagePreviewPath } from "@t3tools/shared/filePreview";
+import { AgentScope } from "@murmur/shared/AgentScope";
+import { getModelSelectionStringOptionValue } from "@murmur/shared/model";
+import { readToolOutputImage } from "@murmur/shared/toolOutput";
+import { isWorkspaceImagePreviewPath } from "@murmur/shared/filePreview";
 import * as Predicate from "effect/Predicate";
 import {
   ProviderDriverKind,
@@ -25,7 +25,7 @@ import {
   type ProviderInstanceId,
   type MessageId,
   type OrchestrationV2ProviderTurnTokenUsage,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { PiSettings } from "../settings.ts";
 import * as Cause from "effect/Cause";
 import * as DateTime from "effect/DateTime";
@@ -44,25 +44,25 @@ import * as Semaphore from "effect/Semaphore";
 import * as Stream from "effect/Stream";
 import * as ChildProcessSpawner from "effect/process/ChildProcessSpawner";
 
-import * as ProviderHost from "@t3tools/provider-core/server/ProviderHost";
-import { providerMessageTextWithAttachmentPaths } from "@t3tools/provider-core/server/attachmentPrompt";
-import { mcpToolPresentation } from "@t3tools/provider-core/server/mcpToolPresentation";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
+import * as ProviderHost from "@murmur/provider-core/server/ProviderHost";
+import { providerMessageTextWithAttachmentPaths } from "@murmur/provider-core/server/attachmentPrompt";
+import { mcpToolPresentation } from "@murmur/provider-core/server/mcpToolPresentation";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
 import { parsePiCompactCommand, type PiCompactCommand } from "./commands.ts";
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
 import {
   ProviderAdapterDriverCreateError,
   type ProviderAdapterDriver,
   type ProviderAdapterDriverCreateInput,
-} from "@t3tools/provider-core/server/adapterDriver";
+} from "@murmur/provider-core/server/adapterDriver";
 import {
   makeProviderFailure,
   makeProviderRetryTurnItem,
-} from "@t3tools/provider-core/server/failure";
-import { turnScopedSelectionTransition } from "@t3tools/provider-core/server/selectionTransition";
+} from "@murmur/provider-core/server/failure";
+import { turnScopedSelectionTransition } from "@murmur/provider-core/server/selectionTransition";
 import {
   findReportedPiModel,
   makePiRpcConnection,

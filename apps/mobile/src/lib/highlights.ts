@@ -2,8 +2,8 @@ import {
   embeddedScripts,
   withEmbeddedScripts,
   type SyntaxToken,
-} from "@t3tools/client-runtime/work-log/embedded-scripts";
-import type { T3Highlights } from "@t3tools/mobile-highlights-native";
+} from "@murmur/client-runtime/work-log/embedded-scripts";
+import type { T3Highlights } from "@murmur/mobile-highlights-native";
 import { NitroModules } from "react-native-nitro-modules";
 
 import { highlightLanguageId } from "./highlightLanguage";

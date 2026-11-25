@@ -1,5 +1,5 @@
 /* oxlint-disable react/no-array-index-key -- Notebook cells and outputs retain their saved source order. */
-import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
+import { formatAttachmentSize } from "@murmur/client-runtime/state/attachments";
 import { T, useGT, useMessages } from "gt-react";
 import { useEffect, useRef, useState } from "react";
 import ChatMarkdown from "~/components/ChatMarkdown";

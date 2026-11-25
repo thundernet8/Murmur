@@ -4,7 +4,7 @@ import {
   COMPACT_THREAD_CACHE_SCHEMA_VERSION,
   type ConnectionPersistenceError,
   StoredOrchestrationThreadSnapshot,
-} from "@t3tools/client-runtime/platform";
+} from "@murmur/client-runtime/platform";
 import {
   CommandId,
   EnvironmentId,
@@ -16,7 +16,7 @@ import {
   type OrchestrationV2ShellSnapshot,
   type OrchestrationV2ThreadDetailSnapshot,
   type ThreadPullRequestLink,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { describe, expect, it } from "@effect/vitest";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";

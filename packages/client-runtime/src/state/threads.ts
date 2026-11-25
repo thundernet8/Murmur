@@ -9,9 +9,9 @@ import {
   type OrchestrationV2ThreadStreamItem,
   type OrchestrationV2TurnItem,
   type ThreadId as ThreadIdType,
-} from "@t3tools/contracts";
-import { boundedSnapshotProjection } from "@t3tools/shared/orchestrationV2BoundedSnapshot";
-import { pendingBackgroundTurnItems } from "@t3tools/shared/orchestrationV2PendingBackgroundWork";
+} from "@murmur/contracts";
+import { boundedSnapshotProjection } from "@murmur/shared/orchestrationV2BoundedSnapshot";
+import { pendingBackgroundTurnItems } from "@murmur/shared/orchestrationV2PendingBackgroundWork";
 import * as Cause from "effect/Cause";
 import * as Clock from "effect/Clock";
 import * as DateTime from "effect/DateTime";

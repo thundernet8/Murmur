@@ -10,16 +10,16 @@ import type {
   OrchestrationV2StoredEvent,
   ProjectId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   isListedThreadLineage,
   isLiveSubagentShell,
   isOlderSettledThreadShell,
   OrchestrationProjectShell as ProjectShellSchema,
   OrchestrationV2ThreadShell as ThreadShellSchema,
-} from "@t3tools/contracts";
-import { turnItemCanChangeUserWait } from "@t3tools/shared/agentAwareness";
-import * as NodeSqliteClient from "@t3tools/shared/nodeSqliteClient";
+} from "@murmur/contracts";
+import { turnItemCanChangeUserWait } from "@murmur/shared/agentAwareness";
+import * as NodeSqliteClient from "@murmur/shared/nodeSqliteClient";
 // @effect-diagnostics-next-line nodeBuiltinImport:off - a synchronous digest of a few project rows.
 import * as NodeCrypto from "node:crypto";
 import type * as Arr from "effect/Array";

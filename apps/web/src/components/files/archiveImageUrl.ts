@@ -1,4 +1,4 @@
-import { hostPreviewMimeTypeFromExtension } from "@t3tools/shared/filePreview";
+import { hostPreviewMimeTypeFromExtension } from "@murmur/shared/filePreview";
 import * as Base64 from "effect/encoding/Base64";
 
 /**

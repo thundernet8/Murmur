@@ -1,4 +1,4 @@
-import { chunkTerminalWrite } from "@t3tools/contracts";
+import { chunkTerminalWrite } from "@murmur/contracts";
 
 import { encodeTerminalPaste } from "./terminalInput";
 

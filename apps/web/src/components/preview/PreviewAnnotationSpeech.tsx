@@ -1,11 +1,11 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { m } from "~/i18n/messages";
-import { scopeProjectRef } from "@t3tools/client-runtime/environment";
+import { scopeProjectRef } from "@murmur/client-runtime/environment";
 import type {
   DesktopPreviewAnnotationVoiceConfig,
   DesktopPreviewAnnotationVoiceEvent,
   ScopedThreadRef,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useNavigate } from "@tanstack/react-router";
 import { useGT, useMessages } from "gt-react";
 import { useEffect, useRef } from "react";

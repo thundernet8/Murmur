@@ -8,7 +8,7 @@ import {
   type AuthCreatePairingCredentialInput,
   type AuthMcpClientAccess,
   type AuthPairingCredentialResult,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Schema from "effect/Schema";
 import * as Effect from "effect/Effect";
 import type * as HttpClient from "effect/http/HttpClient";

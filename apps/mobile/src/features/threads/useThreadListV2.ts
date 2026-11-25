@@ -1,5 +1,5 @@
-import type { OlderSettledScope } from "@t3tools/client-runtime/state/threads";
-import type { EnvironmentId } from "@t3tools/contracts";
+import type { OlderSettledScope } from "@murmur/client-runtime/state/threads";
+import type { EnvironmentId } from "@murmur/contracts";
 import { useMemo, useSyncExternalStore } from "react";
 
 import { keepMarked } from "../../i18n/messages";

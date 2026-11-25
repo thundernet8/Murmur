@@ -1,6 +1,6 @@
-import type { ScopedThreadRef } from "@t3tools/contracts";
-import { withoutPromptLinkParams } from "@t3tools/shared/promptLinks";
-import { parseThreadLinkPrompt } from "@t3tools/shared/promptLinksCopy";
+import type { ScopedThreadRef } from "@murmur/contracts";
+import { withoutPromptLinkParams } from "@murmur/shared/promptLinks";
+import { parseThreadLinkPrompt } from "@murmur/shared/promptLinksCopy";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { msg } from "gt-react";
 import { useEffect } from "react";

@@ -40,14 +40,14 @@ import {
   type ServerProviderUpdateState,
   type ServerProviderVersionAdvisoryStatus,
   type ServerSettings as ContractServerSettings,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { HttpClient, HttpClientResponse } from "effect/http";
 import { ChildProcessSpawner } from "effect/process";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { WindowsShellEnvironment } from "@t3tools/shared/shell";
-import { deepMerge } from "@t3tools/shared/Struct";
-import { createModelCapabilities } from "@t3tools/shared/model";
-import { applyServerSettingsPatch } from "@t3tools/shared/serverSettings";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { WindowsShellEnvironment } from "@murmur/shared/shell";
+import { deepMerge } from "@murmur/shared/Struct";
+import { createModelCapabilities } from "@murmur/shared/model";
+import { applyServerSettingsPatch } from "@murmur/shared/serverSettings";
 
 import {
   checkCodexProviderStatus,
@@ -61,11 +61,11 @@ import * as AntigravityInstallation from "./AntigravityInstallation.ts";
 import * as ModelManifest from "./ModelManifest.ts";
 import { applyProviderCompatibility } from "./providerCompatibility.ts";
 import * as ResetCreditCoordinator from "./resetCreditCoordinator.ts";
-import * as ProviderLatestVersions from "@t3tools/provider-core/server/ProviderLatestVersions";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as OpenCodeRuntime from "@t3tools/provider-opencode/server/OpenCodeRuntime";
-import * as OpenCodeServerLedger from "@t3tools/provider-opencode/server/OpenCodeServerLedger";
-import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
+import * as ProviderLatestVersions from "@murmur/provider-core/server/ProviderLatestVersions";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as OpenCodeRuntime from "@murmur/provider-opencode/server/OpenCodeRuntime";
+import * as OpenCodeServerLedger from "@murmur/provider-opencode/server/OpenCodeServerLedger";
+import * as ProviderEventLoggers from "@murmur/provider-core/server/ProviderEventLoggers";
 import * as ProviderInstallationGate from "./ProviderInstallationGate.ts";
 import * as ProviderInstanceRegistryHydration from "./ProviderInstanceRegistryHydration.ts";
 import * as PortScanner from "../preview/PortScanner.ts";
@@ -77,19 +77,19 @@ import {
   resolveProviderStatusCachePath,
   writeProviderStatusCache,
 } from "./providerStatusCache.ts";
-import { COMPACT_SLASH_COMMAND } from "@t3tools/provider-core/server/snapshotProbe";
+import { COMPACT_SLASH_COMMAND } from "@murmur/provider-core/server/snapshotProbe";
 import type {
   AnyProviderDriver,
   ProviderInstance,
   ProviderWorkspaceSnapshot,
-} from "@t3tools/provider-core/server/driver";
+} from "@murmur/provider-core/server/driver";
 import * as ProviderInstanceRegistry from "./ProviderInstanceRegistry.ts";
 import * as ProviderInstanceRegistryMutator from "./ProviderInstanceRegistryMutator.ts";
 import * as ProviderRegistry from "./ProviderRegistry.ts";
-import { ProviderDriverError } from "@t3tools/provider-core/server/errors";
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import { makeManualOnlyProviderMaintenanceCapabilities } from "@t3tools/provider-core/server/maintenanceResolver";
-import * as SecretResolver from "@t3tools/secret-provider-core/server/SecretResolver";
+import { ProviderDriverError } from "@murmur/provider-core/server/errors";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import { makeManualOnlyProviderMaintenanceCapabilities } from "@murmur/provider-core/server/maintenanceResolver";
+import * as SecretResolver from "@murmur/secret-provider-core/server/SecretResolver";
 import * as ProviderHostPathWatcher from "./ProviderHostPathWatcher.ts";
 import * as DesktopTelemetryReceiver from "../resourceTelemetry/DesktopTelemetryReceiver.ts";
 import { providerHostEnvironment } from "../policy/managedProviders.ts";

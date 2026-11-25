@@ -1,9 +1,9 @@
 import { useNativeFileDrag } from "../useNativeFileDrag";
-import { resolvePathLinkTarget } from "@t3tools/shared/fileLinks";
+import { resolvePathLinkTarget } from "@murmur/shared/fileLinks";
 import { useAtomValue } from "@effect/atom-react";
 import { documentChipKindForFileName } from "~/pierre-icons";
-import { isProviderSkillUserInvocable } from "@t3tools/client-runtime/providerSkills";
-import { formatProviderSkillDisplayName } from "@t3tools/shared/inlineSkills";
+import { isProviderSkillUserInvocable } from "@murmur/client-runtime/providerSkills";
+import { formatProviderSkillDisplayName } from "@murmur/shared/inlineSkills";
 import {
   Extension,
   findChildren,
@@ -33,15 +33,15 @@ import type {
   AssistantCitation,
   ComposerContextClipboardFragment,
   ServerProviderSkill,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   serializeAssistantCitation,
   withAssistantCitationComment,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 import {
   COMPOSER_CONTEXT_CLIPBOARD_MIME,
   encodeComposerContextClipboardHtml,
-} from "@t3tools/shared/composerContextClipboard";
+} from "@murmur/shared/composerContextClipboard";
 import {
   createContext,
   use,

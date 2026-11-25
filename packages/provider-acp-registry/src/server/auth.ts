@@ -2,7 +2,7 @@ import {
   ProviderSetupError,
   type ProviderAuthMethod,
   type ProviderInstanceId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import type { AcpRegistrySettings } from "../settings.ts";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as NodeUtil from "node:util";
@@ -19,12 +19,12 @@ import * as Schema from "effect/Schema";
 import type * as AcpSchema from "effect-acp/compat";
 import * as EffectAcpErrors from "effect-acp/errors";
 
-import * as PtyAdapter from "@t3tools/shared/PtyAdapter";
-import * as ProviderAuthFlow from "@t3tools/provider-core/server/providerAuthFlow";
+import * as PtyAdapter from "@murmur/shared/PtyAdapter";
+import * as ProviderAuthFlow from "@murmur/provider-core/server/providerAuthFlow";
 import { normalizeAcpRegistryAuthMethods, normalizeAcpRegistryWebUrl } from "./probe.ts";
 import * as AcpRegistrySupport from "./AcpRegistrySupport.ts";
 import * as AcpRegistryRuntimeCoordinator from "./AcpRegistryRuntimeCoordinator.ts";
-import * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
+import * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
 
 const isAcpRequestError = Schema.is(EffectAcpErrors.AcpRequestError);
 

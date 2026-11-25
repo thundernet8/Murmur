@@ -7,8 +7,8 @@ import { useMemo, useState } from "react";
 import { Platform } from "react-native";
 import { useGT, useMessages } from "gt-react-native";
 
-import type { EnvironmentThreadShell } from "@t3tools/client-runtime/state/shell";
-import { pickableProjectGroups } from "@t3tools/client-runtime/state/project-grouping";
+import type { EnvironmentThreadShell } from "@murmur/client-runtime/state/shell";
+import { pickableProjectGroups } from "@murmur/client-runtime/state/project-grouping";
 
 import { useProjects } from "../../state/entities";
 import { steadyNavigationThreadShellsAtom } from "../../state/threads";

@@ -1,4 +1,4 @@
-import { injectHtmlRenderBootstrap } from "@t3tools/shared/htmlRender";
+import { injectHtmlRenderBootstrap } from "@murmur/shared/htmlRender";
 import { HtmlRenderDocument } from "../files/BrowserDocumentFrame";
 import { AudioPreview } from "../files/AudioPreview";
 import { cdp, page, userEvent } from "vite-plus/test/browser";
@@ -16,7 +16,7 @@ import {
   ScheduledTaskId,
   ThreadId,
   type OrchestrationV2Subagent,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { type LegendListRef } from "@legendapp/list/react";
 import {
   createRef,
@@ -46,8 +46,8 @@ import { ViewedImagesTimelineRow } from "./TimelineWorkEntryRow";
 import { THOUGHT_PREVIEW_MAX_LENGTH, thoughtPreviewMarkdown } from "./TimelineWorkEntryRow.logic";
 import { wordsHast } from "~/markdown/wordsHast";
 import { TimelineRowCtx } from "./timelineRowContext";
-import { searchableMessageSegments } from "@t3tools/shared/threadFindText";
-import { countThreadSearchOccurrences } from "@t3tools/shared/threadSearch";
+import { searchableMessageSegments } from "@murmur/shared/threadFindText";
+import { countThreadSearchOccurrences } from "@murmur/shared/threadSearch";
 import { collectThreadFindRanges } from "./threadFindHighlights";
 import { toastManager } from "../ui/toast";
 import type { CitedHistory } from "./citationProcedure";
@@ -56,8 +56,8 @@ import { rememberTimelinePosition } from "./timelineScrollAnchoring";
 import {
   COMPOSER_CONTEXT_CLIPBOARD_MIME,
   decodeComposerContextFragment,
-} from "@t3tools/shared/composerContextClipboard";
-import { collectComposerContextReferences } from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextClipboard";
+import { collectComposerContextReferences } from "@murmur/shared/composerContextReferences";
 
 const environmentQuery = vi.hoisted(() => ({
   error: "Pull request not found" as string | null,

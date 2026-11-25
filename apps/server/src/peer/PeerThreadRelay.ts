@@ -10,7 +10,7 @@ import {
   type PeerLinkThreadInput,
   type PeerLinkThreadItemInput,
   PeerLinkThreadReadError,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";
 import * as Duration from "effect/Duration";

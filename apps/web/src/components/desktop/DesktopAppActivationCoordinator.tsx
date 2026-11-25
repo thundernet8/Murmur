@@ -1,4 +1,4 @@
-import type { DesktopAppActivationRequest } from "@t3tools/contracts";
+import type { DesktopAppActivationRequest } from "@murmur/contracts";
 import { useEffect, useEffectEvent, useRef } from "react";
 
 import { useOpenLocalWorkspace } from "../../hooks/useOpenLocalWorkspace";

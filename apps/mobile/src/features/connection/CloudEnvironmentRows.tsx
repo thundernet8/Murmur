@@ -7,13 +7,13 @@ import { SymbolView } from "../../components/ui/AppSymbol";
 import {
   hasSavedBearerRoute,
   type EnvironmentConnectionPhase,
-} from "@t3tools/client-runtime/connection";
+} from "@murmur/client-runtime/connection";
 import {
   type EnvironmentId,
   type EnvironmentMachineKind,
   type ExecutionEnvironmentDescriptor,
   resolveEnvironmentMachineKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { useState } from "react";
 import { Pressable, type TextLayoutEvent, View } from "react-native";
@@ -23,7 +23,7 @@ import { EnvironmentMachineSymbol } from "../../components/EnvironmentMachineSym
 import { ThemedSwitch } from "../../components/ui/ThemedSwitch";
 import { cn } from "../../lib/cn";
 import { copyTextWithHaptic } from "../../lib/copyTextWithHaptic";
-import type { MarkedText } from "@t3tools/client-runtime/errors";
+import type { MarkedText } from "@murmur/client-runtime/errors";
 import type { ConnectedEnvironmentSummary } from "../../state/remote-runtime-types";
 import { serverEnvironment } from "../../state/server";
 import { environmentPresentations } from "../../state/presentation";

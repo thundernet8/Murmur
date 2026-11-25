@@ -1,4 +1,4 @@
-import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
+import type { EnvironmentId, ThreadId } from "@murmur/contracts";
 
 export type LinkedThreadRouteParams = {
   readonly viaEnvironmentId: string;

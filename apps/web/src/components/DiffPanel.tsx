@@ -5,14 +5,14 @@ import type { FileDiffContentsLoader, FileDiffMetadata } from "@pierre/diffs";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import { safeErrorLogAttributes } from "@t3tools/client-runtime/errors";
+} from "@murmur/client-runtime/state/runtime";
+import { safeErrorLogAttributes } from "@murmur/client-runtime/errors";
 import {
   CHECKPOINT_DIFF_TRUNCATED_MARKER,
   type ReviewBranchCommitsResult,
   type ScopedThreadRef,
   type RunId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -49,7 +49,7 @@ import {
   useDiffPanelStore,
 } from "../diffPanelStore";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { isTestChangedFile } from "@t3tools/shared/changedFileKind";
+import { isTestChangedFile } from "@murmur/shared/changedFileKind";
 import { useHideTestFiles } from "./diffs/useHideTestFiles";
 import { useRenderedAppearance } from "../hooks/useTheme";
 import { useStableCallback } from "../hooks/useStableCallback";
@@ -119,7 +119,7 @@ import { useReviewFilePatches } from "./diffs/useReviewFilePatches";
 import { DiffFileLoadingBoundary } from "./diffs/DiffFileLoadingBoundary";
 import { DiffFileStatus } from "./diffs/DiffFileStatus";
 import { useThreadRouteRef } from "../hooks/useThreadRouteTarget";
-import { projectCommitUrl } from "@t3tools/client-runtime/change-request-links";
+import { projectCommitUrl } from "@murmur/client-runtime/change-request-links";
 import {
   isRelativePathInsideFolder,
   repositorySectionForPath,
@@ -127,7 +127,7 @@ import {
   threadGitRepositories,
   turnDiffSections,
   type TurnDiffSection,
-} from "@t3tools/client-runtime/state/thread-repositories";
+} from "@murmur/client-runtime/state/thread-repositories";
 import { useOpenLink } from "../browser/useOpenLink";
 
 type DiffThemeType = "light" | "dark";

@@ -1,8 +1,8 @@
 import { RelayEncryptionTransport, relayIdentityConnectionId } from "../relay/encryption.ts";
 import { msg } from "gt-i18n";
 import { detailFromError, translatableDetail } from "../errors/translatable.ts";
-import type { DesktopSshEnvironmentTarget, EnvironmentId } from "@t3tools/contracts";
-import { resolveRemotePairingTarget } from "@t3tools/shared/remote";
+import type { DesktopSshEnvironmentTarget, EnvironmentId } from "@murmur/contracts";
+import { resolveRemotePairingTarget } from "@murmur/shared/remote";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
@@ -90,7 +90,7 @@ export class ConnectionOnboarding extends Context.Service<
       readonly environmentId: EnvironmentId;
     }) => Effect.Effect<boolean>;
   }
->()("@t3tools/client-runtime/connection/onboarding/ConnectionOnboarding") {}
+>()("@murmur/client-runtime/connection/onboarding/ConnectionOnboarding") {}
 
 const resolvePairingTarget = Effect.fn("clientRuntime.connection.onboarding.resolvePairingTarget")(
   function* (input: PairingConnectionInput) {

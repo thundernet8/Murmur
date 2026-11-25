@@ -12,8 +12,8 @@ import {
   type WorktreeMcpStatusResult,
   type VcsListRefsInput,
   type VcsListRefsResult,
-} from "@t3tools/contracts";
-import { resolveProjectSettings } from "@t3tools/shared/projectSettings";
+} from "@murmur/contracts";
+import { resolveProjectSettings } from "@murmur/shared/projectSettings";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";

@@ -4,19 +4,19 @@ import type {
   ReviewCommentContextRecord,
   ThreadContextRecord,
   UserInputQuestion,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   projectComposerContextForProvider,
   replaceComposerContextReferences,
-} from "@t3tools/shared/composerContextReferences";
-import { formatThreadLink } from "@t3tools/shared/threadLinks";
+} from "@murmur/shared/composerContextReferences";
+import { formatThreadLink } from "@murmur/shared/threadLinks";
 import {
   buildPendingUserInputAnswers,
   normalizeSelectedOptionValues,
   resolvePendingUserInputAnswer,
   type PendingUserInputAnswer,
   type PendingUserInputDraftAnswer,
-} from "@t3tools/client-runtime/state/pending-user-input";
+} from "@murmur/client-runtime/state/pending-user-input";
 
 import { collectInlineContextIds } from "./lib/composerContextReferences";
 import {

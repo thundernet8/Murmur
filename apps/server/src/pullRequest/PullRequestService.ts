@@ -1,5 +1,5 @@
-import { isSshRemoteUrl } from "@t3tools/shared/sourceControl";
-import { parseDiffFilePaths } from "@t3tools/source-control-core/server/diffFileRevisions";
+import { isSshRemoteUrl } from "@murmur/shared/sourceControl";
+import { parseDiffFilePaths } from "@murmur/source-control-core/server/diffFileRevisions";
 import * as Cache from "effect/Cache";
 import * as Cause from "effect/Cause";
 import * as Clock from "effect/Clock";
@@ -75,8 +75,8 @@ import {
   type SourceControlProviderInfo,
   SourceControlProviderKind,
   type ThreadPullRequestKey,
-} from "@t3tools/contracts";
-import { resolveProjectSettings } from "@t3tools/shared/projectSettings";
+} from "@murmur/contracts";
+import { resolveProjectSettings } from "@murmur/shared/projectSettings";
 import { sourceControlDefinitions } from "../sourceControl/sourceControlDefinitions.ts";
 
 import * as ProjectService from "../project/ProjectService.ts";
@@ -84,8 +84,8 @@ import * as ServerSettings from "../serverSettings.ts";
 import * as PullRequestFilesViewed from "../persistence/PullRequestFilesViewed.ts";
 import * as RepositoryIdentityResolver from "../project/RepositoryIdentityResolver.ts";
 import * as SourceControlProviderRegistry from "../sourceControl/SourceControlProviderRegistry.ts";
-import type { SourceControlProviderContext } from "@t3tools/source-control-core/server/SourceControlProvider";
-import * as SourceControlRateLimit from "@t3tools/source-control-core/server/SourceControlRateLimit";
+import type { SourceControlProviderContext } from "@murmur/source-control-core/server/SourceControlProvider";
+import * as SourceControlRateLimit from "@murmur/source-control-core/server/SourceControlRateLimit";
 import {
   type ProviderChangeRequest,
   type ProviderChangeRequestDetail,
@@ -98,7 +98,7 @@ import {
   type ProviderChangeRequestWatchFingerprint,
   type PullRequestProviderApi,
   PullRequestProviderError,
-} from "@t3tools/source-control-core/server/PullRequestProvider";
+} from "@murmur/source-control-core/server/PullRequestProvider";
 import * as PullRequestReadCache from "./PullRequestReadCache.ts";
 import * as PullRequestProviderRegistry from "./PullRequestProviderRegistry.ts";
 import * as ViewedFiles from "./pullRequestViewedFiles.ts";

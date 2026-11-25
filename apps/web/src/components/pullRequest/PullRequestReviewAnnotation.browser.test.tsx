@@ -1,4 +1,4 @@
-import { EnvironmentId, ProjectId, type PullRequestReviewThread } from "@t3tools/contracts";
+import { EnvironmentId, ProjectId, type PullRequestReviewThread } from "@murmur/contracts";
 import { expect, it, vi } from "vite-plus/test";
 import { userEvent } from "vite-plus/test/browser";
 

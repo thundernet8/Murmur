@@ -10,7 +10,7 @@ import {
   ProviderThreadId,
   RunId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cache from "effect/Cache";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
@@ -21,7 +21,7 @@ import * as Exit from "effect/Exit";
 import * as Base64Url from "effect/encoding/Base64Url";
 import * as Hex from "effect/encoding/Hex";
 import * as FileSystem from "effect/FileSystem";
-import * as KeyedLock from "@t3tools/shared/KeyedLock";
+import * as KeyedLock from "@murmur/shared/KeyedLock";
 import * as Layer from "effect/Layer";
 import * as Option from "effect/Option";
 import * as Path from "effect/Path";
@@ -29,7 +29,7 @@ import * as Schema from "effect/Schema";
 
 import { isGitImport, parseTurnDiffFilesFromNumstat } from "../checkpointing/Diffs.ts";
 import * as CheckpointStore from "../checkpointing/CheckpointStore.ts";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
 import * as WorkspaceFolders from "../workspace/WorkspaceFolders.ts";
 
 const CHECKPOINT_REFS_PREFIX = "refs/t3/orchestration-v2/checkpoints";

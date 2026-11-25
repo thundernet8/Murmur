@@ -1,4 +1,4 @@
-import { protectRelayUrl } from "@t3tools/shared/relayTransport";
+import { protectRelayUrl } from "@murmur/shared/relayTransport";
 
 export interface DeviceHubAccess {
   readonly httpBase: string;

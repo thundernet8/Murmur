@@ -12,12 +12,12 @@ import {
   ScheduledTaskId,
   ThreadId,
   type ScheduledTask,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { describe, expect, it, vi } from "vite-plus/test";
 import { page, userEvent } from "vite-plus/test/browser";
 
 import "~/index.css";
-import { createModelCapabilities } from "@t3tools/shared/model";
+import { createModelCapabilities } from "@murmur/shared/model";
 import { act, render } from "../../../test/render";
 import { ScheduledTasksSettings } from "./ScheduledTasksSettings";
 import { ConfirmDialogHost } from "../ConfirmDialogHost";

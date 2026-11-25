@@ -1,5 +1,5 @@
 import { useAuth, useClerk } from "@clerk/react";
-import { readConnectAuthorizeRequest } from "@t3tools/shared/connectAuth";
+import { readConnectAuthorizeRequest } from "@murmur/shared/connectAuth";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 

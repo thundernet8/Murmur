@@ -1,19 +1,19 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
-import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
+import { formatAttachmentSize } from "@murmur/client-runtime/state/attachments";
 import {
   ARCHIVE_ENTRY_MAX_BYTES,
   ARCHIVE_MAX_BYTES,
   boundedZip,
-} from "@t3tools/client-runtime/zip/bounded-zip";
-import { isZipError } from "@t3tools/client-runtime/zip/error";
-import { zipErrorText } from "@t3tools/client-runtime/zip/error-messages";
-import type { EnvironmentId } from "@t3tools/contracts";
-import { filePreviewDelimiter, parseDelimitedPreview } from "@t3tools/shared/delimitedPreview";
+} from "@murmur/client-runtime/zip/bounded-zip";
+import { isZipError } from "@murmur/client-runtime/zip/error";
+import { zipErrorText } from "@murmur/client-runtime/zip/error-messages";
+import type { EnvironmentId } from "@murmur/contracts";
+import { filePreviewDelimiter, parseDelimitedPreview } from "@murmur/shared/delimitedPreview";
 import {
   decodeFilePreviewText,
   filePreviewKind,
   hostPreviewMimeTypeFromExtension,
-} from "@t3tools/shared/filePreview";
+} from "@murmur/shared/filePreview";
 import { LegendList } from "@legendapp/list/react-native";
 import * as Schema from "effect/Schema";
 import { fetch } from "expo/fetch";

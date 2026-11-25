@@ -1,17 +1,17 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import { T, useGT, Var } from "gt-react-native";
 import * as Dialog from "../../components/ui/Dialog";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
   type AtomCommandResult,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   AuthProvidersManageScope,
   isManagedDriverAllowed,
   type ProviderAuthResponse,
   type ServerProvider,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { useRef, useState } from "react";
 import { Pressable, ScrollView, TextInput, useWindowDimensions, View } from "react-native";

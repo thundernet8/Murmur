@@ -1,9 +1,9 @@
-import { assistantCitationsToPlainText } from "@t3tools/shared/assistantCitations";
-import { parseThreadLinkHref } from "@t3tools/shared/threadLinks";
+import { assistantCitationsToPlainText } from "@murmur/shared/assistantCitations";
+import { parseThreadLinkHref } from "@murmur/shared/threadLinks";
 import {
   isAttachmentOnlyBootstrapPrompt,
   replaceComposerContextReferences,
-} from "@t3tools/shared/composerContextReferences";
+} from "@murmur/shared/composerContextReferences";
 import type { Nodes } from "hast";
 
 import { markdownTree } from "~/markdown/wordsHast";

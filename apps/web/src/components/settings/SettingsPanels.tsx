@@ -1,4 +1,4 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { m as resolveMessage } from "~/i18n/messages";
 import { useAtomValue } from "@effect/atom-react";
 import { NotificationSettings } from "./NotificationSettings";
@@ -15,7 +15,7 @@ import {
   ProviderDriverKind,
   type ProviderInstanceId,
   type SidebarProjectGroupingMode,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   DEFAULT_UNIFIED_SETTINGS,
   type DiffLayout,
@@ -26,14 +26,14 @@ import {
   SidebarProjectSortOrder,
   ScreenReaderAnnouncements,
   ToolCallVisibility,
-} from "@t3tools/contracts/settings";
+} from "@murmur/contracts/settings";
 import {
   managedUpdatesDenial,
   managedUpdatesMessage,
-} from "@t3tools/client-runtime/contract-labels";
-import { desktopUpdateChannelOf } from "@t3tools/shared/cliRelease";
-import { createModelSelection, pickModelSelection } from "@t3tools/shared/model";
-import { resolvePastedPath } from "@t3tools/shared/path";
+} from "@murmur/client-runtime/contract-labels";
+import { desktopUpdateChannelOf } from "@murmur/shared/cliRelease";
+import { createModelSelection, pickModelSelection } from "@murmur/shared/model";
+import { resolvePastedPath } from "@murmur/shared/path";
 import * as Equal from "effect/Equal";
 import * as Schema from "effect/Schema";
 import { APP_VERSION, HOSTED_APP_CHANNEL, HOSTED_APP_CHANNEL_LABEL } from "../../branding";
@@ -118,7 +118,7 @@ import {
   SettingsSection,
 } from "./settingsLayout";
 import { useSearchableSetting } from "./settingsSearch";
-import { nativeLanguageName, SYSTEM_LANGUAGE } from "@t3tools/client-runtime/locales";
+import { nativeLanguageName, SYSTEM_LANGUAGE } from "@murmur/client-runtime/locales";
 import { SUPPORTED_LOCALES } from "../../i18n/locales";
 import { BackgroundActivitySettingsRow } from "./BackgroundActivitySettings";
 import { AdvancedSettings } from "./AdvancedSettings";

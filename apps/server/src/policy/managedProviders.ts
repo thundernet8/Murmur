@@ -14,16 +14,16 @@ import {
   resolveProviderInstanceEnabled,
   type RuntimeMode,
   type ServerSettings,
-} from "@t3tools/contracts";
-import { acpRegistryClient } from "@t3tools/provider-acp-registry/client";
-import { cursorClient } from "@t3tools/provider-cursor/client";
-import { fxClient } from "@t3tools/provider-fx/client";
-import { grokClient } from "@t3tools/provider-grok/client";
-import { kiroClient } from "@t3tools/provider-kiro/client";
-import { museClient } from "@t3tools/provider-muse/client";
-import { openCodeClient } from "@t3tools/provider-opencode/client";
-import { piClient } from "@t3tools/provider-pi/client";
-import type { ProviderClientDefinition } from "@t3tools/provider-core/client";
+} from "@murmur/contracts";
+import { acpRegistryClient } from "@murmur/provider-acp-registry/client";
+import { cursorClient } from "@murmur/provider-cursor/client";
+import { fxClient } from "@murmur/provider-fx/client";
+import { grokClient } from "@murmur/provider-grok/client";
+import { kiroClient } from "@murmur/provider-kiro/client";
+import { museClient } from "@murmur/provider-muse/client";
+import { openCodeClient } from "@murmur/provider-opencode/client";
+import { piClient } from "@murmur/provider-pi/client";
+import type { ProviderClientDefinition } from "@murmur/provider-core/client";
 
 interface KnownDriver {
   readonly label: string;

@@ -10,10 +10,10 @@ import {
   paceRemainingPercent,
   remainingPercent,
   type ResetCreditChoice,
-} from "@t3tools/shared/usageLimits";
+} from "@murmur/shared/usageLimits";
 import { T, useGT, useMessages } from "gt-react";
 import type { Popover as PopoverPrimitive } from "@base-ui/react/popover";
-import { normalizeProviderAccentColor } from "@t3tools/client-runtime/state/provider-instance-display";
+import { normalizeProviderAccentColor } from "@murmur/client-runtime/state/provider-instance-display";
 import { AlertTriangleIcon, ExternalLinkIcon, TicketIcon } from "lucide-react";
 import {
   createContext,
@@ -44,7 +44,7 @@ import {
   cursorUsageWindowDetails,
   formatResetsIn,
   resetCreditChoices,
-} from "@t3tools/shared/usageLimitsCopy";
+} from "@murmur/shared/usageLimitsCopy";
 
 function accountInitials(email: string): string {
   const [local = "", domain = ""] = email.split("@");

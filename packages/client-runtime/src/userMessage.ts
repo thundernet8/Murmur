@@ -8,14 +8,14 @@ import {
   type OrchestrationV2IdleCompaction,
   type OrchestrationV2UserMessageInputIntent,
   ScheduledTaskId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   isAttachmentOnlyBootstrapPrompt,
   replaceComposerContextReferences,
-} from "@t3tools/shared/composerContextReferences";
-import { filePreviewKind } from "@t3tools/shared/filePreview";
-import { imageMimeType } from "@t3tools/shared/image";
-import { videoMimeType } from "@t3tools/shared/video";
+} from "@murmur/shared/composerContextReferences";
+import { filePreviewKind } from "@murmur/shared/filePreview";
+import { imageMimeType } from "@murmur/shared/image";
+import { videoMimeType } from "@murmur/shared/video";
 import { msg } from "gt-i18n";
 
 /** The working row while Murmur's own compaction runs. */

@@ -1,5 +1,5 @@
 import { DEFAULT_THEMES, preloadHighlighter } from "@pierre/diffs";
-import { EnvironmentId, ThreadId, type ProjectReadFileResult } from "@t3tools/contracts";
+import { EnvironmentId, ThreadId, type ProjectReadFileResult } from "@murmur/contracts";
 import { AsyncResult } from "effect/reactivity";
 import { StrictMode, type ReactNode } from "react";
 import { describe, expect, it, vi } from "vite-plus/test";
@@ -18,13 +18,13 @@ const state = vi.hoisted(() => ({
   optimistic: null as ProjectReadFileResult | null,
   writeFile: vi.fn(),
   assetUrl: { _tag: "Loading" } as import("~/assets/assetUrls").AssetUrlState,
-  assetResources: [] as Array<import("@t3tools/contracts").AssetResource>,
+  assetResources: [] as Array<import("@murmur/contracts").AssetResource>,
   mintUrl: vi.fn<() => Promise<string | null>>(),
   browserAssetMints: 0,
   openedBrowserUrls: [] as string[],
 }));
 
-vi.mock(import("@t3tools/client-runtime/state/runtime"), async (original) => ({
+vi.mock(import("@murmur/client-runtime/state/runtime"), async (original) => ({
   ...(await original()),
   runAtomCommand: ((_registry: unknown, _command: unknown, request: unknown) =>
     state.writeFile(request)) as never,
@@ -68,7 +68,7 @@ vi.mock(import("~/assets/assetUrls"), async (original) => ({
   useAssetUrlRefresh: () => state.mintUrl,
   useAssetUrlState: (
     _environmentId: unknown,
-    resource: import("@t3tools/contracts").AssetResource | null,
+    resource: import("@murmur/contracts").AssetResource | null,
   ) => {
     if (resource) state.assetResources.push(resource);
     return state.assetUrl;

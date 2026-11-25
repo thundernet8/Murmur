@@ -1,4 +1,4 @@
-import type { ScopedThreadRef } from "@t3tools/contracts";
+import type { ScopedThreadRef } from "@murmur/contracts";
 import { LegendList } from "@legendapp/list/react";
 import type { KeyboardEventHandler } from "react";
 
@@ -8,7 +8,7 @@ import {
   LARGE_MARKDOWN_CHUNK_MAX_CHARS,
   type MarkdownChunk,
   withMarkdownDefinitions,
-} from "@t3tools/shared/markdownChunks";
+} from "@murmur/shared/markdownChunks";
 
 const ESTIMATED_LINE_PX = 24;
 

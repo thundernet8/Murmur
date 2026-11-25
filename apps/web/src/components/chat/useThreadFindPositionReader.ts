@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
-import type { RunId } from "@t3tools/contracts";
-import type { ToolCallVisibility } from "@t3tools/contracts/settings";
+import type { RunId } from "@murmur/contracts";
+import type { ToolCallVisibility } from "@murmur/contracts/settings";
 import type { TimelineEntry } from "../../session-logic";
 import {
   timelineTurnFoldRunIdsByEntryId,

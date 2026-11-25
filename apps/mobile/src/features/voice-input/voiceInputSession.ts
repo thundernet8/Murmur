@@ -6,7 +6,7 @@ import {
   type VoiceInputControllerDependencies,
   type VoiceInputPhase,
   type VoiceInputState,
-} from "@t3tools/client-runtime/voice-input";
+} from "@murmur/client-runtime/voice-input";
 
 import { m } from "../../i18n/messages";
 import { normalizeVoiceInputDecibels, VOICE_WAVEFORM_SAMPLE_COUNT } from "./voiceInputMetering";

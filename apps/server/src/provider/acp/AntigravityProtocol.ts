@@ -2,9 +2,9 @@ import type {
   ProviderApprovalOption,
   ProviderUserInputAnswers,
   UserInputQuestion,
-} from "@t3tools/contracts";
-import { isWorkspaceImagePreviewPath } from "@t3tools/shared/filePreview";
-import { resolveT3McpToolId } from "@t3tools/shared/t3McpToolPresentation";
+} from "@murmur/contracts";
+import { isWorkspaceImagePreviewPath } from "@murmur/shared/filePreview";
+import { resolveT3McpToolId } from "@murmur/shared/t3McpToolPresentation";
 import * as Option from "effect/Option";
 import * as Predicate from "effect/Predicate";
 import * as Schema from "effect/Schema";
@@ -14,7 +14,7 @@ import * as AcpWireSchema from "effect-acp/schema-v1";
 import {
   extractMcpToolCallIdentity,
   type AcpToolCallState,
-} from "@t3tools/provider-acp/server/runtimeModel";
+} from "@murmur/provider-acp/server/runtimeModel";
 
 import {
   ANTIGRAVITY_EDIT_DIFF_OMITTED,

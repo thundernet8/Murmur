@@ -1,4 +1,4 @@
-import type { ServerLifecycleStreamEvent } from "@t3tools/contracts";
+import type { ServerLifecycleStreamEvent } from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as Deferred from "effect/Deferred";
 import * as Effect from "effect/Effect";

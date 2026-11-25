@@ -1,26 +1,26 @@
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
-import type { ModelSelection, ProjectId, ProviderInstanceId } from "@t3tools/contracts";
+import type { ModelSelection, ProjectId, ProviderInstanceId } from "@murmur/contracts";
 import {
   isProviderAvailable,
   isProviderTextGenerationCapable,
   resolveProjectProviderInstanceEnabled,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as DateTime from "effect/DateTime";
-import { exhaustedUsageWindow } from "@t3tools/shared/usageLimits";
-import { fallbackTextGenerationModelSelection } from "@t3tools/shared/serverSettings";
+import { exhaustedUsageWindow } from "@murmur/shared/usageLimits";
+import { fallbackTextGenerationModelSelection } from "@murmur/shared/serverSettings";
 import * as ServerSettings from "../serverSettings.ts";
-import type { ProviderTextGeneration } from "@t3tools/provider-core/server/textGeneration";
-import { TextGenerationError } from "@t3tools/contracts";
+import type { ProviderTextGeneration } from "@murmur/provider-core/server/textGeneration";
+import { TextGenerationError } from "@murmur/contracts";
 
 import * as ProviderInstallationGate from "../provider/ProviderInstallationGate.ts";
 import * as ProviderInstanceRegistry from "../provider/ProviderInstanceRegistry.ts";
-import type { ProviderInstance } from "@t3tools/provider-core/server/driver";
+import type { ProviderInstance } from "@murmur/provider-core/server/driver";
 import * as SourceControlProviderRegistry from "../sourceControl/SourceControlProviderRegistry.ts";
 import * as ThreadTitleLinks from "./ThreadTitleLinks.ts";
 import * as TextGenerators from "./TextGenerators.ts";
-import * as TextGenerationOperations from "@t3tools/provider-core/server/textGenerationOperations";
+import * as TextGenerationOperations from "@murmur/provider-core/server/textGenerationOperations";
 
 export type {
   BranchNameGenerationInput,
@@ -35,7 +35,7 @@ export type {
   ThreadTitleGenerationResult,
   TranscriptionPostProcessingInput,
   TranscriptionPostProcessingResult,
-} from "@t3tools/provider-core/server/textGeneration";
+} from "@murmur/provider-core/server/textGeneration";
 
 export class TextGeneration extends Context.Service<TextGeneration, ProviderTextGeneration>()(
   "t3/textGeneration/TextGeneration",

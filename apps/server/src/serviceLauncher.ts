@@ -9,7 +9,7 @@ import * as NodePath from "node:path";
 import * as NodeUtil from "node:util";
 import { acquireServiceSelectionLock } from "./cloud/serviceSelectionLock.ts";
 import { RESTORE_OOMD_WATCH_SCRIPT } from "./cloud/userManagerOom.ts";
-import { windowsSystem32Path } from "@t3tools/shared/windowsSystem";
+import { windowsSystem32Path } from "@murmur/shared/windowsSystem";
 import { isNoCopyOnWrite, markNoCopyOnWrite } from "./noCopyOnWrite.ts";
 
 import type {

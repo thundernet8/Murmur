@@ -1,5 +1,5 @@
-import type { ProjectEntry } from "@t3tools/contracts";
-import { normalizeSearchQuery } from "@t3tools/shared/searchRanking";
+import type { ProjectEntry } from "@murmur/contracts";
+import { normalizeSearchQuery } from "@murmur/shared/searchRanking";
 
 export const PROJECT_FILE_PICKER_RESULT_LIMIT = 200;
 

@@ -1,7 +1,7 @@
 import { msg } from "gt-i18n";
 import { MarkedText, messageFromError, translatableMessage } from "../errors/translatable.ts";
-import type { EnvironmentId } from "@t3tools/contracts";
-import { decodeRelayJwt } from "@t3tools/shared/relayJwt";
+import type { EnvironmentId } from "@murmur/contracts";
+import { decodeRelayJwt } from "@murmur/shared/relayJwt";
 import * as Cause from "effect/Cause";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";

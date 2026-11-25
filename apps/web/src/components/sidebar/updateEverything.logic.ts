@@ -1,16 +1,16 @@
 import {
   managedNightlyDeniedMessage,
   managedUpdatesDenial,
-} from "@t3tools/client-runtime/contract-labels";
-import type { ServerUpdateState } from "@t3tools/client-runtime/state/server";
+} from "@murmur/client-runtime/contract-labels";
+import type { ServerUpdateState } from "@murmur/client-runtime/state/server";
 import {
   type DesktopUpdateChannel,
   type EnvironmentId,
   type ServerConfig,
   type ServerSelfUpdateCapability,
-} from "@t3tools/contracts";
-import { cliReleaseChannelOf, desktopUpdateChannelOf } from "@t3tools/shared/cliRelease";
-import { compareSemverVersions } from "@t3tools/shared/semver";
+} from "@murmur/contracts";
+import { cliReleaseChannelOf, desktopUpdateChannelOf } from "@murmur/shared/cliRelease";
+import { compareSemverVersions } from "@murmur/shared/semver";
 import { msg } from "gt-react";
 
 import { m, type MessageResolver } from "~/i18n/messages";

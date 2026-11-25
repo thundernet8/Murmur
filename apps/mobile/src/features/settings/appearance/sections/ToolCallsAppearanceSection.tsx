@@ -1,6 +1,6 @@
 import { msg, T, useGT, useMessages } from "gt-react-native";
 import { useAtomValue } from "@effect/atom-react";
-import type { ToolCallVisibility } from "@t3tools/contracts/settings";
+import type { ToolCallVisibility } from "@murmur/contracts/settings";
 import { AsyncResult } from "effect/reactivity";
 import { View } from "react-native";
 

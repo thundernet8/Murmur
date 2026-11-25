@@ -1,4 +1,4 @@
-import { UNFINISHED_DRIVE_PATH } from "@t3tools/shared/markdownLinks";
+import { UNFINISHED_DRIVE_PATH } from "@murmur/shared/markdownLinks";
 
 const SKIPPED_TAGS = new Set(["BUTTON", "INPUT", "SCRIPT", "STYLE", "TEMPLATE"]);
 const SKIPPED_CLASS_NAMES = ["select-none", "sr-only"];

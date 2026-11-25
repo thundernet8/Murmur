@@ -3,7 +3,7 @@ import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { mobile, type DeviceProvider } from "@e2e-dev/mobile";
 import { web } from "@e2e-dev/web";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import { createAgentDeviceClient } from "agent-device";
 import type { E2EConfig } from "e2e";
 import * as Effect from "effect/Effect";

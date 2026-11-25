@@ -70,7 +70,7 @@ export class TanStackSourceApi extends Context.Service<
       input: TanStackSourceApiRequest,
     ) => Effect.Effect<TanStackSourceApiResponse, TanStackSourceApiError>;
   }
->()("@t3tools/source-control-tanstack-source/server/TanStackSourceApi") {}
+>()("@murmur/source-control-tanstack-source/server/TanStackSourceApi") {}
 
 const decodeProblem = Schema.decodeUnknownOption(
   Schema.fromJsonString(

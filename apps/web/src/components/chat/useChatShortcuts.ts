@@ -1,4 +1,4 @@
-import type { KeybindingCommand, ResolvedKeybindingsConfig } from "@t3tools/contracts";
+import type { KeybindingCommand, ResolvedKeybindingsConfig } from "@murmur/contracts";
 import { useEffect, useEffectEvent } from "react";
 import { isCommandPaletteOpen } from "../../commandPaletteBus";
 import { resolveChatShortcutCommand, type ShortcutMatchContext } from "../../keybindings";

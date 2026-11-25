@@ -1,7 +1,7 @@
-import { createChildThreadApprovalsAtom } from "@t3tools/client-runtime/state/thread-requests";
+import { createChildThreadApprovalsAtom } from "@murmur/client-runtime/state/thread-requests";
 import { useAtomValue } from "@effect/atom-react";
-import { enabledEnvironmentIds } from "@t3tools/client-runtime/state/connections";
-import { arrayElementsEqual } from "@t3tools/client-runtime/state/entities";
+import { enabledEnvironmentIds } from "@murmur/client-runtime/state/connections";
+import { arrayElementsEqual } from "@murmur/client-runtime/state/entities";
 import {
   createEnvironmentThreadDetailAtoms,
   createEnvironmentThreadShellAtoms,
@@ -11,8 +11,8 @@ import {
   createOlderSettledThreadAtoms,
   createThreadEnvironmentAtoms,
   createThreadFamilyAtoms,
-} from "@t3tools/client-runtime/state/threads";
-import type { EnvironmentId, OrchestrationV2ThreadShell, ThreadId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/threads";
+import type { EnvironmentId, OrchestrationV2ThreadShell, ThreadId } from "@murmur/contracts";
 import * as Option from "effect/Option";
 import { AsyncResult, Atom } from "effect/reactivity";
 

@@ -1,5 +1,5 @@
-import { ProviderDriverKind } from "@t3tools/contracts";
-import { defineProviderClient } from "@t3tools/provider-core/client";
+import { ProviderDriverKind } from "@murmur/contracts";
+import { defineProviderClient } from "@murmur/provider-core/client";
 
 import { PiSettings } from "./settings.ts";
 

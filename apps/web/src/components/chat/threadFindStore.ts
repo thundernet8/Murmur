@@ -2,13 +2,13 @@ import type {
   OrchestrationThreadSearchMatch,
   OrchestrationV2SearchThreadResult,
   ScopedThreadRef,
-} from "@t3tools/contracts";
-import { parseScopedThreadKey, scopedThreadKey } from "@t3tools/client-runtime/environment";
+} from "@murmur/contracts";
+import { parseScopedThreadKey, scopedThreadKey } from "@murmur/client-runtime/environment";
 import {
   findSearchTokenRanges,
   messagePhrase,
   messageSearchTokens,
-} from "@t3tools/shared/paletteSearch";
+} from "@murmur/shared/paletteSearch";
 import { create } from "zustand";
 import type { ThemeAppearance } from "~/themePalette";
 import { rightPanelHostRef } from "../../rightPanelStore";

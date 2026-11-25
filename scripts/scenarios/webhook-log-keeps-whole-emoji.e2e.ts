@@ -1,4 +1,4 @@
-import { ProjectSnapshot, ProviderInstanceId } from "@t3tools/contracts";
+import { ProjectSnapshot, ProviderInstanceId } from "@murmur/contracts";
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import { FetchHttpClient, HttpClient, HttpClientRequest, HttpClientResponse } from "effect/http";

@@ -27,7 +27,7 @@ import {
   RuntimeMode,
   OrchestrationV2LinkedSender,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import packageJson from "../../package.json" with { type: "json" };
 import { parseBearerToken } from "../auth/EnvironmentAuth.ts";
@@ -48,10 +48,10 @@ import * as McpInvocationContext from "./McpInvocationContext.ts";
 import * as McpToolAccess from "./McpToolAccess.ts";
 import * as McpToolExposure from "./McpToolExposure.ts";
 import * as McpWebhookTransport from "./McpWebhookTransport.ts";
-import { HTML_RENDER_TOOL_NAME } from "@t3tools/shared/htmlRender";
-import { compactT3McpToolOutput } from "@t3tools/shared/toolOutput";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import { MCP_TOOL_EXPOSURE_HEADER } from "@t3tools/provider-core/server/mcpSession";
+import { HTML_RENDER_TOOL_NAME } from "@murmur/shared/htmlRender";
+import { compactT3McpToolOutput } from "@murmur/shared/toolOutput";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import { MCP_TOOL_EXPOSURE_HEADER } from "@murmur/provider-core/server/mcpSession";
 import * as OrchestratorMcpService from "./OrchestratorMcpService.ts";
 import { PreviewControlsToolkit } from "./toolkits/previewControls/tools.ts";
 import * as PreviewControlsHandlers from "./toolkits/previewControls/handlers.ts";

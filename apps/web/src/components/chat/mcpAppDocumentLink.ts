@@ -1,4 +1,4 @@
-import { MCP_APP_DOCUMENT_MESSAGE } from "@t3tools/shared/mcpApp";
+import { MCP_APP_DOCUMENT_MESSAGE } from "@murmur/shared/mcpApp";
 
 const MAX_UNCONFIRMED_MESSAGES = 256;
 

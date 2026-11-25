@@ -6,9 +6,9 @@ import {
   type ProviderInstanceId,
   type ServerProvider,
   type ServerProviderCompatibilityAdvisory,
-} from "@t3tools/contracts";
-import { brokenVersionDetail } from "@t3tools/provider-core/server/compatibility";
-import { satisfiesSemverRange } from "@t3tools/shared/semver";
+} from "@murmur/contracts";
+import { brokenVersionDetail } from "@murmur/provider-core/server/compatibility";
+import { satisfiesSemverRange } from "@murmur/shared/semver";
 import * as Schema from "effect/Schema";
 import packageJson from "../../package.json" with { type: "json" };
 

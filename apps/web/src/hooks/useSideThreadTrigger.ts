@@ -1,7 +1,7 @@
 import {
   type SideThreadOpenIntent,
   sideThreadOpenIntentOf,
-} from "@t3tools/client-runtime/side-thread";
+} from "@murmur/client-runtime/side-thread";
 import { useGT } from "gt-react";
 import { createContext, use, type KeyboardEvent, type MouseEvent } from "react";
 

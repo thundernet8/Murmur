@@ -1,11 +1,11 @@
 import { useAtomValue } from "@effect/atom-react";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
-import type { EnvironmentId } from "@t3tools/contracts";
-import { proposedPlanTitle, stripDisplayedPlanMarkdown } from "@t3tools/shared/proposedPlanText";
+} from "@murmur/client-runtime/state/runtime";
+import type { EnvironmentId } from "@murmur/contracts";
+import { proposedPlanTitle, stripDisplayedPlanMarkdown } from "@murmur/shared/proposedPlanText";
 import { useGT } from "gt-react-native";
 import { m } from "../../i18n/messages";
 import { useRef, useState, type ReactNode } from "react";

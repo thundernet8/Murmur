@@ -3,14 +3,14 @@ import {
   compactDynamicToolOutput,
   mcpToolResultOutput,
   toolOutputImages,
-} from "@t3tools/shared/toolOutput";
+} from "@murmur/shared/toolOutput";
 import { makeProviderTextDeltaCoalescer } from "./ProviderTextDeltaCoalescer.ts";
 import { claudeTaskOutputRoot, tailClaudeTaskOutput } from "./ClaudeTaskOutputTail.ts";
 import {
   dynamicToolTitle,
   formatReadToolLabel,
   formatSearchToolLabel,
-} from "@t3tools/shared/toolActivity";
+} from "@murmur/shared/toolActivity";
 import { field, text } from "../unknownField.ts";
 import { mergeWorkflowAgentMetadata, type WorkflowAgentMetadata } from "../workflowAgentAnswers.ts";
 import {
@@ -25,8 +25,8 @@ import {
   parseClaudeWorkflowRunHandles,
 } from "./claudeWorkflowProgress.ts";
 
-import { isWorkspaceImagePreviewPath } from "@t3tools/shared/filePreview";
-import { pastedUrl } from "@t3tools/shared/oauthCallback";
+import { isWorkspaceImagePreviewPath } from "@murmur/shared/filePreview";
+import { pastedUrl } from "@murmur/shared/oauthCallback";
 import {
   addClaudeLedgerUsage,
   claudeLedgerDelta,
@@ -73,26 +73,26 @@ import type {
 // @effect-diagnostics-next-line nodeBuiltinImport:off -- the SDK takes a Node ChildProcess for the CLI.
 import * as NodeChildProcess from "node:child_process";
 import * as NodeUtil from "node:util";
-import { parseCliArgs } from "@t3tools/shared/cliArgs";
-import { fromLenientJson } from "@t3tools/shared/schemaJson";
+import { parseCliArgs } from "@murmur/shared/cliArgs";
+import { fromLenientJson } from "@murmur/shared/schemaJson";
 import {
   claudeMcpToolName,
   claudeMcpToolNamePart,
   claudeMcpToolPrefix,
   MCP_APP_OUTPUT_KEY,
   mcpAppToolResourceUri,
-} from "@t3tools/shared/mcpApp";
-import { AgentScope } from "@t3tools/shared/AgentScope";
+} from "@murmur/shared/mcpApp";
+import { AgentScope } from "@murmur/shared/AgentScope";
 import * as ProviderProcesses from "../../process/providerProcesses.ts";
 import * as SpawnWorker from "../../process/SpawnWorker.ts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { applyClaudePromptEffortPrefix } from "@t3tools/shared/model";
-import { compareSemverVersions } from "@t3tools/shared/semver";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { applyClaudePromptEffortPrefix } from "@murmur/shared/model";
+import { compareSemverVersions } from "@murmur/shared/semver";
 import {
   CLAUDE_RESUME_COMPACTION_COMPACT_ANSWER,
   CLAUDE_RESUME_COMPACTION_NEVER_ANSWER,
   formatClaudeResumeCompactionQuestion,
-} from "@t3tools/shared/claudeCompaction";
+} from "@murmur/shared/claudeCompaction";
 import {
   type AgentFeedbackMode,
   type ChatAttachment,
@@ -137,7 +137,7 @@ import {
   type ThreadId,
   resolveIdleCompaction,
   isDelegatedAppThread,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import { FILE_HEADERS_ONLY, formatPatch, structuredPatch } from "diff";
 import * as Cause from "effect/Cause";
@@ -193,9 +193,9 @@ import * as ServerConfig from "../../config.ts";
 import * as PortScanner from "../../preview/PortScanner.ts";
 import * as ProcessRunner from "../../processRunner.ts";
 import * as ServerSettings from "../../serverSettings.ts";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
-import { spawnAndCollect } from "@t3tools/provider-core/server/snapshotProbe";
-import { signalProcessGroup } from "@t3tools/provider-core/server/processGroup";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
+import { spawnAndCollect } from "@murmur/provider-core/server/snapshotProbe";
+import { signalProcessGroup } from "@murmur/provider-core/server/processGroup";
 import {
   claudeLocalSettingsDirectory,
   claudeSignedOutMessage,
@@ -216,47 +216,47 @@ import {
   boundProviderEventForLogging,
   shouldPersistProviderEvent,
 } from "../../provider/EventNdjsonLogger.ts";
-import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
+import * as ProviderEventLoggers from "@murmur/provider-core/server/ProviderEventLoggers";
 import {
   claudeRateLimitEventToUpdate,
   type ClaudeScopedLimitNames,
 } from "../../provider/claudeUsageLimits.ts";
-import type { ManagedServerProvider } from "@t3tools/provider-core/server/snapshot";
+import type { ManagedServerProvider } from "@murmur/provider-core/server/snapshot";
 import {
   MURMUR_CODE_DEVICE_TOOL_INSTRUCTIONS_WITH_TOOL_SEARCH,
   MURMUR_CODE_ORCHESTRATION_INSTRUCTIONS,
-} from "@t3tools/provider-core/server/orchestrationInstructions";
-import { buildRuntimeInstructions } from "@t3tools/provider-core/server/runtimeInstructions";
+} from "@murmur/provider-core/server/orchestrationInstructions";
+import { buildRuntimeInstructions } from "@murmur/provider-core/server/runtimeInstructions";
 import {
   mcpToolPresentation,
   normalizeMcpText,
-} from "@t3tools/provider-core/server/mcpToolPresentation";
-import * as McpProviderSession from "@t3tools/provider-core/server/mcpSession";
-import * as McpProviderSessions from "@t3tools/provider-core/server/McpProviderSessions";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+} from "@murmur/provider-core/server/mcpToolPresentation";
+import * as McpProviderSession from "@murmur/provider-core/server/mcpSession";
+import * as McpProviderSessions from "@murmur/provider-core/server/McpProviderSessions";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
 import {
   makeProviderFailure,
   makeProviderRetryTurnItem,
   PROVIDER_RETRY_BUDGET_MS,
   providerProcessExitGuidance,
-} from "@t3tools/provider-core/server/failure";
-import { turnScopedSelectionTransition } from "@t3tools/provider-core/server/selectionTransition";
-import { providerMessageTextWithAttachmentPaths } from "@t3tools/provider-core/server/attachmentPrompt";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
+} from "@murmur/provider-core/server/failure";
+import { turnScopedSelectionTransition } from "@murmur/provider-core/server/selectionTransition";
+import { providerMessageTextWithAttachmentPaths } from "@murmur/provider-core/server/attachmentPrompt";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
 import {
   ProviderAdapterDriverCreateError,
   type ProviderAdapterDriverCreateInput,
-} from "@t3tools/provider-core/server/adapterDriver";
+} from "@murmur/provider-core/server/adapterDriver";
 import {
   type BackgroundWorkReport,
   backgroundWorkNotification,
-} from "@t3tools/provider-core/server/notification";
-import * as ProviderContinuationRequests from "@t3tools/provider-core/server/ProviderContinuationRequests";
+} from "@murmur/provider-core/server/notification";
+import * as ProviderContinuationRequests from "@murmur/provider-core/server/ProviderContinuationRequests";
 import {
   makeSubagentChildThread,
   makeSubagentConversationArtifacts,
   subagentThreadTitle,
-} from "@t3tools/provider-core/server/subagentProjection";
+} from "@murmur/provider-core/server/subagentProjection";
 
 export const CLAUDE_PROVIDER = ProviderDriverKind.make("claudeAgent");
 /** The query exited before the turn attached, so the prompt was never offered. */

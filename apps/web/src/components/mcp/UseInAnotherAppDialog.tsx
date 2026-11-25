@@ -1,11 +1,11 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { useAuth } from "@clerk/react";
 import { useAtomValue } from "@effect/atom-react";
 import {
   managedCapabilityDenial,
   managedRuntimeModeDenial,
-} from "@t3tools/client-runtime/contract-labels";
-import { offersLinkedEnvironments } from "@t3tools/client-runtime/link-request";
+} from "@murmur/client-runtime/contract-labels";
+import { offersLinkedEnvironments } from "@murmur/client-runtime/link-request";
 import {
   AuthAccessWriteScope,
   AuthMcpClientAccess,
@@ -14,7 +14,7 @@ import {
   type EnvironmentId,
   mcpClientScopes,
   sessionGrantsScope,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { useNavigate } from "@tanstack/react-router";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import * as Option from "effect/Option";

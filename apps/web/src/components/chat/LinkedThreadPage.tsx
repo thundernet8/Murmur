@@ -1,5 +1,5 @@
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import type { EnvironmentId, ThreadId } from "@murmur/contracts";
 import { Navigate } from "@tanstack/react-router";
 import { useGT } from "gt-react";
 

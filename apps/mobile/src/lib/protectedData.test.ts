@@ -51,7 +51,7 @@ vi.mock("../features/cloud/managedRelayLayer", async () => {
 vi.mock("../features/cloud/publicConfig", () => ({
   resolveCloudPublicConfig: () => ({ relay: { url: null } }),
 }));
-vi.mock("@t3tools/client-runtime/rpc", async () => {
+vi.mock("@murmur/client-runtime/rpc", async () => {
   const Layer = await import("effect/Layer");
   return { layerRemoteHttpClient: () => Layer.empty };
 });

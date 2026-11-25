@@ -7,7 +7,7 @@ import {
   type MobileThemeVariables,
 } from "./mobileTheme";
 
-import { MURMUR_CHAT_THEME } from "@t3tools/shared/themePalettes";
+import { MURMUR_CHAT_THEME } from "@murmur/shared/themePalettes";
 
 const MOBILE_THEME_VARIABLE_NAMES = Object.keys(
   createMobileThemeVariables(MURMUR_CHAT_THEME.colors, "light"),

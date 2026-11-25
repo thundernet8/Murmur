@@ -1,5 +1,5 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
-import { serverUpdateFailureText } from "@t3tools/client-runtime/state/server";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
+import { serverUpdateFailureText } from "@murmur/client-runtime/state/server";
 import { T, useGT, useMessages, Var } from "gt-react-native";
 import * as Dialog from "../../components/ui/Dialog";
 import { useAtom, useAtomValue } from "@effect/atom-react";
@@ -9,10 +9,10 @@ import {
   AuthOrchestrationReadScope,
   type EnvironmentId,
   type ServerProvider,
-} from "@t3tools/contracts";
-import { settlePromise, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
-import { managedUpdatesDenial } from "@t3tools/client-runtime/contract-labels";
-import { sessionPermissionsUnavailableMessage } from "@t3tools/shared/authScopeOptions";
+} from "@murmur/contracts";
+import { settlePromise, squashAtomCommandFailure } from "@murmur/client-runtime/state/runtime";
+import { managedUpdatesDenial } from "@murmur/client-runtime/contract-labels";
+import { sessionPermissionsUnavailableMessage } from "@murmur/shared/authScopeOptions";
 import * as Cause from "effect/Cause";
 import * as Exit from "effect/Exit";
 import { AsyncResult } from "effect/reactivity";

@@ -9,8 +9,8 @@ import type {
   ScopedThreadRef,
   ThreadLinkedPullRequest,
   ThreadPullRequestLink,
-} from "@t3tools/contracts";
-import { scopedThreadKey } from "@t3tools/client-runtime/environment";
+} from "@murmur/contracts";
+import { scopedThreadKey } from "@murmur/client-runtime/environment";
 import { lazy, Suspense } from "react";
 import { LinkedThreadPane } from "./LinkedThreadPane";
 import SideThreadPane from "./SideThreadPane";

@@ -1,6 +1,6 @@
-import { EnvironmentId, type ServerConfig } from "@t3tools/contracts";
-import { clampFileAttachmentUploadBytes } from "@t3tools/client-runtime/state/attachments";
-import type { AttachmentUploadStatus } from "@t3tools/client-runtime/state/attachment-uploads";
+import { EnvironmentId, type ServerConfig } from "@murmur/contracts";
+import { clampFileAttachmentUploadBytes } from "@murmur/client-runtime/state/attachments";
+import type { AttachmentUploadStatus } from "@murmur/client-runtime/state/attachment-uploads";
 import { msg } from "gt-react-native";
 import { m, type MessageResolver } from "../i18n/messages";
 

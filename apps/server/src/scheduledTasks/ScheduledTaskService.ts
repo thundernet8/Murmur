@@ -27,7 +27,7 @@ import {
   managedPolicyDeniedMessage,
   scheduledTaskThreadMode,
   managedRuntimeModeDenial,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as Digest from "effect/crypto/Digest";
@@ -35,8 +35,8 @@ import * as Mac from "effect/crypto/Mac";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as DateTime from "effect/DateTime";
 import * as Effect from "effect/Effect";
-import { splitsSurrogatePair } from "@t3tools/shared/assistantCitations";
-import * as NodeSqliteClient from "@t3tools/shared/nodeSqliteClient";
+import { splitsSurrogatePair } from "@murmur/shared/assistantCitations";
+import * as NodeSqliteClient from "@murmur/shared/nodeSqliteClient";
 import * as Exit from "effect/Exit";
 import * as Duration from "effect/Duration";
 import * as Metric from "effect/Metric";
@@ -60,7 +60,7 @@ import * as SecretRequests from "../secrets/SecretRequests.ts";
 import * as ManagedPolicy from "../policy/ManagedPolicy.ts";
 import * as DueHint from "../scheduling/DueHint.ts";
 import * as Scheduler from "../scheduling/Scheduler.ts";
-import { latestRootProviderFailure } from "@t3tools/shared/orchestrationV2ThreadError";
+import { latestRootProviderFailure } from "@murmur/shared/orchestrationV2ThreadError";
 import { isMissedFixedTimeRun, isSameSchedule, nextScheduledRunAt } from "./Schedule.ts";
 import {
   redactHeaders,

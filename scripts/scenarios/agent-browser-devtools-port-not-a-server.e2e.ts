@@ -1,5 +1,5 @@
 import * as NodeNet from "node:net";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import { expect } from "e2e";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";

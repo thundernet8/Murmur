@@ -5,7 +5,7 @@ import {
   type OrchestrationV2ThreadHistoryPage,
   type OrchestrationV2ThreadStreamItem,
   type PeerLinkSummary,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { describe, expect, it } from "@effect/vitest";
 import * as DateTime from "effect/DateTime";
 import * as Deferred from "effect/Deferred";

@@ -17,9 +17,9 @@ import {
   terminalSequenceEnd,
   terminalSequenceStateAfter,
   TerminalProviderInstanceNotFoundError,
-} from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { SpawnExecutableResolution } from "@t3tools/shared/shell";
+} from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { SpawnExecutableResolution } from "@murmur/shared/shell";
 import * as NodePtyAdapter from "./NodePtyAdapter.ts";
 import * as Clock from "effect/Clock";
 import * as Deferred from "effect/Deferred";
@@ -55,7 +55,7 @@ import { makePrepareTerminalLaunch } from "../workspace/restoreMissingWorktree.t
 import { layerNoTaskFolders } from "../orchestration-v2/ProviderTurnStartService.testkit.ts";
 import { withWorkspaceLease } from "../workspace/workspaceLease.ts";
 import { terminalOutputStream } from "./OutputProtocol.ts";
-import * as PtyAdapter from "@t3tools/shared/PtyAdapter";
+import * as PtyAdapter from "@murmur/shared/PtyAdapter";
 import packageJson from "../../package.json" with { type: "json" };
 
 vi.mock("effect/SynchronizedRef", async (importOriginal) => {

@@ -11,17 +11,17 @@ import {
   type LinkRequestItem,
   linkRequestTarget,
   rankMachinesByHint,
-} from "@t3tools/client-runtime/link-request";
+} from "@murmur/client-runtime/link-request";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   AuthAccessWriteScope,
   type AuthMcpClientAccess,
   type EnvironmentId,
   type OrchestrationV2ProjectedTurnItem,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Option from "effect/Option";
 import * as Result from "effect/Result";
 import { msg, T, useGT, useMessages, Var } from "gt-react-native";

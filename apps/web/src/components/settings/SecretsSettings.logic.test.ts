@@ -1,4 +1,4 @@
-import { ServerSettings } from "@t3tools/contracts";
+import { ServerSettings } from "@murmur/contracts";
 import * as Schema from "effect/Schema";
 import { expect, it } from "vite-plus/test";
 

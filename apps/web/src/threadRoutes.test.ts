@@ -5,9 +5,9 @@ import {
   createRouter,
 } from "@tanstack/react-router";
 import { describe, expect, it } from "vite-plus/test";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import { EMPTY_ENVIRONMENT_THREAD_STATE } from "@t3tools/client-runtime/state/threads";
-import { ThreadId } from "@t3tools/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import { EMPTY_ENVIRONMENT_THREAD_STATE } from "@murmur/client-runtime/state/threads";
+import { ThreadId } from "@murmur/contracts";
 import * as DateTime from "effect/DateTime";
 import * as Option from "effect/Option";
 import { linkedThreadRouteParams } from "./linkedThreadSurface";

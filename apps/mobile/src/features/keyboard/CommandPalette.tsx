@@ -8,9 +8,9 @@ import {
   threadSearchSubject,
   type EnvironmentThreadSearchMatch,
   type ShownOrder,
-} from "@t3tools/client-runtime/state/thread-search";
-import { isShownUnderParent } from "@t3tools/client-runtime/state/threads";
-import { THREAD_JUMP_KEYBINDING_COMMANDS } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/thread-search";
+import { isShownUnderParent } from "@murmur/client-runtime/state/threads";
+import { THREAD_JUMP_KEYBINDING_COMMANDS } from "@murmur/contracts";
 import {
   foldSearchQuery,
   PALETTE_MESSAGE_LIMIT,
@@ -18,8 +18,8 @@ import {
   splitSearchText,
   pickedQuery,
   threadRecentUse,
-} from "@t3tools/shared/paletteSearch";
-import { searchMatchHintLabel } from "@t3tools/shared/paletteSearchCopy";
+} from "@murmur/shared/paletteSearch";
+import { searchMatchHintLabel } from "@murmur/shared/paletteSearchCopy";
 import { T, useGT, useMessages } from "gt-react-native";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {

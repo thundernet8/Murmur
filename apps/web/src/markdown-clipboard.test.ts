@@ -6,11 +6,11 @@ import {
   serializeTableElementToHtml,
   serializeTableElementToMarkdown,
 } from "./markdown-clipboard";
-import { EnvironmentId, MessageId, ThreadId } from "@t3tools/contracts";
+import { EnvironmentId, MessageId, ThreadId } from "@murmur/contracts";
 import {
   collectAssistantCitations,
   serializeAssistantCitation,
-} from "@t3tools/shared/assistantCitations";
+} from "@murmur/shared/assistantCitations";
 import type { Element as HastElement, ElementContent, Root } from "hast";
 
 import { markdownTree } from "./markdown/wordsHast";

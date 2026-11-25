@@ -1,16 +1,16 @@
 // @effect-diagnostics nodeBuiltinImport:off - Effect has no incremental digest or free-space query.
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
 import * as ModelManifest from "./ModelManifest.ts";
-import { cliArchiveTarCommand } from "@t3tools/shared/cliRelease";
-import { compareSemverVersions } from "@t3tools/shared/semver";
+import { cliArchiveTarCommand } from "@murmur/shared/cliRelease";
+import { compareSemverVersions } from "@murmur/shared/semver";
 import {
   ProviderDriverKind,
   type ProviderInstallState,
   type ServerProviderCompatibilityAdvisory,
-} from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { resolveNodeExecutable, nodeRuntimeUnavailableMessage } from "@t3tools/shared/nodeRuntime";
-import { resolveCommandPath } from "@t3tools/shared/shell";
+} from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { resolveNodeExecutable, nodeRuntimeUnavailableMessage } from "@murmur/shared/nodeRuntime";
+import { resolveCommandPath } from "@murmur/shared/shell";
 import * as Clock from "effect/Clock";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";

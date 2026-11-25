@@ -1,6 +1,6 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import { parsePullRequestAnchor } from "@t3tools/shared/pullRequestAnchor";
-import type { EnvironmentId, ScopedThreadRef } from "@t3tools/contracts";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
+import { parsePullRequestAnchor } from "@murmur/shared/pullRequestAnchor";
+import type { EnvironmentId, ScopedThreadRef } from "@murmur/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigate } from "@tanstack/react-router";
 import { type MouseEvent } from "react";
@@ -9,9 +9,9 @@ import { msg } from "gt-react";
 import {
   resolveChangeRequestLinkTarget,
   resolvePullRequestPreviewTarget,
-} from "@t3tools/client-runtime/change-request-links";
+} from "@murmur/client-runtime/change-request-links";
 
-import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
+import { sourceControlClients } from "@murmur/client-runtime/source-control-clients";
 
 import { canOpenLinksInApp } from "../browser/browserLinkTarget";
 import { useOpenLink } from "../browser/useOpenLink";

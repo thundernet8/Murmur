@@ -3,21 +3,21 @@ import {
   AuthOrchestrationOperateScope,
   AuthOrchestrationReadScope,
   EnvironmentHttpApi,
-} from "@t3tools/contracts";
-import { isDevProxiedPath } from "@t3tools/shared/devProxy";
+} from "@murmur/contracts";
+import { isDevProxiedPath } from "@murmur/shared/devProxy";
 import {
   injectMcpAppCookieBootstrap,
   injectMcpAppDocumentBootstrap,
   injectMcpAppThemeBootstrap,
-} from "@t3tools/shared/mcpApp";
-import { FILE_PREVIEW_SCROLL_SCRIPT } from "@t3tools/shared/htmlRender";
+} from "@murmur/shared/mcpApp";
+import { FILE_PREVIEW_SCROLL_SCRIPT } from "@murmur/shared/htmlRender";
 import {
   DESKTOP_READINESS_CHALLENGE_MAX_LENGTH,
   DESKTOP_READINESS_CHALLENGE_PARAM,
   DESKTOP_READINESS_PROOF_PATH,
   desktopReadinessProof,
-} from "@t3tools/shared/desktopReadinessProof";
-import { decodeOtlpTraceRecords } from "@t3tools/shared/observability";
+} from "@murmur/shared/desktopReadinessProof";
+import { decodeOtlpTraceRecords } from "@murmur/shared/observability";
 import * as ByteSize from "effect/ByteSize";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";

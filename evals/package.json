@@ -1,5 +1,5 @@
 {
-  "name": "@t3tools/evals",
+  "name": "@murmur/evals",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,9 +17,9 @@
   },
   "dependencies": {
     "@effect/platform-node": "catalog:",
-    "@t3tools/contracts": "workspace:*",
-    "@t3tools/provider-core": "workspace:*",
-    "@t3tools/shared": "workspace:*",
+    "@murmur/contracts": "workspace:*",
+    "@murmur/provider-core": "workspace:*",
+    "@murmur/shared": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

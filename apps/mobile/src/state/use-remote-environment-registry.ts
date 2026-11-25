@@ -1,13 +1,13 @@
 import * as Dialog from "../components/ui/Dialog";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigation } from "@react-navigation/native";
-import { Discovery } from "@t3tools/client-runtime/relay";
-import type { EnvironmentId } from "@t3tools/contracts";
+import { Discovery } from "@murmur/client-runtime/relay";
+import type { EnvironmentId } from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import { msg } from "gt-react-native";
 import { AsyncResult, Atom } from "effect/reactivity";
-import { runAtomCommand } from "@t3tools/client-runtime/state/runtime";
+import { runAtomCommand } from "@murmur/client-runtime/state/runtime";
 
 import { hasCloudPublicConfig } from "../features/cloud/publicConfig";
 import { m } from "../i18n/messages";

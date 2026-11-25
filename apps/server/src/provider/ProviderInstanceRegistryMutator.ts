@@ -3,7 +3,7 @@ import type {
   ProviderInstanceConfigMap,
   ProviderInstanceId,
   SecretReference,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import type * as Effect from "effect/Effect";
 

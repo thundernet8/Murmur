@@ -1,13 +1,13 @@
 import {
   parseGitRemoteHost,
   unknownRemoteProvider,
-} from "@t3tools/source-control-core/shared/definition";
+} from "@murmur/source-control-core/shared/definition";
 import {
   probeSourceControlProvider,
   refineUnknownRemoteProvider,
-} from "@t3tools/source-control-core/server/discovery";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { processOutput } from "@t3tools/source-control-testing/TestSourceControlHost";
+} from "@murmur/source-control-core/server/discovery";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { processOutput } from "@murmur/source-control-testing/TestSourceControlHost";
 import { assert, it } from "@effect/vitest";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";

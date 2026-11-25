@@ -1,5 +1,5 @@
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { pathSetupCommand, resolveCommandPath } from "@t3tools/shared/shell";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { pathSetupCommand, resolveCommandPath } from "@murmur/shared/shell";
 import * as Console from "effect/Console";
 import * as Duration from "effect/Duration";
 import * as Effect from "effect/Effect";

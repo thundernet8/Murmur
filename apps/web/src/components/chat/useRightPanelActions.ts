@@ -1,22 +1,22 @@
 import { msg } from "gt-react";
-import { errorDisplayMessage, thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage, thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { m } from "~/i18n/messages";
 import type { ToolCallDiffTarget } from "../../diffPanelStore";
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/shell";
 import type { ThreadPreviewState } from "../../previewStateStore";
-import { formatFilePathForClipboard } from "@t3tools/client-runtime/media-actions";
-import { resolvePathLinkTarget } from "@t3tools/shared/fileLinks";
+import { formatFilePathForClipboard } from "@murmur/client-runtime/media-actions";
+import { resolvePathLinkTarget } from "@murmur/shared/fileLinks";
 import { useStableCallback } from "../../hooks/useStableCallback";
-import { type ScopedThreadRef, type PreviewSessionSnapshot } from "@t3tools/contracts";
-import { scopeThreadRef } from "@t3tools/client-runtime/environment";
-import { sideThreadComposer, sideThreadKindOf } from "@t3tools/client-runtime/side-thread";
+import { type ScopedThreadRef, type PreviewSessionSnapshot } from "@murmur/contracts";
+import { scopeThreadRef } from "@murmur/client-runtime/environment";
+import { sideThreadComposer, sideThreadKindOf } from "@murmur/client-runtime/side-thread";
 import { readThreadShell } from "../../state/entities";
-import { scopedThreadKey } from "@t3tools/client-runtime/environment";
+import { scopedThreadKey } from "@murmur/client-runtime/environment";
 import { useEffect } from "react";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { useDiffPanelStore } from "../../diffPanelStore";
 import { type ThreadPanelPresentation } from "../../rightPanelLayout";
 import {

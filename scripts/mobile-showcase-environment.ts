@@ -107,7 +107,7 @@ export const SHOWCASE_PROJECTS = [
     id: "murmur",
     title: "Murmur",
     directory: "murmur",
-    repositoryUrl: "https://github.com/pingdotgg/t3code.git",
+    repositoryUrl: "https://github.com/thundernet8/Murmur.git",
     favicon: PROJECT_FAVICONS.murmur,
   },
   {
@@ -291,7 +291,7 @@ async function seedMurmurWorkspace(workspaceRoot: string): Promise<void> {
   );
   await initializeRepository({
     workspaceRoot,
-    repositoryUrl: "https://github.com/pingdotgg/t3code.git",
+    repositoryUrl: "https://github.com/thundernet8/Murmur.git",
     commitMessage: "Show connected environments",
   });
   await runGit(workspaceRoot, ["checkout", "-b", "feat/remote-command-center"]);

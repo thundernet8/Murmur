@@ -1,4 +1,4 @@
-import type { AssetResource, EnvironmentId } from "@t3tools/contracts";
+import type { AssetResource, EnvironmentId } from "@murmur/contracts";
 import { useEffect, useRef, useState } from "react";
 
 import { useAssetUrlState } from "~/assets/assetUrls";

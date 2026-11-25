@@ -1,4 +1,4 @@
-import type { EnvironmentId } from "@t3tools/contracts";
+import type { EnvironmentId } from "@murmur/contracts";
 import { expect, it } from "vite-plus/test";
 
 import type { WorkspaceEnvironment } from "../../state/workspaceModel";

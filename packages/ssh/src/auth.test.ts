@@ -11,8 +11,8 @@ import * as Path from "effect/Path";
 import * as Sink from "effect/Sink";
 import * as Stream from "effect/Stream";
 import { ChildProcessSpawner } from "effect/process";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { symlinksSupported } from "@t3tools/shared/testing/symlinks";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { symlinksSupported } from "@murmur/shared/testing/symlinks";
 
 import { buildSshChildEnvironment, isSshAgentSigningFailure, isSshAuthFailure } from "./auth.ts";
 

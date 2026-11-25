@@ -1,8 +1,8 @@
-import { OrchestrationV2ThreadProjectionJson } from "@t3tools/contracts";
+import { OrchestrationV2ThreadProjectionJson } from "@murmur/contracts";
 import {
   omitLocalVisibleTurnItems,
   restoreLocalVisibleTurnItems,
-} from "@t3tools/shared/orchestrationV2BoundedSnapshot";
+} from "@murmur/shared/orchestrationV2BoundedSnapshot";
 import * as Effect from "effect/Effect";
 import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";

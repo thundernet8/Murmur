@@ -1,8 +1,8 @@
-import { findErrorTraceId, thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { findErrorTraceId, thrownErrorMessage } from "@murmur/client-runtime/errors";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import { msg } from "gt-react";
 import { useState } from "react";
 

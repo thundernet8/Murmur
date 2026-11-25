@@ -1,4 +1,4 @@
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import {
   ClientSettingsSchema,
   type ClientSettingsPatch,
@@ -14,15 +14,15 @@ import {
   ServerSettings,
   type T3ProjectFile,
   type ServerSettingsPatch,
-} from "@t3tools/contracts";
-import type { EnvironmentConnectionPhase } from "@t3tools/client-runtime/connection";
+} from "@murmur/contracts";
+import type { EnvironmentConnectionPhase } from "@murmur/client-runtime/connection";
 import {
   clearProjectSettingsOverrides,
   resolveProjectSettings,
   resolveWorktreeCleanup,
   type ProjectSettingSource,
-} from "@t3tools/shared/projectSettings";
-import { applyServerSettingsPatch } from "@t3tools/shared/serverSettings";
+} from "@murmur/shared/projectSettings";
+import { applyServerSettingsPatch } from "@murmur/shared/serverSettings";
 import * as Equal from "effect/Equal";
 import * as Cause from "effect/Cause";
 import { Atom } from "effect/reactivity";

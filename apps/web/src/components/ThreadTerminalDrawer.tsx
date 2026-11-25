@@ -1,4 +1,4 @@
-import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
+import { thrownErrorMessage } from "@murmur/client-runtime/errors";
 import { contextMenuSourceOf } from "../contextMenuSource";
 import { workspaceAreaProps } from "../lib/workspaceFocus";
 import { useAtomMount, useAtomValue } from "@effect/atom-react";
@@ -8,14 +8,14 @@ import {
   isAtomCommandInterrupted,
   executeAtomQuery,
   squashAtomCommandFailure,
-} from "@t3tools/client-runtime/state/runtime";
+} from "@murmur/client-runtime/state/runtime";
 import {
   INITIAL_TERMINAL_OUTPUT_CURSOR,
   readTerminalOutputUpdate,
   type TerminalOutputCursor,
   type TerminalOutputUpdate,
   type TerminalSessionState,
-} from "@t3tools/client-runtime/state/terminal";
+} from "@murmur/client-runtime/state/terminal";
 import {
   Plus,
   Square,
@@ -34,8 +34,8 @@ import {
   type ResolvedKeybindingsConfig,
   type ScopedThreadRef,
   type ThreadId,
-} from "@t3tools/contracts";
-import { getTerminalLabel } from "@t3tools/shared/terminalLabelsCopy";
+} from "@murmur/contracts";
+import { getTerminalLabel } from "@murmur/shared/terminalLabelsCopy";
 import * as Schema from "effect/Schema";
 import { AsyncResult } from "effect/reactivity";
 import {

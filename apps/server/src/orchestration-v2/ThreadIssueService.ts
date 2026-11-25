@@ -14,7 +14,7 @@ import {
   type ThreadId,
   type ThreadIssueKey,
   type ThreadIssueLinkSource,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as Effect from "effect/Effect";

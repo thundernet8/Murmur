@@ -2,13 +2,13 @@ import { useAtomValue } from "@effect/atom-react";
 import {
   RelayConnectionRegistration,
   RelayConnectionTarget,
-} from "@t3tools/client-runtime/connection";
-import type { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/connection";
+import type { EnvironmentId } from "@murmur/contracts";
 import type {
   RelayClientEnvironmentRecord,
   RelayEnvironmentStatusResponse,
-} from "@t3tools/contracts/relay";
-import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
+} from "@murmur/contracts/relay";
+import { errorDisplayMessage } from "@murmur/client-runtime/errors";
 import { useMessages } from "gt-react-native";
 import * as Option from "effect/Option";
 import { useMemo } from "react";

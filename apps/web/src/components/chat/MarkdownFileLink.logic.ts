@@ -1,5 +1,5 @@
-import type { EnvironmentId } from "@t3tools/contracts";
-import { splitFilePathPosition } from "@t3tools/shared/fileLinks";
+import type { EnvironmentId } from "@murmur/contracts";
+import { splitFilePathPosition } from "@murmur/shared/fileLinks";
 import { msg } from "gt-react";
 
 import { m } from "../../i18n/messages";

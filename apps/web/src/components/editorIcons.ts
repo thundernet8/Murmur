@@ -1,4 +1,4 @@
-import type { EditorId } from "@t3tools/contracts";
+import type { EditorId } from "@murmur/contracts";
 import { FolderClosedIcon } from "lucide-react";
 
 import { isMacPlatform, isWindowsPlatform } from "~/lib/utils";

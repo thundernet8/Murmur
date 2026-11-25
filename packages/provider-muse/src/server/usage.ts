@@ -3,17 +3,17 @@ import * as Option from "effect/Option";
 import * as Path from "effect/Path";
 import * as Schema from "effect/Schema";
 
-import { mergeProviderInstanceEnvironment } from "@t3tools/provider-core/server/instanceEnvironment";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
-import { providerProbeEnvironment } from "@t3tools/provider-core/server/snapshotProbe";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
+import { providerProbeEnvironment } from "@murmur/provider-core/server/snapshotProbe";
 import {
   tokenCount,
   totalTokens,
   type ProviderUsageReader,
   type TranscriptUsageFormat,
   type UsageRecord,
-} from "@t3tools/provider-core/server/usage";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+} from "@murmur/provider-core/server/usage";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import type { MuseSettings } from "../settings.ts";
 import { makeMuseEnvironment } from "./sdk.ts";
 import * as MuseUsageHome from "./MuseUsageHome.ts";

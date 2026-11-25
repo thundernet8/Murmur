@@ -1,4 +1,4 @@
-import type { EnvironmentIssueEntry } from "@t3tools/client-runtime/issue-list";
+import type { EnvironmentIssueEntry } from "@murmur/client-runtime/issue-list";
 import { MessageSquareIcon } from "lucide-react";
 import { memo } from "react";
 

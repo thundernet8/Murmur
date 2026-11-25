@@ -5,7 +5,7 @@ import {
   latestUnheldRun,
   threadErrorSummary,
   usageLimitRunPresentedAsLatest,
-} from "@t3tools/shared/orchestrationV2ThreadError";
+} from "@murmur/shared/orchestrationV2ThreadError";
 import {
   isOrchestrationV2WorkActive,
   isProviderNativeSubagentThread,
@@ -27,11 +27,11 @@ import {
   orchestrationV2RunWorkStartedAt,
   type RunId,
   type ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   backgroundWorkHoldsCompletion,
   derivePendingBackgroundWork,
-} from "@t3tools/shared/orchestrationV2PendingBackgroundWork";
+} from "@murmur/shared/orchestrationV2PendingBackgroundWork";
 import {
   DEFAULT_VARIANT_CHOICE_ID,
   getModelSelectionStringOptionValue,
@@ -39,9 +39,9 @@ import {
   getProviderOptionStatedValue,
   resolveSelectableModel,
   withLegacyUltracodeEffort,
-} from "@t3tools/shared/model";
-import { unsentManualContinuationSource } from "@t3tools/shared/orchestrationV2ManualContinuation";
-import { formatDuration } from "@t3tools/shared/orchestrationTiming";
+} from "@murmur/shared/model";
+import { unsentManualContinuationSource } from "@murmur/shared/orchestrationV2ManualContinuation";
+import { formatDuration } from "@murmur/shared/orchestrationTiming";
 import * as DateTime from "effect/DateTime";
 
 import {

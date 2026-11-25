@@ -10,10 +10,10 @@ import type {
   ProjectReadFileResult,
   ProjectWriteFileInput,
   ProjectWriteFileResult,
-} from "@t3tools/contracts";
-import { expandHomePath } from "@t3tools/provider-core/server/pathExpansion";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { isNetworkPath } from "@t3tools/shared/path";
+} from "@murmur/contracts";
+import { expandHomePath } from "@murmur/provider-core/server/pathExpansion";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { isNetworkPath } from "@murmur/shared/path";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

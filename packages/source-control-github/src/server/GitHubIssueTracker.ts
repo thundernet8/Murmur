@@ -9,12 +9,12 @@ import {
   type IssueInvolvement,
   type IssueLabel,
   type IssueListSort,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   IssueTrackerError,
   type IssueInvolvementFilter,
   type IssueTrackerApi,
-} from "@t3tools/source-control-core/server/IssueTracker";
+} from "@murmur/source-control-core/server/IssueTracker";
 
 import * as GitHubRest from "./GitHubRest.ts";
 import { readIssueTemplates } from "./gitHubIssueTemplates.ts";

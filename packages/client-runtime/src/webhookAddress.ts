@@ -1,5 +1,5 @@
-import type { ScheduledTaskWebhookEndpoint } from "@t3tools/contracts";
-import { isLocalLoopbackHost } from "@t3tools/shared/hostClassification";
+import type { ScheduledTaskWebhookEndpoint } from "@murmur/contracts";
+import { isLocalLoopbackHost } from "@murmur/shared/hostClassification";
 import { mFallback, msg } from "gt-i18n";
 import type { MFunctionType } from "gt-i18n/types";
 

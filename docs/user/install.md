@@ -61,7 +61,7 @@ run a server there, build it from source with `vp`, which provides the Node vers
 ([Install vp](../operations/00_development.md#first-checkout)):
 
 ```bash
-git clone https://github.com/pingdotgg/t3code
+git clone https://github.com/thundernet8/Murmur.git murmur
 cd murmur && vp i && vp run build:desktop
 node apps/server/dist/bin.mjs
 ```
@@ -71,7 +71,7 @@ update it with `git pull` and a rebuild.
 
 ## Desktop app
 
-Download a release from [GitHub Releases](https://github.com/pingdotgg/t3code/releases),
+Download a release from [GitHub Releases](https://github.com/thundernet8/Murmur/releases),
 or use a package manager:
 
 | Platform           | Install                                                      |
@@ -180,7 +180,7 @@ on web and desktop. The store apps work with both stable and Nightly servers. Te
 
 - **iPhone and iPad:** TestFlight is invite-only.
 - **Android:** download an APK from the
-  [Android beta releases](https://github.com/pingdotgg/t3code/releases?q=android-beta-).
+  [Android beta releases](https://github.com/thundernet8/Murmur/releases?q=android-beta-).
 
 If the app crashes during launch, open Settings → Diagnostics on the next launch
 that succeeds. It lists startup crashes from the last 7 days with the error and

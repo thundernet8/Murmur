@@ -1,9 +1,9 @@
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { BookmarkIcon, FileIcon, FileTextIcon } from "lucide-react";
 import { memo, useEffect, useEffectEvent, useRef, useState, type RefObject } from "react";
-import { assistantCitationsToPlainText } from "@t3tools/shared/assistantCitations";
-import { replaceComposerContextReferences } from "@t3tools/shared/composerContextReferences";
-import { composerFileLinksToPlainText } from "@t3tools/shared/composerInlineTokens";
+import { assistantCitationsToPlainText } from "@murmur/shared/assistantCitations";
+import { replaceComposerContextReferences } from "@murmur/shared/composerContextReferences";
+import { composerFileLinksToPlainText } from "@murmur/shared/composerInlineTokens";
 
 import { RelativeTime } from "../RelativeTime";
 import { m, type MessageResolver } from "~/i18n/messages";

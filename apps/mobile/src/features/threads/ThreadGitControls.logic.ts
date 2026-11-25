@@ -1,4 +1,4 @@
-import { splitsSurrogatePair } from "@t3tools/shared/assistantCitations";
+import { splitsSurrogatePair } from "@murmur/shared/assistantCitations";
 
 function truncateMiddle(value: string, maxLength: number): string {
   if (value.length <= maxLength) {

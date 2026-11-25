@@ -1,4 +1,4 @@
-import type { OrchestrationV2Run, WorktreeSetupSnapshot } from "@t3tools/contracts";
+import type { OrchestrationV2Run, WorktreeSetupSnapshot } from "@murmur/contracts";
 
 export function resolveVisibleWorktreeSetup(input: {
   live: WorktreeSetupSnapshot | null;

@@ -1,10 +1,10 @@
-import type { UsageTokenTotals } from "@t3tools/contracts";
+import type { UsageTokenTotals } from "@murmur/contracts";
 import {
   isModelCostUnknown,
   type CategoryCost,
   type ModelTotals,
   type SpeedCost,
-} from "@t3tools/shared/usageMerge";
+} from "@murmur/shared/usageMerge";
 
 import { msg } from "gt-react";
 

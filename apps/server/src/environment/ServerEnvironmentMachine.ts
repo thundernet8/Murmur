@@ -1,5 +1,5 @@
-import { EnvironmentMachineKind } from "@t3tools/contracts";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import { EnvironmentMachineKind } from "@murmur/contracts";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Config from "effect/Config";
 import * as Effect from "effect/Effect";
 import * as FileSystem from "effect/FileSystem";

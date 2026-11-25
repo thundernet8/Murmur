@@ -17,8 +17,8 @@ import {
   makeStoredShellSnapshotEncoder,
   makeStoredThreadSnapshotEncoder,
   makeThreadCacheWriteOrder,
-} from "@t3tools/client-runtime/platform";
-import { TokenStore } from "@t3tools/client-runtime/authorization";
+} from "@murmur/client-runtime/platform";
+import { TokenStore } from "@murmur/client-runtime/authorization";
 import { msg } from "gt-react";
 import {
   ConnectionTransientError,
@@ -29,9 +29,9 @@ import {
   StoredPullRequestRoutingPermission,
   pullRequestRoutingConnectionKey,
   pullRequestRoutingPermissionFor,
-} from "@t3tools/client-runtime/connection";
-import { EnvironmentQueryStore } from "@t3tools/client-runtime/state/query-persistence";
-import { EnvironmentId, ServerConfig, ThreadId, VcsListRefsResult } from "@t3tools/contracts";
+} from "@murmur/client-runtime/connection";
+import { EnvironmentQueryStore } from "@murmur/client-runtime/state/query-persistence";
+import { EnvironmentId, ServerConfig, ThreadId, VcsListRefsResult } from "@murmur/contracts";
 import * as Clock from "effect/Clock";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";

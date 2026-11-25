@@ -4,7 +4,7 @@ import {
   VcsProcessExitError,
   VcsProcessSpawnError,
   VcsProcessTimeoutError,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { assert, it } from "@effect/vitest";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import * as Effect from "effect/Effect";
@@ -16,15 +16,15 @@ import * as PlatformError from "effect/PlatformError";
 import {
   providerAuth,
   type SourceControlProviderDiscoverySpec,
-} from "@t3tools/source-control-core/server/discovery";
-import type * as SourceControlHost from "@t3tools/source-control-core/server/SourceControlHost";
+} from "@murmur/source-control-core/server/discovery";
+import type * as SourceControlHost from "@murmur/source-control-core/server/SourceControlHost";
 import {
   fakeDiscovery,
   fakeSourceControlProvider,
-} from "@t3tools/source-control-testing/fakeSourceControlDriver";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { SpawnExecutableResolution } from "@t3tools/shared/shell";
-import * as TestSourceControlHost from "@t3tools/source-control-testing/TestSourceControlHost";
+} from "@murmur/source-control-testing/fakeSourceControlDriver";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { SpawnExecutableResolution } from "@murmur/shared/shell";
+import * as TestSourceControlHost from "@murmur/source-control-testing/TestSourceControlHost";
 
 import * as ServerConfig from "../config.ts";
 import * as ServerSettings from "../serverSettings.ts";

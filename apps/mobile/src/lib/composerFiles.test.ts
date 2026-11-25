@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
-import { PROVIDER_SEND_TURN_MAX_IMAGE_BYTES } from "@t3tools/contracts";
+import { PROVIDER_SEND_TURN_MAX_IMAGE_BYTES } from "@murmur/contracts";
 import type { ImagePickerAsset } from "expo-image-picker";
 
 // Bytes of image files the tests create, so stored attachments can be read back and measured.

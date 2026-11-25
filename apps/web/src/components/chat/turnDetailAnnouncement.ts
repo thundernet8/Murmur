@@ -1,6 +1,6 @@
-import type { RunId, ScreenReaderAnnouncements } from "@t3tools/contracts";
+import type { RunId, ScreenReaderAnnouncements } from "@murmur/contracts";
 import * as DateTime from "effect/DateTime";
-import { searchToolLabelParts } from "@t3tools/shared/toolActivity";
+import { searchToolLabelParts } from "@murmur/shared/toolActivity";
 import { msg } from "gt-react";
 
 import { m } from "../../i18n/messages";

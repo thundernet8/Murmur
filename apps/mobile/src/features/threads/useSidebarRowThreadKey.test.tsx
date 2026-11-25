@@ -1,8 +1,8 @@
 import { act, useLayoutEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { RegistryContext } from "@effect/atom-react";
-import type { EnvironmentThreadShell } from "@t3tools/client-runtime/state/shell";
-import { EnvironmentId, ThreadId } from "@t3tools/contracts";
+import type { EnvironmentThreadShell } from "@murmur/client-runtime/state/shell";
+import { EnvironmentId, ThreadId } from "@murmur/contracts";
 import { type Atom, AtomRegistry } from "effect/reactivity";
 import { describe, expect, it, vi } from "vite-plus/test";
 

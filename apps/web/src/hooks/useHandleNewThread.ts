@@ -2,13 +2,13 @@ import {
   scopedProjectKey,
   scopeProjectRef,
   scopeThreadRef,
-} from "@t3tools/client-runtime/environment";
+} from "@murmur/client-runtime/environment";
 import {
   DEFAULT_SERVER_SETTINGS,
   type ScopedProjectRef,
   type T3ProjectFile,
   type ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import { type AnyRouter, useRouter } from "@tanstack/react-router";
 import { flushSync } from "react-dom";
 import {
@@ -28,8 +28,8 @@ import {
   resolveGroupDefaultProject,
   selectProjectGroupingSettings,
   type ProjectGroupingSettings,
-} from "@t3tools/client-runtime/state/project-grouping";
-import { resolveNewThreadEnvMode, resolveProjectSettings } from "@t3tools/shared/projectSettings";
+} from "@murmur/client-runtime/state/project-grouping";
+import { resolveNewThreadEnvMode, resolveProjectSettings } from "@murmur/shared/projectSettings";
 import {
   readProjects,
   readThreadShell,
@@ -44,7 +44,7 @@ import {
   resolveNewThreadModelSelectionOverride,
   threadHasStarted,
 } from "../lib/chatThreadActions";
-import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
+import type { EnvironmentProject } from "@murmur/client-runtime/state/shell";
 import { peekT3ProjectFile, readT3ProjectFile } from "../lib/t3ProjectFileDefaults";
 import { appAtomRegistry } from "../rpc/atomRegistry";
 import { environmentSummaries } from "../state/presentation";
@@ -59,7 +59,7 @@ import { defaultProjectFallbackReadyAtom } from "../state/projects";
 import { useThreadRouteTarget } from "./useThreadRouteTarget";
 import { readUnloadedThreadCount } from "../state/olderSettledShelf";
 import { resolveProjectDefaultProviderModelSelection } from "../providerInstances";
-import { resolveNewThreadModelSelection } from "@t3tools/shared/usageLimits";
+import { resolveNewThreadModelSelection } from "@murmur/shared/usageLimits";
 
 export const LAST_USED_PROJECT_STORAGE_KEY = "murmur:last-used-project:v1";
 export const lastUsedProjectKeySchema = Schema.NullOr(Schema.String);

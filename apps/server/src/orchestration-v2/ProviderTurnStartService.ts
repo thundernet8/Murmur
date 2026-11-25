@@ -1,7 +1,7 @@
 import { classifyCodexManagedError } from "../provider/CodexManagedErrors.ts";
-import { modelSelectionsEqual } from "@t3tools/shared/model";
-import { projectComposerContextForProvider } from "@t3tools/shared/composerContextReferences";
-import { expandAssistantCitationsForProvider } from "@t3tools/shared/assistantCitations";
+import { modelSelectionsEqual } from "@murmur/shared/model";
+import { projectComposerContextForProvider } from "@murmur/shared/composerContextReferences";
+import { expandAssistantCitationsForProvider } from "@murmur/shared/assistantCitations";
 import {
   CommandId,
   PROVIDER_SEND_TURN_MAX_INPUT_CHARS,
@@ -21,7 +21,7 @@ import {
   RunAttemptId,
   NodeId,
   ThreadId,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import * as Cause from "effect/Cause";
 import * as Context from "effect/Context";
 import * as DateTime from "effect/DateTime";
@@ -63,23 +63,23 @@ import {
   contextUsageForHandoff,
   historicalMessage,
   latestNativeContextUsage,
-} from "@t3tools/provider-core/server/handoffBudget";
+} from "@murmur/provider-core/server/handoffBudget";
 import {
   deliverContextHandoffs,
   isSlashCommandMessage,
   withInlineContext,
 } from "./ContextHandoffDelivery.ts";
 import { isProviderCommand, outputInstructions } from "./runOutput.ts";
-import * as ProviderAdapter from "@t3tools/provider-core/server/ProviderAdapter";
-import * as IdAllocator from "@t3tools/provider-core/server/IdAllocator";
+import * as ProviderAdapter from "@murmur/provider-core/server/ProviderAdapter";
+import * as IdAllocator from "@murmur/provider-core/server/IdAllocator";
 import * as ProjectionStore from "./ProjectionStore.ts";
-import { unsentManualContinuationSource } from "@t3tools/shared/orchestrationV2ManualContinuation";
+import { unsentManualContinuationSource } from "@murmur/shared/orchestrationV2ManualContinuation";
 import * as ProviderSessionManager from "./ProviderSessionManager.ts";
 import {
   ContextHandoffBackgroundWorkError,
   knownProviderFailureMessage,
   makeProviderFailure,
-} from "@t3tools/provider-core/server/failure";
+} from "@murmur/provider-core/server/failure";
 import * as RunExecutionService from "./RunExecutionService.ts";
 import * as RuntimePolicy from "./RuntimePolicy.ts";
 import * as TurnItemPositionStore from "./TurnItemPositionStore.ts";

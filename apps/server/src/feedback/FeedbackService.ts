@@ -1,6 +1,6 @@
 import * as NodeOS from "node:os";
 
-import type { ThreadId } from "@t3tools/contracts";
+import type { ThreadId } from "@murmur/contracts";
 import * as Context from "effect/Context";
 import * as SecureRandom from "effect/crypto/SecureRandom";
 import * as Effect from "effect/Effect";

@@ -3,7 +3,7 @@ import {
   type PullRequestCapabilities,
   type PullRequestListState,
   type PullRequestViewerPermissions,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 import {
   PullRequestProviderError,
   tailLogLines,
@@ -12,7 +12,7 @@ import {
   type ProviderCheckRerun,
   type ProviderRepositoryRef,
   type PullRequestProviderApi,
-} from "@t3tools/source-control-core/server/PullRequestProvider";
+} from "@murmur/source-control-core/server/PullRequestProvider";
 import * as Cache from "effect/Cache";
 import * as Duration from "effect/Duration";
 import * as Effect from "effect/Effect";

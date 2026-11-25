@@ -11,9 +11,9 @@ import {
   type CloudSpeechProvider,
   EnvironmentSpeechTranscriptionResult,
   type SpeechTranscriptionOptions,
-} from "@t3tools/contracts";
-import * as SecretResolver from "@t3tools/secret-provider-core/server/SecretResolver";
-import { cloudSpeechLanguages, effectiveSpeechLanguage } from "@t3tools/shared/speech";
+} from "@murmur/contracts";
+import * as SecretResolver from "@murmur/secret-provider-core/server/SecretResolver";
+import { cloudSpeechLanguages, effectiveSpeechLanguage } from "@murmur/shared/speech";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Exit from "effect/Exit";

@@ -1,12 +1,12 @@
-import type { EnvironmentThreadShell } from "@t3tools/client-runtime/state/shell";
+import type { EnvironmentThreadShell } from "@murmur/client-runtime/state/shell";
 import {
   activeThreadSortKey,
   generateSpreadPinOrderKeys,
   pinOrderKeyBetween,
   planPinnedReorder,
-} from "@t3tools/client-runtime/state/thread-sort";
-import { effectiveSnoozed } from "@t3tools/client-runtime/state/thread-settled";
-import type { EnvironmentId } from "@t3tools/contracts";
+} from "@murmur/client-runtime/state/thread-sort";
+import { effectiveSnoozed } from "@murmur/client-runtime/state/thread-settled";
+import type { EnvironmentId } from "@murmur/contracts";
 import { msg } from "gt-react-native";
 
 import { m, type MessageResolver } from "../../i18n/messages";

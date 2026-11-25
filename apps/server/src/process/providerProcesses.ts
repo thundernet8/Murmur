@@ -4,8 +4,8 @@ import * as NodeFS from "node:fs";
 import * as NodeOS from "node:os";
 import * as NodePath from "node:path";
 
-import * as AcpSessionRuntime from "@t3tools/provider-acp/server/AcpSessionRuntime";
-import * as HostProcess from "@t3tools/shared/HostProcess";
+import * as AcpSessionRuntime from "@murmur/provider-acp/server/AcpSessionRuntime";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";

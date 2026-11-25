@@ -1,10 +1,10 @@
-import { desktopTrackMismatchText } from "@t3tools/client-runtime/state/server";
+import { desktopTrackMismatchText } from "@murmur/client-runtime/state/server";
 import type {
   DesktopBridge,
   DesktopUpdateActionResult,
   DesktopUpdateState,
-} from "@t3tools/contracts";
-import { desktopUpdateChannelOf } from "@t3tools/shared/cliRelease";
+} from "@murmur/contracts";
+import { desktopUpdateChannelOf } from "@murmur/shared/cliRelease";
 import { msg } from "gt-react";
 
 import { m, type MessageResolver } from "../i18n/messages";

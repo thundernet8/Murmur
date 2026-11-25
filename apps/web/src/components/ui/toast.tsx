@@ -10,7 +10,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { type ScopedThreadRef, type ThreadId } from "@t3tools/contracts";
+import { type ScopedThreadRef, type ThreadId } from "@murmur/contracts";
 import {
   CircleAlertIcon,
   CircleCheckIcon,

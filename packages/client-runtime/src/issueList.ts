@@ -8,7 +8,7 @@ import type {
   IssueScopeRef,
   IssueTrackerSummary,
   SourceControlProviderKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
 import { mergeIssueListPage } from "./state/issues.ts";
 import { sourceControlClients } from "./sourceControlClients.ts";

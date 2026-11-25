@@ -1,4 +1,4 @@
-import type { EnvironmentThreadShell } from "@t3tools/client-runtime/state/shell";
+import type { EnvironmentThreadShell } from "@murmur/client-runtime/state/shell";
 import { useNavigation } from "@react-navigation/native";
 import { useGT } from "gt-react-native";
 import { changeRequestTermKind } from "../../lib/changeRequestTerm";

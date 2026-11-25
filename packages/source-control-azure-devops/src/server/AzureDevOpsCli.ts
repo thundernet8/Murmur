@@ -10,18 +10,18 @@ import {
   type SourceControlRepositoryVisibility,
   type VcsError,
   type VcsProcessExitFailureKind,
-} from "@t3tools/contracts";
+} from "@murmur/contracts";
 
-import * as SourceControlHost from "@t3tools/source-control-core/server/SourceControlHost";
-import * as HostProcess from "@t3tools/shared/HostProcess";
-import { SpawnExecutableResolution } from "@t3tools/shared/shell";
+import * as SourceControlHost from "@murmur/source-control-core/server/SourceControlHost";
+import * as HostProcess from "@murmur/shared/HostProcess";
+import { SpawnExecutableResolution } from "@murmur/shared/shell";
 import { AzureCliInstallLocation } from "./azureCliLauncher.ts";
 import {
   decodeAzureDevOpsPullRequestJson,
   decodeAzureDevOpsPullRequestListJson,
   type NormalizedAzureDevOpsPullRequestRecord,
 } from "./azureDevOpsPullRequests.ts";
-import * as SourceControlProvider from "@t3tools/source-control-core/server/SourceControlProvider";
+import * as SourceControlProvider from "@murmur/source-control-core/server/SourceControlProvider";
 
 const DEFAULT_TIMEOUT_MS = 30_000;
 
@@ -271,7 +271,7 @@ export class AzureDevOpsCli extends Context.Service<
       readonly remoteUrl?: string;
     }) => Effect.Effect<string | null, AzureDevOpsCliError>;
   }
->()("@t3tools/source-control-azure-devops/server/AzureDevOpsCli") {}
+>()("@murmur/source-control-azure-devops/server/AzureDevOpsCli") {}
 
 function normalizeChangeRequestId(reference: string): string {
   const trimmed = reference.trim().replace(/^#/, "");
