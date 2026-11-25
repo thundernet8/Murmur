@@ -1,3 +1,4 @@
+import { RelayEncryptionTransport, relayIdentityConnectionId } from "../relay/encryption.ts";
 import { msg } from "gt-i18n";
 import { detailFromError, translatableDetail } from "../errors/translatable.ts";
 import type { DesktopSshEnvironmentTarget, EnvironmentId } from "@t3tools/contracts";
@@ -126,8 +127,36 @@ export const preparePairingRegistration = Effect.fn(
   "clientRuntime.connection.onboarding.preparePairingRegistration",
 )(function* (input: PairingConnectionInput) {
   const target = yield* resolvePairingTarget(input);
+  const existingRegistry = yield* Effect.serviceOption(EnvironmentRegistry.EnvironmentRegistry);
+  const primaryAddress =
+    Option.isSome(existingRegistry) &&
+    [...(yield* SubscriptionRef.get(existingRegistry.value.entries)).values()].some(
+      (entry) =>
+        entry.target._tag === "PrimaryConnectionTarget" &&
+        new URL(entry.target.httpBaseUrl).origin === new URL(target.httpBaseUrl).origin,
+    );
+  let relayPublicKey = primaryAddress ? undefined : target.relayPublicKey;
+  const identities = yield* Effect.serviceOption(
+    ConnectionCredentialStore.ConnectionCredentialStore,
+  );
   const presentation = yield* ClientCapabilities.ClientPresentation;
-  const descriptor = yield* fetchRemoteEnvironmentDescriptor({
+  const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
+  if (relayPublicKey !== undefined) {
+    if (Option.isNone(encryption))
+      return yield* new ConnectionBlockedError({
+        reason: "configuration",
+        ...translatableDetail(msg("Relay encryption is unavailable.")),
+      });
+    yield* Effect.try({
+      try: () => encryption.value.pin(target.httpBaseUrl, relayPublicKey!),
+      catch: () =>
+        new ConnectionBlockedError({
+          reason: "configuration",
+          ...translatableDetail(msg("The environment encryption identity changed. Pair it again.")),
+        }),
+    });
+  }
+  let descriptor = yield* fetchRemoteEnvironmentDescriptor({
     httpBaseUrl: target.httpBaseUrl,
   }).pipe(Effect.mapError(mapRemoteEnvironmentError));
   // Checked before redeeming the one-time code, so a wrong link is not spent.
@@ -137,6 +166,43 @@ export const preparePairingRegistration = Effect.fn(
   ) {
     return yield* differentMachineError(descriptor.label);
   }
+  if (!primaryAddress && relayPublicKey === undefined && Option.isSome(identities)) {
+    const identity = yield* identities.value.get(
+      relayIdentityConnectionId(descriptor.environmentId),
+    );
+    if (Option.isSome(identity) && identity.value._tag === "BearerConnectionCredential") {
+      relayPublicKey = identity.value.token;
+      if (Option.isNone(encryption))
+        return yield* new ConnectionBlockedError({
+          reason: "configuration",
+          ...translatableDetail(msg("Relay encryption is unavailable.")),
+        });
+      const expectedId = descriptor.environmentId;
+      yield* Effect.try({
+        try: () => encryption.value.pin(target.httpBaseUrl, relayPublicKey!),
+        catch: () =>
+          new ConnectionBlockedError({
+            reason: "configuration",
+            ...translatableDetail(
+              msg("The environment encryption identity changed. Pair it again."),
+            ),
+          }),
+      });
+      descriptor = yield* fetchRemoteEnvironmentDescriptor({
+        httpBaseUrl: target.httpBaseUrl,
+      }).pipe(Effect.mapError(mapRemoteEnvironmentError));
+      if (descriptor.environmentId !== expectedId)
+        return yield* differentMachineError(descriptor.label);
+    }
+  }
+  const rememberIdentity = Effect.fn("connection.onboarding.rememberRelayIdentity")(function* () {
+    if (relayPublicKey !== undefined && Option.isSome(identities)) {
+      yield* identities.value.put(
+        relayIdentityConnectionId(descriptor.environmentId),
+        new BearerConnectionCredential({ token: relayPublicKey }),
+      );
+    }
+  });
   const connectionId = bearerConnectionId(descriptor.environmentId, target.httpBaseUrl);
   const route = {
     target: new BearerConnectionTarget({
@@ -150,6 +216,7 @@ export const preparePairingRegistration = Effect.fn(
       label: descriptor.label,
       httpBaseUrl: target.httpBaseUrl,
       wsBaseUrl: target.wsBaseUrl,
+      ...(relayPublicKey ? { relayPublicKey: relayPublicKey } : {}),
     }),
   };
   // The registry checks again under its lease; this early check keeps a refused code unspent.
@@ -181,6 +248,7 @@ export const preparePairingRegistration = Effect.fn(
       clientMetadata: presentation.metadata,
       dpopProof: dpopProof.value,
     }).pipe(Effect.mapError(mapRemoteEnvironmentError));
+    yield* rememberIdentity();
     return new BearerConnectionRegistration({
       ...route,
       credential: new DpopConnectionCredential({
@@ -195,6 +263,7 @@ export const preparePairingRegistration = Effect.fn(
     clientMetadata: presentation.metadata,
   }).pipe(Effect.mapError(mapRemoteEnvironmentError));
 
+  yield* rememberIdentity();
   return new BearerConnectionRegistration({
     ...route,
     credential: new BearerConnectionCredential({
@@ -326,6 +395,9 @@ export const prepareBearerConnectionUpdate = Effect.fn(
       label,
       httpBaseUrl,
       wsBaseUrl: deriveWsBaseUrl(httpBaseUrl),
+      ...(entry.profile.value.relayPublicKey
+        ? { relayPublicKey: entry.profile.value.relayPublicKey }
+        : {}),
     }),
     credential: credential.value,
   });
@@ -379,6 +451,7 @@ export const make = Effect.gen(function* () {
   const httpClient = yield* HttpClient.HttpClient;
   const ssh = yield* ClientCapabilities.SshEnvironmentGateway;
   const credentials = yield* ConnectionCredentialStore.ConnectionCredentialStore;
+  const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
 
   // Provisioning retains the delegated onboarding operation spans.
   return ConnectionOnboarding.of({
@@ -389,6 +462,11 @@ export const make = Effect.gen(function* () {
       Effect.provideService(EnvironmentRegistry.EnvironmentRegistry, registry),
       Effect.provideService(ClientCapabilities.ClientPresentation, presentation),
       Effect.provideService(HttpClient.HttpClient, httpClient),
+      Effect.provideService(ConnectionCredentialStore.ConnectionCredentialStore, credentials),
+      (effect) =>
+        Option.isSome(encryption)
+          ? effect.pipe(Effect.provideService(RelayEncryptionTransport, encryption.value))
+          : effect,
     ),
     registerSsh: Effect.fnUntraced(
       function* (input) {

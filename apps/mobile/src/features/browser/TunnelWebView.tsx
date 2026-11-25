@@ -1,4 +1,7 @@
-import { createRelaySocketBridge, type RelaySocketBridgeEvent } from "@t3tools/shared/relaySocketBridge";
+import {
+  createRelaySocketBridge,
+  type RelaySocketBridgeEvent,
+} from "@t3tools/shared/relaySocketBridge";
 import type { createRelayTransport } from "@t3tools/shared/relayTransport";
 import type { EnvironmentId } from "@t3tools/contracts";
 import { requireNativeModule, requireNativeView } from "expo";
@@ -36,7 +39,10 @@ export interface TunnelWebViewRef {
 const PreviewTunnel = requireNativeModule<{
   resolveAccess(requestId: string, url: string | null): void;
   receiveRelaySocket(id: string, type: string, data: string): void;
-  addListener(name: "onRelaySocket", listener: (event: RelaySocketBridgeEvent) => void): { remove(): void };
+  addListener(
+    name: "onRelaySocket",
+    listener: (event: RelaySocketBridgeEvent) => void,
+  ): { remove(): void };
 }>("T3PreviewTunnel");
 
 const relayBridgeSlot = globalThis as typeof globalThis & {
@@ -44,10 +50,13 @@ const relayBridgeSlot = globalThis as typeof globalThis & {
   __murmurPreviewBridge?: { remove(): void };
 };
 relayBridgeSlot.__murmurPreviewBridge?.remove();
-relayBridgeSlot.__murmurPreviewBridge = PreviewTunnel.addListener("onRelaySocket", createRelaySocketBridge({
-  transport: () => relayBridgeSlot.__murmurRelayTransport,
-  receive: (id, type, data) => PreviewTunnel.receiveRelaySocket(id, type, data),
-}));
+relayBridgeSlot.__murmurPreviewBridge = PreviewTunnel.addListener(
+  "onRelaySocket",
+  createRelaySocketBridge({
+    transport: () => relayBridgeSlot.__murmurRelayTransport,
+    receive: (id, type, data) => PreviewTunnel.receiveRelaySocket(id, type, data),
+  }),
+);
 
 const NativeTunnelWebView = requireNativeView<
   ViewProps & {

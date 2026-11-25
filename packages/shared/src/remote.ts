@@ -1,3 +1,4 @@
+import { decodeRelayPublicKey } from "./relayTransport.ts";
 import * as Schema from "effect/Schema";
 
 import { parseUrl } from "./url.ts";
@@ -135,6 +136,7 @@ const toWsBaseUrl = (url: URL): string => {
 
 export interface ResolvedRemotePairingTarget {
   readonly credential: string;
+  readonly relayPublicKey?: string;
   readonly httpBaseUrl: string;
   readonly wsBaseUrl: string;
 }
@@ -227,7 +229,7 @@ export const resolveRemotePairingTarget = (input: {
         "hosted-pairing-host",
       );
       return {
-        credential: hostedPairingRequest.token,
+        ...splitRelayPairingCredential(hostedPairingRequest.token),
         httpBaseUrl: toHttpBaseUrl(hostedBackendUrl),
         wsBaseUrl: toWsBaseUrl(hostedBackendUrl),
       };
@@ -238,7 +240,7 @@ export const resolveRemotePairingTarget = (input: {
       throw new RemotePairingTokenMissingError({ host: url.host });
     }
     return {
-      credential,
+      ...splitRelayPairingCredential(credential),
       httpBaseUrl: toHttpBaseUrl(url),
       wsBaseUrl: toWsBaseUrl(url),
     };
@@ -255,8 +257,19 @@ export const resolveRemotePairingTarget = (input: {
   }
 
   return {
-    credential: pairingCode,
+    ...splitRelayPairingCredential(pairingCode),
     httpBaseUrl: toHttpBaseUrl(normalizedHost),
     wsBaseUrl: toWsBaseUrl(normalizedHost),
   };
 };
+
+function splitRelayPairingCredential(credential: string): {
+  credential: string;
+  relayPublicKey?: string;
+} {
+  const index = credential.indexOf("~e2ee.");
+  if (index < 0) return { credential };
+  const relayPublicKey = credential.slice(index + 6);
+  decodeRelayPublicKey(relayPublicKey);
+  return { credential: credential.slice(0, index), relayPublicKey };
+}

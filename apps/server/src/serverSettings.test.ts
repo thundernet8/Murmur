@@ -302,6 +302,7 @@ it.layer(Layer.mergeAll(NodeServices.layer, NodeCrypto.layer))("server settings"
       const settings = yield* service.getSettings;
       assert.equal(settings.idleCompaction, "onReturn");
       assert.strictEqual(settings.compactIdleThreads, false);
+      assert.isTrue(settings.requireConnectDeviceApproval);
     }).pipe(Effect.provide(layerServerSettings())),
   );
 

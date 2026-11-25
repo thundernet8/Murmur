@@ -1,3 +1,5 @@
+import { RelayEncryptionTransport } from "@t3tools/client-runtime/relay/encryption";
+import * as Context from "effect/Context";
 import { msg } from "gt-react-native";
 
 import { m } from "../../i18n/messages";
@@ -129,7 +131,11 @@ export function runSpeech<A, E>(
                 code: "cancelled",
                 message: m(msg("Your transcription choice changed.")),
               });
-            return expoFetch(url, { ...options, redirect: "error" });
+            const encryption = Context.getOption(context, RelayEncryptionTransport);
+            const target = url instanceof Request ? url.url : String(url);
+            return Option.isSome(encryption) && encryption.value.isEncrypted(target)
+              ? encryption.value.fetch(url, { ...options, redirect: "error" })
+              : expoFetch(url, { ...options, redirect: "error" });
           }),
           Effect.provide(context),
         ),

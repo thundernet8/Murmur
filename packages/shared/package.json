@@ -674,6 +674,22 @@
     "./assistantInsights": {
       "types": "./src/assistantInsights.ts",
       "import": "./src/assistantInsights.ts"
+    },
+    "./relayE2ee/noise": {
+      "types": "./src/relayE2ee/noise.ts",
+      "import": "./src/relayE2ee/noise.ts"
+    },
+    "./relayE2ee/records": {
+      "types": "./src/relayE2ee/records.ts",
+      "import": "./src/relayE2ee/records.ts"
+    },
+    "./relaySocketBridge": {
+      "types": "./src/relaySocketBridge.ts",
+      "import": "./src/relaySocketBridge.ts"
+    },
+    "./relayTransport": {
+      "types": "./src/relayTransport.ts",
+      "import": "./src/relayTransport.ts"
     }
   },
   "scripts": {
@@ -681,6 +697,7 @@
     "test": "vp test run --config ../../vite.config.ts --dir ."
   },
   "dependencies": {
+    "@noble/ciphers": "1.3.0",
     "@noble/curves": "catalog:",
     "@noble/hashes": "catalog:",
     "@t3tools/contracts": "workspace:*",

@@ -1407,6 +1407,8 @@ function ConnectionsSettingsContent({
                     : {
                         required: accessServerConfig.settings.requireConnectDeviceApproval,
                         canManage: canWriteAccess,
+                        enforced:
+                          accessServerConfig.environment.capabilities.relayEncryption === true,
                       }
                 }
               />

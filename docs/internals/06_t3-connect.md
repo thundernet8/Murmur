@@ -1,40 +1,35 @@
 # Murmur Connect
 
-Murmur Connect uses Clerk for cloud identity. The relay manages environment links, bootstrap
-credentials, and managed tunnel allocations. Regular HTTP and WebSocket traffic goes directly from
-clients to the environment's tunnel hostname—the relay Worker is not in the data path.
+Murmur Connect 使用 Clerk 管理云端身份。relay 负责发现环境和分配 Tunnel，
+客户端业务流量通过 Tunnel 内的端到端加密通道传输；Cloudflare 的 TLS 终止点也只能看到密文。
+部署配置见 [Connect setup runbook](../operations/02_connect-setup.md)。
 
-The one forwarded exception is automation webhooks
-([`HookForwarder.ts`](../../infra/relay/src/hooks/HookForwarder.ts)), which give senders a stable
-URL while leaving token/signature verification to the environment and keeping bodies/tokens out of
-traces. Opt-in offline holding stores raw webhook requests in a per-link Durable Object
-([`HookInboxObject.ts`](../../infra/relay/src/hooks/HookInboxObject.ts)) rather than Queues or
-Postgres because held requests need per-link ordering, retry timing, and larger payload limits.
+## 配对是信任根
 
-Deployment and Clerk configuration live in the [Connect setup runbook](../operations/02_connect-setup.md).
+主机在本地 secret store 保存独立的 X25519 身份。公钥随一次性配对凭证放入链接 fragment，
+由客户端独立保存；relay 的发现结果只能提供路由，不能替换公钥。旧的 relay 会话须重新配对，
+没有本地公钥时不发送环境会话凭证，也不降级到明文。
 
-## The relay is a trusted broker
+传输参考 [Paseo 的受保护端点方案](https://github.com/getpaseo/paseo/blob/main/docs/relay-endpoint-security.md)，
+使用 Noise NK、X25519、ChaCha20-Poly1305 和 SHA-256。双方每次握手生成临时密钥，
+每个方向独立计数，认证失败关闭连接。记录层同时保护文本／二进制类型和分块边界。
+改编的 Noise 实现及其 Apache-2.0 许可在 [relayE2ee](../../packages/shared/src/relayE2ee/noise.ts)。
 
-- **DPoP-bound bootstrap minting.** For a linked user, the relay asks the environment to mint a
-  one-time bootstrap credential bound to the client's DPoP key. The client redeems it directly with
-  the environment for an [environment session](./04_environment-auth.md). The relay never sees session
-  tokens, and a bootstrap credential is useless without the client's proof key.
-- **Mutual authentication.** The environment accepts only bounded, replay-guarded relay proofs for
-  its own identity, linked user, and operation; the relay verifies signed environment responses
-  bound to the request nonce and client proof key so nothing behind the tunnel can impersonate the
-  environment ([`CloudLink.ts`](../../apps/server/src/cloud/CloudLink.ts),
-  [`EnvironmentConnector.ts`](../../infra/relay/src/environments/EnvironmentConnector.ts)).
-- **Explicit trust assumption & device approval.** DPoP protects an honest exchange, not a
-  compromised relay signing key. Enabling `requireConnectDeviceApproval` shifts trust from the relay
-  to approved DPoP key thumbprints: untrusted keys mint credentials that cannot be spent until
-  someone with `access:write` approves the key, and revoking a key revokes all of its sessions and
-  pending credentials. Approving admits a device already signed in to the owner's cloud account
-  and returns no credential to the approver, so `access:write` alone is enough, as it is for
-  turning the setting off.
-- **Anti-hijack and anti-SSRF rules.** Managed tunnels expose only the server's own loopback HTTP
-  origin (ignoring caller-supplied origins). The relay refuses to relink an active environment ID
-  under a different key until unlinked, resolves endpoints only from its own managed allocations,
-  and never follows redirects on health or mint requests.
+## Tunnel 不直接暴露业务服务
+
+[RelayEncryption](../../apps/server/src/relay/RelayEncryption.ts) 将受管理 Tunnel 指向仅监听本机的
+密文网关，而不是业务 HTTP listener。网关只允许健康检查及签名的 bootstrap mint 请求走公开控制面；
+其他 HTTP 请求与 WebSocket upgrade 均须先完成 Noise 握手，再由本机转给原有处理器。
+加密不会代替原有的 session、scope、撤销及 DPoP 校验。新 relay 设备始终需要本机审批，
+relay 签名本身不授予设备访问权。
+
+客户端的 HTTP、RPC、媒体请求复用 [relayTransport](../../packages/shared/src/relayTransport.ts)。
+文件在本地解密后呈现；桌面 SOCKS 预览直接复用此适配器，移动端原生代理通过进程内字节桥接复用它。
+原生代理不另行学习公钥或发出明文 relay 请求。
+活动推送只发送进度元数据，项目名、会话标题、摘要和模型信息不离开加密通道。
+
+外部 webhook 发送者不参与此握手，因此不能视为端到端加密客户端；密文入口不会把其请求转给业务服务。
+第三方 webhook 在 relay 接收处的内容以及已保存的离线 inbox 不受本通道保护。
 
 ## Link, allocation, and tunnel lifetimes
 

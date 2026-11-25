@@ -1,3 +1,4 @@
+import { RelayEncryptionTransport } from "../relay/encryption.ts";
 import { msg } from "gt-i18n";
 import { translatableDetail } from "../errors/translatable.ts";
 import type {
@@ -121,6 +122,7 @@ const makePrimaryBroker = Effect.fn("clientRuntime.connection.broker.makePrimary
 const makeBearerBroker = Effect.fn("clientRuntime.connection.broker.makeBearer")(function* () {
   const credentials = yield* ConnectionCredentialStore.ConnectionCredentialStore;
   const remote = yield* RemoteEnvironmentAuthorization.RemoteEnvironmentAuthorization;
+  const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
 
   return Effect.fn("clientRuntime.connection.broker.bearer")(function* (
     entry: ConnectionCatalogEntry & { readonly target: BearerConnectionTarget },
@@ -143,6 +145,23 @@ const makeBearerBroker = Effect.fn("clientRuntime.connection.broker.makeBearer")
       return yield* environmentMismatchError({
         expected: target.environmentId,
         actual: profile.environmentId,
+      });
+    }
+    if (profile.relayPublicKey !== undefined) {
+      if (Option.isNone(encryption))
+        return yield* new ConnectionBlockedError({
+          reason: "configuration",
+          ...translatableDetail(msg("Relay encryption is unavailable.")),
+        });
+      yield* Effect.try({
+        try: () => encryption.value.pin(profile.httpBaseUrl, profile.relayPublicKey!),
+        catch: () =>
+          new ConnectionBlockedError({
+            reason: "configuration",
+            ...translatableDetail(
+              msg("The environment encryption identity changed. Pair it again."),
+            ),
+          }),
       });
     }
     if (profile.authorization === "t3-connect") {
@@ -185,18 +204,15 @@ const makeBearerBroker = Effect.fn("clientRuntime.connection.broker.makeBearer")
 const makeRelayBroker = Effect.fn("clientRuntime.connection.broker.makeRelay")(function* () {
   const remote = yield* RemoteEnvironmentAuthorization.RemoteEnvironmentAuthorization;
 
-  return Effect.fnUntraced(
-    function* (target: RelayConnectionTarget) {
-      const authorized = yield* remote.authorizeDpop({
-        expectedEnvironmentId: target.environmentId,
-      });
-      return {
-        ...authorized,
-        target,
-      } satisfies PreparedConnection;
-    },
-    Effect.withSpan("clientRuntime.connection.broker.relay"),
-  );
+  return Effect.fnUntraced(function* (target: RelayConnectionTarget) {
+    const authorized = yield* remote.authorizeDpop({
+      expectedEnvironmentId: target.environmentId,
+    });
+    return {
+      ...authorized,
+      target,
+    } satisfies PreparedConnection;
+  }, Effect.withSpan("clientRuntime.connection.broker.relay"));
 });
 
 const makeSshBroker = Effect.fn("clientRuntime.connection.broker.makeSsh")(function* () {

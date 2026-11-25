@@ -1,3 +1,4 @@
+import * as RelayEncryption from "../relay/RelayEncryption.ts";
 import {
   type EnvironmentCloudLinkStateResult,
   type EnvironmentCloudPreferencesRequest,
@@ -96,7 +97,6 @@ import * as ConnectReachability from "./ConnectReachability.ts";
 import * as ManagedEndpointRuntime from "./ManagedEndpointRuntime.ts";
 import * as ManagedLimits from "../policy/managedLimits.ts";
 import * as ManagedPolicy from "../policy/ManagedPolicy.ts";
-import * as ServerSettings from "../serverSettings.ts";
 import { relayUrlConfig } from "./publicConfig.ts";
 import {
   filterRelayResponse,
@@ -498,6 +498,7 @@ export class CloudLink extends Context.Service<
       boolean,
       | CloudLinkEndpointUnavailableError
       | CloudLinkOriginInvalidError
+      | CloudLinkInternalError
       | ServerSecretStore.SecretStoreError
     >;
     readonly releaseManagedTunnelOnShutdown: () => Effect.Effect<
@@ -511,11 +512,16 @@ export class CloudLink extends Context.Service<
 
 const make = Effect.gen(function* () {
   const secrets = yield* ServerSecretStore.ServerSecretStore;
+  const encryption = yield* RelayEncryption.RelayEncryption;
+  const encryptedGatewayOrigin = encryption.origin.pipe(
+    Effect.mapError(
+      (cause) => new CloudLinkInternalError({ operation: "resolve-server-origin", cause }),
+    ),
+  );
   const environment = yield* ServerEnvironment.ServerEnvironment;
   const endpointRuntime = yield* ManagedEndpointRuntime.CloudManagedEndpointRuntime;
   const reachability = yield* ConnectReachability.ConnectReachability;
   const environmentAuth = yield* EnvironmentAuth.EnvironmentAuth;
-  const serverSettings = yield* ServerSettings.ServerSettingsService;
   const cliTokenManager = yield* CliTokenManager.CloudCliTokenManager;
   const httpClient = yield* HttpClient.HttpClient;
   const httpServer = yield* HttpServer.HttpServer;
@@ -588,9 +594,7 @@ const make = Effect.gen(function* () {
     if (typeof address === "string" || !("port" in address)) {
       return yield* new CloudLinkInternalError({ operation: "resolve-server-origin" });
     }
-    const { origin } = parseManagedEndpointLocalOrigin(
-      `http://${loopbackUrlHostForAddress(address)}:${address.port}`,
-    );
+    const { origin } = parseManagedEndpointLocalOrigin(yield* encryptedGatewayOrigin);
     if (!isLoopbackEndpointOrigin(origin)) {
       return yield* new CloudLinkOriginInvalidError({ origin: "local" });
     }
@@ -716,8 +720,9 @@ const make = Effect.gen(function* () {
     "environment.cloud.startManagedCloudTunnelIfOriginConfirmed",
   )(function* (localOrigin: string, options?: { readonly requireConfirmedOrigin?: boolean }) {
     const requireConfirmedOrigin = options?.requireConfirmedOrigin ?? true;
+    const encryptedOrigin = yield* encryptedGatewayOrigin;
     const parsedOrigin = yield* Effect.try({
-      try: () => parseManagedEndpointLocalOrigin(localOrigin),
+      try: () => parseManagedEndpointLocalOrigin(encryptedOrigin),
       catch: () => new CloudLinkOriginInvalidError({ origin: "local" }),
     });
     return yield* endpointRuntime.withLinkStateLock(
@@ -863,9 +868,10 @@ const make = Effect.gen(function* () {
     );
 
   const reconcileDesiredCloudLinkWith = Effect.fn("environment.cloud.reconcileDesiredLinkWith")(
-    function* (localOrigin: string) {
+    function* (_localOrigin: string) {
+      const encryptedOrigin = yield* encryptedGatewayOrigin;
       const parsedOrigin = yield* Effect.try({
-        try: () => parseManagedEndpointLocalOrigin(localOrigin),
+        try: () => parseManagedEndpointLocalOrigin(encryptedOrigin),
         catch: () => new CloudLinkOriginInvalidError({ origin: "local" }),
       });
       const token = yield* cliTokenManager.getExisting.pipe(
@@ -1024,8 +1030,9 @@ const make = Effect.gen(function* () {
       return { status: "not_linked" as const };
     }
 
+    const encryptedOrigin = yield* encryptedGatewayOrigin;
     const parsedOrigin = yield* Effect.try({
-      try: () => parseManagedEndpointLocalOrigin(localOrigin),
+      try: () => parseManagedEndpointLocalOrigin(encryptedOrigin),
       catch: () => new CloudLinkOriginInvalidError({ origin: "local" }),
     });
     if (config.tunnelId === undefined) {
@@ -1116,8 +1123,9 @@ const make = Effect.gen(function* () {
       }
     }
 
+    const encryptedOrigin = yield* encryptedGatewayOrigin;
     const parsedOrigin = yield* Effect.try({
-      try: () => parseManagedEndpointLocalOrigin(localOrigin),
+      try: () => parseManagedEndpointLocalOrigin(encryptedOrigin),
       catch: () => new CloudLinkOriginInvalidError({ origin: "local" }),
     });
 
@@ -1643,12 +1651,9 @@ const make = Effect.gen(function* () {
         return yield* new CloudLinkProofReplayedError({ request: "mint" });
       }
 
-      const settings = yield* serverSettings.getSettings.pipe(
-        Effect.catch(internalError("issue-credential")),
-      );
       const issued = yield* environmentAuth.issueConnectCredential({
         proofKeyThumbprint: proof.clientProofKeyThumbprint,
-        requireApproval: settings.requireConnectDeviceApproval,
+        requireApproval: true,
       });
       const responsePayload = {
         iss: `t3-env:${environmentId}`,

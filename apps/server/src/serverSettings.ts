@@ -731,7 +731,10 @@ const make = Effect.gen(function* () {
   // Locks are laid over every settings value that leaves this service, never persisted.
   const toEffective = (settings: ServerSettings) =>
     resolveTextGenerationProvider(
-      managedProviders.applyLimits(managed.applyLocks(settings)),
+      managedProviders.applyLimits({
+        ...managed.applyLocks(settings),
+        requireConnectDeviceApproval: true,
+      }),
       managedProviders.isDriverAllowed,
     );
   const writeSemaphore = yield* Semaphore.make(1);

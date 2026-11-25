@@ -1,3 +1,4 @@
+import * as RelayEncryption from "../relay/RelayEncryption.ts";
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { describe, expect, it } from "@effect/vitest";
@@ -80,7 +81,15 @@ const layerLinkProofRoutes = HttpApiBuilder.layer(LinkProofTestApi).pipe(
   Layer.provide([AuthHttp.layer, ConnectHttp.layer]),
   Layer.provide(AuthHttp.layerAuthenticatedAuth),
   Layer.provide(ServerHttp.layerApiBodyLimit),
-  Layer.provide(CloudLink.layer),
+  Layer.provide(
+    CloudLink.layer.pipe(
+      Layer.provide(
+        Layer.succeed(RelayEncryption.RelayEncryption, {
+          origin: Effect.succeed("http://127.0.0.1:3773"),
+        }),
+      ),
+    ),
+  ),
   Layer.provide(ServerSettings.ServerSettingsService.layerTest()),
   Layer.provide(EnvironmentKeys.layer),
   Layer.provide(

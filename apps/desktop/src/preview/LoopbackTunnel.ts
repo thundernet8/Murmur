@@ -160,14 +160,19 @@ const dialDestination = Effect.fn("LoopbackTunnel.dialDestination")(function* (
   if (url.hash.startsWith("#relay-e2ee=")) {
     const publicKey = url.hash.slice("#relay-e2ee=".length);
     url.hash = "";
-    const transport = createRelayTransport({ fetch: globalThis.fetch, WebSocket: NodeWS.WebSocket as unknown as typeof WebSocket });
+    const transport = createRelayTransport({
+      fetch: globalThis.fetch,
+      WebSocket: NodeWS.WebSocket as unknown as typeof WebSocket,
+    });
     transport.pin(url.origin, publicKey);
     const tunnel = yield* Effect.acquireRelease(
       Effect.sync(() => new transport.WebSocket(url)),
       (socket) => Effect.sync(() => socket.close()),
     );
     tunnel.binaryType = "arraybuffer";
-    const socket = yield* Socket.fromWebSocket(Effect.succeed(tunnel), { openTimeout: CONNECT_TIMEOUT });
+    const socket = yield* Socket.fromWebSocket(Effect.succeed(tunnel), {
+      openTimeout: CONNECT_TIMEOUT,
+    });
     return { pull: yield* Socket.readerBytes(socket), writer: yield* socket.writer };
   }
   const tunnel = yield* Effect.acquireRelease(

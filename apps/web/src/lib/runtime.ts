@@ -1,3 +1,5 @@
+import { createRelayTransport } from "@t3tools/shared/relayTransport";
+import { RelayEncryptionTransport } from "@t3tools/client-runtime/relay/encryption";
 import * as ManagedRuntime from "effect/ManagedRuntime";
 import type * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
@@ -16,7 +18,19 @@ function configuredRelayUrl(): string {
   return resolveCloudPublicConfig().relayUrl ?? "http://relay.invalid";
 }
 
-const layerHttpClient = layerRemoteHttpClient((input, init) => globalThis.fetch(input, init));
+const relayPlatform = globalThis as typeof globalThis & {
+  __murmurRelayTransport?: ReturnType<typeof createRelayTransport>;
+};
+const relayTransport = (relayPlatform.__murmurRelayTransport ??= createRelayTransport({
+  fetch: globalThis.fetch.bind(globalThis),
+  WebSocket: globalThis.WebSocket,
+}));
+globalThis.fetch = relayTransport.fetch;
+globalThis.WebSocket = relayTransport.WebSocket;
+const layerHttpClient = Layer.merge(
+  layerRemoteHttpClient(relayTransport.fetch),
+  Layer.succeed(RelayEncryptionTransport, relayTransport),
+);
 
 type RuntimeLayerSource =
   | typeof layerHttpClient

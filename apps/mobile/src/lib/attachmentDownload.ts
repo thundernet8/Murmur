@@ -6,6 +6,7 @@ import { msg } from "gt-react-native";
 import { m } from "../i18n/messages";
 import { beginForegroundHandoff } from "./foreground-handoff";
 import { uuidv4 } from "./uuid";
+import { downloadRelayFile } from "./relayFileIo";
 
 const ATTACHMENT_DOWNLOAD_DIRECTORY = "t3-attachment-downloads";
 const DOWNLOAD_RETENTION_MS = 24 * 60 * 60_000;
@@ -169,6 +170,32 @@ export function nativeViewerErrorMessage(cause: unknown): string {
     : m(msg("The file could not be opened. Check the connection and try again."));
 }
 
+export async function cacheDecryptedRelayAsset(
+  bytes: Uint8Array,
+  mimeType: string,
+): Promise<string> {
+  const extensions: Readonly<Record<string, string>> = {
+    "image/png": "png",
+    "image/jpeg": "jpg",
+    "image/webp": "webp",
+    "image/gif": "gif",
+    "image/svg+xml": "svg",
+    "application/pdf": "pdf",
+    "video/mp4": "mp4",
+    "audio/mpeg": "mp3",
+  };
+  const extension = extensions[mimeType.split(";", 1)[0]!.trim().toLowerCase()] ?? "bin";
+  const cached = await createCachedAttachmentFile({ name: `asset.${extension}`, mimeType });
+  try {
+    cached.file.create();
+    await cached.file.write(bytes);
+    cached.retainAfterHandoff();
+    return cached.file.uri;
+  } finally {
+    cached.preview.dispose();
+  }
+}
+
 export async function openAttachmentInViewer(input: {
   readonly uri: string;
   readonly attachment: AttachmentFileMetadata;
@@ -181,7 +208,7 @@ export async function openAttachmentInViewer(input: {
   try {
     if (/^(file|content):/.test(input.uri)) {
       await new File(input.uri).copy(cached.file);
-    } else {
+    } else if (!(await downloadRelayFile(input.uri, cached.file, input.signal))) {
       await File.downloadFileAsync(input.uri, cached.file, { signal: input.signal });
     }
     if (input.signal.aborted) return;
@@ -216,7 +243,11 @@ export async function downloadAttachmentForPreview(input: {
       cached.preview.dispose();
       return null;
     }
-    await File.downloadFileAsync(input.url, cached.file, { signal: input.signal });
+    if (/^(file|content):/.test(input.url)) {
+      await new File(input.url).copy(cached.file);
+    } else if (!(await downloadRelayFile(input.url, cached.file, input.signal))) {
+      await File.downloadFileAsync(input.url, cached.file, { signal: input.signal });
+    }
     if (input.signal.aborted) {
       cached.preview.dispose();
       return null;

@@ -666,6 +666,10 @@
     "./pull-request-references": {
       "types": "./src/pullRequestReferences.ts",
       "default": "./src/pullRequestReferences.ts"
+    },
+    "./relay/encryption": {
+      "types": "./src/relay/encryption.ts",
+      "import": "./src/relay/encryption.ts"
     }
   },
   "scripts": {

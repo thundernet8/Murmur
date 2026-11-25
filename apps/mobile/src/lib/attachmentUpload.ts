@@ -7,6 +7,7 @@ import {
 import { runAtomCommand, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
 import { msg } from "gt-react-native";
 import { m } from "../i18n/messages";
+import { encryptedRelayTransport } from "./relayFileIo";
 import type {
   ChatFileAttachment,
   ChatImageAttachment,
@@ -234,21 +235,29 @@ async function uploadFileBytes(
         encoding: "base64",
       });
     }
-    const result = await file.upload(url, {
-      httpMethod: "POST",
-      uploadType: UploadType.BINARY_CONTENT,
-      headers: { "Content-Type": composerAttachmentWireMimeType(attachment) },
-      signal,
-      ...(onProgress
-        ? {
-            // Native events carry Int64 counts, which expo-modules-jsi delivers as BigInt despite the `number` type.
-            onProgress: ({ bytesSent, totalBytes }) => {
-              const total = Number(totalBytes);
-              if (total > 0) onProgress(Number(bytesSent) / total);
-            },
-          }
-        : {}),
-    });
+    const encryption = encryptedRelayTransport(url);
+    const result = encryption
+      ? await encryption.fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": composerAttachmentWireMimeType(attachment) },
+          signal,
+          body: new Uint8Array(await file.bytes()),
+        })
+      : await file.upload(url, {
+          httpMethod: "POST",
+          uploadType: UploadType.BINARY_CONTENT,
+          headers: { "Content-Type": composerAttachmentWireMimeType(attachment) },
+          signal,
+          ...(onProgress
+            ? {
+                // Native events carry Int64 counts, which expo-modules-jsi delivers as BigInt despite the `number` type.
+                onProgress: ({ bytesSent, totalBytes }) => {
+                  const total = Number(totalBytes);
+                  if (total > 0) onProgress(Number(bytesSent) / total);
+                },
+              }
+            : {}),
+        });
     if (result.status < 200 || result.status >= 300) {
       throw new Error(
         m(
@@ -259,6 +268,7 @@ async function uploadFileBytes(
         ),
       );
     }
+    if (encryption) onProgress?.(1);
   } finally {
     if (fileUri === undefined && file.exists) file.delete();
   }

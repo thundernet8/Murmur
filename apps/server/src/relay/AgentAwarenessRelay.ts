@@ -540,11 +540,26 @@ export const make = Effect.gen(function* () {
         cachedRelayClient = yield* makeRelayClient(relayConfig);
       }
       const relayClient = cachedRelayClient;
+      // 推送服务只接收进度元数据；标题、摘要及模型信息留在端到端通道内。
+      const state: RelayAgentActivityState | null =
+        input.state === null
+          ? null
+          : {
+              environmentId: input.state.environmentId,
+              threadId: input.state.threadId,
+              projectTitle: "Encrypted project",
+              threadTitle: "Encrypted thread",
+              phase: input.state.phase,
+              headline: "Encrypted activity",
+              modelTitle: "Agent",
+              updatedAt: input.state.updatedAt,
+              deepLink: input.state.deepLink,
+            };
       const proof = yield* makePublishProof({
         relayIssuer: relayConfig.issuer,
         environmentId,
         threadId,
-        state: input.state,
+        state,
         jti: yield* random.uuidV4(),
       }).pipe(Effect.provideService(EnvironmentSigningKey, signingKey));
 
@@ -564,7 +579,7 @@ export const make = Effect.gen(function* () {
             threadId,
           },
           payload: {
-            state: input.state,
+            state,
             proof,
           },
         })

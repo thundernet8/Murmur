@@ -372,7 +372,7 @@ describe("AgentAwarenessRelay", () => {
       );
       yield* relay.publishThread(THREAD_ID);
       assert.equal(publications.length, 3);
-      assert.equal(publications[2]?.state?.threadTitle, "Renamed thread");
+      assert.equal(publications[2]?.state?.threadTitle, "Encrypted thread");
       assert.equal(publications[2]?.state?.updatedAt, publications[1]?.state?.updatedAt);
 
       yield* setShell(waitingChild({ pendingRuntimeRequest: null }));
@@ -660,7 +660,7 @@ describe("AgentAwarenessRelay", () => {
       yield* Ref.set(currentShell, shell({ title: "Renamed thread" }));
       yield* relay.publishThread(THREAD_ID);
       assert.equal(publications.length, 2);
-      assert.equal(publications[1]?.state?.threadTitle, "Renamed thread");
+      assert.equal(publications[1]?.state?.threadTitle, "Encrypted thread");
     }),
   );
 
@@ -1215,8 +1215,8 @@ it.effect("catches up after startup without polling after success", () =>
     assert.equal(publications.length, 1);
     assert.include(publications[0]?.state, {
       threadId: THREAD_ID,
-      projectTitle: "Project",
-      threadTitle: "Thread",
+      projectTitle: "Encrypted project",
+      threadTitle: "Encrypted thread",
       phase: "running",
     });
 

@@ -423,6 +423,8 @@
   "e942562a42aede34": "已完成",
   "26b2b9727fe11289": "提前结束",
   "1bb995dcec481554": "请在 {host} 上批准此设备。它会显示代码 {verificationCode}。",
+  "ac4f009324d33757": "Pair this environment again to enable encrypted relay connections.",
+  "763c0aca2a48cdc0": "The environment encryption identity changed. Pair it again.",
   "8696a33219944832": "无法创建 WebSocket 授权证明。",
   "5678f133a8631f7d": "你的云端登录已变化。请重新登录以授权环境。",
   "cce5645836bd55e9": "正在等待 Murmur Connect 登录状态加载。",
@@ -510,6 +512,7 @@
   "123afa0f864a0ff8": "{host} 上的 Murmur 太忙，未能响应。",
   "5c5941732d5dfac6": "配对信息无效。",
   "b8ca23ad7dda376e": "该地址指向另一台机器 {host}。请将其添加为独立环境。",
+  "2dd1afd9da606881": "relay 加密不可用。",
   "0c0150a90b582a7a": "环境 URL 无效。",
   "693cb5c4fb40f109": "只能编辑已保存的 bearer 环境。",
   "5f5844b910cb1544": "已保存的 bearer 凭据不可用。",
@@ -686,6 +689,7 @@
   "8450a95e5214d199": "{host} 发送了此客户端无法读取的服务器配置更新。",
   "56b4ff3993c93eca": "{host} 发送了不兼容的服务器配置。",
   "368c4d4f99c66bfb": "请将客户端和服务器更新到兼容的版本。",
+  "871bb6751810ce4b": "无法加载加密文件。",
   "e5fd422e445391fc": "上传失败。点按以重试。",
   "b2bc6bd92ea24e5c": "{size} MB",
   "88f84178edbb7f57": "{size} KB",
@@ -12817,5 +12821,6 @@
   "27d76249d09eb69f": "审查导览已就绪",
   "faa3bb26abb39c93": "审查导览生成失败",
   "b7df38b7d8792d78": "打开导览",
-  "9e91e9a77b664e4e": "无法开始生成审查导览"
+  "9e91e9a77b664e4e": "无法开始生成审查导览",
+  "df1277248337c992": "加密 relay 连接始终要求审批新设备。"
 }

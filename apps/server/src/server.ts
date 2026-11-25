@@ -1,3 +1,4 @@
+import * as RelayEncryption from "./relay/RelayEncryption.ts";
 import * as ProviderEventLoggers from "@t3tools/provider-core/server/ProviderEventLoggers";
 import type { RelayManagedEndpointRuntimeConfig } from "@t3tools/contracts/relay";
 import * as Random from "effect/Random";
@@ -907,6 +908,7 @@ const layerMakeRoutes = Layer.mergeAll(
     PreviewTunnel.routeLayer,
     ServerHttp.layerStaticAndDevRoute,
     Ws.layer,
+    RelayEncryption.routeLayer,
     speechStreamRouteLayer,
   ),
   McpHttpServer.layer.pipe(
@@ -958,6 +960,7 @@ const layerMakeRoutes = Layer.mergeAll(
   Layer.provide(layerCommandReadiness),
   Layer.provide(ServerHttp.layerBrowserApiCors),
   Layer.provide(ServerHttp.layerHttpCompression),
+  Layer.provide(RelayEncryption.layer),
 );
 
 const layerMakeServer = Layer.unwrap(
@@ -1412,7 +1415,12 @@ const layerMakeServer = Layer.unwrap(
     );
 
     return layerServerApplication.pipe(
-      Layer.provide(CloudLink.layer.pipe(Layer.provideMerge(ConnectReachability.layer))),
+      Layer.provide(
+        CloudLink.layer.pipe(
+          Layer.provideMerge(ConnectReachability.layer),
+          Layer.provide(RelayEncryption.layer),
+        ),
+      ),
       Layer.provideMerge(layerRuntimeServices),
       Layer.provideMerge(
         McpSessionRegistry.layer.pipe(

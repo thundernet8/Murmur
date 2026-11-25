@@ -1,3 +1,5 @@
+import { msg } from "gt-i18n";
+import { translatableMessage } from "../errors/translatable.ts";
 import {
   type AssetCreateUrlInput,
   type AssetCreateUrlResult,
@@ -24,6 +26,9 @@ import { AsyncResult, Atom, AtomRegistry } from "effect/reactivity";
 import * as EnvironmentRegistry from "../connection/registry.ts";
 import * as EnvironmentSupervisor from "../connection/supervisor.ts";
 import { request } from "../rpc/client.ts";
+import { RelayEncryptionTransport } from "../relay/encryption.ts";
+import * as SubscriptionRef from "effect/SubscriptionRef";
+import { RemoteEnvironmentAuthFetchError } from "../rpc/http.ts";
 import type { ProjectFaviconCache, ProjectFaviconTarget } from "../projectFaviconCache.ts";
 import { createEnvironmentQueryAtomFamily } from "./runtime.ts";
 
@@ -260,7 +265,27 @@ export function createAssetEnvironmentAtoms<R, E>(
   const execute = Effect.fn("assets.createUrl")(function* (input: AssetCreateUrlInput) {
     const supervisor = yield* EnvironmentSupervisor.EnvironmentSupervisor;
     const result = yield* mint(supervisor.target.environmentId, input).pipe(Effect.result);
-    if (Result.isSuccess(result)) return result.success;
+    if (Result.isSuccess(result)) {
+      const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
+      const prepared = yield* SubscriptionRef.get(supervisor.prepared);
+      if (
+        Option.isSome(encryption) &&
+        Option.isSome(prepared) &&
+        encryption.value.isEncrypted(prepared.value.httpBaseUrl)
+      ) {
+        const url = new URL(result.success.relativeUrl, prepared.value.httpBaseUrl).href;
+        const relativeUrl = yield* Effect.tryPromise({
+          try: () => encryption.value.localAsset(url),
+          catch: (cause) =>
+            new RemoteEnvironmentAuthFetchError({
+              ...translatableMessage(msg("Could not load the encrypted asset.")),
+              cause,
+            }),
+        });
+        return { ...result.success, relativeUrl };
+      }
+      return result.success;
+    }
     const error = result.failure;
     const resource = input.resource;
     const local = localMediaEnvironment

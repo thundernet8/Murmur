@@ -1,3 +1,4 @@
+import { getRelayEncryptionKey } from "../relay/RelayEncryption.ts";
 import {
   AuthAccessTokenType,
   AuthAccessWriteScope,
@@ -1059,6 +1060,7 @@ export const make = Effect.gen(function* () {
     | ServerAuthScopeNotGrantedError
     | ServerAuthConnectApprovalPendingError
   > => {
+    credential = credential.replace(/~e2ee\.[A-Za-z0-9_-]{43}$/, "");
     if (!devAuth?.matches(credential)) {
       return bootstrapCredentials.consume(credential, input).pipe(
         Effect.catchTags({
@@ -1224,9 +1226,10 @@ export const make = Effect.gen(function* () {
         ...(input?.mcpApproval ? { mcpApproval: input.mcpApproval } : {}),
         ...(input?.requiresConnectApproval ? { requiresConnectApproval: true } : {}),
       });
+      const relayKey = yield* getRelayEncryptionKey(secretStore);
       return {
         id: issued.id,
-        credential: issued.credential,
+        credential: `${issued.credential}~e2ee.${Buffer.from(relayKey.publicKey).toString("base64url")}`,
         scopes: input?.scopes ?? AuthStandardClientScopes,
         subject: input?.subject ?? "one-time-token",
         ...(issued.label ? { label: issued.label } : {}),

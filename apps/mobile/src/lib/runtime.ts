@@ -1,3 +1,6 @@
+import * as ExpoCrypto from "expo-crypto";
+import { createRelayTransport } from "@t3tools/shared/relayTransport";
+import { RelayEncryptionTransport } from "@t3tools/client-runtime/relay/encryption";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
 import * as ManagedRuntime from "effect/ManagedRuntime";
@@ -11,6 +14,7 @@ import * as NativeWebSocket from "../native/nativeWebSocket";
 import * as Persistence from "../persistence/layer";
 import { disposeOnFoundationReplace, type FoundationHotModule } from "./foundation-fast-refresh";
 import { whenProtectedDataAvailable } from "./protectedData";
+import { cacheDecryptedRelayAsset } from "./attachmentDownload";
 
 declare const module: { readonly hot?: FoundationHotModule } | undefined;
 
@@ -18,7 +22,22 @@ function configuredRelayUrl(): string {
   return resolveCloudPublicConfig().relay.url ?? "http://relay.invalid";
 }
 
-const layerHttpClient = layerRemoteHttpClient(fetch);
+const relayPlatform = globalThis as typeof globalThis & {
+  __murmurRelayTransport?: ReturnType<typeof createRelayTransport>;
+};
+const relayTransport = (relayPlatform.__murmurRelayTransport ??= createRelayTransport({
+  fetch: globalThis.fetch.bind(globalThis),
+  WebSocket: globalThis.WebSocket,
+  randomBytes: ExpoCrypto.getRandomBytes,
+  bufferedResponses: true,
+  cacheAsset: cacheDecryptedRelayAsset,
+}));
+globalThis.fetch = relayTransport.fetch;
+globalThis.WebSocket = relayTransport.WebSocket;
+const layerHttpClient = Layer.merge(
+  layerRemoteHttpClient(relayTransport.fetch),
+  Layer.succeed(RelayEncryptionTransport, relayTransport),
+);
 
 type RuntimeLayerSource =
   | ReturnType<typeof ManagedRelayLayer.layer>

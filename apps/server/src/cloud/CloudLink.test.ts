@@ -1,3 +1,4 @@
+import * as RelayEncryption from "../relay/RelayEncryption.ts";
 // @effect-diagnostics-next-line nodeBuiltinImport:off -- Effect's Crypto has no generateKeyPairSync.
 import * as NodeCrypto from "node:crypto";
 import { EnvironmentId } from "@t3tools/contracts";
@@ -156,6 +157,11 @@ const withService = <A, E>(
     }).pipe(
       Effect.provide(
         CloudLink.layer.pipe(
+          Layer.provide(
+            Layer.succeed(RelayEncryption.RelayEncryption, {
+              origin: Effect.succeed("http://127.0.0.1:3773"),
+            }),
+          ),
           // The mocked secret store cannot create a key pair, and no test reads the signature.
           Layer.provide(
             Layer.mock(EnvironmentKeys.EnvironmentSigningKey)({
@@ -320,7 +326,7 @@ it.effect("mints a Murmur Connect credential under the host's device approval se
       }).pipe(Effect.provide(NodePlatformCrypto.layerSignature));
       yield* mintCredential({ proof });
       assert.deepEqual(connectCredentialRequests, [
-        { proofKeyThumbprint: "client-jkt", requireApproval: false },
+        { proofKeyThumbprint: "client-jkt", requireApproval: true },
       ]);
       const markers = [...stored.keys()].filter((name) => !before.has(name)).toSorted();
       assert.lengthOf(markers, 2);
@@ -385,6 +391,11 @@ it.effect("unlinks on startup and refuses to link when the policy turns Connect 
     }).pipe(
       Effect.provide(
         CloudLink.layer.pipe(
+          Layer.provide(
+            Layer.succeed(RelayEncryption.RelayEncryption, {
+              origin: Effect.succeed("http://127.0.0.1:3773"),
+            }),
+          ),
           // These tests never sign proofs; the mocked secret store cannot create a key pair.
           Layer.provide(Layer.mock(EnvironmentKeys.EnvironmentSigningKey)({ publicKey: "" })),
           Layer.provide(layerDependencies),

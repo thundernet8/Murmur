@@ -10,6 +10,7 @@ import { AsyncResult, Atom, AtomRegistry } from "effect/reactivity";
 import type { PreparedConnection } from "../connection/model.ts";
 import { environmentEndpointUrl } from "../environment/endpoint.ts";
 import { mintMediaTicket } from "./deviceHubAccess.ts";
+import { RelayEncryptionTransport } from "../relay/encryption.ts";
 
 const TICKET_REFRESH_MARGIN_MS = 30_000;
 
@@ -33,21 +34,28 @@ export function createPreviewTunnelUrlReader<R, E>(input: {
         if (prepared === null) return Effect.never;
         // The proxy cannot send cookies, so only ticketed connections tunnel.
         if (prepared.httpAuthorization === null) return Effect.succeed(null);
-        return mintMediaTicket(prepared).pipe(
-          Effect.map((ticket) => {
-            const url = new URL(
-              environmentEndpointUrl(prepared.httpBaseUrl, "/api/preview/tunnel").replace(
-                /^http/,
-                "ws",
-              ),
-            );
-            url.searchParams.set("wsTicket", Redacted.value(ticket.ticket));
-            return {
-              url: url.toString(),
-              expiresAtMillis: DateTime.toEpochMillis(ticket.expiresAt),
-            };
-          }),
-        );
+        return Effect.gen(function* () {
+          const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
+          const publicKey = Option.isSome(encryption)
+            ? encryption.value.publicKey(prepared.httpBaseUrl)
+            : undefined;
+          return yield* mintMediaTicket(prepared).pipe(
+            Effect.map((ticket) => {
+              const url = new URL(
+                environmentEndpointUrl(prepared.httpBaseUrl, "/api/preview/tunnel").replace(
+                  /^http/,
+                  "ws",
+                ),
+              );
+              url.searchParams.set("wsTicket", Redacted.value(ticket.ticket));
+              if (publicKey) url.hash = `relay-e2ee=${publicKey}`;
+              return {
+                url: url.toString(),
+                expiresAtMillis: DateTime.toEpochMillis(ticket.expiresAt),
+              };
+            }),
+          );
+        });
       })
       .pipe(Atom.setIdleTTL(60_000), Atom.withLabel(`preview-tunnel-access:${environmentId}`)),
   );

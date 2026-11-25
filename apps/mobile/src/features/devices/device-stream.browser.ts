@@ -4,6 +4,7 @@ import {
 } from "@t3tools/client-runtime/device/stream";
 
 import type { DeviceStreamConfiguration } from "./device-stream-document";
+import { configureWebViewRelayEncryption } from "./webViewRelayEncryption";
 
 declare global {
   interface Window {
@@ -30,6 +31,7 @@ export function command(button: "home" | "back" | "appSwitcher" | "rotate") {
 
 export function start(configuration: DeviceStreamConfiguration) {
   stop();
+  configureWebViewRelayEncryption(configuration.access);
   // oxlint-disable-next-line unicorn/require-post-message-target-origin -- The native WebView bridge takes one string.
   const post = (message: object) => window.ReactNativeWebView.postMessage(JSON.stringify(message));
   const { colors, platform } = configuration;

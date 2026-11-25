@@ -5,6 +5,8 @@
  * stream.
  */
 import * as Effect from "effect/Effect";
+import * as Option from "effect/Option";
+import { RelayEncryptionTransport } from "../relay/encryption.ts";
 import * as Redacted from "effect/Redacted";
 import type { HttpClient } from "effect/http";
 
@@ -52,11 +54,15 @@ export const resolveDeviceHubAccess = Effect.fn("clientRuntime.state.resolveDevi
       return { httpBase, wsBase, query: {}, credentials: true };
     }
     const ticket = yield* mintMediaTicket(input.prepared);
+    const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
     return {
       httpBase,
       wsBase,
       query: { wsTicket: Redacted.value(ticket.ticket) },
       credentials: false,
+      ...(Option.isSome(encryption) && encryption.value.isEncrypted(httpBase)
+        ? { encrypted: true, relayPublicKey: encryption.value.publicKey(httpBase)! }
+        : {}),
     };
   },
 );

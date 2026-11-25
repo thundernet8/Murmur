@@ -1,3 +1,4 @@
+import { RelayEncryptionTransport, relayIdentityConnectionId } from "../relay/encryption.ts";
 import { msg } from "gt-i18n";
 import { translatableDetail } from "../errors/translatable.ts";
 import {
@@ -183,6 +184,34 @@ export const make = Effect.gen(function* () {
   const tokenStore = yield* TokenStore.RemoteDpopAccessTokenStore;
   const credentials = yield* ConnectionCredentialStore.ConnectionCredentialStore;
   const httpClient = yield* HttpClient.HttpClient;
+  const encryption = yield* Effect.serviceOption(RelayEncryptionTransport);
+  const configureEncryptedRelay = Effect.fn("environment.authorization.encryptedRelay")(function* (
+    environmentId: EnvironmentId,
+    origin: string,
+  ) {
+    const identity = yield* credentials.get(relayIdentityConnectionId(environmentId));
+    if (
+      Option.isNone(identity) ||
+      identity.value._tag !== "BearerConnectionCredential" ||
+      Option.isNone(encryption)
+    ) {
+      return yield* new ConnectionBlockedError({
+        reason: "configuration",
+        ...translatableDetail(
+          msg("Pair this environment again to enable encrypted relay connections."),
+        ),
+      });
+    }
+    const publicKey = identity.value.token;
+    yield* Effect.try({
+      try: () => encryption.value.pin(origin, publicKey),
+      catch: () =>
+        new ConnectionBlockedError({
+          reason: "configuration",
+          ...translatableDetail(msg("The environment encryption identity changed. Pair it again.")),
+        }),
+    });
+  });
   const tokenLock = yield* Semaphore.make(1);
   const directTokenLocks = yield* KeyedLock.make<string>();
   const tokenOwners = new Map<
@@ -381,6 +410,7 @@ export const make = Effect.gen(function* () {
       identity: ClientCapabilities.CloudSessionIdentity,
     ) {
       const bootstrap = yield* obtainBootstrap(environmentId, identity);
+      yield* configureEncryptedRelay(environmentId, bootstrap.endpoint.httpBaseUrl);
       const descriptor = yield* fetchDescriptor(bootstrap.endpoint.httpBaseUrl, "relay").pipe(
         Effect.provideService(HttpClient.HttpClient, httpClient),
         Effect.withSpan("environment.authorization.descriptor"),
@@ -469,6 +499,10 @@ export const make = Effect.gen(function* () {
           cached.value.accessToken !== input.rejectedAccessToken &&
           (owner?.accessToken !== cached.value.accessToken || owner.identity === identity)
         ) {
+          yield* configureEncryptedRelay(
+            input.expectedEnvironmentId,
+            cached.value.endpoint.httpBaseUrl,
+          );
           tokenOwners.set(input.expectedEnvironmentId, {
             accessToken: cached.value.accessToken,
             identity,

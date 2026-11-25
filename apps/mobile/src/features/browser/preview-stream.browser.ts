@@ -10,6 +10,7 @@ import {
 } from "@t3tools/client-runtime/preview/server-browser-stream";
 
 import type { PreviewStreamConfiguration, PreviewStreamMessage } from "./preview-stream-document";
+import { configureWebViewRelayEncryption } from "../devices/webViewRelayEncryption";
 
 declare global {
   interface Window {
@@ -66,6 +67,7 @@ export function pictureInPicture() {
 
 export function start(configuration: PreviewStreamConfiguration) {
   stop();
+  configureWebViewRelayEncryption(configuration.access);
   const post = (message: PreviewStreamMessage) => {
     // oxlint-disable-next-line unicorn/require-post-message-target-origin -- The native WebView bridge takes one string.
     window.ReactNativeWebView.postMessage(JSON.stringify(message));

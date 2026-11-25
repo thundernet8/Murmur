@@ -839,11 +839,13 @@ function ConfiguredCloudLinkRow({
             <CloudLinkSwitch
               ariaLabel={gt("Require approval for new Murmur Connect devices")}
               checked={connectDeviceApproval.required}
-              disabled={!connectDeviceApproval.canManage}
+              disabled={!connectDeviceApproval.canManage || connectDeviceApproval.enforced === true}
               disabledReason={
-                connectDeviceApproval.canManage
-                  ? null
-                  : gt("Your session does not have permission to manage access.")
+                connectDeviceApproval.enforced
+                  ? gt("Encrypted relay connections always require approval for new devices.")
+                  : connectDeviceApproval.canManage
+                    ? null
+                    : gt("Your session does not have permission to manage access.")
               }
               onCheckedChange={(enabled) =>
                 updateEnvironmentSettings({ requireConnectDeviceApproval: enabled })
@@ -858,6 +860,7 @@ function ConfiguredCloudLinkRow({
 
 /** Older servers have no device approval, so callers pass null and the row stays hidden. */
 export interface ConnectDeviceApprovalControl {
+  readonly enforced?: boolean;
   readonly required: boolean;
   readonly canManage: boolean;
 }

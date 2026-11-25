@@ -1,3 +1,5 @@
+import * as RelayEncryption from "../relay/RelayEncryption.ts";
+import { loopbackUrlHostForAddress } from "../startupAccess.ts";
 import * as NodeCrypto from "@effect/platform-node/NodeCrypto";
 import * as NodeServices from "@effect/platform-node/NodeServices";
 import { describe, expect, it } from "@effect/vitest";
@@ -146,6 +148,7 @@ describe("releaseManagedTunnelOnShutdown", () => {
     readonly onRequest?: (request: HttpClientRequest.HttpClientRequest) => Effect.Effect<void>;
     readonly respond?: () => Response;
     readonly address?: HttpServer.HttpServer["Service"]["address"];
+    readonly gatewayOrigin?: string;
     readonly respondEffect?: Effect.Effect<Response>;
     readonly getExisting?: CliTokenManager.CloudCliTokenManager["Service"]["getExisting"];
     readonly latestReachability?: ConnectReachability.ConnectReachability["Service"]["latest"];
@@ -172,6 +175,18 @@ describe("releaseManagedTunnelOnShutdown", () => {
       effect.pipe(
         Effect.provide(
           CloudLink.layer.pipe(
+            Layer.provide(
+              Layer.succeed(RelayEncryption.RelayEncryption, {
+                origin: Effect.sync(() => {
+                  const address = harness.address ?? idleHttpServer.address;
+                  if (!("port" in address)) throw new Error("TCP required");
+                  return (
+                    harness.gatewayOrigin ??
+                    `http://${loopbackUrlHostForAddress(address)}:${address.port}`
+                  );
+                }),
+              }),
+            ),
             Layer.provide(EnvironmentKeys.layer),
             Layer.provide(ManagedPolicy.layerTest()),
             Layer.provide(ServerSettings.ServerSettingsService.layerTest()),
@@ -353,7 +368,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(yield* link.reconcileDesiredLinkIfStillDesired("http://127.0.0.1:3773")).toBeNull();
       expect(requests).toEqual([]);
       expect(applyConfigCalls).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("stops the connector, releases the relay tunnel, and drops the dead token", () => {
@@ -376,7 +397,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(request.headers.authorization).toBe("Bearer cli-access-token");
       expect(values.has(CLOUD_ENDPOINT_RUNTIME_CONFIG)).toBe(false);
       expect(values.has(CLOUD_ENDPOINT_CONFIRMED_ORIGIN)).toBe(false);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("releases a tunnel only through the configured relay", () => {
@@ -390,7 +417,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(yield* link.releaseManagedTunnelOnShutdown()).toBe(false);
       expect(applyConfigCalls).toEqual([]);
       expect(requests).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("leaves the tunnel of a web/mobile-installed link untouched", () => {
@@ -409,7 +442,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(applyConfigCalls).toEqual([]);
       expect(requests).toEqual([]);
       expect(values.has(CLOUD_ENDPOINT_RUNTIME_CONFIG)).toBe(true);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("keeps the tunnel when shutdown hands off to a pending update", () => {
@@ -433,7 +472,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(applyConfigCalls).toEqual([]);
       expect(requests).toEqual([]);
       expect(values.has(CLOUD_ENDPOINT_RUNTIME_CONFIG)).toBe(true);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("still releases a pending update when the launcher is stopping", () => {
@@ -461,7 +506,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(released).toBe(true);
       expect(requests).toHaveLength(1);
       expect(values.has(CLOUD_ENDPOINT_RUNTIME_CONFIG)).toBe(false);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   // regression: 808d6853555 keep the managed tunnel across remote update restarts
@@ -484,7 +535,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(released).toBe(true);
       expect(requests).toHaveLength(1);
       expect(values.has(CLOUD_ENDPOINT_RUNTIME_CONFIG)).toBe(false);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("keeps a runtime config that a fast restart replaced mid-release", () => {
@@ -875,7 +932,14 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(yield* link.startManagedTunnelIfOriginConfirmed(origin)).toBe(false);
       expect(applyConfigCalls).toEqual([]);
       expect(requests).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+        gatewayOrigin: origin,
+      }),
+    );
   });
 
   // regression: #9386 remove tunnels after hosts go offline
@@ -981,7 +1045,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       });
       expect(requests).toEqual([]);
       expect(applyConfigCalls).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("recovers a web-linked tunnel and clears its revoked mark", () => {
@@ -1047,7 +1117,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       expect(yield* link.recoverManagedTunnel("http://127.0.0.1:3773")).toBe(false);
       expect(applyConfigCalls).toEqual([]);
       expect(requests).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect("ignores recovery requests for a tunnel that has already been replaced", () => {
@@ -1074,7 +1150,13 @@ describe("releaseManagedTunnelOnShutdown", () => {
       ).toBe(false);
       expect(requests).toEqual([]);
       expect(applyConfigCalls).toEqual([]);
-    }).pipe(provideReleaseHarness({ store, applyConfigCalls, requests }));
+    }).pipe(
+      provideReleaseHarness({
+        store,
+        applyConfigCalls,
+        requests,
+      }),
+    );
   });
 
   it.effect.each([
