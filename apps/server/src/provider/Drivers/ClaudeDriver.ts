@@ -66,6 +66,7 @@ import {
 } from "./ClaudeHome.ts";
 import * as HostProcess from "@murmur/shared/HostProcess";
 import { makeClaudeMaintenanceResolution } from "./ClaudeMaintenance.ts";
+import { makeClaudeHttpClient } from "./ClaudeHttpClient.ts";
 const decodeClaudeSettings = Schema.decodeSync(ClaudeSettings);
 
 const DRIVER_KIND = ProviderDriverKind.make("claudeAgent");
@@ -114,7 +115,6 @@ export const ClaudeDriver: ProviderDriver<ClaudeSettings, ClaudeDriverEnv, Path.
     // The server cwd is $HOME in packaged desktop builds, and `claude`
     // wrappers that scope themselves to their cwd refuse to run there.
     const { stateDir } = yield* ServerConfig.ServerConfig;
-    const httpClient = yield* HttpClient.HttpClient;
     const latestVersions = yield* ProviderLatestVersions.ProviderLatestVersions;
     const resetCreditCoordinator = yield* ResetCreditCoordinator.ResetCreditCoordinator;
     const catalogService = yield* ModelCatalog.ModelCatalog;
@@ -122,6 +122,7 @@ export const ClaudeDriver: ProviderDriver<ClaudeSettings, ClaudeDriverEnv, Path.
       .current(DRIVER_KIND)
       .pipe(Effect.map(resolveClaudeModelCatalog));
     const processEnv = yield* mergeClaudeProcessEnvironment(config, environment, process.env);
+    const httpClient = yield* makeClaudeHttpClient(config, processEnv);
     const fallbackContinuationIdentity = defaultProviderContinuationIdentity({
       driverKind: DRIVER_KIND,
       instanceId,

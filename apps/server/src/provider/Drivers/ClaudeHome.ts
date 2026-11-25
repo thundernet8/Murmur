@@ -67,7 +67,7 @@ const CLAUDE_HOST_SESSION_VARIABLES = [
  * Claude Code reads its entrypoint from the process env, not its settings `env`, so Murmur applies that override itself.
  */
 export const mergeClaudeProcessEnvironment = Effect.fn("mergeClaudeProcessEnvironment")(function* (
-  config: Pick<ClaudeSettings, "homePath">,
+  config: Pick<ClaudeSettings, "homePath" | "httpProxy">,
   instanceEnvironment: ProviderInstanceEnvironment | undefined,
   hostEnvironment: NodeJS.ProcessEnv,
 ) {
@@ -80,6 +80,17 @@ export const mergeClaudeProcessEnvironment = Effect.fn("mergeClaudeProcessEnviro
   // an Electron app they start (Murmur itself, VS Code) would run as Node and exit.
   delete baseEnvironment.ELECTRON_RUN_AS_NODE;
   const environment = yield* mergeProviderInstanceEnvironment(instanceEnvironment, baseEnvironment);
+  const httpProxy = config.httpProxy?.trim();
+  if (httpProxy) {
+    // Claude 优先读取小写代理变量；移除它们以保证专用设置生效。
+    delete environment.http_proxy;
+    delete environment.https_proxy;
+    environment.HTTP_PROXY = httpProxy;
+    environment.HTTPS_PROXY = httpProxy;
+    if (environment.NO_PROXY === undefined && environment.no_proxy === undefined) {
+      environment.NO_PROXY = "localhost,127.0.0.1,::1";
+    }
+  }
   const settingsEntrypoint = (yield* readClaudeSettingsEnv(config, undefined, environment))
     .CLAUDE_CODE_ENTRYPOINT;
   return settingsEntrypoint

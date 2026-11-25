@@ -249,6 +249,21 @@ describe("ServerSettings secret providers", () => {
   });
 });
 
+describe("Claude HTTP proxy settings", () => {
+  it("accepts an optional HTTP(S) proxy URL and rejects other protocols", () => {
+    expect(decodeClaudeSettings({}).httpProxy).toBeUndefined();
+    for (const httpProxy of ["", "http://127.0.0.1:7890", "https://proxy.example:8080"]) {
+      expect(decodeClaudeSettings({ httpProxy }).httpProxy).toBe(httpProxy);
+    }
+    expect(decodeClaudeSettings({ httpProxy: "  http://127.0.0.1:7890  " }).httpProxy).toBe(
+      "http://127.0.0.1:7890",
+    );
+    for (const httpProxy of ["127.0.0.1:7890", "socks5://127.0.0.1:7890", "invalid"]) {
+      expect(() => decodeClaudeSettings({ httpProxy })).toThrow();
+    }
+  });
+});
+
 describe("custom model settings", () => {
   const capabilities = {
     optionDescriptors: [

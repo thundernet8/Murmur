@@ -1,7 +1,8 @@
 import {
+  ClaudeSettings,
   type ListTextGeneratorModelsInput,
   type ListTextGeneratorModelsResult,
-  type ProviderInstanceId,
+  ProviderInstanceId,
   TextGenerationError,
   type TextGeneratorConfig,
   TextGeneratorError,
@@ -9,23 +10,29 @@ import {
   textGeneratorForSelection,
 } from "@murmur/contracts";
 import * as TextGenerationOperations from "@murmur/provider-core/server/textGenerationOperations";
+import { mergeProviderInstanceEnvironment } from "@murmur/provider-core/server/instanceEnvironment";
 import * as SecretResolver from "@murmur/secret-provider-core/server/SecretResolver";
+import * as HostProcess from "@murmur/shared/HostProcess";
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Equal from "effect/Equal";
 import * as Layer from "effect/Layer";
 import * as Ref from "effect/Ref";
+import * as Schema from "effect/Schema";
 import { FetchHttpClient, HttpClient } from "effect/http";
 
 import * as SecretResolverLayer from "../secrets/SecretResolver.ts";
 import { requireSettingsSecret } from "../secrets/settingsSecretValue.ts";
 import * as ServerSettings from "../serverSettings.ts";
 import { SECRET_REDACTED } from "../settingsSecrets.ts";
+import { makeClaudeHttpClient } from "../provider/Drivers/ClaudeHttpClient.ts";
 import {
   TEXT_GENERATOR_DRIVERS,
   type TextGeneratorConnection,
   TextGeneratorRequestError,
 } from "./textGeneratorDrivers.ts";
+
+const decodeClaudeSettings = Schema.decodeUnknownEffect(ClaudeSettings);
 
 /** Text generators configured in settings: model APIs that generate text but cannot run agents. */
 export class TextGenerators extends Context.Service<
@@ -84,16 +91,66 @@ export const make = Effect.gen(function* () {
     return { baseUrl: config.baseUrl, apiKey, label } satisfies TextGeneratorConnection;
   });
 
+  const clientFor = Effect.fn("TextGenerators.clientFor")(function* (config: TextGeneratorConfig) {
+    if (config.kind !== "anthropic") return http;
+    const settings = yield* settingsService.getSettings.pipe(
+      Effect.mapError(
+        (cause) =>
+          new TextGeneratorRequestError({
+            detail: "Couldn't read Claude proxy settings.",
+            cause,
+          }),
+      ),
+    );
+    // Text Generator 没有关联的 agent 实例，只继承同一环境默认 Claude 实例的代理。
+    const instance = settings.providerInstances[ProviderInstanceId.make("claudeAgent")];
+    if (instance?.driver !== "claudeAgent") return http;
+    const claude = yield* decodeClaudeSettings(instance.config ?? {}).pipe(
+      Effect.mapError(
+        (cause) =>
+          new TextGeneratorRequestError({
+            detail: "Claude proxy settings are invalid.",
+            cause,
+          }),
+      ),
+    );
+    if (!claude.httpProxy) return http;
+    const bypass = yield* Effect.forEach(
+      (instance.environment ?? []).filter((variable) => variable.name.toUpperCase() === "NO_PROXY"),
+      (variable) =>
+        requireSettingsSecret(secrets, variable.value).pipe(
+          Effect.map((value) => ({ ...variable, value })),
+          Effect.mapError(
+            (cause) =>
+              new TextGeneratorRequestError({
+                detail: "Couldn't read Claude proxy settings.",
+                cause,
+              }),
+          ),
+        ),
+    );
+    const environment = yield* mergeProviderInstanceEnvironment(
+      bypass,
+      yield* HostProcess.Environment,
+    );
+    return yield* makeClaudeHttpClient(claude, environment, { followRedirects: false }).pipe(
+      Effect.provideService(HttpClient.HttpClient, http),
+    );
+  });
+
   const runnerFor =
     (config: TextGeneratorConfig): TextGenerationOperations.Runner =>
     (request) => {
       const driver = TEXT_GENERATOR_DRIVERS[config.kind];
       const label = generatorLabel(config);
-      return connect(config).pipe(
-        Effect.flatMap((connection) =>
-          driver.generate(connection, request.modelSelection.model, request.prompt),
-        ),
-        Effect.provideService(HttpClient.HttpClient, http),
+      return Effect.gen(function* () {
+        const connection = yield* connect(config);
+        const client = yield* clientFor(config);
+        return yield* driver
+          .generate(connection, request.modelSelection.model, request.prompt)
+          .pipe(Effect.provideService(HttpClient.HttpClient, client));
+      }).pipe(
+        Effect.scoped,
         Effect.mapError(
           (error) =>
             new TextGenerationError({
@@ -158,10 +215,11 @@ export const make = Effect.gen(function* () {
         return { models: cached.models };
       }
       const connection = yield* connect(config);
+      const client = yield* clientFor(config);
       const driver = TEXT_GENERATOR_DRIVERS[config.kind];
       const models = yield* driver
         .listModels(connection)
-        .pipe(Effect.provideService(HttpClient.HttpClient, http));
+        .pipe(Effect.provideService(HttpClient.HttpClient, client));
       if (input.test === true) {
         // An explicit test sends one tiny request: some APIs list models without checking the key.
         const model =
@@ -175,7 +233,7 @@ export const make = Effect.gen(function* () {
         }
         yield* driver
           .generate(connection, model, "Reply with OK.")
-          .pipe(Effect.provideService(HttpClient.HttpClient, http));
+          .pipe(Effect.provideService(HttpClient.HttpClient, client));
         return { models, testedModel: model };
       }
       yield* Ref.update(modelCache, (current) =>
@@ -183,6 +241,7 @@ export const make = Effect.gen(function* () {
       );
       return { models };
     },
+    Effect.scoped,
     Effect.mapError((error) => new TextGeneratorError({ detail: error.detail })),
   );
 

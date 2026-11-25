@@ -15,6 +15,62 @@ import {
 } from "./ClaudeHome.ts";
 
 it.layer(NodeServices.layer)("ClaudeHome", (it) => {
+  it.effect("applies the HTTP proxy without overwriting proxy bypass settings", () =>
+    Effect.gen(function* () {
+      const fileSystem = yield* FileSystem.FileSystem;
+      const homePath = yield* fileSystem.makeTempDirectoryScoped({
+        prefix: "murmur-claude-proxy-",
+      });
+      const host = {
+        HTTP_PROXY: "http://host:8080",
+        https_proxy: "http://inherited:8080",
+        KEEP: "1",
+      };
+      const httpProxy = "http://127.0.0.1:7890";
+      const config = { homePath, httpProxy };
+      const expected = {
+        CLAUDE_CODE_ENTRYPOINT: "t3-code",
+        HTTP_PROXY: httpProxy,
+        HTTPS_PROXY: httpProxy,
+        KEEP: "1",
+      };
+      const instance = [{ name: "http_proxy", value: "http://instance:8080", sensitive: false }];
+
+      expect(yield* mergeClaudeProcessEnvironment(config, instance, host)).toEqual({
+        ...expected,
+        NO_PROXY: "localhost,127.0.0.1,::1",
+      });
+      for (const name of ["NO_PROXY", "no_proxy"]) {
+        for (const value of ["internal.example", ""]) {
+          expect(
+            yield* mergeClaudeProcessEnvironment(
+              config,
+              [...instance, { name, value, sensitive: false }],
+              host,
+            ),
+          ).toEqual({ ...expected, [name]: value });
+          expect(
+            yield* mergeClaudeProcessEnvironment(config, instance, { ...host, [name]: value }),
+          ).toEqual({ ...expected, [name]: value });
+        }
+      }
+      for (const httpProxy of [undefined, "", "   "]) {
+        expect(
+          yield* mergeClaudeProcessEnvironment(
+            { homePath, ...(httpProxy === undefined ? {} : { httpProxy }) },
+            undefined,
+            host,
+          ),
+        ).toEqual({ ...host, CLAUDE_CODE_ENTRYPOINT: "t3-code" });
+      }
+      expect(host).toEqual({
+        HTTP_PROXY: "http://host:8080",
+        https_proxy: "http://inherited:8080",
+        KEEP: "1",
+      });
+    }),
+  );
+
   describe("Claude home resolution", () => {
     it.effect("resolves configured Claude HOME and stamps continuation/cache keys with it", () =>
       Effect.gen(function* () {

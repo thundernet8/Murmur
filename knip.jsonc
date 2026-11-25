@@ -64,6 +64,9 @@
         "scripts/update-test-shard-weights.ts",
         "scripts/verify-background-live.ts",
         "src/provider/testFixtures/*.mjs",
+        // 代理 E2E 使用独立配置显式运行，不进入默认测试集。
+        "integration/claudeHttpProxy.config.ts",
+        "integration/claudeHttpProxy.e2e.ts",
         // graphqlgen reads its config.
         "graphql.config.ts",
       ],

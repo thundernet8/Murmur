@@ -108,6 +108,7 @@ const PACKAGE_FIELD_TEXT: ReadonlyMap<string, string> = new Map([
   ["Shadow home path", msg("Shadow home path")],
   ["Launch arguments", msg("Launch arguments")],
   ["CLAUDE_CONFIG_DIR path", msg("CLAUDE_CONFIG_DIR path")],
+  ["HTTP proxy", msg("HTTP proxy")],
   ["Auto-compact after", msg("Auto-compact after")],
   ["Compact idle threads", msg("Compact idle threads")],
   ["Sign-in method", msg("Sign-in method")],
@@ -146,6 +147,10 @@ const PACKAGE_FIELD_TEXT: ReadonlyMap<string, string> = new Map([
   [
     "Custom Claude home and config directory. Keeps .claude.json and .claude separate.",
     msg("Custom Claude home and config directory. Keeps .claude.json and .claude separate."),
+  ],
+  [
+    "Proxy URL for Claude connections. Leave empty to use environment settings.",
+    msg("Proxy URL for Claude connections. Leave empty to use environment settings."),
   ],
   [
     "Additional CLI arguments passed on session start.",

@@ -822,6 +822,28 @@ export const ClaudeSettings = makeProviderSettingsSchema(
         providerSettingsForm: { placeholder: "~/.claude", clearWhenEmpty: "omit" },
       }),
     ),
+    httpProxy: Schema.optionalKey(
+      TrimmedString.check(
+        Schema.makeFilter((value) => {
+          if (!value) return true;
+          try {
+            const url = new URL(value);
+            return url.protocol === "http:" || url.protocol === "https:";
+          } catch {
+            return false;
+          }
+        }),
+      ),
+    ).pipe(
+      Schema.annotateKey({
+        title: "HTTP proxy",
+        description: "Proxy URL for Claude connections. Leave empty to use environment settings.",
+        providerSettingsForm: {
+          placeholder: "http://127.0.0.1:7890",
+          clearWhenEmpty: "omit",
+        },
+      }),
+    ),
     customModels: Schema.Array(CustomModelSetting).pipe(
       Schema.withDecodingDefault(Effect.succeed([])),
       Schema.annotateKey({ providerSettingsForm: { hidden: true } }),
@@ -866,7 +888,14 @@ export const ClaudeSettings = makeProviderSettingsSchema(
     ),
   },
   {
-    order: ["binaryPath", "homePath", "autoCompactWindow", "idleCompaction", "launchArgs"],
+    order: [
+      "binaryPath",
+      "homePath",
+      "httpProxy",
+      "autoCompactWindow",
+      "idleCompaction",
+      "launchArgs",
+    ],
   },
 );
 export type ClaudeSettings = typeof ClaudeSettings.Type;
