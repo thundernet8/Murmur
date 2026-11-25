@@ -9591,6 +9591,13 @@
   "5c0c973276a61fdb": "Kunde inte spara behörigheten för routning av pull requests",
   "1bfcffe8411e2439": "Routning av pull requests för {environment}",
   "ae4761ddc038b102": "Datorer du litar på här kan läsa PR-data via varandras åtkomst till versionshantering. Aktivera på båda datorerna. Läs och agera kan använda bredare behörigheter än den dator som äger dem. Gäller bara den här enheten.",
+  "4283b08de9658591": "Ange en HTTPS-adress utan inloggningsuppgifter, sökväg, frågeparametrar eller fragment.",
+  "da5cd405f7c96608": "Det gick inte att spara relay-adressen. Kontrollera att lokal lagring är tillgänglig.",
+  "f1280edc8cd91ff3": "Relay-server",
+  "93d1569eda226cb7": "Relay-serveradress",
+  "bdafa131798037c8": "Adressen som den här klienten använder för Murmur Connect. Klienten laddas om när du sparar. Lämna tomt för att använda standardadressen.",
+  "a7d9380d68b58a4a": "Spara och ladda om",
+  "6a760f9f2cb229e0": "Använd standard och ladda om",
   "02bca2d9c90e5f1e": "{value} s",
   "af22f973466903c3": "{value} min",
   "401ba3f2391d8742": "{value} h",
@@ -9781,6 +9788,7 @@
   "cea9eb0641af231d": "Behåll webhook-begäranden i upp till 24 timmar medan miljön är offline och leverera dem sedan. Av: Murmur Connect vidarebefordrar bara begäranden och lagrar ingenting.",
   "b4cdd0400e43b2fc": "Håll kvar webhook-begäranden medan miljön är offline",
   "eef9592f9db61f66": "Kräv godkännande för nya Murmur Connect-enheter",
+  "df1277248337c992": "Krypterade reläanslutningar kräver alltid godkännande av nya enheter.",
   "da7029b74a481832": "Din session har inte behörighet att hantera åtkomst.",
   "b50ecb8b55636130": "Murmur Connect",
   "2c2a12fbdc300d03": "Parkoppla den här anslutningen med både behörigheterna Visa relä och Hantera relä för att redigera de här inställningarna.",
@@ -12809,6 +12817,5 @@
   "27d76249d09eb69f": "Granskningsguiden är klar",
   "faa3bb26abb39c93": "Granskningsguiden misslyckades",
   "b7df38b7d8792d78": "Öppna guiden",
-  "9e91e9a77b664e4e": "Kunde inte starta en granskningsguide",
-  "df1277248337c992": "Krypterade reläanslutningar kräver alltid godkännande av nya enheter."
+  "9e91e9a77b664e4e": "Kunde inte starta en granskningsguide"
 }

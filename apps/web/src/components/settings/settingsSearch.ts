@@ -1480,6 +1480,12 @@ export const SETTINGS_SEARCH_ITEMS = [
     searchTerms: [msg("add pair backend host code ssh config agent tunnel saved t3 connect")],
   },
   {
+    id: "relay-server",
+    title: msg("Relay server address"),
+    to: "/settings/connections",
+    searchTerms: ["relay", "URL", "Murmur Connect"],
+  },
+  {
     id: "load-balancing",
     title: msg("Load balancing"),
     to: "/settings/connections",

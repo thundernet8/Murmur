@@ -9585,6 +9585,13 @@
   "5c0c973276a61fdb": "Berechtigung für Pull-Request-Routing konnte nicht gespeichert werden",
   "1bfcffe8411e2439": "Pull-Request-Routing für {environment}",
   "ae4761ddc038b102": "Rechner, denen du hier vertraust, können PR-Daten über den Versionskontrollzugriff des jeweils anderen lesen. Aktiviere es auf beiden Rechnern. „Lesen und handeln“ kann weitergehende Berechtigungen nutzen als der Rechner, dem sie gehören. Gilt nur für dieses Gerät.",
+  "4283b08de9658591": "Gib eine HTTPS-Adresse ohne Anmeldedaten, Pfad, Abfrageparameter oder Fragment ein.",
+  "da5cd405f7c96608": "Die Relay-Adresse konnte nicht gespeichert werden. Prüfe, ob der lokale Speicher verfügbar ist.",
+  "f1280edc8cd91ff3": "Relay-Server",
+  "93d1569eda226cb7": "Relay-Serveradresse",
+  "bdafa131798037c8": "Adresse für Murmur Connect auf diesem Client. Beim Speichern wird der Client neu geladen. Leer lassen, um die Standardadresse zu verwenden.",
+  "a7d9380d68b58a4a": "Speichern und neu laden",
+  "6a760f9f2cb229e0": "Standard verwenden und neu laden",
   "02bca2d9c90e5f1e": "{value} s",
   "af22f973466903c3": "{value} Min.",
   "401ba3f2391d8742": "{value} Std.",
@@ -9775,6 +9782,7 @@
   "cea9eb0641af231d": "Webhook-Anfragen bis zu 24 Stunden zurückhalten, solange diese Umgebung offline ist, und sie dann zustellen. Aus: Murmur Connect leitet Anfragen nur weiter und speichert nichts.",
   "b4cdd0400e43b2fc": "Webhook-Anfragen zurückhalten, solange diese Umgebung offline ist",
   "eef9592f9db61f66": "Genehmigung für neue T3-Connect-Geräte verlangen",
+  "df1277248337c992": "Verschlüsselte Relay-Verbindungen erfordern immer die Genehmigung neuer Geräte.",
   "da7029b74a481832": "Deine Sitzung hat keine Berechtigung, den Zugriff zu verwalten.",
   "b50ecb8b55636130": "Murmur Connect",
   "2c2a12fbdc300d03": "Um diese Einstellungen zu bearbeiten, kopple diese Verbindung mit den Berechtigungen „Relay anzeigen“ und „Relay verwalten“.",
@@ -12802,6 +12810,5 @@
   "27d76249d09eb69f": "Review-Leitfaden bereit",
   "faa3bb26abb39c93": "Review-Leitfaden fehlgeschlagen",
   "b7df38b7d8792d78": "Leitfaden öffnen",
-  "9e91e9a77b664e4e": "Review-Leitfaden konnte nicht gestartet werden",
-  "df1277248337c992": "Verschlüsselte Relay-Verbindungen erfordern immer die Genehmigung neuer Geräte."
+  "9e91e9a77b664e4e": "Review-Leitfaden konnte nicht gestartet werden"
 }

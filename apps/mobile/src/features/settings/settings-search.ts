@@ -15,6 +15,7 @@ const SETTINGS_SEARCH_TERMS = {
     msg("connect", { $context: "settings search keyword" }),
   ],
   SettingsEnvironments: [
+    msg("Relay server address"),
     msg("servers", { $context: "settings search keyword" }),
     msg("connections", { $context: "settings search keyword" }),
     msg("pair", { $context: "settings search keyword" }),

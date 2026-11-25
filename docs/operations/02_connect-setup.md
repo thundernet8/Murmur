@@ -15,6 +15,8 @@ MURMUR_RELAY_URL=https://relay.example.com
 
 `CLERK_SECRET_KEY` belongs only in relay secrets, never in client config. Client and bundled-server builds embed these values at build time; EAS preview/production environments need the publishable key, JWT template, and relay URL.
 
+客户端可在「设置 → 环境 → Relay 服务器」覆盖 relay 地址，保存后自动重新加载，无需重新构建。此设置仅保存在当前浏览器或设备，留空或选择恢复默认值会使用构建时配置；它不会修改所连接主机的服务端配置。地址必须是 HTTPS origin，不包含凭据、路径、查询参数或 fragment。Clerk 配置仍需在构建时提供，单独设置 relay 地址不会启用尚未配置身份认证的 Murmur Connect。
+
 ## Clerk setup
 
 ### CLI OAuth application

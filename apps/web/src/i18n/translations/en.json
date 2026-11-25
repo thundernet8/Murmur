@@ -9593,6 +9593,13 @@
   "5c0c973276a61fdb": "Could not save pull request routing permission",
   "1bfcffe8411e2439": "{environment} pull request routing",
   "ae4761ddc038b102": "Machines you trust here can read PR data through each other's source control access. Enable both machines. Read and act may use broader permissions than the machine that owns them. This applies only to this device.",
+  "4283b08de9658591": "Enter an HTTPS address without credentials, a path, query parameters, or a fragment.",
+  "da5cd405f7c96608": "Could not save the relay address. Check that local storage is available.",
+  "f1280edc8cd91ff3": "Relay server",
+  "93d1569eda226cb7": "Relay server address",
+  "bdafa131798037c8": "Used by this client for Murmur Connect. Saving reloads the client. Leave blank to use the default address.",
+  "a7d9380d68b58a4a": "Save and reload",
+  "6a760f9f2cb229e0": "Use default and reload",
   "02bca2d9c90e5f1e": "{value}s",
   "af22f973466903c3": "{value}m",
   "401ba3f2391d8742": "{value}h",
@@ -9783,6 +9790,7 @@
   "cea9eb0641af231d": "Keep webhook requests for up to 24 hours while this environment is offline, then deliver them. Off: Murmur Connect only forwards requests and stores nothing.",
   "b4cdd0400e43b2fc": "Hold webhook requests while this environment is offline",
   "eef9592f9db61f66": "Require approval for new Murmur Connect devices",
+  "df1277248337c992": "Encrypted relay connections always require approval for new devices.",
   "da7029b74a481832": "Your session does not have permission to manage access.",
   "b50ecb8b55636130": "Murmur Connect",
   "2c2a12fbdc300d03": "To edit these settings, pair this connection with both View relay and Manage relay permissions.",
@@ -12811,6 +12819,5 @@
   "27d76249d09eb69f": "Review guide ready",
   "faa3bb26abb39c93": "Review guide failed",
   "b7df38b7d8792d78": "Open guide",
-  "9e91e9a77b664e4e": "Could not start a review guide",
-  "df1277248337c992": "Encrypted relay connections always require approval for new devices."
+  "9e91e9a77b664e4e": "Could not start a review guide"
 }

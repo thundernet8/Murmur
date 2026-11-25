@@ -10,6 +10,7 @@ import { layerRemoteHttpClient } from "@murmur/client-runtime/rpc";
 import * as Dpop from "../features/cloud/dpop";
 import * as ManagedRelayLayer from "../features/cloud/managedRelayLayer";
 import { resolveCloudPublicConfig } from "../features/cloud/publicConfig";
+import { loadRelayClientSettings } from "../features/cloud/relaySettings";
 import * as NativeWebSocket from "../native/nativeWebSocket";
 import * as Persistence from "../persistence/layer";
 import { disposeOnFoundationReplace, type FoundationHotModule } from "./foundation-fast-refresh";
@@ -47,7 +48,11 @@ type RuntimeLayerSource =
   | typeof Persistence.layer;
 
 const layerRuntime = Layer.merge(
-  ManagedRelayLayer.layer(configuredRelayUrl()),
+  Layer.unwrap(
+    Effect.promise(loadRelayClientSettings).pipe(
+      Effect.map(() => ManagedRelayLayer.layer(configuredRelayUrl())),
+    ),
+  ),
   NativeWebSocket.layer,
 ).pipe(
   Layer.provideMerge(Dpop.layer),

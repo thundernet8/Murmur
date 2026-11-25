@@ -4,6 +4,7 @@ import {
 } from "@murmur/shared/relayAuth";
 import { normalizeSecureRelayUrl } from "@murmur/shared/relayUrl";
 import * as Schema from "effect/Schema";
+import { relayUrlOverride } from "./relaySettings";
 
 export class CloudPublicConfigMissingError extends Schema.TaggedError<CloudPublicConfigMissingError>()(
   "CloudPublicConfigMissingError",
@@ -32,9 +33,9 @@ export function resolveCloudPublicConfig(): CloudPublicConfig {
       import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string | undefined,
     ),
     clerkJwtTemplate: trimNonEmpty(import.meta.env.VITE_CLERK_JWT_TEMPLATE as string | undefined),
-    relayUrl: normalizeSecureRelayUrl(
-      (import.meta.env.VITE_MURMUR_RELAY_URL as string | undefined) ?? "",
-    ),
+    relayUrl:
+      relayUrlOverride ??
+      normalizeSecureRelayUrl((import.meta.env.VITE_MURMUR_RELAY_URL as string | undefined) ?? ""),
   };
 }
 

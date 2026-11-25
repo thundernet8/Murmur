@@ -9585,6 +9585,13 @@
   "5c0c973276a61fdb": "Não foi possível salvar a permissão de roteamento de pull requests",
   "1bfcffe8411e2439": "Roteamento de pull requests de {environment}",
   "ae4761ddc038b102": "As máquinas em que você confia aqui podem ler dados de PRs pelo acesso ao controle de versão umas das outras. Ative nas duas máquinas. \"Ler e agir\" pode usar permissões mais amplas que as da máquina dona delas. Isso vale só para este dispositivo.",
+  "4283b08de9658591": "Insira um endereço HTTPS sem credenciais, caminho, parâmetros de consulta ou fragmento.",
+  "da5cd405f7c96608": "Não foi possível salvar o endereço do relay. Verifique se o armazenamento local está disponível.",
+  "f1280edc8cd91ff3": "Servidor relay",
+  "93d1569eda226cb7": "Endereço do servidor relay",
+  "bdafa131798037c8": "Endereço usado por este cliente para o Murmur Connect. Salvar recarrega o cliente. Deixe em branco para usar o endereço padrão.",
+  "a7d9380d68b58a4a": "Salvar e recarregar",
+  "6a760f9f2cb229e0": "Usar padrão e recarregar",
   "02bca2d9c90e5f1e": "{value}s",
   "af22f973466903c3": "{value}min",
   "401ba3f2391d8742": "{value}h",
@@ -9773,6 +9780,7 @@
   "cea9eb0641af231d": "Guarda as requisições de webhook por até 24 horas enquanto este ambiente está offline e as entrega depois. Desativado: o Murmur Connect só encaminha as requisições e não armazena nada.",
   "b4cdd0400e43b2fc": "Reter requisições de webhook enquanto este ambiente está offline",
   "eef9592f9db61f66": "Exigir aprovação de novos dispositivos do Murmur Connect",
+  "df1277248337c992": "Conexões de relay criptografadas sempre exigem aprovação de novos dispositivos.",
   "da7029b74a481832": "Sua sessão não tem permissão para gerenciar o acesso.",
   "b50ecb8b55636130": "Murmur Connect",
   "2c2a12fbdc300d03": "Para editar estas configurações, pareie esta conexão com as permissões View relay e Manage relay.",
@@ -12802,6 +12810,5 @@
   "27d76249d09eb69f": "Guia de revisão pronto",
   "faa3bb26abb39c93": "O guia de revisão falhou",
   "b7df38b7d8792d78": "Abrir guia",
-  "9e91e9a77b664e4e": "Não foi possível iniciar um guia de revisão",
-  "df1277248337c992": "Conexões de relay criptografadas sempre exigem aprovação de novos dispositivos."
+  "9e91e9a77b664e4e": "Não foi possível iniciar um guia de revisão"
 }

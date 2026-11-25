@@ -9,6 +9,7 @@ import { RefreshControl } from "../../components/ui/RefreshControl";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { SettingsScreen } from "./components/SettingsScreen";
+import { RelayServerSettings } from "./RelayServerSettings";
 import { CloudEnvironmentRows } from "../connection/CloudEnvironmentRows";
 import { LocalEnvironmentList } from "../connection/LocalEnvironmentList";
 import { PullRequestRoutingSettings } from "../connection/PullRequestRoutingSettings";
@@ -130,6 +131,7 @@ export function SettingsEnvironmentsRouteScreen() {
           ) : undefined
         }
       >
+        <RelayServerSettings />
         <LocalEnvironmentList
           environments={localEnvironments}
           expandedId={null}

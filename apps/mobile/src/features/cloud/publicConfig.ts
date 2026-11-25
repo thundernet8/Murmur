@@ -2,6 +2,7 @@ import Constants from "expo-constants";
 import { relayClerkTokenOptions } from "@murmur/shared/relayAuth";
 import { normalizeSecureRelayUrl } from "@murmur/shared/relayUrl";
 import * as Schema from "effect/Schema";
+import { getRelayUrlOverride } from "./relaySettings";
 
 export class CloudPublicConfigMissingError extends Schema.TaggedError<CloudPublicConfigMissingError>()(
   "CloudPublicConfigMissingError",
@@ -45,7 +46,7 @@ export function resolveCloudPublicConfig(extra: ExpoExtra = Constants.expoConfig
       jwtTemplate: trimNonEmpty(extra?.clerk?.jwtTemplate),
     },
     relay: {
-      url: normalizeSecureRelayUrl(trimNonEmpty(extra?.relay?.url) ?? ""),
+      url: getRelayUrlOverride() ?? normalizeSecureRelayUrl(trimNonEmpty(extra?.relay?.url) ?? ""),
     },
   } satisfies CloudPublicConfig;
 }

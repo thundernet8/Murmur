@@ -9585,6 +9585,13 @@
   "5c0c973276a61fdb": "Impossible d’enregistrer l’autorisation de routage des pull requests",
   "1bfcffe8411e2439": "Routage des pull requests de {environment}",
   "ae4761ddc038b102": "Les machines auxquelles vous faites confiance ici peuvent lire les données des PR via l’accès à la gestion de versions des unes et des autres. Activez les deux machines. Lire et agir peut utiliser des autorisations plus larges que celles de la machine qui les possède. Ne s’applique qu’à cet appareil.",
+  "4283b08de9658591": "Saisissez une adresse HTTPS sans identifiants, chemin, paramètres de requête ni fragment.",
+  "da5cd405f7c96608": "Impossible d’enregistrer l’adresse du relais. Vérifiez que le stockage local est disponible.",
+  "f1280edc8cd91ff3": "Serveur relais",
+  "93d1569eda226cb7": "Adresse du serveur relais",
+  "bdafa131798037c8": "Adresse utilisée par ce client pour Murmur Connect. Enregistrer recharge le client. Laissez vide pour utiliser l’adresse par défaut.",
+  "a7d9380d68b58a4a": "Enregistrer et recharger",
+  "6a760f9f2cb229e0": "Utiliser la valeur par défaut et recharger",
   "02bca2d9c90e5f1e": "{value} s",
   "af22f973466903c3": "{value} min",
   "401ba3f2391d8742": "{value} h",
@@ -9773,6 +9780,7 @@
   "cea9eb0641af231d": "Conserve les requêtes webhook jusqu’à 24 heures pendant que cet environnement est hors ligne, puis les livre. Désactivé : Murmur Connect se contente de transférer les requêtes et ne stocke rien.",
   "b4cdd0400e43b2fc": "Conserver les requêtes webhook pendant que cet environnement est hors ligne",
   "eef9592f9db61f66": "Exiger l’approbation des nouveaux appareils Murmur Connect",
+  "df1277248337c992": "Les connexions de relais chiffrées exigent toujours l’approbation des nouveaux appareils.",
   "da7029b74a481832": "Votre session n’est pas autorisée à gérer l’accès.",
   "b50ecb8b55636130": "Murmur Connect",
   "2c2a12fbdc300d03": "Pour modifier ces paramètres, appairez cette connexion avec les autorisations Voir le relais et Gérer le relais.",
@@ -12802,6 +12810,5 @@
   "27d76249d09eb69f": "Guide de revue prêt",
   "faa3bb26abb39c93": "Échec du guide de revue",
   "b7df38b7d8792d78": "Ouvrir le guide",
-  "9e91e9a77b664e4e": "Impossible de démarrer un guide de revue",
-  "df1277248337c992": "Les connexions de relais chiffrées exigent toujours l’approbation des nouveaux appareils."
+  "9e91e9a77b664e4e": "Impossible de démarrer un guide de revue"
 }

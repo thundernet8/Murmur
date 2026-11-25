@@ -151,6 +151,7 @@ import {
   SavedBackendListRow,
 } from "./SavedEnvironmentRows";
 import { AddEnvironmentDialog } from "./AddEnvironmentDialog";
+import { RelayServerSettings } from "./RelayServerSettings";
 import {
   type ConnectDeviceRevokeRequest,
   RevokeConnectDeviceDialog,
@@ -1921,6 +1922,7 @@ function ConnectionsSettingsContent({
           </>
         )}
       </SettingsSection>
+      <RelayServerSettings />
       {hasCloudPublicConfig() ? (
         <RemoveT3ConnectEnvironmentDialog
           environmentLabel={pendingT3ConnectRemoval?.label ?? null}
