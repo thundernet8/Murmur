@@ -356,6 +356,14 @@ it.layer(layerTest)("AntigravityDriver", (it) => {
         for (const launch of h.launches) expect(launch.credentialKeys).toEqual([]);
         expect(h.releases).toEqual([h.first.version, h.second.version]);
         const requests = yield* h.readRequests;
+        expect(
+          requests
+            .filter((request) => request.method === "initialize")
+            .map((request) => request.params?.clientInfo),
+        ).toEqual([
+          expect.objectContaining({ name: "murmur", title: "Murmur" }),
+          expect.objectContaining({ name: "murmur", title: "Murmur" }),
+        ]);
         expect(requests.map((request) => request.method)).toEqual([
           "initialize",
           "auth/login",
@@ -535,12 +543,11 @@ it.layer(layerTest)("AntigravityDriver", (it) => {
       }),
   );
 
-  it.effect.skipIf(windowsHost)(
-    "refuses to open a session on a PATH executable older than 1.5",
-    () =>
-      Effect.gen(function* () {
+  it.effect.skipIf(windowsHost)("拒绝旧版 agy 并在创建会话前提示升级", () =>
+    Effect.gen(function* () {
+      for (const version of ["1.4.5", "1.5.0"]) {
         const h = yield* makeHarness();
-        const old = yield* h.makeExecutable("runtime old", { agentVersion: "1.4.5" });
+        const old = yield* h.makeExecutable("runtime old", { agentVersion: version });
         h.controls.selected = { ...old, source: "path", version: null };
         const threadId = ThreadId.make("thread-antigravity-old-runtime");
         const modelSelection = { instanceId: h.instance.instanceId, model: "gemini-test-low" };
@@ -561,14 +568,15 @@ it.layer(layerTest)("AntigravityDriver", (it) => {
             yield* session.ensureThread({ threadId, modelSelection, runtimePolicy });
           }),
         ).pipe(Effect.flip);
-        const message = `Antigravity 1.4.5 does not work with this Murmur release. Update the Antigravity executable at ${old.executablePath} to >=1.5.12 <2, then retry.`;
+        const message = `Antigravity ${version} does not work with this Murmur release. Update agy (Antigravity CLI) at ${old.executablePath} to >=1.5.12 <2, then retry.`;
         expect(knownProviderFailureMessage(error)).toBe(message);
         expect((yield* h.refresh().pipe(Effect.flip)).detail).toBe(message);
         const methods = (yield* h.readRequests).map((request) => request.method);
         expect(methods).toContain("initialize");
         expect(methods).not.toContain("session/new");
         yield* h.assertClosed;
-      }),
+      }
+    }),
   );
 
   it.effect.skipIf(windowsHost)(

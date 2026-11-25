@@ -62,12 +62,10 @@ is available. T3 checks Google's CLI release channel while provider update check
 are enabled. Installing or reinstalling also checks that channel. Updates keep
 your profile and existing runtime available if the new release fails validation.
 
-T3 needs Antigravity 1.5 or newer and recommends 1.5.12 or newer. Sessions do not
-start on an older runtime: update the managed runtime here, or update the executable
-a custom binary path or `PATH` points at. You may need to sign in again after
-updating from a runtime older than 1.5. Threads already running finish with their
-original runtime; new sessions use the updated release. Custom binary paths keep
-using the executable you selected.
+Murmur 需要 Antigravity CLI（`agy`）1.5.1 或更新版本，推荐使用 1.5.12 或更新版本。
+旧版不能创建会话，会提示升级 `agy`：在此更新托管运行时，或更新自定义路径、`PATH` 指向的可执行文件。
+从低于 1.5 的版本升级后，可能需要重新登录。已运行的会话继续使用原运行时，新会话使用更新后的版本；
+自定义 Binary path 始终使用你指定的可执行文件。
 
 ## Models and threads
 
@@ -154,9 +152,7 @@ T3 does not support Antigravity goal status, pause, resume, or clear commands.
 
 ## Check access and troubleshoot
 
-Open **Usage > Limits** to see the remaining Gemini and shared Claude/GPT allowances
-for Google sign-ins. Each group has separate five-hour and weekly limits and reset
-times. Limits refresh with provider status and include usage outside Murmur.
+Antigravity 订阅额度查询已禁用。请通过官方 Antigravity 客户端查看剩余额度。
 
 A server restart keeps your Google sign-in. The provider shows the saved account
 until a session, a refresh, or a sign-out reports something new.

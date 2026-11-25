@@ -245,7 +245,7 @@ export const makeAntigravityInstallation = Effect.fn("AntigravityInstallation.ma
     if (yield* isWithdrawn(version))
       return yield* installationError(
         "verify",
-        "This Antigravity release was withdrawn. Check for updates and try again.",
+        "This agy (Antigravity CLI) release is not supported. Update agy and try again.",
       );
   });
 
@@ -504,7 +504,7 @@ export const makeAntigravityInstallation = Effect.fn("AntigravityInstallation.ma
         _tag: "repairable" as const,
         error: installationError(
           "resolve",
-          `Antigravity ${record.version} predates the Antigravity CLI and no longer works with this Murmur release. Update it in Antigravity setup.`,
+          `Antigravity ${record.version} predates the Antigravity CLI and no longer works with this Murmur release. Update agy in Antigravity setup.`,
         ),
       };
     }
@@ -656,7 +656,7 @@ export const makeAntigravityInstallation = Effect.fn("AntigravityInstallation.ma
       if (yield* isWithdrawn(installed.version))
         return yield* installationError(
           "resolve",
-          `Antigravity ${installed.version} no longer works with this Murmur release. Update it in Antigravity setup.`,
+          `Antigravity ${installed.version} no longer works with this Murmur release. Update agy in Antigravity setup.`,
         );
       return installed;
     }
@@ -761,7 +761,6 @@ export const makeAntigravityInstallation = Effect.fn("AntigravityInstallation.ma
           tempDirectory: profileDirectory,
         });
         const runtime = yield* makeAntigravityAcpRuntime({
-          runtimeVersion: expectedVersion,
           spawn: buildAntigravityAcpSpawnInput({
             installation: executable,
             profile,
