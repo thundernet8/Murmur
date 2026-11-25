@@ -8,6 +8,10 @@
 
 Murmur fork 自 [T3 Code](https://github.com/pingdotgg/t3code)。感谢上游项目及所有贡献者；原始项目介绍保留在 [README-Original.md](./README-Original.md)。
 
+## 名称由来
+
+**[Murmur](https://www.oxfordlearnersdictionaries.com/definition/english/murmur_1)** /ˈmɜːmə(r)/（低语）取名自 **[Murmuration](https://www.collinsdictionary.com/dictionary/english/murmuration)** /ˌmɜːməˈreɪʃən/（集合名词：一群椋鸟），寓意**多智能体社会系统中涌现的秩序**。
+
 ## 为什么 fork
 
 我们希望拥有一个能够安心使用、自由参与的 coding agent 应用，并围绕这些原则持续修改：
